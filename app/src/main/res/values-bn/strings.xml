@@ -1,0 +1,43 @@
+<resources>
+    <!-- Progress Dialog -->
+    <string name="progress_dialog_loading">লোড  হইচ্চে\.\.\.</string>
+
+    <!-- Settings -->
+    <string name="txt_settings">সেটিংস</string>
+    <string name="txt_more">আরও</string>
+    <string name="txt_app_language">অ্যাপের ভাষা</string>
+    <string name="txt_language_english">অ্যাপের ভাষা(ইংরেজি)</string>
+    <string name="txt_language_bengali">অ্যাপের ভাষা(বাংলা)</string>
+
+    <!-- Home -->
+    <string name="txt_ki">কি</string>
+    <string name="txt_lagbe">লাগবে?</string>
+    <string name="txt_lagbe_naki">লাগবে নাকি?</string>
+    <string name="txt_search_here">এখানে খুঁজুন\.\.\.</string>
+    <string name="txt_category">সেবাকুঞ্জ</string>
+    <string name="txt_popular_product">বেশী বিক্রিত পণ্য</string>
+    <string name="txt_new_product">নতুন পণ্য</string>
+
+    <!-- Search -->
+    <string name="txt_search">খুঁজুন</string>
+    <string name="txt_product">পণ্য</string>
+    <string name="txt_suggestion">সাজেশন</string>
+
+    <!-- Order -->
+    <string name="txt_plus">+</string>
+    <string name="txt_minus">-</string>
+
+    <string name="complete_order_question">"Are you sure you want to complete order?</string>
+
+    <string name="txt_cart_detail">CART DETAIL</string>
+    <string name="clear_all">Clear All</string>
+    <string name="complete_order">COMPLETE ORDER</string>
+    <string name="multiplier">X</string>
+    <string name="back_to_vitrin">BACK TO VITRIN</string>
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="cart_clean">Your cart is as clean as the first day.</string>
+    <string name="sent_order">Your order has been successfully completed. :)</string>
+    <string name="failed_order">Something went wrong. :(</string>
+    <string name="delete_all_orders">Are you sure you want to delete all orders?</string>
+    <string name="sending_order">Your order is being completed, please wait.</string>
+</resources>

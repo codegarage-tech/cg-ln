@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9CD8EB</color>
+    <color name="colorPrimaryDark">#44B0D1</color>
+    <color name="colorAccent">#EB8EAE</color>
+    <color name="paragraphTextColor">#99000000</color>
+    <color name="hintsTextColor">#66000000</color>
+    <color name="screenBgColor">#EDF9FD</color>
+
+    <color name="windowBackgroundColor">#FFF2F2F2</color>
+    <color name="whitePrimary">#FFFFFF</color> <!-- 100 % -->
+
+    <!-- Colori di base -->
+    <color name="black_35">#59000000</color>
+    <color name="black_55">#8C000000</color>
+    <color name="black_85">#D9000000</color>
+    <color name="grey_35">#59efefef</color>
+    <color name="grey_55">#8Cefefef</color>
+    <color name="grey_85">#D9efefef</color>
+</resources>

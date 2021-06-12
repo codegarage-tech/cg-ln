@@ -1,0 +1,153 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "3",
+      "name": "Grocery",
+      "image": "https://w7.pngwing.com/pngs/49/257/png-transparent-grocery-store-shopping-bags-trolleys-supermarket-grocery-miscellaneous-food-photography-thumbnail.png",
+      "newItemCount": 2,
+      "subcategory": [
+        {
+          "id": "4",
+          "name": "Rice",
+          "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6ea1d905-c746-459b-9fd2-1b0f9f188817/d6nw4qm-c8661f6f-cc42-4f86-b896-77abeefd4512.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzZlYTFkOTA1LWM3NDYtNDU5Yi05ZmQyLTFiMGY5ZjE4ODgxN1wvZDZudzRxbS1jODY2MWY2Zi1jYzQyLTRmODYtYjg5Ni03N2FiZWVmZDQ1MTIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.E9mX1Yd2w3Dxp6JA3BeX0AE-LqxrhjQOojvPrmf3dsg"
+        },
+        {
+          "id": "11",
+          "name": "Beverage",
+          "image": "https://image.flaticon.com/icons/png/512/683/683974.png"
+        },
+        {
+          "id": "12",
+          "name": "Bakery",
+          "image": "https://image.flaticon.com/icons/png/512/1669/1669110.png"
+        },{
+          "id": "14",
+          "name": "Ice-Cream",
+          "image": "https://image.similarpng.com/very-thumbnail/2020/07/Ice-cream-cartoon-design-vector-PNG.png"
+        },{
+          "id": "15",
+          "name": "Chocolate",
+          "image": "https://image.flaticon.com/icons/png/512/1076/1076709.png"
+        },{
+          "id": "16",
+          "name": "Cake",
+          "image": "https://cdn2.iconfinder.com/data/icons/food-drink-60/50/1F382-birthday-cake-512.png"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Cosmetic",
+      "image": "https://cdn.imgbin.com/25/9/5/imgbin-mac-cosmetics-beauty-make-up-h9XqMhgsDwHqN4zKFK78jRxAz.jpg",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "6",
+          "name": "Ear ring",
+          "image": "https://p1.hiclipart.com/preview/647/430/529/quality-icon-earring-jewellery-high-quality-earrings-womens-cross-earrings-gemstone-aqua-teal-png-clipart.jpg"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Meat",
+      "image": "https://www.pngrepo.com/download/297209/meat.png",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "8",
+          "name": "Chicken",
+          "image": "https://www.alfmmeat.com/wp-content/uploads/2016/06/freshchicken.png"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Confectionery",
+      "image": "https://img.favpng.com/19/3/23/donuts-bigmouth-inc-gigantic-pink-donut-beach-blanket-drawing-bakery-png-favpng-3zwhVPN1FYzicGUxVDuZxPzUD.jpg",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "19",
+          "name": "Sweet",
+          "image": "https://icon2.cleanpng.com/20180511/xaw/kisspng-indian-cuisine-chutney-kaju-katli-dessert-clip-art-5af61ae90e8e64.8196757815260781850596.jpg"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Vegetable",
+      "image": "https://image.flaticon.com/icons/png/512/2329/2329865.png",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "18",
+          "name": "Carrot",
+          "image": "https://cdn1.iconfinder.com/data/icons/food-2-11/128/carrot-food-vegetable-vegetables-512.png"
+        }
+      ]
+    },{
+      "id": "20",
+      "name": "Stationery",
+      "image": "https://cdn.imgbin.com/8/13/11/imgbin-office-supplies-stationery-paper-business-ZUHLyWPEWMUHeEBc9C1m6hawV.jpg",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "21",
+          "name": "Khata",
+          "image": "https://www.bashundharapapermills.com/assets/upload/wallpaper_1595667201.png"
+        }
+      ]
+    },{
+      "id": "22",
+      "name": "Electric Accessories",
+      "image": "https://www.jchmarineoffshore.com/wp-content/uploads/2019/05/ELECTRIC-SUPPLIES.jpg",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "23",
+          "name": "Bulb",
+          "image": "https://image.similarpng.com/very-thumbnail/2020/08/Illustration-of-light-bulb-icon-on-transparent-background-PNG.png"
+        }
+      ]
+    },{
+      "id": "24",
+      "name": "Medicine",
+      "image": "https://image.flaticon.com/icons/png/512/1988/1988002.png",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "25",
+          "name": "Paracetamol",
+          "image": "https://www.francesoir.fr/sites/francesoir/files/90883738_m_field_mise_en_avant_principale_1_0.jpg"
+        }
+      ]
+    },{
+      "id": "26",
+      "name": "Home Appliance",
+      "image": "https://png.pngtree.com/element_our/20190522/ourmid/pngtree-home-appliance-vector-picture-image_1068673.jpg",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "27",
+          "name": "Television",
+          "image": "https://w7.pngwing.com/pngs/647/5/png-transparent-live-television-television-show-television-channel-others-television-game-rectangle.png"
+        }
+      ]
+    },{
+      "id": "28",
+      "name": "Crockery",
+      "image": "https://www.pngjoy.com/pngs/892/10422993_plastic-bucket-injection-molding-products-hd-png-download.png",
+      "newItemCount": 0,
+      "subcategory": [
+        {
+          "id": "29",
+          "name": "Box",
+          "image": "https://icon2.cleanpng.com/20180525/jsu/kisspng-food-storage-containers-box-5b087046e1bd44.1059480815272796869246.jpg"
+        }
+      ]
+    }
+  ]
+}

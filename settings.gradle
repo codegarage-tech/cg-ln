@@ -1,0 +1,9 @@
+include ':app',
+        ':library:localemanager',
+        ':library:recolor',
+        ':library:msvsearch',
+        ':library:retrofitmanager',
+        ':library:ultimatetablayout'
+//,
+//        ':library:flexibleadapter',
+//        ':library:flexibleadapterui'

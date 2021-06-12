@@ -1,0 +1,242 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion appCompileSdkVersion
+    buildToolsVersion appBuildToolsVersion
+
+    signingConfigs {
+        releaseConfig {
+            try {
+                keyAlias 'keydata.keystore'
+                keyPassword KEY_PASSWORD
+                storeFile file('../misc/keydata.keystore.jks')
+                storePassword STORE_PASSWORD
+            } catch (Exception ex) {
+                throw new InvalidUserDataException(ex.getMessage())
+            }
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.meembusoft.ln"
+        minSdkVersion appMinSdkVersion
+        targetSdkVersion appTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        vectorDrawables.useSupportLibrary = true
+
+        // define your base Applications name here
+        resValue 'string', 'app_name', 'Lagbe Naki?'
+    }
+
+    buildTypes {
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+    //Flavor definition
+    flavorDimensions "appType", "clientType"
+    productFlavors {
+        // App types
+        user {
+            dimension "appType"
+
+            applicationIdSuffix ".user"
+        }
+        admin {
+            dimension "appType"
+
+            applicationIdSuffix ".admin"
+        }
+        driver {
+            dimension "appType"
+
+            applicationIdSuffix ".driver"
+        }
+
+        // Client types
+        bd {
+            dimension "clientType"
+
+            applicationIdSuffix ".bd"
+            versionCode bdVersionCode
+            versionName bdVersionName
+
+            resValue 'string', 'app_name', 'Lagbe Naki?'
+        }
+        rashedshop {
+            dimension "clientType"
+
+            applicationIdSuffix ".rashedshop"
+            versionCode rashedShopVersionCode
+            versionName rashedShopVersionName
+
+            resValue 'string', 'app_name', 'RashedShop'
+        }
+    }
+
+    //Remove unwanted variants
+    android.variantFilter { variant ->
+        if (variant.getFlavors().get(0).name.equals('user')
+                && (variant.getFlavors().get(1).name.equals('rashedshop'))) {
+            variant.setIgnore(true)
+        }
+        if (variant.getFlavors().get(0).name.equals('admin')
+                && (variant.getFlavors().get(1).name.equals('rashedshop'))) {
+            variant.setIgnore(true)
+        }
+        if (variant.getFlavors().get(0).name.equals('driver')
+                && (variant.getFlavors().get(1).name.equals('rashedshop'))) {
+            variant.setIgnore(true)
+        }
+    }
+
+    applicationVariants.all { variant ->
+        // Define source directory
+        def flavors = variant.productFlavors
+        def app = flavors[0].name
+        def client = flavors[1].name
+        System.out.println("app: " + app)
+        System.out.println("client: " + client)
+        def srcSet = app + client.capitalize()
+        System.out.println("srcSet: " + srcSet)
+        android.sourceSets."$srcSet".java.srcDirs += "src/$srcSet/java"
+        android.sourceSets."$srcSet".res.srcDirs += "src/$srcSet/res"
+
+        // Furnish output and rename the output apk file name
+        variant.outputs.all { output ->
+            def appName = variant.mergedFlavor.resValues.get('app_name').getValue()
+            def underScore = "_"
+            def hyphen = "-"
+            def appType = variant.productFlavors[0].name
+            def clientType = variant.productFlavors[1].name
+            def version = variant.versionName
+            def buildType = variant.buildType.name
+            System.out.println("appName: " + appName)
+            System.out.println("appType: " + appType)
+            System.out.println("clientType: " + clientType)
+            System.out.println("version: " + version)
+            System.out.println("buildType: " + buildType)
+            def releaseApkName = appName + underScore + appType.capitalize() + underScore + version + underScore + buildType.capitalize() + ".apk"
+            outputFileName = releaseApkName
+            System.out.println("outputFileName: " + outputFileName)
+
+            // set new resVale for final app name
+            def finalAppName = ""
+            if (appType.equals('user')) {
+                finalAppName = appName
+            } else if (appType.equals('admin')) {
+                finalAppName = appName + hyphen + convertToCamelCase(appType)
+            } else if (appType.equals('driver')) {
+                finalAppName = appName + hyphen + convertToCamelCase(appType)
+            } else {
+                finalAppName = appName
+            }
+            System.out.println("finalAppName: " + finalAppName)
+            variant.resValue 'string', 'app_name', finalAppName
+        }
+    }
+}
+
+def static String convertToCamelCase(String str) {
+    if (str == null) {
+        return null
+    }
+
+    boolean space = true
+    StringBuilder builder = new StringBuilder(str)
+    final int len = builder.length()
+
+    for (int i = 0; i < len; ++i) {
+        char c = builder.charAt(i)
+        if (space) {
+            if (!Character.isWhitespace(c)) {
+                // Convert to title case and switch out of whitespace mode.
+                builder.setCharAt(i, Character.toTitleCase(c))
+                space = false
+            }
+        } else if (Character.isWhitespace(c)) {
+            space = true
+        } else {
+            builder.setCharAt(i, Character.toLowerCase(c))
+        }
+    }
+
+    return builder.toString()
+}
+
+dependencies {
+    // Androidx support libraries
+    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$androidXConstraintLayoutVersion"
+    implementation "androidx.multidex:multidex:$androidXMultiDexVersion"
+    implementation "com.android.support:design:27.0.2"
+
+    // Kotlin support
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "androidx.core:core-ktx:$androidXCoreKotlinLibraryVersion"
+
+    // Menu
+    implementation "com.github.skydoves:flourish:1.0.1"
+    implementation "com.github.skydoves:powermenu:2.1.9"
+
+    // Calligraphy
+    implementation 'dev.b3nedikt.calligraphy:calligraphy:4.0.2'
+    implementation 'dev.b3nedikt.viewpump:viewpump:4.0.5'
+
+    // Sectioned recyclerview
+    implementation 'com.afollestad:sectioned-recyclerview:0.5.0'
+
+    // Image loader
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    // Increment product view
+    implementation 'com.steelkiwi:increment-product-view:1.2.0'
+
+    implementation 'com.github.zhangjianliang110:color-shadow_drawable:v1.0.1'
+
+    implementation 'com.github.lzyzsd.randomcolor:library:1.0.0'
+
+    implementation 'com.meembusoft.recyclerview:mrecyclerview:1.0.00'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+//    implementation 'eu.davidea:flexible-adapter:5.1.0'
+//    implementation 'eu.davidea:flexible-adapter-ui:1.0.0'
+
+    // Library projects
+    implementation project(":library:localemanager")
+    implementation project(":library:recolor")
+    implementation project(":library:msvsearch")
+    implementation project(":library:retrofitmanager")
+    implementation project(":library:ultimatetablayout")
+//    implementation project(":library:flexibleadapter")
+//    implementation project(":library:flexibleadapterui")
+}

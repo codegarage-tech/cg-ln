@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/v_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/screenBgColor"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/search_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/drop_shadow_rounded_edittext">
+
+        <ImageView
+            android:id="@+id/bt_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/vector_arrow_left"
+            app:tint="@color/hintsTextColor" />
+
+        <EditText
+            android:id="@+id/ed_search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bt_clear"
+            android:layout_toRightOf="@+id/bt_back"
+            android:background="@null"
+            android:hint="@string/txt_search_here"
+            android:imeOptions="actionSearch"
+            android:inputType="textNoSuggestions"
+            android:paddingLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/paragraphTextColor"
+            android:textColorHint="@color/hintsTextColor" />
+
+        <ImageView
+            android:id="@+id/bt_clear"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_close_grey600_24dp"
+            app:tint="@color/hintsTextColor" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_suggestions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_top_bar"
+        android:background="@color/screenBgColor"
+        android:paddingLeft="23dp"
+        android:paddingTop="5dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="15dp"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App wise common color -->
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/colorShadeRed</color>
+    <color name="colorAccent">@color/a7</color>
+    <color name="screenBgColor">@color/colorShadeBlue</color>
+    <color name="titleTextColor">@color/black100</color>
+    <color name="subtitleTextColor">@color/black70</color>
+    <color name="paragraphTextColor">@color/black60</color>
+    <color name="hintsTextColor">@color/black40</color>
+    <color name="imageTintColor">@color/black100</color>
+    <color name="statusBarColor">@color/white100</color>
+    <color name="navigationBarColor">@color/white100</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="gray_1">#C0C0C0</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
