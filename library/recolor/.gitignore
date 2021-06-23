@@ -17,7 +17,7 @@ out/
 .gradle/
 .idea
 build/
-gradle
+#gradle
 androidTest/
 test/
 target/
