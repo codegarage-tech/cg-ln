@@ -5,11 +5,13 @@ public class Subcategory {
     private int id;
     private String name;
     private String image;
+    private boolean isSelected = false;
 
     public Subcategory(int id, String name, String image) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.isSelected = false;
     }
 
     public int getId() {
@@ -34,5 +36,13 @@ public class Subcategory {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

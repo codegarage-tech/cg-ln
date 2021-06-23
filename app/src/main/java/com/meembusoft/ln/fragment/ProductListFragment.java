@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.ProductListAdapter;
+import com.meembusoft.ln.adapter.SubCategoryListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.recyclerview.effect.FanEffect;
@@ -18,8 +19,9 @@ public class ProductListFragment extends BaseFragment {
 
     private Category mCategory;
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvProduct, rvSubCategory;
     private ProductListAdapter mProductListAdapter;
+    private SubCategoryListAdapter mSubCategoryListAdapter;
     private String TAG = ProductListFragment.class.getSimpleName();
 
     public ProductListFragment(Category category) {
@@ -38,7 +40,8 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     public void initFragmentViews(View parentView) {
-        mRecyclerView = parentView.findViewById(R.id.recycler_view);
+        rvProduct = parentView.findViewById(R.id.rv_product);
+        rvSubCategory = parentView.findViewById(R.id.rv_sub_category);
     }
 
     @Override
@@ -67,9 +70,15 @@ public class ProductListFragment extends BaseFragment {
     }
 
     private void initializeRecyclerView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
         mProductListAdapter = new ProductListAdapter(mCategory);
-        mRecyclerView.setAdapter(mProductListAdapter);
-        mRecyclerView.addOnScrollListener(new MRecyclerViewScrollListener(new FanEffect()));
+        rvProduct.setAdapter(mProductListAdapter);
+        rvProduct.addOnScrollListener(new MRecyclerViewScrollListener(new FanEffect()));
+
+        rvSubCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        rvSubCategory.setHasFixedSize(true);
+        mSubCategoryListAdapter = new SubCategoryListAdapter(mCategory);
+        rvSubCategory.setAdapter(mSubCategoryListAdapter);
+        mSubCategoryListAdapter.setSelection(0);
     }
 }
