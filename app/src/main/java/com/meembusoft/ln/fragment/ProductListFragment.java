@@ -18,10 +18,9 @@ import com.meembusoft.recyclerview.listener.MRecyclerViewScrollListener;
 public class ProductListFragment extends BaseFragment {
 
     private Category mCategory;
-
-    private RecyclerView rvProduct, rvSubCategory;
-    private ProductListAdapter mProductListAdapter;
+    private RecyclerView rvSubCategory, rvProduct;
     private SubCategoryListAdapter mSubCategoryListAdapter;
+    private ProductListAdapter mProductListAdapter;
     private String TAG = ProductListFragment.class.getSimpleName();
 
     public ProductListFragment(Category category) {
@@ -40,13 +39,13 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     public void initFragmentViews(View parentView) {
-        rvProduct = parentView.findViewById(R.id.rv_product);
         rvSubCategory = parentView.findViewById(R.id.rv_sub_category);
+        rvProduct = parentView.findViewById(R.id.rv_product);
     }
 
     @Override
     public void initFragmentViewsData() {
-        initializeRecyclerView();
+        initSubCategory(mCategory);
     }
 
     @Override
@@ -69,16 +68,21 @@ public class ProductListFragment extends BaseFragment {
 
     }
 
-    private void initializeRecyclerView() {
-        rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mProductListAdapter = new ProductListAdapter(mCategory);
-        rvProduct.setAdapter(mProductListAdapter);
-        rvProduct.addOnScrollListener(new MRecyclerViewScrollListener(new FanEffect()));
-
+    private void initSubCategory(Category category) {
         rvSubCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         rvSubCategory.setHasFixedSize(true);
-        mSubCategoryListAdapter = new SubCategoryListAdapter(mCategory);
+        mSubCategoryListAdapter = new SubCategoryListAdapter(category);
         rvSubCategory.setAdapter(mSubCategoryListAdapter);
         mSubCategoryListAdapter.setSelection(0);
+        rvSubCategory.smoothScrollToPosition(0);
+
+        initProduct(category);
+    }
+
+    private void initProduct(Category category) {
+        rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mProductListAdapter = new ProductListAdapter(category);
+        rvProduct.setAdapter(mProductListAdapter);
+        rvProduct.addOnScrollListener(new MRecyclerViewScrollListener(new FanEffect()));
     }
 }

@@ -54,7 +54,7 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
         holder.tvSubCategory.setText(subcategory.getName());
         if (subcategory.isSelected()) {
             holder.tvSubCategory.setBackgroundResource(R.drawable.chip_selected);
-            holder.tvSubCategory.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.tvSubCategory.setTextColor(Color.parseColor("#ff4651"));
         } else {
             holder.tvSubCategory.setBackgroundResource(R.drawable.chip_unselected);
             holder.tvSubCategory.setTextColor(Color.parseColor("#3F51B5"));
