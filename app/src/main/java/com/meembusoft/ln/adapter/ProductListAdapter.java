@@ -1,65 +1,35 @@
 package com.meembusoft.ln.adapter;
 
-import android.annotation.SuppressLint;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.content.Context;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.meembusoft.ln.R;
-import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
-import com.squareup.picasso.Picasso;
+import com.meembusoft.ln.viewholder.ProductViewHolder;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
+import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
+import java.security.InvalidParameterException;
 
-    private Category mCategory;
+public class ProductListAdapter extends RecyclerArrayAdapter<Subcategory> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    private static final int VIEW_TYPE_REGULAR = 1;
 
-        public TextView tvProductName;
-        public TextView tvProductDescription;
-        public ImageView ivProductImage;
-        public View layout;
+    public ProductListAdapter(Context context) {
+        super(context);
+    }
 
-        public ViewHolder(View v) {
-            super(v);
-            layout = v;
+    @Override
+    public int getViewType(int position) {
+        return VIEW_TYPE_REGULAR;
+    }
 
-            tvProductName = layout.findViewById(R.id.tv_product_name);
-            tvProductDescription = layout.findViewById(R.id.tv_product_description);
-            ivProductImage = layout.findViewById(R.id.iv_product_image);
+    @Override
+    public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case VIEW_TYPE_REGULAR:
+                return new ProductViewHolder(parent);
+            default:
+                throw new InvalidParameterException();
         }
-    }
-
-    public ProductListAdapter(Category category) {
-        mCategory = category;
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(
-                parent.getContext());
-        View v =
-                inflater.inflate(R.layout.row_item_product, parent, false);
-
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        Subcategory subcategory = mCategory.getSubcategory().get(position);
-        holder.tvProductName.setText(subcategory.getName());
-        Picasso.get().load(subcategory.getImage()).into(holder.ivProductImage);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mCategory.getSubcategory().size();
     }
 }

@@ -12,13 +12,16 @@ import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.adapter.SubCategoryListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.recyclerview.MRecyclerView;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.effect.FanEffect;
 import com.meembusoft.recyclerview.listener.MRecyclerViewScrollListener;
 
 public class ProductListFragment extends BaseFragment {
 
     private Category mCategory;
-    private RecyclerView rvSubCategory, rvProduct;
+    private RecyclerView rvSubCategory;
+    private MRecyclerView rvProduct;
     private SubCategoryListAdapter mSubCategoryListAdapter;
     private ProductListAdapter mProductListAdapter;
     private String TAG = ProductListFragment.class.getSimpleName();
@@ -69,19 +72,37 @@ public class ProductListFragment extends BaseFragment {
     }
 
     private void initSubCategory(Category category) {
+        // Setup subcategory recyclerview
         rvSubCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         rvSubCategory.setHasFixedSize(true);
-        mSubCategoryListAdapter = new SubCategoryListAdapter(category);
-        rvSubCategory.setAdapter(mSubCategoryListAdapter);
+
+        // Setup subcategory adapter
+        mSubCategoryListAdapter = new SubCategoryListAdapter(getActivity());
+        mSubCategoryListAdapter.addAll(category.getSubcategory());
         mSubCategoryListAdapter.setSelection(0);
+        mSubCategoryListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int i) {
+                mSubCategoryListAdapter.setSelection(i);
+            }
+        });
+
+        // Load subcategory adapter
+        rvSubCategory.setAdapter(mSubCategoryListAdapter);
         rvSubCategory.smoothScrollToPosition(0);
 
         initProduct(category);
     }
 
     private void initProduct(Category category) {
+        // Setup product recyclerview
         rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mProductListAdapter = new ProductListAdapter(category);
+
+        // Setup product adapter
+        mProductListAdapter = new ProductListAdapter(getActivity());
+        mProductListAdapter.addAll(category.getSubcategory());
+
+        // Load subcategory adapter
         rvProduct.setAdapter(mProductListAdapter);
         rvProduct.addOnScrollListener(new MRecyclerViewScrollListener(new FanEffect()));
     }
