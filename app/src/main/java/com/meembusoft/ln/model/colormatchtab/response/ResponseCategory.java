@@ -1,15 +1,17 @@
-package com.meembusoft.ln.model.colormatchtab;
+package com.meembusoft.ln.model.colormatchtab.response;
+
+import com.meembusoft.ln.model.colormatchtab.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseOfflineCategory {
+public class ResponseCategory {
 
     private int status = 0;
     private String message = "";
     private List<Category> data = new ArrayList<>();
 
-    public ResponseOfflineCategory() {
+    public ResponseCategory() {
     }
 
     public int getStatus() {

@@ -45,4 +45,14 @@ public class SubCategoryListAdapter extends RecyclerArrayAdapter<Subcategory> {
         }
         notifyDataSetChanged();
     }
+
+    public Subcategory getSelectedSubCategory() {
+        List<Subcategory> data = getAllData();
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).isSelected()) {
+                return data.get(i);
+            }
+        }
+        return null;
+    }
 }

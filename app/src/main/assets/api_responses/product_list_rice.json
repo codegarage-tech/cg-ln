@@ -1,0 +1,30 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "White Binni",
+      "image": "https://mehedimart.com.bd/images/product/feature/5f0d945b5d746.jpeg",
+      "vendor": "BPM"
+    },
+    {
+      "id": "2",
+      "name": "ChiniGura",
+      "image": "https://www.mehedimart.com.bd/images/product/feature/5f0d75179733c.jpeg",
+      "vendor": "Pran"
+    },
+    {
+      "id": "3",
+      "name": "NajirShah",
+      "image": "https://marsgiant.com/pub/media/catalog/product/cache/42b5eeaed503327e0c893d31d2d0f990/t/e/teer_nazirshile_rice_5kg.jpg",
+      "vendor": "Teer"
+    },
+    {
+      "id": "4",
+      "name": "ChiniGura",
+      "image": "https://www.mehedimart.com.bd/images/product/feature/5f0d75e29709f.jpeg",
+      "vendor": "Fresh"
+    }
+  ]
+}

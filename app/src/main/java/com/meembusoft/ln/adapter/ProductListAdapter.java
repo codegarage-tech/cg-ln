@@ -3,14 +3,14 @@ package com.meembusoft.ln.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.viewholder.ProductViewHolder;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 
 import java.security.InvalidParameterException;
 
-public class ProductListAdapter extends RecyclerArrayAdapter<Subcategory> {
+public class ProductListAdapter extends RecyclerArrayAdapter<Product> {
 
     private static final int VIEW_TYPE_REGULAR = 1;
 

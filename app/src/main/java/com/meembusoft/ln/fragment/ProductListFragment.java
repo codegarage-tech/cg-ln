@@ -12,10 +12,14 @@ import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.adapter.SubCategoryListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
-import com.meembusoft.recyclerview.effect.FanEffect;
-import com.meembusoft.recyclerview.listener.MRecyclerViewScrollListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductListFragment extends BaseFragment {
 
@@ -48,6 +52,7 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     public void initFragmentViewsData() {
+        initUI();
         initSubCategory(mCategory);
     }
 
@@ -71,39 +76,45 @@ public class ProductListFragment extends BaseFragment {
 
     }
 
-    private void initSubCategory(Category category) {
+    private void initUI() {
         // Setup subcategory recyclerview
         rvSubCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         rvSubCategory.setHasFixedSize(true);
-
         // Setup subcategory adapter
         mSubCategoryListAdapter = new SubCategoryListAdapter(getActivity());
-        mSubCategoryListAdapter.addAll(category.getSubcategory());
-        mSubCategoryListAdapter.setSelection(0);
         mSubCategoryListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int i) {
                 mSubCategoryListAdapter.setSelection(i);
+                initProduct(mSubCategoryListAdapter.getSelectedSubCategory());
             }
         });
-
         // Load subcategory adapter
         rvSubCategory.setAdapter(mSubCategoryListAdapter);
-        rvSubCategory.smoothScrollToPosition(0);
 
-        initProduct(category);
-    }
-
-    private void initProduct(Category category) {
         // Setup product recyclerview
         rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        // Setup product adapter
         mProductListAdapter = new ProductListAdapter(getActivity());
-        mProductListAdapter.addAll(category.getSubcategory());
-
         // Load subcategory adapter
         rvProduct.setAdapter(mProductListAdapter);
-        rvProduct.addOnScrollListener(new MRecyclerViewScrollListener(new FanEffect()));
+    }
+
+    private void initSubCategory(Category category) {
+        mSubCategoryListAdapter.addAll(category.getSubcategory());
+        mSubCategoryListAdapter.setSelection(0);
+        rvSubCategory.smoothScrollToPosition(0);
+
+        initProduct(mSubCategoryListAdapter.getSelectedSubCategory());
+    }
+
+    private void initProduct(Subcategory subcategory) {
+        // Setup product adapter
+        List<Product> products = new ArrayList<>();
+        if (subcategory.getName().equalsIgnoreCase("Rice")) {
+            products.addAll(DataUtil.getAllProducts(getActivity(), subcategory));
+//            products.addAll(DataUtil.getAllProducts(getActivity(), subcategory));
+        }
+        mProductListAdapter.clear();
+        mProductListAdapter.addAll(products);
     }
 }

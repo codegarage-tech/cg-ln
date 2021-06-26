@@ -5,11 +5,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
-import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.squareup.picasso.Picasso;
 
-public class ProductViewHolder extends BaseViewHolder<Subcategory> {
+public class ProductViewHolder extends BaseViewHolder<Product> {
 
     private TextView tvProductName, tvProductDescription;
     private ImageView ivProductImage;
@@ -23,7 +23,7 @@ public class ProductViewHolder extends BaseViewHolder<Subcategory> {
     }
 
     @Override
-    public void setData(final Subcategory data) {
+    public void setData(final Product data) {
         tvProductName.setText(data.getName());
         Picasso.get().load(data.getImage()).into(ivProductImage);
     }
