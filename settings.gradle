@@ -4,6 +4,6 @@ include ':app',
         ':library:msvsearch',
         ':library:retrofitmanager',
         ':library:ultimatetablayout',
-        ':library:flexibleadapter',
-        ':library:flexibleadapterui',
+//        ':library:flexibleadapter',
+//        ':library:flexibleadapterui',
         ':library:fabulousfilter'

@@ -1,16 +1,21 @@
 package com.meembusoft.ln.fragment;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.adapter.SubCategoryListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
+import com.meembusoft.ln.fragment.filter.ProductFilterFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
@@ -28,6 +33,10 @@ public class ProductListFragment extends BaseFragment {
     private MRecyclerView rvProduct;
     private SubCategoryListAdapter mSubCategoryListAdapter;
     private ProductListAdapter mProductListAdapter;
+    // Filter
+    private ArrayMap<String, List<String>> appliedFilters = new ArrayMap<>();
+    private FloatingActionButton fabFilter;
+    private ProductFilterFragment productFilterFragment;
     private String TAG = ProductListFragment.class.getSimpleName();
 
     public ProductListFragment(Category category) {
@@ -48,12 +57,25 @@ public class ProductListFragment extends BaseFragment {
     public void initFragmentViews(View parentView) {
         rvSubCategory = parentView.findViewById(R.id.rv_sub_category);
         rvProduct = parentView.findViewById(R.id.rv_product);
+        fabFilter = parentView.findViewById(R.id.fab_filter);
     }
 
     @Override
     public void initFragmentViewsData() {
         initUI();
         initSubCategory(mCategory);
+
+        fabFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productFilterFragment = ProductFilterFragment.newInstance(appliedFilters);
+                productFilterFragment.setParentFab(fabFilter);
+                productFilterFragment.setCallbacks((AAH_FabulousFragment.Callbacks) getActivity());
+                productFilterFragment.setAnimationListener((AAH_FabulousFragment.AnimationListener) getActivity());
+
+                productFilterFragment.show(getActivity().getSupportFragmentManager(), productFilterFragment.getTag());
+            }
+        });
     }
 
     @Override
@@ -116,5 +138,59 @@ public class ProductListFragment extends BaseFragment {
         }
         mProductListAdapter.clear();
         mProductListAdapter.addAll(products);
+    }
+
+    /***************************
+     * Fabulous Filter methods *
+     ***************************/
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (productFilterFragment.isAdded()) {
+            productFilterFragment.dismiss();
+            productFilterFragment.show(getActivity().getSupportFragmentManager(), productFilterFragment.getTag());
+        }
+    }
+
+    public void onResult(Object result) {
+//        Log.d(TAG, "onResult: " + result.toString());
+
+//        if (result != null) {
+//
+//            if (result.toString().equalsIgnoreCase("swiped_down")) {
+//                //do something or nothing
+//            } else {
+//
+//                appliedFilters = (ArrayMap<String, List<String>>) result;
+//                ArrayMap<String, List<String>> appliedFilters = (ArrayMap<String, List<String>>) result;
+//                if (appliedFilters.size() != 0) {
+//
+//                    if (appliedFilters.get("food_category") != null) {
+//                        if (appliedFilters.get("food_category").size() == 1) {
+//                            selectedFoodCategory = appliedFilters.get("food_category").get(0);
+//                        } else {
+//                            selectedFoodCategory = "";
+//                        }
+//                    } else {
+//                        selectedFoodCategory = "";
+//                    }
+//
+//                    if (appliedFilters.get("restaurant_category") != null) {
+//                        if (appliedFilters.get("restaurant_category").size() == 1) {
+//                            selectedRestaurantCategory = appliedFilters.get("restaurant_category").get(0);
+//                        } else {
+//                            selectedRestaurantCategory = "";
+//                        }
+//                    } else {
+//                        selectedRestaurantCategory = "";
+//                    }
+//                } else {
+//                    selectedFoodCategory = "";
+//                    selectedRestaurantCategory = "";
+//                }
+//
+//                searchRestaurant(mLocation, getSelectedFoodCategory(selectedFoodCategory).getId(), getSelectedRestaurantCategory(selectedRestaurantCategory).getId());
+//            }
+//        }
     }
 }

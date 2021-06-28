@@ -9,17 +9,20 @@ import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.athbk.ultimatetablayout.OnClickTabListener;
 import com.athbk.ultimatetablayout.UltimateTabLayout;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.ProductViewPagerAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.fragment.ProductListFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.util.FragmentUtilsManager;
 
 import java.util.List;
 
-public class ProductListActivity extends BaseActivity {
+public class ProductListActivity extends BaseActivity implements AAH_FabulousFragment.Callbacks, AAH_FabulousFragment.AnimationListener {
 
     // Toolbar
     private TextView tvTitle;
@@ -158,4 +161,35 @@ public class ProductListActivity extends BaseActivity {
 //            tab.setCustomView(AppUtil.getTabView(getActivity(), category));
 //        }
     }
+
+
+    /***************************
+     * Fabulous Filter methods *
+     ***************************/
+    @Override
+    public void onResult(Object result) {
+        Log.d(TAG, "onResult: " + result.toString());
+//        ((ProductListFragment) FragmentUtilsManager.getVisibleSupportFragment(getActivity(), getString(R.string.title_fragment_home))).onResult(result);
+    }
+
+    @Override
+    public void onOpenAnimationStart() {
+        Log.d("aah_animation", "onOpenAnimationStart: ");
+    }
+
+    @Override
+    public void onOpenAnimationEnd() {
+        Log.d("aah_animation", "onOpenAnimationEnd: ");
+    }
+
+    @Override
+    public void onCloseAnimationStart() {
+        Log.d("aah_animation", "onCloseAnimationStart: ");
+    }
+
+    @Override
+    public void onCloseAnimationEnd() {
+        Log.d("aah_animation", "onCloseAnimationEnd: ");
+    }
+
 }
