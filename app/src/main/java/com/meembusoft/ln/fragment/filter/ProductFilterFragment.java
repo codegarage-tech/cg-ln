@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
     TabLayout tabs_types;
 
-    ImageButton imgbtn_apply;
+    ImageButton imgbtn_close, imgbtn_refresh, imgbtn_apply;
     SectionsPagerAdapter mAdapter;
 
     private static String TAG = ProductFilterFragment.class.getSimpleName();
@@ -91,11 +92,26 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         View contentView = View.inflate(getContext(), R.layout.filter_view, null);
 
         RelativeLayout rl_content = (RelativeLayout) contentView.findViewById(R.id.rl_content);
-//        LinearLayout ll_buttons = (LinearLayout) contentView.findViewById(R.id.ll_buttons);
-//        imgbtn_refresh = (ImageButton) contentView.findViewById(R.id.imgbtn_refresh);
+        LinearLayout ll_buttons = (LinearLayout) contentView.findViewById(R.id.ll_buttons);
+        imgbtn_close = (ImageButton) contentView.findViewById(R.id.imgbtn_close);
+        imgbtn_refresh = (ImageButton) contentView.findViewById(R.id.imgbtn_refresh);
         imgbtn_apply = (ImageButton) contentView.findViewById(R.id.imgbtn_apply);
         ViewPager vp_types = (ViewPager) contentView.findViewById(R.id.vp_types);
         tabs_types = (TabLayout) contentView.findViewById(R.id.tabs_types);
+
+        imgbtn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeFilter("closed");
+            }
+        });
+
+        imgbtn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllSelectedData();
+            }
+        });
 
         imgbtn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,12 +133,6 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 closeFilter(selectedItem);
             }
         });
-//        imgbtn_refresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                clearAllSelectedData();
-//            }
-//        });
 
         mAdapter = new SectionsPagerAdapter();
         vp_types.setOffscreenPageLimit(4);
@@ -135,7 +145,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         setPeekHeight(300); // optional; default 400dp
         setCallbacks((Callbacks) getActivity()); //optional; to get back result
         setAnimationListener((AnimationListener) getActivity()); //optional; to get animation callbacks
-//        setViewgroupStatic(ll_buttons); // optional; layout to stick at bottom on slide
+        setViewgroupStatic(ll_buttons); // optional; layout to stick at bottom on slide
         setViewPager(vp_types); //optional; if you use viewpager that has scrollview
         setViewMain(rl_content); //necessary; main bottomsheet view
         setMainContentView(contentView); // necessary; call at end before super
@@ -213,10 +223,10 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 @Override
                 public void onClick(View v) {
                     //For multiple selection
-//                    multiChoiceSelectedMap(tv);
+                    multiChoiceSelectedMap(tv);
 
                     //For single selection
-                    singleChoiceSelectedMap(filter_category, tv);
+//                    singleChoiceSelectedMap(filter_category, tv);
                 }
             });
             try {
@@ -230,11 +240,11 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
             if (applied_filters != null && applied_filters.get(filter_category) != null && applied_filters.get(filter_category).contains(keys.get(finalI))) {
                 tv.setTag("selected");
                 tv.setBackgroundResource(R.drawable.chip_selected);
-                tv.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.subtitleTextColor));
             } else {
                 tv.setTag("unselected");
                 tv.setBackgroundResource(R.drawable.chip_unselected);
-                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.filters_header));
+                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
             }
             textviews.add(tv);
 
@@ -303,7 +313,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     private void selectTextView(TextView textView) {
         textView.setTag("selected");
         textView.setBackgroundResource(R.drawable.chip_selected);
-        textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
+        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.subtitleTextColor));
 
         updateTextView(textView);
     }
@@ -311,7 +321,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     private void unSelectTextView(TextView textView) {
         textView.setTag("unselected");
         textView.setBackgroundResource(R.drawable.chip_unselected);
-        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.filters_header));
+        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
 
         updateTextView(textView);
     }
@@ -345,7 +355,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         for (TextView tv : textviews) {
             tv.setTag("unselected");
             tv.setBackgroundResource(R.drawable.chip_unselected);
-            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.filters_header));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
         }
         applied_filters.clear();
     }
@@ -373,7 +383,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
                             mTextView.setTag("unselected");
                             mTextView.setBackgroundResource(R.drawable.chip_unselected);
-                            mTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.filters_header));
+                            mTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
 
                             updateTextView(mTextView);
                         }
@@ -403,7 +413,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
                         textView.setTag("unselected");
                         textView.setBackgroundResource(R.drawable.chip_unselected);
-                        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.filters_header));
+                        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
 
                         updateTextView(textView);
                     }
