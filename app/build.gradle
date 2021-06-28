@@ -239,6 +239,7 @@ dependencies {
     implementation project(":library:msvsearch")
     implementation project(":library:retrofitmanager")
     implementation project(":library:ultimatetablayout")
-//    implementation project(":library:flexibleadapter")
-//    implementation project(":library:flexibleadapterui")
+    implementation project(":library:flexibleadapter")
+    implementation project(":library:flexibleadapterui")
+    implementation project(":library:fabulousfilter")
 }

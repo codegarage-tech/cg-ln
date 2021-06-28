@@ -3,7 +3,7 @@ include ':app',
         ':library:recolor',
         ':library:msvsearch',
         ':library:retrofitmanager',
-        ':library:ultimatetablayout'
-//,
-//        ':library:flexibleadapter',
-//        ':library:flexibleadapterui'
+        ':library:ultimatetablayout',
+        ':library:flexibleadapter',
+        ':library:flexibleadapterui',
+        ':library:fabulousfilter'
