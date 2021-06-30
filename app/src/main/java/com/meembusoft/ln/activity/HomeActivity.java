@@ -85,7 +85,7 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.ll_category).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentItemList = new Intent(getActivity(), ProductListActivity.class);
+                Intent intentItemList = new Intent(getActivity(), CategoryActivity.class);
                 startActivity(intentItemList);
             }
         });

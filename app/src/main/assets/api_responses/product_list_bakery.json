@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Wonder White Bead",
+      "image": "https://www.pngfind.com/pngs/m/187-1871070_white-bread-wonder-hd-png-download.png",
+      "vendor": "Wonder"
+    }
+  ]
+}

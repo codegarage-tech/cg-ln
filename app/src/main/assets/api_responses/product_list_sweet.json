@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Sweet",
+      "image": "https://www.pikpng.com/pngl/m/12-122972_free-png-sweets-free-png-png-images-transparent.png",
+      "vendor": ""
+    }
+  ]
+}

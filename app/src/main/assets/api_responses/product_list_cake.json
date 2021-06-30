@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Chocolate Cake",
+      "image": "https://admin.mrbakerbd.com/public/images/products/1598514745.jpg",
+      "vendor": "Mr Baker"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.meembusoft.ln.R;
-import com.meembusoft.ln.util.FragmentUtilsManager;
+import com.meembusoft.ln.enumeration.FilterType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,16 +59,16 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         return mff;
     }
 
-    private List<String> getFoodCategoryKey(){
-        return new ArrayList<String>(){{
+    private List<String> getFoodCategoryKey() {
+        return new ArrayList<String>() {{
             add("Fast Food");
             add("Drinks");
             add("Grill");
         }};
     }
 
-    private List<String> getRestaurantCategoryKey(){
-        return new ArrayList<String>(){{
+    private List<String> getRestaurantCategoryKey() {
+        return new ArrayList<String>() {{
             add("Chinese");
             add("Thai");
             add("Korean");
@@ -162,12 +162,12 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 //            LinearLayout ll_scroll = (LinearLayout) layout.findViewById(R.id.ll_scroll);
 //            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (metrics.heightPixels-(104*metrics.density)));
 //            ll_scroll.setLayoutParams(lp);
-            switch (position) {
-                case 0:
-                    inflateLayoutWithFilters("food_category", fbl);
+            switch (FilterType.values()[position]) {
+                case VENDOR:
+                    inflateLayoutWithFilters(FilterType.VENDOR, fbl);
                     break;
-                case 1:
-                    inflateLayoutWithFilters("restaurant_category", fbl);
+                case PRICE:
+                    inflateLayoutWithFilters(FilterType.PRICE, fbl);
                     break;
             }
             collection.addView(layout);
@@ -181,18 +181,12 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
         @Override
         public int getCount() {
-            return 2;
+            return FilterType.values().length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "   FOOD";
-                case 1:
-                    return "   RESTAURANT";
-            }
-            return "";
+            return "   " + FilterType.values()[position].getValue() + "   ";
         }
 
         @Override
@@ -202,13 +196,13 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
     }
 
-    private void inflateLayoutWithFilters(final String filter_category, FlexboxLayout fbl) {
+    private void inflateLayoutWithFilters(FilterType filterType, FlexboxLayout fbl) {
         List<String> keys = new ArrayList<>();
-        switch (filter_category) {
-            case "food_category":
+        switch (filterType) {
+            case VENDOR:
                 keys = getFoodCategoryKey();
                 break;
-            case "restaurant_category":
+            case PRICE:
                 keys = getRestaurantCategoryKey();
                 break;
         }
@@ -230,14 +224,14 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 }
             });
             try {
-                Log.d(TAG, "key: " + filter_category + " |val:" + keys.get(finalI));
+                Log.d(TAG, "key: " + filterType + " |val:" + keys.get(finalI));
                 Log.d(TAG, "applied_filters != null: " + (applied_filters != null));
-                Log.d(TAG, "applied_filters.get(key) != null: " + (applied_filters.get(filter_category) != null));
-                Log.d(TAG, "applied_filters.get(key).contains(keys.get(finalI)): " + (applied_filters.get(filter_category).contains(keys.get(finalI))));
+                Log.d(TAG, "applied_filters.get(key) != null: " + (applied_filters.get(filterType) != null));
+                Log.d(TAG, "applied_filters.get(key).contains(keys.get(finalI)): " + (applied_filters.get(filterType).contains(keys.get(finalI))));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (applied_filters != null && applied_filters.get(filter_category) != null && applied_filters.get(filter_category).contains(keys.get(finalI))) {
+            if (applied_filters != null && applied_filters.get(filterType) != null && applied_filters.get(filterType).contains(keys.get(finalI))) {
                 tv.setTag("selected");
                 tv.setBackgroundResource(R.drawable.chip_selected);
                 tv.setTextColor(ContextCompat.getColor(getContext(), R.color.subtitleTextColor));

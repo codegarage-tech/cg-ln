@@ -69,8 +69,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         mScreenView = LayoutInflater.from(getActivity()).inflate(initScreenLayout(), null);
 
         // Set status bar and navigation bar color
-        new ReColor(getActivity()).setStatusBarColor(AppUtil.getColor(getActivity(), R.color.screenBgColor), AppUtil.getColor(getActivity(), R.color.screenBgColor), 1000);
-        new ReColor(getActivity()).setNavigationBarColor(AppUtil.getColor(getActivity(), R.color.screenBgColor), AppUtil.getColor(getActivity(), R.color.screenBgColor), 1000);
+        new ReColor(getActivity()).setStatusBarColor(AppUtil.getColor(getActivity(), R.color.statusBarColor), AppUtil.getColor(getActivity(), R.color.statusBarColor), 1000);
+        new ReColor(getActivity()).setNavigationBarColor(AppUtil.getColor(getActivity(), R.color.navigationBarColor), AppUtil.getColor(getActivity(), R.color.navigationBarColor), 1000);
 
         mSavedInstanceState = savedInstanceState;
         initIntentData(mSavedInstanceState, getIntent());

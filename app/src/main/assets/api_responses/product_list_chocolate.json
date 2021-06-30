@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "KitKat",
+      "image": "https://toppng.com/uploads/preview/kitkat-4-fingers-kit-kat-11562942497b5jizpnamz.png",
+      "vendor": "Nestle"
+    }
+  ]
+}

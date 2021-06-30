@@ -13,16 +13,14 @@ import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.athbk.ultimatetablayout.OnClickTabListener;
 import com.athbk.ultimatetablayout.UltimateTabLayout;
 import com.meembusoft.ln.R;
-import com.meembusoft.ln.adapter.ProductViewPagerAdapter;
+import com.meembusoft.ln.adapter.CategoryViewPagerAdapter;
 import com.meembusoft.ln.base.BaseActivity;
-import com.meembusoft.ln.fragment.ProductListFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.util.DataUtil;
-import com.meembusoft.ln.util.FragmentUtilsManager;
 
 import java.util.List;
 
-public class ProductListActivity extends BaseActivity implements AAH_FabulousFragment.Callbacks, AAH_FabulousFragment.AnimationListener {
+public class CategoryActivity extends BaseActivity implements AAH_FabulousFragment.Callbacks, AAH_FabulousFragment.AnimationListener {
 
     // Toolbar
     private TextView tvTitle;
@@ -38,7 +36,7 @@ public class ProductListActivity extends BaseActivity implements AAH_FabulousFra
 
     @Override
     public int initScreenLayout() {
-        return R.layout.activity_product_list;
+        return R.layout.activity_category;
     }
 
     @Override
@@ -92,7 +90,7 @@ public class ProductListActivity extends BaseActivity implements AAH_FabulousFra
     private void initTab() {
         List<Category> categories = DataUtil.getAllCategoriesWithSubcategories(getActivity());
 
-        ProductViewPagerAdapter pagerAdapter = new ProductViewPagerAdapter(getSupportFragmentManager(), categories);
+        CategoryViewPagerAdapter pagerAdapter = new CategoryViewPagerAdapter(getSupportFragmentManager(), categories);
         viewPager.setAdapter(pagerAdapter);
 
         ultimateTabLayout.setOnClickTabListener(new OnClickTabListener() {

@@ -7,46 +7,39 @@ import android.view.View;
 
 import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.ProductListAdapter;
-import com.meembusoft.ln.adapter.SubCategoryListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.fragment.filter.ProductFilterFragment;
-import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
-import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListFragment extends BaseFragment {
+public class SubCategoryFragment extends BaseFragment {
 
-    private Category mCategory;
-    private Subcategory mLastSelectedSubCategory;
-    private RecyclerView rvSubCategory;
+    private Subcategory mSubCategory;
     private MRecyclerView rvProduct;
-    private SubCategoryListAdapter mSubCategoryListAdapter;
     private ProductListAdapter mProductListAdapter;
     // Filter
     private ArrayMap<String, List<String>> appliedFilters = new ArrayMap<>();
     private FloatingActionButton fabFilter;
     private ProductFilterFragment productFilterFragment;
-    private String TAG = ProductListFragment.class.getSimpleName();
+    private String TAG = SubCategoryFragment.class.getSimpleName();
 
-    public ProductListFragment(Category category) {
-        mCategory = category;
+    public SubCategoryFragment(Subcategory subcategory) {
+        mSubCategory = subcategory;
     }
 
     @Override
     public int initFragmentLayout() {
-        return R.layout.fragment_product_list;
+        return R.layout.fragment_sub_category;
     }
 
     @Override
@@ -56,15 +49,21 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     public void initFragmentViews(View parentView) {
-        rvSubCategory = parentView.findViewById(R.id.rv_sub_category);
         rvProduct = parentView.findViewById(R.id.rv_product);
         fabFilter = parentView.findViewById(R.id.fab_filter);
     }
 
     @Override
     public void initFragmentViewsData() {
-        initUI();
-        initSubCategory(mCategory);
+        // Setup product recyclerview
+        rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mProductListAdapter = new ProductListAdapter(getActivity());
+        // Load subcategory adapter
+        rvProduct.setAdapter(mProductListAdapter);
+        // Load products into adapter
+        List<Product> products = new ArrayList<>();
+        products.addAll(DataUtil.getAllProducts(getActivity(), mSubCategory));
+        mProductListAdapter.addAll(products);
 
         fabFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,49 +96,6 @@ public class ProductListFragment extends BaseFragment {
     @Override
     public void initFragmentOnResult(int requestCode, int resultCode, Intent data) {
 
-    }
-
-    private void initUI() {
-        // Setup subcategory recyclerview
-        rvSubCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        rvSubCategory.setHasFixedSize(true);
-        // Setup subcategory adapter
-        mSubCategoryListAdapter = new SubCategoryListAdapter(getActivity());
-        mSubCategoryListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int i) {
-                mSubCategoryListAdapter.setSelection(i);
-                initProduct(mSubCategoryListAdapter.getSelectedSubCategory());
-            }
-        });
-        // Load subcategory adapter
-        rvSubCategory.setAdapter(mSubCategoryListAdapter);
-
-        // Setup product recyclerview
-        rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mProductListAdapter = new ProductListAdapter(getActivity());
-        // Load subcategory adapter
-        rvProduct.setAdapter(mProductListAdapter);
-    }
-
-    private void initSubCategory(Category category) {
-        mSubCategoryListAdapter.addAll(category.getSubcategory());
-        mSubCategoryListAdapter.setSelection(0);
-        rvSubCategory.smoothScrollToPosition(0);
-
-        initProduct(mSubCategoryListAdapter.getSelectedSubCategory());
-    }
-
-    private void initProduct(Subcategory subcategory) {
-        mLastSelectedSubCategory = subcategory;
-        // Setup product adapter
-        List<Product> products = new ArrayList<>();
-        if (subcategory.getName().equalsIgnoreCase("Rice")) {
-            products.addAll(DataUtil.getAllProducts(getActivity(), subcategory));
-//            products.addAll(DataUtil.getAllProducts(getActivity(), subcategory));
-        }
-        mProductListAdapter.clear();
-        mProductListAdapter.addAll(products);
     }
 
     /***************************

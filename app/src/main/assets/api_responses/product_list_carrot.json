@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Carrot Big",
+      "image": "https://toppng.com/uploads/preview/carrot-transparent-11546979193sx09yyzr30.png",
+      "vendor": ""
+    }
+  ]
+}

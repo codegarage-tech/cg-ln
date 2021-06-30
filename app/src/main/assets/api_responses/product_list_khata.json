@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Bashundhara Khata",
+      "image": "https://www.bashundharapapermills.com/assets/upload/wallpaper_1595667201.png",
+      "vendor": "Bashundhara"
+    }
+  ]
+}

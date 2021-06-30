@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "RFL tiffine Box",
+      "image": "https://image.pngaaa.com/523/612523-small.png",
+      "vendor": "RFL"
+    }
+  ]
+}

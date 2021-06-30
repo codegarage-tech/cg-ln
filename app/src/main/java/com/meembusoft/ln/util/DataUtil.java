@@ -23,9 +23,9 @@ public class DataUtil {
     // Asset file path
     public static final String ASSET_API_RESPONSE_BASE_PATH = "api_responses/";
     public static final String ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY = "category_with_subcategory.json";
-    public static final String ASSET_FILE_NAME_PRODUCT = "product_list_rice.json";
+    //    public static final String ASSET_FILE_NAME_PRODUCT_RICE = "product_list_rice.json";
     public static final String ASSET_FILE_PATH_CATEGORY_WITH_SUBCATEGORY = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY;
-    public static final String ASSET_FILE_PATH_PRODUCT = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT;
+//    public static final String ASSET_FILE_PATH_PRODUCT = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT;
 
     public static List<Category> getAllCategoriesWithSubcategories(Context context) {
         List<Category> categories = new ArrayList<>();
@@ -41,7 +41,39 @@ public class DataUtil {
 
     public static List<Product> getAllProducts(Context context, Subcategory subcategory) {
         List<Product> products = new ArrayList<>();
-        String jsonResponse = AndroidAssetManager.readTextFileFromAsset(context, ASSET_FILE_PATH_PRODUCT);
+        String filePath = "";
+        if (subcategory.getName().equalsIgnoreCase("Rice")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_rice.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Beverage")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_beverage.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Bakery")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_bakery.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Ice-Cream")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_ice_cream.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Chocolate")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_chocolate.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Cake")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_cake.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Ear ring")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_ear_ring.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Chicken")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_chicken.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Sweet")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_sweet.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Carrot")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_carrot.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Khata")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_khata.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Bulb")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_bulb.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Paracetamol")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_paracetamol.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Television")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_television.json";
+        } else if (subcategory.getName().equalsIgnoreCase("Box")) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + "product_list_box.json";
+        }
+        String jsonResponse = AndroidAssetManager.readTextFileFromAsset(context, filePath);
         Logger.d(TAG, TAG + ">>getAllProducts>>jsonResponse: " + jsonResponse);
         ResponseProduct offlineProduct = APIResponse.getObjectFromJSONString(jsonResponse, ResponseProduct.class);
         if (offlineProduct != null) {

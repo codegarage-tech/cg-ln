@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Singer 30 inch Television",
+      "image": "https://singer.pay-dev.razer.com/sites/default/files/TLE327.gif",
+      "vendor": "Singer"
+    }
+  ]
+}

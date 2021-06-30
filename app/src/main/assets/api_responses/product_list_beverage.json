@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Orange Juice",
+      "image": "https://freepngimg.com/download/juice/5-orange-juice-png-image.png",
+      "vendor": ""
+    }
+  ]
+}

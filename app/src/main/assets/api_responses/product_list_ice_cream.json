@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Igloo Cone Ice Cream",
+      "image": "https://toppng.com/uploads/preview/vanilla-ice-cream-png-11553727146neljxgrhgo.png",
+      "vendor": "Igloo"
+    }
+  ]
+}

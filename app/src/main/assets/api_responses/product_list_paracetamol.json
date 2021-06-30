@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Napa Tablet",
+      "image": "https://cdn.osudpotro.com/medicine/1598886410899.png",
+      "vendor": "Napa"
+    }
+  ]
+}

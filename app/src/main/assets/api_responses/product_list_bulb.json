@@ -1,0 +1,12 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": [
+    {
+      "id": "1",
+      "name": "Super Star Bulb",
+      "image": "https://www.kablewala.com.bd/images/detailed/31/SSG_1083,_1084__Emergency-10-Watt-380x324.png",
+      "vendor": "Super Star"
+    }
+  ]
+}

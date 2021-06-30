@@ -6,17 +6,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.athbk.ultimatetablayout.IFTabAdapter;
-import com.meembusoft.ln.fragment.ProductListFragment;
+import com.meembusoft.ln.fragment.CategoryFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductViewPagerAdapter extends FragmentPagerAdapter implements IFTabAdapter<String> {
+public class CategoryViewPagerAdapter extends FragmentPagerAdapter implements IFTabAdapter<String> {
 
     private List<Category> mCategories = new ArrayList<>();
 
-    public ProductViewPagerAdapter(@NonNull FragmentManager fragmentManager, List<Category> categories) {
+    public CategoryViewPagerAdapter(@NonNull FragmentManager fragmentManager, List<Category> categories) {
         super(fragmentManager);
         mCategories = categories;
     }
@@ -24,7 +24,7 @@ public class ProductViewPagerAdapter extends FragmentPagerAdapter implements IFT
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return new ProductListFragment(mCategories.get(position));
+        return new CategoryFragment(mCategories.get(position));
     }
 
     @Override
