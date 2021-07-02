@@ -2,15 +2,21 @@ package com.meembusoft.ln.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.adapter.SubCategoryViewPagerAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.util.FragmentUtilsManager;
+
+import java.util.List;
 
 public class CategoryFragment extends BaseFragment {
 
@@ -55,9 +61,61 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void initFragmentViewsData() {
-        subCategoryViewPagerAdapter = new SubCategoryViewPagerAdapter(this.getChildFragmentManager(), mCategory.getSubcategory());
+        subCategoryViewPagerAdapter = new SubCategoryViewPagerAdapter(getChildFragmentManager(), mCategory.getSubcategory());
+        viewPagerSubCategory.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                List<Fragment> subFragments = getChildFragmentManager().getFragments();
+                if (subFragments != null && subFragments.size() > 0) {
+                    Log.d(TAG, "onPageSelected>>subFragments>>size: " + subFragments.size());
+
+                    for (Fragment subFragment : subFragments) {
+                        if (subFragment instanceof SubCategoryFragment) {
+                            Log.d(TAG, "onPageSelected>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+                        }
+                    }
+
+                    Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getChildFragmentManager(), viewPagerSubCategory);
+                    Log.d(TAG, "onPageSelected>>visibleViewPagerSubFragment>>name: " + ((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory().getName());
+                    ((CategoryActivity) getActivity()).setSelectedSubCategory(((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory());
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         viewPagerSubCategory.setAdapter(subCategoryViewPagerAdapter);
         tabLayoutSubCategory.setupWithViewPager(viewPagerSubCategory);
+
+        viewPagerSubCategory.post(new Runnable() {
+            @Override
+            public void run() {
+                // For avoiding multiple view pager instance
+                if (((CategoryActivity) getActivity()).getSelectedCategory().getName().equalsIgnoreCase(mCategory.getName())) {
+                    List<Fragment> subFragments = getChildFragmentManager().getFragments();
+                    if (subFragments != null && subFragments.size() > 0) {
+                        Log.d(TAG, "onPageSelected>>post>>subFragments>>size: " + subFragments.size());
+
+                        for (Fragment subFragment : subFragments) {
+                            if (subFragment instanceof SubCategoryFragment) {
+                                Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+                            }
+                        }
+
+                        Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getChildFragmentManager(), viewPagerSubCategory);
+                        Log.d(TAG, "onPageSelected>>post>>visibleViewPagerSubFragment>>name: " + ((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory().getName());
+                        ((CategoryActivity) getActivity()).setSelectedSubCategory(((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory());
+                    }
+                }
+            }
+        });
 
 //        initUI();
 //        initSubCategory(mCategory);
@@ -191,4 +249,13 @@ public class CategoryFragment extends BaseFragment {
 ////            }
 ////        }
 //    }
+
+
+    public Category getCategory() {
+        return mCategory;
+    }
+
+    public ViewPager getViewPagerSubCategory() {
+        return viewPagerSubCategory;
+    }
 }

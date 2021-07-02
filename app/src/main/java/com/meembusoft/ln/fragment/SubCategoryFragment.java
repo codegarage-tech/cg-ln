@@ -151,4 +151,8 @@ public class SubCategoryFragment extends BaseFragment {
 //            }
 //        }
     }
+
+    public Subcategory getSubCategory() {
+        return mSubCategory;
+    }
 }

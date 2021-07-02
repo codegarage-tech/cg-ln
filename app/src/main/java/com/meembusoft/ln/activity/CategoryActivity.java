@@ -7,16 +7,20 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
-import com.athbk.ultimatetablayout.OnClickTabListener;
 import com.athbk.ultimatetablayout.UltimateTabLayout;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.CategoryViewPagerAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.fragment.CategoryFragment;
+import com.meembusoft.ln.fragment.SubCategoryFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.colormatchtab.Subcategory;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.util.FragmentUtilsManager;
 
 import java.util.List;
 
@@ -26,8 +30,12 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     private TextView tvTitle;
     private LinearLayout llClose;
 
-    private ViewPager viewPager;
+    private ViewPager viewPagerCategory;
     private UltimateTabLayout ultimateTabLayout;
+
+    // Filter
+    private Subcategory mSelectedSubCategory;
+    private Category mSelectedCategory;
 
     @Override
     public int initToolbarLayout() {
@@ -50,7 +58,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         tvTitle = findViewById(R.id.tv_title);
         llClose = findViewById(R.id.ll_close);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPagerCategory = (ViewPager) findViewById(R.id.view_pager_category);
         ultimateTabLayout = (UltimateTabLayout) findViewById(R.id.ultimate_tab_layout);
     }
 
@@ -91,73 +99,86 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         List<Category> categories = DataUtil.getAllCategoriesWithSubcategories(getActivity());
 
         CategoryViewPagerAdapter pagerAdapter = new CategoryViewPagerAdapter(getSupportFragmentManager(), categories);
-        viewPager.setAdapter(pagerAdapter);
 
-        ultimateTabLayout.setOnClickTabListener(new OnClickTabListener() {
+        viewPagerCategory.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onClickTab(int currentPos) {
-                Log.e("LOG", "OnClickTab " + currentPos);
-                viewPager.setCurrentItem(currentPos);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                if (fragments != null && fragments.size() > 0) {
+                    Log.d(TAG, "onPageSelected>>fragments>>size: " + fragments.size() + " position: "
+                            + position + " current position: " + viewPagerCategory.getCurrentItem());
+                    for (Fragment mFragment : fragments) {
+                        if (mFragment instanceof CategoryFragment) {
+                            Log.d(TAG, "onPageSelected>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
+                        }
+                    }
+
+                    Fragment visibleViewPagerFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getSupportFragmentManager(), viewPagerCategory);
+                    setSelectedCategory(((CategoryFragment) visibleViewPagerFragment).getCategory());
+                    Log.d(TAG, "onPageSelected>>visibleViewPagerFragment>>name: " + mSelectedCategory.getName());
+                    List<Fragment> subFragments = visibleViewPagerFragment.getChildFragmentManager().getFragments();
+                    if (subFragments != null && subFragments.size() > 0) {
+                        Log.d(TAG, "onPageSelected>>subFragments>>size: " + subFragments.size());
+
+                        for (Fragment subFragment : subFragments) {
+                            if (subFragment instanceof SubCategoryFragment) {
+                                Log.d(TAG, "onPageSelected>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+                            }
+                        }
+
+                        Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(visibleViewPagerFragment.getChildFragmentManager(), ((CategoryFragment) visibleViewPagerFragment).getViewPagerSubCategory());
+                        Log.d(TAG, "onPageSelected>>visibleViewPagerSubFragment>>name: " + ((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory().getName());
+                        setSelectedSubCategory(((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory());
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
-        ultimateTabLayout.setViewPager(viewPager, pagerAdapter);
+        viewPagerCategory.setAdapter(pagerAdapter);
+        ultimateTabLayout.setViewPager(viewPagerCategory, pagerAdapter);
 
+        // For the very first time selected item
+        viewPagerCategory.post(new Runnable() {
+            @Override
+            public void run() {
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                if (fragments != null && fragments.size() > 0) {
+                    Log.d(TAG, "onPageSelected>>post>>fragments>>size: " + fragments.size() + " current position: " + viewPagerCategory.getCurrentItem());
+                    for (Fragment mFragment : fragments) {
+                        if (mFragment instanceof CategoryFragment) {
+                            Log.d(TAG, "onPageSelected>>post>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
+                        }
+                    }
 
-////        TabLayout tabLayout = findViewById(R.id.tabLayout);
-//        FlexibleTabLayout ftl = findViewById(R.id.flexibleTabLayout);
-//
-//        ftl.setInflateTabsDelegate(new Function1<LinearLayout, List<? extends View>>() {
-//            @Override
-//            public List<? extends View> invoke(LinearLayout linearLayout) {
-//
-//                List<View> tabs = new ArrayList<>();
-//                for(Category category : categories){
-//                tabs.add(AppUtil.getTabView(getActivity(), category));}
-//
-//                return tabs;
-//            }
-//        });
-//
-//        ftl.setHasIndicator(false);
+                    Fragment visibleViewPagerFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getSupportFragmentManager(), viewPagerCategory);
+                    setSelectedCategory(((CategoryFragment) visibleViewPagerFragment).getCategory());
+                    Log.d(TAG, "onPageSelected>>post>>visibleViewPagerFragment>>name: " + mSelectedCategory.getName());
+                    List<Fragment> subFragments = visibleViewPagerFragment.getChildFragmentManager().getFragments();
+                    if (subFragments != null && subFragments.size() > 0) {
+                        Log.d(TAG, "onPageSelected>>post>>subFragments>>size: " + subFragments.size());
 
+                        for (Fragment subFragment : subFragments) {
+                            if (subFragment instanceof SubCategoryFragment) {
+                                Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+                            }
+                        }
 
-//        ViewPager viewPager = findViewById(R.id.pager);
-//        viewPager.setAdapter(new ProductViewPagerAdapter(getSupportFragmentManager(), categories));
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                ftl.onPageScrolled(position, positionOffset);
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                ftl.onPageSelected(position);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//            }
-//        });
-//        ftl.inflateTabs();
-//        ftl.inflateIndicator();
-
-//        viewPager.setAdapter(new ProductViewPagerAdapter(getSupportFragmentManager(), categories));
-////        viewPager.addOnPageChangeListener(ColorTabLayoutOnPageChangeListener(colorMatchTabLayout))
-////        viewPager.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGreen));
-////        viewPager.getBackground().setAlpha(128);
-//
-//        tabLayout.setupWithViewPager(viewPager);
-//
-//
-//        for (int index = 0; index < categories.size(); index++) {
-//            Category category = categories.get(index);
-////            String tabName = category.getName();
-////            int selectedColor = new RandomColor().randomColor();
-////            String icon = category.getImage();
-//
-//            TabLayout.Tab tab = tabLayout.getTabAt(index);
-//            tab.setCustomView(AppUtil.getTabView(getActivity(), category));
-//        }
+                        Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(visibleViewPagerFragment.getChildFragmentManager(), ((CategoryFragment) visibleViewPagerFragment).getViewPagerSubCategory());
+                        Log.d(TAG, "onPageSelected>>post>>visibleViewPagerSubFragment>>name: " + ((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory().getName());
+                        setSelectedSubCategory(((SubCategoryFragment) visibleViewPagerSubFragment).getSubCategory());
+                    }
+                }
+            }
+        });
     }
 
 
@@ -167,7 +188,6 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     @Override
     public void onResult(Object result) {
         Log.d(TAG, "onResult: " + result.toString());
-//        ((ProductListFragment) FragmentUtilsManager.getVisibleSupportFragment(getActivity(), getString(R.string.title_fragment_home))).onResult(result);
     }
 
     @Override
@@ -190,4 +210,21 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         Log.d("aah_animation", "onCloseAnimationEnd: ");
     }
 
+    public void setSelectedCategory(Category selectedCategory) {
+        this.mSelectedCategory = selectedCategory;
+        Log.d(TAG, "onPageSelected>>mSelectedCategory: " + mSelectedCategory.getName());
+    }
+
+    public void setSelectedSubCategory(Subcategory selectedSubCategory) {
+        this.mSelectedSubCategory = selectedSubCategory;
+        Log.d(TAG, "onPageSelected>>mSelectedSubCategory: " + mSelectedSubCategory.getName());
+    }
+
+    public Subcategory getSelectedSubCategory() {
+        return mSelectedSubCategory;
+    }
+
+    public Category getSelectedCategory() {
+        return mSelectedCategory;
+    }
 }

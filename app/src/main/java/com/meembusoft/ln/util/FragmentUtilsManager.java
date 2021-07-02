@@ -104,6 +104,11 @@ public class FragmentUtilsManager {
         return fragment;
     }
 
+    public static androidx.fragment.app.Fragment getVisibleViewPagerFragment(FragmentManager fragmentManager, androidx.viewpager.widget.ViewPager viewPager) {
+        androidx.fragment.app.Fragment fragment = fragmentManager.findFragmentByTag("android:switcher:" + viewPager.getId() + ":" + viewPager.getCurrentItem());
+        return fragment;
+    }
+
     public static Fragment getVisibleViewPagerSupportFragment(AppCompatActivity activity, ViewPager viewPager) {
         Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag("android:switcher:" + viewPager.getId() + ":" + viewPager.getCurrentItem());
         return fragment;

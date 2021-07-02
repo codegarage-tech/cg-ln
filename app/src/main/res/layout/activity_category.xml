@@ -55,9 +55,20 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/view_pager_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right|end"
+        android:layout_margin="@dimen/dp_8"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="@dimen/dp_10"
+        app:fabCustomSize="@dimen/dp_50"
+        app:srcCompat="@drawable/ic_filter"
+        app:tint="@color/blue_300" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
