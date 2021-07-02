@@ -10,6 +10,7 @@ import com.meembusoft.ln.model.colormatchtab.response.ResponseProduct;
 import com.meembusoft.retrofitmanager.APIResponse;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -81,5 +82,16 @@ public class DataUtil {
             products.addAll(offlineProduct.getData());
         }
         return products;
+    }
+
+    public static List<String> getUniqueVendorKeys(List<Product> products) {
+        List<String> keys = new ArrayList<>();
+        for (Product product : products) {
+            if (!keys.contains(product.getVendor())) {
+                keys.add(product.getVendor());
+            }
+        }
+        Collections.sort(keys);
+        return keys;
     }
 }

@@ -1,19 +1,17 @@
 package com.meembusoft.ln.fragment;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
-import com.meembusoft.ln.fragment.filter.ProductFilterFragment;
+import com.meembusoft.ln.enumeration.FilterType;
+import com.meembusoft.ln.interfaces.OnProductFilter;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
 import com.meembusoft.ln.util.DataUtil;
@@ -22,16 +20,14 @@ import com.meembusoft.recyclerview.MRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubCategoryFragment extends BaseFragment {
+public class SubCategoryFragment extends BaseFragment implements OnProductFilter {
 
     private Subcategory mSubCategory;
     private MRecyclerView rvProduct;
     private ProductListAdapter mProductListAdapter;
-    // Filter
-    private ArrayMap<String, List<String>> appliedFilters = new ArrayMap<>();
-    private FloatingActionButton fabFilter;
-    private ProductFilterFragment productFilterFragment;
     private String TAG = SubCategoryFragment.class.getSimpleName();
+    private ArrayMap<String, List<String>> mFilterKeys = new ArrayMap<>();
+    private ArrayMap<String, List<String>> mSelectedFilterKeys = new ArrayMap<>();
 
     public SubCategoryFragment(Subcategory subcategory) {
         mSubCategory = subcategory;
@@ -50,7 +46,6 @@ public class SubCategoryFragment extends BaseFragment {
     @Override
     public void initFragmentViews(View parentView) {
         rvProduct = parentView.findViewById(R.id.rv_product);
-        fabFilter = parentView.findViewById(R.id.fab_filter);
     }
 
     @Override
@@ -65,17 +60,8 @@ public class SubCategoryFragment extends BaseFragment {
         products.addAll(DataUtil.getAllProducts(getActivity(), mSubCategory));
         mProductListAdapter.addAll(products);
 
-        fabFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                productFilterFragment = ProductFilterFragment.newInstance(appliedFilters);
-                productFilterFragment.setParentFab(fabFilter);
-                productFilterFragment.setCallbacks((AAH_FabulousFragment.Callbacks) getActivity());
-                productFilterFragment.setAnimationListener((AAH_FabulousFragment.AnimationListener) getActivity());
-
-                productFilterFragment.show(getActivity().getSupportFragmentManager(), productFilterFragment.getTag());
-            }
-        });
+        // Initialize filter keys
+        findFilterKeys(products);
     }
 
     @Override
@@ -98,61 +84,30 @@ public class SubCategoryFragment extends BaseFragment {
 
     }
 
-    /***************************
-     * Fabulous Filter methods *
-     ***************************/
+    public Subcategory getSubCategory() {
+        return mSubCategory;
+    }
+
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (productFilterFragment.isAdded()) {
-            productFilterFragment.dismiss();
-            productFilterFragment.show(getActivity().getSupportFragmentManager(), productFilterFragment.getTag());
+    public void findFilterKeys(List<Product> productList) {
+        if(productList != null && productList.size()>0){
+            mFilterKeys.put(FilterType.VENDOR.name(), DataUtil.getUniqueVendorKeys(productList));
+            mFilterKeys.put(FilterType.PRICE.name(), new ArrayList<>());
         }
     }
 
-    public void onResult(Object result) {
-//        Log.d(TAG, "onResult: " + result.toString());
-
-//        if (result != null) {
-//
-//            if (result.toString().equalsIgnoreCase("swiped_down")) {
-//                //do something or nothing
-//            } else {
-//
-//                appliedFilters = (ArrayMap<String, List<String>>) result;
-//                ArrayMap<String, List<String>> appliedFilters = (ArrayMap<String, List<String>>) result;
-//                if (appliedFilters.size() != 0) {
-//
-//                    if (appliedFilters.get("food_category") != null) {
-//                        if (appliedFilters.get("food_category").size() == 1) {
-//                            selectedFoodCategory = appliedFilters.get("food_category").get(0);
-//                        } else {
-//                            selectedFoodCategory = "";
-//                        }
-//                    } else {
-//                        selectedFoodCategory = "";
-//                    }
-//
-//                    if (appliedFilters.get("restaurant_category") != null) {
-//                        if (appliedFilters.get("restaurant_category").size() == 1) {
-//                            selectedRestaurantCategory = appliedFilters.get("restaurant_category").get(0);
-//                        } else {
-//                            selectedRestaurantCategory = "";
-//                        }
-//                    } else {
-//                        selectedRestaurantCategory = "";
-//                    }
-//                } else {
-//                    selectedFoodCategory = "";
-//                    selectedRestaurantCategory = "";
-//                }
-//
-//                searchRestaurant(mLocation, getSelectedFoodCategory(selectedFoodCategory).getId(), getSelectedRestaurantCategory(selectedRestaurantCategory).getId());
-//            }
-//        }
+    @Override
+    public ArrayMap<String, List<String>> getFilterKeys() {
+        return mFilterKeys;
     }
 
-    public Subcategory getSubCategory() {
-        return mSubCategory;
+    @Override
+    public void setSelectedFilterKeys(ArrayMap<String, List<String>> selectedFilterKeys) {
+        mSelectedFilterKeys = selectedFilterKeys;
+    }
+
+    @Override
+    public ArrayMap<String, List<String>> getSelectedFilterKeys() {
+        return getSelectedFilterKeys();
     }
 }

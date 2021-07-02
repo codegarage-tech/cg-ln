@@ -60,19 +60,11 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     }
 
     private List<String> getFoodCategoryKey() {
-        return new ArrayList<String>() {{
-            add("Fast Food");
-            add("Drinks");
-            add("Grill");
-        }};
+        return applied_filters.get(FilterType.VENDOR.name());
     }
 
     private List<String> getRestaurantCategoryKey() {
-        return new ArrayList<String>() {{
-            add("Chinese");
-            add("Thai");
-            add("Korean");
-        }};
+        return applied_filters.get(FilterType.PRICE.name());
     }
 
     @Override
@@ -116,10 +108,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         imgbtn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayMap<String, List<String>> selectedItem = getSelectedData(new ArrayList<String>() {{
-                    add("food_category");
-                    add("restaurant_category");
-                }});
+                ArrayMap<String, List<String>> selectedItem = getSelectedData();
 
                 Log.d(TAG, "=====================Saving======================");
                 for (Map.Entry<String, List<String>> entry : selectedItem.entrySet()) {
@@ -246,16 +235,16 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         }
     }
 
-    private ArrayMap<String, List<String>> getSelectedData(ArrayList<String> filterKeys) {
+    private ArrayMap<String, List<String>> getSelectedData() {
         ArrayMap<String, List<String>> tempSelectedData = new ArrayMap<>();
 
-        for (int i = 0; i < filterKeys.size(); i++) {
+        for (int i = 0; i < FilterType.values().length; i++) {
             List<String> keys = null;
-            switch (filterKeys.get(i)) {
-                case "food_category":
+            switch (FilterType.values()[i]) {
+                case VENDOR:
                     keys = getFoodCategoryKey();
                     break;
-                case "restaurant_category":
+                case PRICE:
                     keys = getRestaurantCategoryKey();
                     break;
             }
@@ -264,7 +253,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 for (int j = 0; j < keys.size(); j++) {
                     if (textView.getText().toString().equalsIgnoreCase(keys.get(j))) {
                         if (textView.getTag().equals("selected")) {
-                            String currentFilterKey = filterKeys.get(i);
+                            String currentFilterKey = FilterType.values()[i].name();
                             String currentKey = keys.get(j);
                             if (tempSelectedData.get(currentFilterKey) != null && !tempSelectedData.get(currentFilterKey).contains(currentKey)) {
                                 tempSelectedData.get(currentFilterKey).add(currentKey);
