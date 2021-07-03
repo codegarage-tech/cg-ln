@@ -122,18 +122,25 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
     @Override
     public void executeFilter(List<Product> productList, ArrayMap<String, List<String>> appliedFilterKeys) {
         List<Product> filteredProducts = new ArrayList<>();
-        List<Product> allProducts = new ArrayList<>(productList);
 
-        for (int i = 0; i < FilterType.values().length; i++) {
-            List<String> keys = appliedFilterKeys.get(FilterType.values()[i].name());
-            if (keys != null && !keys.isEmpty()) {
-                for (int k = 0; k < keys.size(); k++) {
-                    for (int j = 0; j < allProducts.size(); j++) {
-                        if (allProducts.get(j).getVendor().equalsIgnoreCase(keys.get(k))) {
-                            filteredProducts.add(allProducts.get(j));
+        if ((productList != null && !productList.isEmpty())) {
+            List<Product> allProducts = new ArrayList<>(productList);
+
+            if ((appliedFilterKeys != null && !appliedFilterKeys.isEmpty())) {
+                for (int i = 0; i < FilterType.values().length; i++) {
+                    List<String> keys = appliedFilterKeys.get(FilterType.values()[i].name());
+                    if (keys != null && !keys.isEmpty()) {
+                        for (int k = 0; k < keys.size(); k++) {
+                            for (int j = 0; j < allProducts.size(); j++) {
+                                if (allProducts.get(j).getVendor().equalsIgnoreCase(keys.get(k))) {
+                                    filteredProducts.add(allProducts.get(j));
+                                }
+                            }
                         }
                     }
                 }
+            } else {
+                filteredProducts.addAll(allProducts);
             }
         }
 
