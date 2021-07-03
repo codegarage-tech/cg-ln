@@ -11,16 +11,17 @@ import com.squareup.picasso.Picasso;
 
 public class ProductViewHolder extends BaseViewHolder<Product> {
 
-    private TextView tvProductName, tvProductVendor, tvProductAvailabilityTime, tvProductOriginalPrice, tvProductOfferPrice;
+    private TextView tvProductName, tvProductVendor, tvProductAvailabilityTime, tvProductQuantity, tvProductOriginalPrice, tvProductOfferPrice;
     private ImageView ivProductImage, ivProductFavorite, ivProductCart;
 
     public ProductViewHolder(ViewGroup parent) {
-        super(parent, R.layout.row_item_product);
+        super(parent, R.layout.row_item_product_new);
 
         ivProductImage = $(R.id.iv_product_image);
         tvProductName = $(R.id.tv_product_name);
         tvProductVendor = $(R.id.tv_product_vendor);
         tvProductAvailabilityTime = $(R.id.tv_product_availability);
+        tvProductQuantity = $(R.id.tv_product_quantity);
         tvProductOriginalPrice = $(R.id.tv_product_original_price);
         tvProductOfferPrice = $(R.id.tv_product_offer_price);
         ivProductFavorite = $(R.id.iv_product_favorite);
