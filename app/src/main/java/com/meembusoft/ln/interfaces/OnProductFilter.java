@@ -11,7 +11,7 @@ public interface OnProductFilter {
 
     ArrayMap<String, List<String>> getFilterKeys();
 
-    void setSelectedFilterKeys(ArrayMap<String, List<String>> selectedFilterKeys);
+    void setAppliedFilterKeys(ArrayMap<String, List<String>> appliedFilterKeys);
 
-    ArrayMap<String, List<String>> getSelectedFilterKeys();
+    ArrayMap<String, List<String>> getAppliedFilterKeys();
 }

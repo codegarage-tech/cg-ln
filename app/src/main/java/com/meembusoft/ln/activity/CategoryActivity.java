@@ -82,13 +82,15 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         fabFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mSubCategoryFragment != null && mSubCategoryFragment.getFilterKeys().size()>0)
-                productFilterFragment = ProductFilterFragment.newInstance(mSubCategoryFragment.getFilterKeys());
-                productFilterFragment.setParentFab(fabFilter);
-                productFilterFragment.setCallbacks((AAH_FabulousFragment.Callbacks) getActivity());
-                productFilterFragment.setAnimationListener((AAH_FabulousFragment.AnimationListener) getActivity());
+                if (mSubCategoryFragment != null && mSubCategoryFragment.getFilterKeys().size() > 0) {
+                    productFilterFragment = ProductFilterFragment.newInstance(mSubCategoryFragment.getFilterKeys());
+                    productFilterFragment.setAppliedFilterKeys(mSubCategoryFragment.getAppliedFilterKeys());
+                    productFilterFragment.setParentFab(fabFilter);
+                    productFilterFragment.setCallbacks((AAH_FabulousFragment.Callbacks) getActivity());
+                    productFilterFragment.setAnimationListener((AAH_FabulousFragment.AnimationListener) getActivity());
 
-                productFilterFragment.show(getSupportFragmentManager(), productFilterFragment.getTag());
+                    productFilterFragment.show(getSupportFragmentManager(), productFilterFragment.getTag());
+                }
             }
         });
 
@@ -226,10 +228,12 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         if (result != null) {
             if (result.toString().equalsIgnoreCase("swiped_down")) {
                 //do something or nothing
+            } else if (result.toString().equalsIgnoreCase("closed")) {
+                // do nothing
             } else {
                 appliedFilters = (ArrayMap<String, List<String>>) result;
-                if(mSubCategoryFragment != null ){
-                    mSubCategoryFragment.setSelectedFilterKeys(appliedFilters);
+                if (mSubCategoryFragment != null) {
+                    mSubCategoryFragment.setAppliedFilterKeys(appliedFilters);
                 }
 //                ArrayMap<String, List<String>> appliedFilters = (ArrayMap<String, List<String>>) result;
 //
@@ -291,6 +295,13 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void setSubCategoryFragment(SubCategoryFragment subCategoryFragment) {
         this.mSubCategoryFragment = subCategoryFragment;
         Log.d(TAG, "onPageSelected>>mSubCategoryFragment: " + mSubCategoryFragment.getSubCategory().getName());
+
+        // Gone filter view if there is no filter keys
+        if (mSubCategoryFragment.getFilterKeys().size() == 0) {
+            fabFilter.setVisibility(View.GONE);
+        } else {
+            fabFilter.setVisibility(View.VISIBLE);
+        }
     }
 
     public CategoryFragment getCategoryFragment() {

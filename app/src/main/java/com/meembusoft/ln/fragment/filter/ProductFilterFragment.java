@@ -32,21 +32,19 @@ import java.util.Map;
  */
 public class ProductFilterFragment extends AAH_FabulousFragment {
 
-    static ArrayMap<String, List<String>> applied_filters = new ArrayMap<>();
-    List<TextView> textviews = new ArrayList<>();
-
-    TabLayout tabs_types;
-
-    ImageButton imgbtn_close, imgbtn_refresh, imgbtn_apply;
-    SectionsPagerAdapter mAdapter;
-
+    private static ArrayMap<String, List<String>> filterKeys = new ArrayMap<>();
+    private ArrayMap<String, List<String>> appliedFilter = new ArrayMap<>();
+    private  List<TextView> textViews = new ArrayList<>();
+    private TabLayout tabFilterType;
+    private ImageButton imgBtnClose, imgBtnRefresh, imgBtnApply;
+    private SectionsPagerAdapter mAdapter;
     private static String TAG = ProductFilterFragment.class.getSimpleName();
 
     public static ProductFilterFragment newInstance(ArrayMap<String, List<String>> data) {
-        applied_filters = data;
+        filterKeys = data;
 
         Log.d(TAG, "=====================Opening======================");
-        for (Map.Entry<String, List<String>> entry : applied_filters.entrySet()) {
+        for (Map.Entry<String, List<String>> entry : filterKeys.entrySet()) {
             Log.d(TAG, "saved filter key: " + entry.getKey());
             for (String s : entry.getValue()) {
                 Log.d(TAG, "saved item: " + s);
@@ -59,12 +57,16 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         return mff;
     }
 
-    private List<String> getFoodCategoryKey() {
-        return applied_filters.get(FilterType.VENDOR.name());
+    public void setAppliedFilterKeys(ArrayMap<String, List<String>> selectedFilterKeys){
+        appliedFilter = selectedFilterKeys;
     }
 
-    private List<String> getRestaurantCategoryKey() {
-        return applied_filters.get(FilterType.PRICE.name());
+    private List<String> getVendorCategoryKey() {
+        return filterKeys.get(FilterType.VENDOR.name());
+    }
+
+    private List<String> getPriceCategoryKey() {
+        return filterKeys.get(FilterType.PRICE.name());
     }
 
     @Override
@@ -83,29 +85,29 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     public void setupDialog(Dialog dialog, int style) {
         View contentView = View.inflate(getContext(), R.layout.filter_view, null);
 
-        RelativeLayout rl_content = (RelativeLayout) contentView.findViewById(R.id.rl_content);
-        LinearLayout ll_buttons = (LinearLayout) contentView.findViewById(R.id.ll_buttons);
-        imgbtn_close = (ImageButton) contentView.findViewById(R.id.imgbtn_close);
-        imgbtn_refresh = (ImageButton) contentView.findViewById(R.id.imgbtn_refresh);
-        imgbtn_apply = (ImageButton) contentView.findViewById(R.id.imgbtn_apply);
-        ViewPager vp_types = (ViewPager) contentView.findViewById(R.id.vp_types);
-        tabs_types = (TabLayout) contentView.findViewById(R.id.tabs_types);
+        RelativeLayout parentView = (RelativeLayout) contentView.findViewById(R.id.rl_content);
+        LinearLayout llBottomBar = (LinearLayout) contentView.findViewById(R.id.ll_buttons);
+        imgBtnClose = (ImageButton) contentView.findViewById(R.id.imgbtn_close);
+        imgBtnRefresh = (ImageButton) contentView.findViewById(R.id.imgbtn_refresh);
+        imgBtnApply = (ImageButton) contentView.findViewById(R.id.imgbtn_apply);
+        ViewPager vpFilterType = (ViewPager) contentView.findViewById(R.id.vp_types);
+        tabFilterType = (TabLayout) contentView.findViewById(R.id.tabs_types);
 
-        imgbtn_close.setOnClickListener(new View.OnClickListener() {
+        imgBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeFilter("closed");
             }
         });
 
-        imgbtn_refresh.setOnClickListener(new View.OnClickListener() {
+        imgBtnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clearAllSelectedData();
             }
         });
 
-        imgbtn_apply.setOnClickListener(new View.OnClickListener() {
+        imgBtnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ArrayMap<String, List<String>> selectedItem = getSelectedData();
@@ -124,19 +126,19 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         });
 
         mAdapter = new SectionsPagerAdapter();
-        vp_types.setOffscreenPageLimit(4);
-        vp_types.setAdapter(mAdapter);
+        vpFilterType.setOffscreenPageLimit(4);
+        vpFilterType.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-        tabs_types.setupWithViewPager(vp_types);
+        tabFilterType.setupWithViewPager(vpFilterType);
 
         //params to set
         setAnimationDuration(600); //optional; default 500ms
         setPeekHeight(300); // optional; default 400dp
         setCallbacks((Callbacks) getActivity()); //optional; to get back result
         setAnimationListener((AnimationListener) getActivity()); //optional; to get animation callbacks
-        setViewgroupStatic(ll_buttons); // optional; layout to stick at bottom on slide
-        setViewPager(vp_types); //optional; if you use viewpager that has scrollview
-        setViewMain(rl_content); //necessary; main bottomsheet view
+        setViewgroupStatic(llBottomBar); // optional; layout to stick at bottom on slide
+        setViewPager(vpFilterType); //optional; if you use viewpager that has scrollview
+        setViewMain(parentView); //necessary; main bottomsheet view
         setMainContentView(contentView); // necessary; call at end before super
         super.setupDialog(dialog, style); //call super at last
     }
@@ -155,9 +157,9 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 case VENDOR:
                     inflateLayoutWithFilters(FilterType.VENDOR, fbl);
                     break;
-                case PRICE:
-                    inflateLayoutWithFilters(FilterType.PRICE, fbl);
-                    break;
+//                case PRICE:
+//                    inflateLayoutWithFilters(FilterType.PRICE, fbl);
+//                    break;
             }
             collection.addView(layout);
             return layout;
@@ -175,25 +177,24 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "   " + FilterType.values()[position].getValue() + "   ";
+            return "    " + FilterType.values()[position].getValue() + "    ";
         }
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
         }
-
     }
 
     private void inflateLayoutWithFilters(FilterType filterType, FlexboxLayout fbl) {
         List<String> keys = new ArrayList<>();
         switch (filterType) {
             case VENDOR:
-                keys = getFoodCategoryKey();
+                keys = getVendorCategoryKey();
                 break;
-            case PRICE:
-                keys = getRestaurantCategoryKey();
-                break;
+//            case PRICE:
+//                keys = getPriceCategoryKey();
+//                break;
         }
 
         for (int i = 0; i < keys.size(); i++) {
@@ -213,14 +214,14 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 }
             });
             try {
-                Log.d(TAG, "key: " + filterType + " |val:" + keys.get(finalI));
-                Log.d(TAG, "applied_filters != null: " + (applied_filters != null));
-                Log.d(TAG, "applied_filters.get(key) != null: " + (applied_filters.get(filterType) != null));
-                Log.d(TAG, "applied_filters.get(key).contains(keys.get(finalI)): " + (applied_filters.get(filterType).contains(keys.get(finalI))));
+                Log.d(TAG, "key: " + filterType.name() + " |val:" + keys.get(finalI));
+                Log.d(TAG, "applied_filters != null: " + (appliedFilter != null));
+                Log.d(TAG, "applied_filters.get(key) != null: " + (appliedFilter.get(filterType.name()) != null));
+                Log.d(TAG, "applied_filters.get(key).contains(keys.get(finalI)): " + (appliedFilter.get(filterType.name()).contains(keys.get(finalI))));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (applied_filters != null && applied_filters.get(filterType) != null && applied_filters.get(filterType).contains(keys.get(finalI))) {
+            if (appliedFilter != null && appliedFilter.get(filterType.name()) != null && appliedFilter.get(filterType.name()).contains(keys.get(finalI))) {
                 tv.setTag("selected");
                 tv.setBackgroundResource(R.drawable.chip_selected);
                 tv.setTextColor(ContextCompat.getColor(getContext(), R.color.subtitleTextColor));
@@ -229,7 +230,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
                 tv.setBackgroundResource(R.drawable.chip_unselected);
                 tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
             }
-            textviews.add(tv);
+            textViews.add(tv);
 
             fbl.addView(subchild);
         }
@@ -239,17 +240,17 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         ArrayMap<String, List<String>> tempSelectedData = new ArrayMap<>();
 
         for (int i = 0; i < FilterType.values().length; i++) {
-            List<String> keys = null;
+            List<String> keys = new ArrayList<>();
             switch (FilterType.values()[i]) {
                 case VENDOR:
-                    keys = getFoodCategoryKey();
+                    keys = getVendorCategoryKey();
                     break;
-                case PRICE:
-                    keys = getRestaurantCategoryKey();
-                    break;
+//                case PRICE:
+//                    keys = getPriceCategoryKey();
+//                    break;
             }
 
-            for (TextView textView : textviews) {
+            for (TextView textView : textViews) {
                 for (int j = 0; j < keys.size(); j++) {
                     if (textView.getText().toString().equalsIgnoreCase(keys.get(j))) {
                         if (textView.getTag().equals("selected")) {
@@ -279,11 +280,11 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         }
     }
 
-    private void singleChoiceSelectedMap(String filterKey, TextView textView) {
-        if (filterKey.equalsIgnoreCase("food_category") || filterKey.equalsIgnoreCase("restaurant_category")) {
-            clearAllSelectedData(filterKey);
+    private void singleChoiceSelectedMap(FilterType filterType, TextView textView) {
+        if (filterType == FilterType.VENDOR || filterType == FilterType.PRICE) {
+            clearAllSelectedData(filterType);
         } else {
-            clearAllSelectedDataExceptCurrent(filterKey, textView);
+            clearAllSelectedDataExceptCurrent(filterType, textView);
         }
 
         if (textView.getTag().equals("selected")) {
@@ -310,7 +311,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     }
 
     private TextView getTextView(String value) {
-        for (TextView tv : textviews) {
+        for (TextView tv : textViews) {
             if (tv.getText().toString().equalsIgnoreCase(value)) {
                 return tv;
             }
@@ -319,8 +320,8 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     }
 
     private int getTextViewPosition(String value) {
-        for (int i = 0; i < textviews.size(); i++) {
-            if (textviews.get(i).getText().toString().equalsIgnoreCase(value)) {
+        for (int i = 0; i < textViews.size(); i++) {
+            if (textViews.get(i).getText().toString().equalsIgnoreCase(value)) {
                 return i;
             }
         }
@@ -329,32 +330,32 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
 
     private TextView updateTextView(TextView textView) {
         int position = getTextViewPosition(textView.getText().toString());
-        textviews.remove(position);
-        textviews.add(position, textView);
-        return textviews.get(position);
+        textViews.remove(position);
+        textViews.add(position, textView);
+        return textViews.get(position);
     }
 
     private void clearAllSelectedData() {
-        for (TextView tv : textviews) {
+        for (TextView tv : textViews) {
             tv.setTag("unselected");
             tv.setBackgroundResource(R.drawable.chip_unselected);
             tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
         }
-        applied_filters.clear();
+        appliedFilter.clear();
     }
 
-    private void clearAllSelectedDataExceptCurrent(String filterKey, TextView textView) {
+    private void clearAllSelectedDataExceptCurrent(FilterType filterType, TextView textView) {
         List<String> keys = null;
-        switch (filterKey) {
-            case "food_category":
-                keys = getFoodCategoryKey();
+        switch (filterType) {
+            case VENDOR:
+                keys = getVendorCategoryKey();
                 break;
-            case "restaurant_category":
-                keys = getRestaurantCategoryKey();
-                break;
+//            case PRICE:
+//                keys = getPriceCategoryKey();
+//                break;
         }
 
-        List<TextView> tempTextViews = new ArrayList<>(textviews);
+        List<TextView> tempTextViews = new ArrayList<>(textViews);
 
         for (TextView mTextView : tempTextViews) {
             for (int i = 0; i < keys.size(); i++) {
@@ -376,18 +377,18 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         }
     }
 
-    private void clearAllSelectedData(String filterKey) {
+    private void clearAllSelectedData(FilterType filterType) {
         List<String> keys = null;
-        switch (filterKey) {
-            case "food_category":
-                keys = getFoodCategoryKey();
+        switch (filterType) {
+            case VENDOR:
+                keys = getVendorCategoryKey();
                 break;
-            case "restaurant_category":
-                keys = getRestaurantCategoryKey();
-                break;
+//            case PRICE:
+//                keys = getPriceCategoryKey();
+//                break;
         }
 
-        List<TextView> tempTextViews = new ArrayList<>(textviews);
+        List<TextView> tempTextViews = new ArrayList<>(textViews);
 
         for (TextView textView : tempTextViews) {
             for (int i = 0; i < keys.size(); i++) {

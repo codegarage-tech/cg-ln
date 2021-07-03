@@ -27,7 +27,7 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
     private ProductListAdapter mProductListAdapter;
     private String TAG = SubCategoryFragment.class.getSimpleName();
     private ArrayMap<String, List<String>> mFilterKeys = new ArrayMap<>();
-    private ArrayMap<String, List<String>> mSelectedFilterKeys = new ArrayMap<>();
+    private ArrayMap<String, List<String>> mAppliedFilterKeys = new ArrayMap<>();
 
     public SubCategoryFragment(Subcategory subcategory) {
         mSubCategory = subcategory;
@@ -90,9 +90,12 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
 
     @Override
     public void findFilterKeys(List<Product> productList) {
-        if(productList != null && productList.size()>0){
-            mFilterKeys.put(FilterType.VENDOR.name(), DataUtil.getUniqueVendorKeys(productList));
-            mFilterKeys.put(FilterType.PRICE.name(), new ArrayList<>());
+        if (productList != null && productList.size() > 0) {
+            List<String> vendors = DataUtil.getUniqueVendorKeys(productList);
+            if (vendors != null && !vendors.isEmpty()) {
+                mFilterKeys.put(FilterType.VENDOR.name(), vendors);
+            }
+//            mFilterKeys.put(FilterType.PRICE.name(), new ArrayList<>());
         }
     }
 
@@ -102,12 +105,12 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
     }
 
     @Override
-    public void setSelectedFilterKeys(ArrayMap<String, List<String>> selectedFilterKeys) {
-        mSelectedFilterKeys = selectedFilterKeys;
+    public void setAppliedFilterKeys(ArrayMap<String, List<String>> appliedFilterKeys) {
+        mAppliedFilterKeys = appliedFilterKeys;
     }
 
     @Override
-    public ArrayMap<String, List<String>> getSelectedFilterKeys() {
-        return getSelectedFilterKeys();
+    public ArrayMap<String, List<String>> getAppliedFilterKeys() {
+        return mAppliedFilterKeys;
     }
 }

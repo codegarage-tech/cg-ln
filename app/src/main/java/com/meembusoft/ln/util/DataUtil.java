@@ -1,6 +1,7 @@
 package com.meembusoft.ln.util;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
@@ -87,7 +88,7 @@ public class DataUtil {
     public static List<String> getUniqueVendorKeys(List<Product> products) {
         List<String> keys = new ArrayList<>();
         for (Product product : products) {
-            if (!keys.contains(product.getVendor())) {
+            if (!TextUtils.isEmpty(product.getVendor()) && !keys.contains(product.getVendor())) {
                 keys.add(product.getVendor());
             }
         }
