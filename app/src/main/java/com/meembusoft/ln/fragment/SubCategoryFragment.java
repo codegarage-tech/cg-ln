@@ -25,6 +25,7 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
     private Subcategory mSubCategory;
     private MRecyclerView rvProduct;
     private ProductListAdapter mProductListAdapter;
+    private List<Product> mProducts = new ArrayList<>();
     private String TAG = SubCategoryFragment.class.getSimpleName();
     private ArrayMap<String, List<String>> mFilterKeys = new ArrayMap<>();
     private ArrayMap<String, List<String>> mAppliedFilterKeys = new ArrayMap<>();
@@ -56,12 +57,15 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
         // Load subcategory adapter
         rvProduct.setAdapter(mProductListAdapter);
         // Load products into adapter
-        List<Product> products = new ArrayList<>();
-        products.addAll(DataUtil.getAllProducts(getActivity(), mSubCategory));
-        mProductListAdapter.addAll(products);
+        mFilterKeys.clear();
+        mAppliedFilterKeys.clear();
+        mProducts.clear();
+        mProducts.addAll(DataUtil.getAllProducts(getActivity(), mSubCategory));
+        mProductListAdapter.clear();
+        mProductListAdapter.addAll(mProducts);
 
         // Initialize filter keys
-        findFilterKeys(products);
+        findFilterKeys(mProducts);
     }
 
     @Override
@@ -107,10 +111,33 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
     @Override
     public void setAppliedFilterKeys(ArrayMap<String, List<String>> appliedFilterKeys) {
         mAppliedFilterKeys = appliedFilterKeys;
+        executeFilter(mProducts, mAppliedFilterKeys);
     }
 
     @Override
     public ArrayMap<String, List<String>> getAppliedFilterKeys() {
         return mAppliedFilterKeys;
+    }
+
+    @Override
+    public void executeFilter(List<Product> productList, ArrayMap<String, List<String>> appliedFilterKeys) {
+        List<Product> filteredProducts = new ArrayList<>();
+        List<Product> allProducts = new ArrayList<>(productList);
+
+        for (int i = 0; i < FilterType.values().length; i++) {
+            List<String> keys = appliedFilterKeys.get(FilterType.values()[i].name());
+            if (keys != null && !keys.isEmpty()) {
+                for (int k = 0; k < keys.size(); k++) {
+                    for (int j = 0; j < allProducts.size(); j++) {
+                        if (allProducts.get(j).getVendor().equalsIgnoreCase(keys.get(k))) {
+                            filteredProducts.add(allProducts.get(j));
+                        }
+                    }
+                }
+            }
+        }
+
+        mProductListAdapter.clear();
+        mProductListAdapter.addAll(filteredProducts);
     }
 }

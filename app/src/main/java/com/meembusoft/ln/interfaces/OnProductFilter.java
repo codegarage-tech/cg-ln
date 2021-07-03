@@ -14,4 +14,6 @@ public interface OnProductFilter {
     void setAppliedFilterKeys(ArrayMap<String, List<String>> appliedFilterKeys);
 
     ArrayMap<String, List<String>> getAppliedFilterKeys();
+
+    void executeFilter(List<Product> productList, ArrayMap<String, List<String>> appliedFilterKeys);
 }
