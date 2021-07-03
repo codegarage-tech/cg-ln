@@ -12,7 +12,7 @@
         android:background="@color/colorShadeBlueDark"
         app:layout_collapseMode="pin"
         app:tabGravity="start"
-        app:tabIndicatorColor="@android:color/white"
+        app:tabIndicatorColor="@color/colorBlueDark"
         app:tabMode="scrollable"
         app:tabRippleColor="@null"
         app:tabSelectedTextColor="@color/colorPink"

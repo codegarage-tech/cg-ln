@@ -14,17 +14,4 @@
         android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right|end"
-        android:layout_margin="@dimen/dp_5"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="@dimen/dp_10"
-        android:visibility="gone"
-        app:fabCustomSize="@dimen/dp_50"
-        app:srcCompat="@drawable/ic_filter"
-        app:tint="@color/blue_300" />
-
 </FrameLayout>
