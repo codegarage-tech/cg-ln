@@ -11,20 +11,26 @@ import com.squareup.picasso.Picasso;
 
 public class ProductViewHolder extends BaseViewHolder<Product> {
 
-    private TextView tvProductName, tvProductDescription;
-    private ImageView ivProductImage;
+    private TextView tvProductName, tvProductVendor, tvProductAvailabilityTime, tvProductOriginalPrice, tvProductOfferPrice;
+    private ImageView ivProductImage, ivProductFavorite, ivProductCart;
 
     public ProductViewHolder(ViewGroup parent) {
         super(parent, R.layout.row_item_product);
 
-        tvProductName = $(R.id.tv_product_name);
-        tvProductDescription = $(R.id.tv_product_description);
         ivProductImage = $(R.id.iv_product_image);
+        tvProductName = $(R.id.tv_product_name);
+        tvProductVendor = $(R.id.tv_product_vendor);
+        tvProductAvailabilityTime = $(R.id.tv_product_availability);
+        tvProductOriginalPrice = $(R.id.tv_product_original_price);
+        tvProductOfferPrice = $(R.id.tv_product_offer_price);
+        ivProductFavorite = $(R.id.iv_product_favorite);
+        ivProductCart = $(R.id.iv_product_cart);
     }
 
     @Override
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
+        tvProductVendor.setText(data.getVendor());
         Picasso.get().load(data.getImage()).into(ivProductImage);
     }
 }

@@ -3,7 +3,6 @@ package com.meembusoft.ln.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -26,8 +25,6 @@ import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.FragmentUtilsManager;
 
-import org.parceler.Parcels;
-
 import java.util.List;
 
 import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
@@ -36,7 +33,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     // Toolbar
     private TextView tvTitle;
-    private LinearLayout llClose;
+    private LinearLayout llClose, llCart;
 
     private ViewPager viewPagerCategory;
     private UltimateTabLayout ultimateTabLayout;
@@ -51,7 +48,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     @Override
     public int initToolbarLayout() {
-        return R.layout.toolbar_base;
+        return R.layout.toolbar_category;
     }
 
     @Override
@@ -62,12 +59,9 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     @Override
     public void initIntentData(Bundle savedInstanceState, Intent intent) {
         // Get intent data
-        if(intent != null){
-//            Parcelable parcelableCategory = intent.getParcelableExtra(INTENT_KEY_CATEGORY);
-//            if(parcelableCategory != null){
+        if (intent != null) {
             mSelectedCategoryPosition = intent.getIntExtra(INTENT_KEY_CATEGORY, 0);
-                Log.d(TAG, "mSelectedCategoryPosition: " + mSelectedCategoryPosition);
-//            }
+            Log.d(TAG, "mSelectedCategoryPosition: " + mSelectedCategoryPosition);
         }
     }
 
@@ -76,6 +70,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         // Toolbar
         tvTitle = findViewById(R.id.tv_title);
         llClose = findViewById(R.id.ll_close);
+        llCart = findViewById(R.id.ll_cart);
 
         viewPagerCategory = (ViewPager) findViewById(R.id.view_pager_category);
         ultimateTabLayout = (UltimateTabLayout) findViewById(R.id.ultimate_tab_layout);

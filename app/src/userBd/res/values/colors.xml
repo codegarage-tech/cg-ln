@@ -9,6 +9,8 @@
     <color name="subtitleTextColor">@color/black70</color>
     <color name="paragraphTextColor">@color/black60</color>
     <color name="hintsTextColor">@color/black40</color>
+    <color name="successTextColor">@color/green_600</color>
+    <color name="failureTextColor">@color/red_500</color>
     <color name="imageTintColor">@color/black100</color>
     <color name="statusBarColor">@color/screenBgColor</color>
     <color name="navigationBarColor">@color/gray_light</color>
