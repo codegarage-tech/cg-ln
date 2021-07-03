@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_5"
             android:text="Title"
+            android:textAppearance="?android:attr/textAppearanceListItem"
             android:textColor="@color/paragraphTextColor"
             android:textStyle="bold" />
 
@@ -63,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_5"
             android:text="Subtitle"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
             android:textColor="@color/hintsTextColor" />
 
     </LinearLayout>

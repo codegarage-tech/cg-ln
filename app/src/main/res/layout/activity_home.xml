@@ -111,20 +111,22 @@
                     android:textSize="@dimen/sp_25"
                     android:textStyle="bold" />
 
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_product_popular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_item_popular_product" />
 
-                        <include layout="@layout/row_item_product_left_icon_rectangle" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -146,20 +148,22 @@
                     android:textSize="@dimen/sp_25"
                     android:textStyle="bold" />
 
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_product_new"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_item_new_product" />
 
-                        <include layout="@layout/row_item_product_right_icon_rectangle_rotate" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                </LinearLayout>
 
             </LinearLayout>
 

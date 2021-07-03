@@ -3,7 +3,6 @@ package com.meembusoft.ln.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,9 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.CategoryListAdapter;
+import com.meembusoft.ln.adapter.NewProductListAdapter;
+import com.meembusoft.ln.adapter.PopularProductListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.Language;
-import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.localemanager.LocaleManager;
 import com.meembusoft.localemanager.languagesupport.LanguagesSupport;
@@ -29,8 +29,6 @@ import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
-
-import org.parceler.Parcels;
 
 import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
 
@@ -49,8 +47,10 @@ public class HomeActivity extends BaseActivity {
     private TextView tvAppLanguage;
 
     // Category
-    private RecyclerView rvCategory;
+    private RecyclerView rvCategory, rvPopularProduct, rvNewProduct;
     private CategoryListAdapter mCategoryListAdapter;
+    private PopularProductListAdapter mPopularProductListAdapter;
+    private NewProductListAdapter mNewProductListAdapter;
 
     @Override
     public int initToolbarLayout() {
@@ -74,6 +74,8 @@ public class HomeActivity extends BaseActivity {
 
         rlSearch = findViewById(R.id.rl_search);
         rvCategory = findViewById(R.id.rv_category);
+        rvPopularProduct = findViewById(R.id.rv_product_popular);
+        rvNewProduct = findViewById(R.id.rv_product_new);
     }
 
     @Override
@@ -87,8 +89,6 @@ public class HomeActivity extends BaseActivity {
         mCategoryListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Category category = mCategoryListAdapter.getItem(position);
-//                Log.d(TAG, "category: " + category.toString());
                 Intent intentCategory = new Intent(getActivity(), CategoryActivity.class);
                 intentCategory.putExtra(INTENT_KEY_CATEGORY, position);
                 startActivity(intentCategory);
@@ -96,6 +96,30 @@ public class HomeActivity extends BaseActivity {
         });
         rvCategory.setAdapter(mCategoryListAdapter);
         mCategoryListAdapter.addAll(DataUtil.getAllCategoriesWithSubcategories(getActivity()));
+
+        // Initialize popular product
+        rvPopularProduct.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mPopularProductListAdapter = new PopularProductListAdapter(getActivity());
+        mPopularProductListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        });
+        rvPopularProduct.setAdapter(mPopularProductListAdapter);
+        mPopularProductListAdapter.addAll(DataUtil.getAllProducts(getActivity(), "Popular"));
+
+        // Initialize new product
+        rvNewProduct.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mNewProductListAdapter = new NewProductListAdapter(getActivity());
+        mNewProductListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        });
+        rvNewProduct.setAdapter(mNewProductListAdapter);
+        mNewProductListAdapter.addAll(DataUtil.getAllProducts(getActivity(), "New"));
     }
 
     @Override
