@@ -247,4 +247,5 @@ dependencies {
 //    implementation project(":library:flexibleadapter")
 //    implementation project(":library:flexibleadapterui")
     implementation project(":library:fabulousfilter")
+    implementation project(":library:foldablelayout")
 }

@@ -6,4 +6,5 @@ include ':app',
         ':library:ultimatetablayout',
 //        ':library:flexibleadapter',
 //        ':library:flexibleadapterui',
-        ':library:fabulousfilter'
+        ':library:fabulousfilter',
+        ':library:foldablelayout'
