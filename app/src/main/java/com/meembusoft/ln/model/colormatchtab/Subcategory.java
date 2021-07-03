@@ -1,11 +1,17 @@
 package com.meembusoft.ln.model.colormatchtab;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Subcategory {
 
     private int id;
     private String name;
     private String image;
     private boolean isSelected = false;
+
+    public Subcategory() {
+    }
 
     public Subcategory(int id, String name, String image) {
         this.id = id;
@@ -44,5 +50,15 @@ public class Subcategory {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    @Override
+    public String toString() {
+        return "Subcategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", isSelected=" + isSelected +
+                '}';
     }
 }

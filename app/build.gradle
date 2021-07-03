@@ -234,6 +234,10 @@ dependencies {
 //    implementation 'eu.davidea:flexible-adapter:5.1.0'
 //    implementation 'eu.davidea:flexible-adapter-ui:1.0.0'
 
+    // Parceler
+    implementation "org.parceler:parceler-api:$parcelerVersion"
+    annotationProcessor "org.parceler:parceler:$parcelerVersion"
+
     // Library projects
     implementation project(":library:localemanager")
     implementation project(":library:recolor")

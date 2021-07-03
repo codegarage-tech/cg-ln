@@ -3,17 +3,25 @@ package com.meembusoft.ln.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.adapter.CategoryListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.Language;
+import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.localemanager.LocaleManager;
 import com.meembusoft.localemanager.languagesupport.LanguagesSupport;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.skydoves.flourish.Flourish;
 import com.skydoves.flourish.FlourishAnimation;
 import com.skydoves.flourish.FlourishOrientation;
@@ -21,6 +29,10 @@ import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
+
+import org.parceler.Parcels;
+
+import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
 
 public class HomeActivity extends BaseActivity {
 
@@ -35,6 +47,10 @@ public class HomeActivity extends BaseActivity {
     private PowerMenu mPowerMenu;
     private String mSelectedAppLanguageCode = "";
     private TextView tvAppLanguage;
+
+    // Category
+    private RecyclerView rvCategory;
+    private CategoryListAdapter mCategoryListAdapter;
 
     @Override
     public int initToolbarLayout() {
@@ -57,12 +73,29 @@ public class HomeActivity extends BaseActivity {
         llSettings = findViewById(R.id.ll_settings);
 
         rlSearch = findViewById(R.id.rl_search);
+        rvCategory = findViewById(R.id.rv_category);
     }
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Initialize menu
         initMenu();
+
+        // Initialize category
+        rvCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mCategoryListAdapter = new CategoryListAdapter(getActivity());
+        mCategoryListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                Category category = mCategoryListAdapter.getItem(position);
+//                Log.d(TAG, "category: " + category.toString());
+                Intent intentCategory = new Intent(getActivity(), CategoryActivity.class);
+                intentCategory.putExtra(INTENT_KEY_CATEGORY, position);
+                startActivity(intentCategory);
+            }
+        });
+        rvCategory.setAdapter(mCategoryListAdapter);
+        mCategoryListAdapter.addAll(DataUtil.getAllCategoriesWithSubcategories(getActivity()));
     }
 
     @Override
@@ -79,14 +112,6 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intentSearch = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intentSearch);
-            }
-        });
-
-        findViewById(R.id.ll_category).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentItemList = new Intent(getActivity(), CategoryActivity.class);
-                startActivity(intentItemList);
             }
         });
     }

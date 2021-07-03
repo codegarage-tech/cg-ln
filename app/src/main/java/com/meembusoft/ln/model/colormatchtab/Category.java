@@ -1,9 +1,12 @@
 package com.meembusoft.ln.model.colormatchtab;
 
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Category {
 
     private int id;
@@ -11,6 +14,9 @@ public class Category {
     private String image;
     private int newItemCount;
     private List<Subcategory> subcategory = new ArrayList<>();
+
+    public Category() {
+    }
 
     public Category(int id, String name, String image, int newItemCount, List<Subcategory> subcategory) {
         this.id = id;
@@ -58,5 +64,16 @@ public class Category {
 
     public void setSubcategory(List<Subcategory> subcategory) {
         this.subcategory = subcategory;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", newItemCount=" + newItemCount +
+                ", subcategory=" + subcategory +
+                '}';
     }
 }

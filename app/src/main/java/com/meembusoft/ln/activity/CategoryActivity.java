@@ -3,6 +3,7 @@ package com.meembusoft.ln.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,7 +26,11 @@ import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.FragmentUtilsManager;
 
+import org.parceler.Parcels;
+
 import java.util.List;
+
+import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
 
 public class CategoryActivity extends BaseActivity implements AAH_FabulousFragment.Callbacks, AAH_FabulousFragment.AnimationListener {
 
@@ -35,6 +40,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     private ViewPager viewPagerCategory;
     private UltimateTabLayout ultimateTabLayout;
+    private int mSelectedCategoryPosition = 0;
 
     // Filter
     private SubCategoryFragment mSubCategoryFragment;
@@ -55,7 +61,14 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     @Override
     public void initIntentData(Bundle savedInstanceState, Intent intent) {
-
+        // Get intent data
+        if(intent != null){
+//            Parcelable parcelableCategory = intent.getParcelableExtra(INTENT_KEY_CATEGORY);
+//            if(parcelableCategory != null){
+            mSelectedCategoryPosition = intent.getIntExtra(INTENT_KEY_CATEGORY, 0);
+                Log.d(TAG, "mSelectedCategoryPosition: " + mSelectedCategoryPosition);
+//            }
+        }
     }
 
     @Override
@@ -174,38 +187,39 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         viewPagerCategory.post(new Runnable() {
             @Override
             public void run() {
-                List<Fragment> fragments = getSupportFragmentManager().getFragments();
-                if (fragments != null && fragments.size() > 0) {
-                    Log.d(TAG, "onPageSelected>>post>>fragments>>size: " + fragments.size());
-//                    for (Fragment mFragment : fragments) {
-//                        if (mFragment instanceof CategoryFragment) {
-//                            Log.d(TAG, "onPageSelected>>post>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
+                viewPagerCategory.setCurrentItem(mSelectedCategoryPosition);
+//                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+//                if (fragments != null && fragments.size() > 0) {
+//                    Log.d(TAG, "onPageSelected>>post>>fragments>>size: " + fragments.size());
+////                    for (Fragment mFragment : fragments) {
+////                        if (mFragment instanceof CategoryFragment) {
+////                            Log.d(TAG, "onPageSelected>>post>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
+////                        }
+////                    }
+//
+//                    Fragment visibleViewPagerFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getSupportFragmentManager(), viewPagerCategory);
+//                    if (visibleViewPagerFragment != null) {
+//                        CategoryFragment categoryFragment = (CategoryFragment) visibleViewPagerFragment;
+//                        setCategoryFragment(categoryFragment);
+//
+//                        List<Fragment> subFragments = categoryFragment.getChildFragmentManager().getFragments();
+//                        if (subFragments != null && subFragments.size() > 0) {
+//                            Log.d(TAG, "onPageSelected>>post>>subFragments>>size: " + subFragments.size());
+//
+////                            for (Fragment subFragment : subFragments) {
+////                                if (subFragment instanceof SubCategoryFragment) {
+////                                    Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+////                                }
+////                            }
+//
+//                            Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(categoryFragment.getChildFragmentManager(), categoryFragment.getViewPagerSubCategory());
+//                            if (visibleViewPagerSubFragment != null) {
+//                                SubCategoryFragment subCategoryFragment = (SubCategoryFragment) visibleViewPagerSubFragment;
+//                                setSubCategoryFragment(subCategoryFragment);
+//                            }
 //                        }
 //                    }
-
-                    Fragment visibleViewPagerFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getSupportFragmentManager(), viewPagerCategory);
-                    if (visibleViewPagerFragment != null) {
-                        CategoryFragment categoryFragment = (CategoryFragment) visibleViewPagerFragment;
-                        setCategoryFragment(categoryFragment);
-
-                        List<Fragment> subFragments = categoryFragment.getChildFragmentManager().getFragments();
-                        if (subFragments != null && subFragments.size() > 0) {
-                            Log.d(TAG, "onPageSelected>>post>>subFragments>>size: " + subFragments.size());
-
-//                            for (Fragment subFragment : subFragments) {
-//                                if (subFragment instanceof SubCategoryFragment) {
-//                                    Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
-//                                }
-//                            }
-
-                            Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(categoryFragment.getChildFragmentManager(), categoryFragment.getViewPagerSubCategory());
-                            if (visibleViewPagerSubFragment != null) {
-                                SubCategoryFragment subCategoryFragment = (SubCategoryFragment) visibleViewPagerSubFragment;
-                                setSubCategoryFragment(subCategoryFragment);
-                            }
-                        }
-                    }
-                }
+//                }
             }
         });
     }
@@ -235,35 +249,6 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
                 if (mSubCategoryFragment != null) {
                     mSubCategoryFragment.setAppliedFilterKeys(appliedFilters);
                 }
-//                ArrayMap<String, List<String>> appliedFilters = (ArrayMap<String, List<String>>) result;
-//
-//                if (appliedFilters.size()>0) {
-//
-//                    if (appliedFilters.get("food_category") != null) {
-//                        if (appliedFilters.get("food_category").size() == 1) {
-//                            selectedFoodCategory = appliedFilters.get("food_category").get(0);
-//                        } else {
-//                            selectedFoodCategory = "";
-//                        }
-//                    } else {
-//                        selectedFoodCategory = "";
-//                    }
-//
-//                    if (appliedFilters.get("restaurant_category") != null) {
-//                        if (appliedFilters.get("restaurant_category").size() == 1) {
-//                            selectedRestaurantCategory = appliedFilters.get("restaurant_category").get(0);
-//                        } else {
-//                            selectedRestaurantCategory = "";
-//                        }
-//                    } else {
-//                        selectedRestaurantCategory = "";
-//                    }
-//                } else {
-//                    selectedFoodCategory = "";
-//                    selectedRestaurantCategory = "";
-//                }
-//
-//                searchRestaurant(mLocation, getSelectedFoodCategory(selectedFoodCategory).getId(), getSelectedRestaurantCategory(selectedRestaurantCategory).getId());
             }
         }
     }
