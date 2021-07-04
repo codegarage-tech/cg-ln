@@ -249,4 +249,6 @@ dependencies {
     implementation project(":library:fabulousfilter")
     implementation project(":library:foldablelayout")
     implementation project(":library:shopping")
+    implementation project(":library:flowlayout")
+    implementation project(":library:expansionpanel")
 }

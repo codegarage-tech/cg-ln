@@ -8,4 +8,6 @@ include ':app',
 //        ':library:flexibleadapterui',
         ':library:fabulousfilter',
         ':library:foldablelayout',
-        ':library:shopping'
+        ':library:shopping',
+        ':library:flowlayout',
+        ':library:expansionpanel'
