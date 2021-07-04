@@ -251,4 +251,7 @@ dependencies {
     implementation project(":library:shopping")
     implementation project(":library:flowlayout")
     implementation project(":library:expansionpanel")
+    implementation project(":library:animationmanager")
+    implementation project(":library:realmmanager")
+    implementation project(":library:addtocart")
 }

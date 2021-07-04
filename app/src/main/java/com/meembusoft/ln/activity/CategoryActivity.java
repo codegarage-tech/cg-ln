@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     // Toolbar
     private TextView tvTitle;
     private LinearLayout llClose, llCart;
+    private ImageView ivCart;
 
     private ViewPager viewPagerCategory;
     private UltimateTabLayout ultimateTabLayout;
@@ -71,6 +73,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         tvTitle = findViewById(R.id.tv_title);
         llClose = findViewById(R.id.ll_close);
         llCart = findViewById(R.id.ll_cart);
+        ivCart = findViewById(R.id.iv_cart);
 
         viewPagerCategory = (ViewPager) findViewById(R.id.view_pager_category);
         ultimateTabLayout = (UltimateTabLayout) findViewById(R.id.ultimate_tab_layout);
@@ -291,5 +294,9 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void setCategoryFragment(CategoryFragment categoryFragment) {
         this.mCategoryFragment = categoryFragment;
         Log.d(TAG, "onPageSelected>>mCategoryFragment: " + mCategoryFragment.getCategory().getName());
+    }
+
+    public ImageView getCart() {
+        return ivCart;
     }
 }

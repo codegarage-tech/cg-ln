@@ -1,5 +1,6 @@
 package com.meembusoft.ln.viewholder;
 
+import android.animation.Animator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 import com.github.florent37.expansionpanel.ExpansionHeader;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.RandomManager;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.nex3z.flowlayout.FlowLayout;
@@ -68,6 +71,28 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 //                    cartItem.setQuantity(num);
 //                    onOrderNowClick(cartItem, svAddToCart);
 //                }
+
+                //make fly animation for adding item
+                AppUtil.makeFlyAnimation(((CategoryActivity) getContext()), svAddToCart, svAddToCart.getAddIcon(), ((CategoryActivity) getContext()).getCart(), 1000, new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+//                        resetCounterView();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
             }
 
             @Override

@@ -1,9 +1,13 @@
 package com.meembusoft.ln.util;
 
+import android.animation.Animator;
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.meembusoft.animationmanager.flytocart.CircleAnimationUtil;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.model.colormatchtab.Category;
 
@@ -108,5 +113,30 @@ public class AppUtil {
 
         } catch (Exception e) {
         }
+    }
+
+    public static void makeFlyAnimation(Activity activity, View sourceView, Bitmap sourceViewBitmap, View destinationView, int timeMilliSecond, Animator.AnimatorListener animatorListener) {
+
+        //Create a copy view
+        ImageView animImg = new ImageView(activity);
+//        Bitmap bm = ((BitmapDrawable) sourceView.getDrawable()).getBitmap();
+        animImg.setImageBitmap(sourceViewBitmap);
+
+        ViewGroup anim_mask_layout = com.meembusoft.animationmanager.flytocart.CircleAnimationUtil.createAnimLayout(activity);
+        anim_mask_layout.addView(animImg);
+
+        int[] startXY = new int[2];
+        sourceView.getLocationInWindow(startXY);
+        final View v = com.meembusoft.animationmanager.flytocart.CircleAnimationUtil.addViewToAnimLayout(activity, animImg, startXY, true);
+        if (v == null) {
+            return;
+        }
+
+        new CircleAnimationUtil().attachActivity(activity)
+                .setTargetView(sourceView)
+                .setTargetViewCopy(v)
+                .setMoveDuration(timeMilliSecond)
+                .setDestView(destinationView)
+                .setAnimationListener(animatorListener).startAnimation();
     }
 }

@@ -10,4 +10,7 @@ include ':app',
         ':library:foldablelayout',
         ':library:shopping',
         ':library:flowlayout',
-        ':library:expansionpanel'
+        ':library:expansionpanel',
+        ':library:animationmanager',
+        ':library:realmmanager',
+        ':library:addtocart'

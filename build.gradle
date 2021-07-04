@@ -73,6 +73,7 @@ allprojects {
     ext.retrofit2ConverterGsonVersion = '2.6.2'
     ext.okhttp3LoggingInterceptorVersion = '4.2.1'
     ext.gsonVersion = '2.8.5'
+    ext.realmPluginVersion = '6.0.0'
     ext.picassoVersion = '2.71828'
     ext.parcelerVersion = '1.1.12'
 }
