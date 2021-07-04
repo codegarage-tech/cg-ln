@@ -39,10 +39,10 @@ public class FlowLayoutManager {
         final TextView textView = new TextView(context);
         textView.setText(text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        textView.setPadding((int) dpToPx(16), (int) dpToPx(8), (int) dpToPx(16), (int) dpToPx(8));
+        textView.setPadding((int) dpToPx(16), (int) dpToPx(3), (int) dpToPx(16), (int) dpToPx(3));
         textView.setBackgroundResource(R.drawable.chip_unselected);
         textView.setTag(TEXT_TYPE.UNSELECTED.name());
-        textView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        textView.setTextColor(ContextCompat.getColor(context, R.color.brown));
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,14 +126,14 @@ public class FlowLayoutManager {
     private TextView selectFlowView(TextView textView) {
         textView.setTag(TEXT_TYPE.SELECTED.name());
         textView.setBackgroundResource(R.drawable.chip_selected);
-        textView.setTextColor(ContextCompat.getColor(context, android.R.color.white));
+        textView.setTextColor(ContextCompat.getColor(context, R.color.brown));
         return textView;
     }
 
     private TextView unSelectFlowView(TextView textView) {
         textView.setTag(TEXT_TYPE.UNSELECTED.name());
         textView.setBackgroundResource(R.drawable.chip_unselected);
-        textView.setTextColor(ContextCompat.getColor(context, R.color.filters_header));
+        textView.setTextColor(ContextCompat.getColor(context, R.color.brown));
         return textView;
     }
 

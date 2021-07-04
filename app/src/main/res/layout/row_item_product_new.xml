@@ -23,38 +23,12 @@
             android:id="@+id/tv_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_10"
             android:text="Name"
             android:textAppearance="?android:attr/textAppearanceListItemSecondary"
             android:textColor="@color/paragraphTextColor"
             android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/chip_unselected"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:minWidth="@dimen/dp_50"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_3"
-                android:paddingRight="@dimen/dp_10"
-                android:paddingBottom="@dimen/dp_3"
-                android:text="1 KG" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                app:srcCompat="@drawable/vector_arrow_bottom"
-                app:tint="@color/colorShadeBlueDark" />
-
-        </RelativeLayout>
+        <include layout="@layout/layout_expandable_size" />
 
         <TextView
             android:id="@+id/tv_product_original_price"
@@ -86,9 +60,15 @@
             android:visibility="visible" />
 
         <me.wangyuwei.shoppoing.ShoppingView
-            android:layout_width="@dimen/dp_50"
+            android:id="@+id/sv_add_to_cart"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_20"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:minWidth="@dimen/dp_50"
+            app:sv_bg_color="@color/colorShadeBlueDark"
+            app:sv_duration="600"
+            app:sv_number_color="@color/brown"
+            app:sv_text="Add to Cart" />
 
     </LinearLayout>
 
