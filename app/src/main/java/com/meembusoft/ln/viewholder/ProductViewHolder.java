@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.florent37.expansionpanel.ExpansionHeader;
+import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.util.RandomManager;
@@ -28,10 +30,12 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     // Size
     private FlowLayout flowLayoutSize;
     private FlowLayoutManager flowLayoutManagerSize;
+    private ExpansionHeader expansionHeader;
+    private ExpansionLayout expansionLayout;
     private String TAG = "ProductViewHolder";
 
     public ProductViewHolder(ViewGroup parent) {
-        super(parent, R.layout.row_item_product_new);
+        super(parent, R.layout.row_item_product_grid);
 
         ivProductImage = $(R.id.iv_product_image);
         ivProductFavorite = $(R.id.iv_product_favorite);
@@ -42,6 +46,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         tvProductOfferPrice = $(R.id.tv_product_offer_price);
         flowLayoutSize = $(R.id.fl_size);
         svAddToCart = $(R.id.sv_add_to_cart);
+        expansionHeader = $(R.id.eh_unit);
+        expansionLayout = $(R.id.expansionLayout);
     }
 
     @Override
@@ -96,6 +102,9 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 
                     updateSizeSelection(tempSelectedSize);
 
+                    // Close expansion layout
+                    expansionLayout.collapse(true);
+
                     //Save temp selected size
                 }
             })
@@ -113,10 +122,11 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 
     private void updateSizeSelection(String sizeKey) {
         if (!TextUtils.isEmpty(sizeKey)) {
-
             tvProductSize.setText(sizeKey);
             tvProductOriginalPrice.setText(RandomManager.getRandom(5, 100) + " Tk");
-            svAddToCart.setTextNum(0);
+//            if (!isFirstTime) {
+//                svAddToCart.setTextNum(0);
+//            }
         }
     }
 }
