@@ -7,4 +7,5 @@ include ':app',
 //        ':library:flexibleadapter',
 //        ':library:flexibleadapterui',
         ':library:fabulousfilter',
-        ':library:foldablelayout'
+        ':library:foldablelayout',
+        ':library:shopping'

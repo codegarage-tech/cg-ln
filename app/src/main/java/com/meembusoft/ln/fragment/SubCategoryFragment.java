@@ -53,7 +53,7 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
     @Override
     public void initFragmentViewsData() {
         // Setup product recyclerview
-        rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvProduct.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mProductListAdapter = new ProductListAdapter(getActivity());
         // Load subcategory adapter
         rvProduct.setAdapter(mProductListAdapter);

@@ -248,4 +248,5 @@ dependencies {
 //    implementation project(":library:flexibleadapterui")
     implementation project(":library:fabulousfilter")
     implementation project(":library:foldablelayout")
+    implementation project(":library:shopping")
 }
