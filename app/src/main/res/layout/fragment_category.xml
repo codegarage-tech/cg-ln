@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:background="@drawable/shape_line_vertical_fading_edge"
+        android:backgroundTint="@color/colorBlue" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout_sub_category"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorShadeBlueDark"
+        android:paddingBottom="@dimen/dp_5"
         app:layout_collapseMode="pin"
         app:tabGravity="start"
-        app:tabIndicatorColor="@color/colorBlueDark"
+        app:tabIndicator="@drawable/tab_indicator"
         app:tabMode="scrollable"
         app:tabRippleColor="@null"
         app:tabSelectedTextColor="@color/colorPink"
-        app:tabTextColor="@color/white" />
+        app:tabTextColor="@color/black" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_sub_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tabLayout_sub_category"
         android:background="@color/white" />
 
-</RelativeLayout>
+</LinearLayout>

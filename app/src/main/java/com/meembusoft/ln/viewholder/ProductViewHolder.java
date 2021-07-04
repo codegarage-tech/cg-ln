@@ -11,27 +11,23 @@ import com.squareup.picasso.Picasso;
 
 public class ProductViewHolder extends BaseViewHolder<Product> {
 
-    private TextView tvProductName, tvProductVendor, tvProductAvailabilityTime, tvProductQuantity, tvProductOriginalPrice, tvProductOfferPrice;
-    private ImageView ivProductImage, ivProductFavorite, ivProductCart;
+    private TextView tvProductName, tvProductAvailabilityTime, tvProductOriginalPrice, tvProductOfferPrice;
+    private ImageView ivProductImage, ivProductFavorite;
 
     public ProductViewHolder(ViewGroup parent) {
         super(parent, R.layout.row_item_product_new);
 
         ivProductImage = $(R.id.iv_product_image);
+        ivProductFavorite = $(R.id.iv_product_favorite);
         tvProductName = $(R.id.tv_product_name);
-//        tvProductVendor = $(R.id.tv_product_vendor);
-//        tvProductAvailabilityTime = $(R.id.tv_product_availability);
-//        tvProductQuantity = $(R.id.tv_product_quantity);
-//        tvProductOriginalPrice = $(R.id.tv_product_original_price);
-//        tvProductOfferPrice = $(R.id.tv_product_offer_price);
-//        ivProductFavorite = $(R.id.iv_product_favorite);
-//        ivProductCart = $(R.id.iv_product_cart);
+        tvProductAvailabilityTime = $(R.id.tv_product_availability_time);
+        tvProductOriginalPrice = $(R.id.tv_product_original_price);
+        tvProductOfferPrice = $(R.id.tv_product_offer_price);
     }
 
     @Override
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
-//        tvProductVendor.setText(data.getVendor());
         Picasso.get().load(data.getImage()).into(ivProductImage);
     }
 }
