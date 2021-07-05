@@ -6,7 +6,29 @@
       "id": "1",
       "name": "KitKat",
       "image": "https://toppng.com/uploads/preview/kitkat-4-fingers-kit-kat-11562942497b5jizpnamz.png",
-      "vendor": "Nestle"
+      "vendor": "Nestle",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }

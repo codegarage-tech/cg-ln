@@ -12,6 +12,7 @@ import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.colormatchtab.Size;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.RandomManager;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
@@ -57,10 +58,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
         Picasso.get().load(data.getImage()).into(ivProductImage);
-        initSize(new ArrayList<String>() {{
-            add("Kg");
-            add("Sack");
-        }});
+        initSize(data.getSize());
 
         svAddToCart.setOnShoppingClickListener(new ShoppingView.ShoppingClickListener() {
             @Override
@@ -110,8 +108,12 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     /***************************
      * Methods for flow layout *
      ***************************/
-    public void initSize(List<String> keys) {
-        if (keys != null && !keys.isEmpty()) {
+    public void initSize(List<Size> sizes) {
+        List<String> keys = new ArrayList<>();
+        for (int i = 0; i < sizes.size(); i++) {
+            keys.add(sizes.get(i).getName());
+        }
+        if (!keys.isEmpty()) {
             // Remove all previous keys
             if (flowLayoutManagerSize != null) {
                 flowLayoutManagerSize.removeAllKeys();
@@ -141,7 +143,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 //            if (!AllSettingsManager.isNullOrEmpty(lastTempSelectedRoom)) {
 //                flowLayoutManagerSize.clickFlowView(lastTempSelectedRoom);
 //            }
-            flowLayoutManagerSize.clickFlowView("Kg");
+            flowLayoutManagerSize.clickFlowView("1 KG");
         }
     }
 

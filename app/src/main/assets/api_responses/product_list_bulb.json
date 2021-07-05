@@ -6,7 +6,29 @@
       "id": "1",
       "name": "Super Star Bulb",
       "image": "https://www.kablewala.com.bd/images/detailed/31/SSG_1083,_1084__Emergency-10-Watt-380x324.png",
-      "vendor": "Super Star"
+      "vendor": "Super Star",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }

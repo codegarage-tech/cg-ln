@@ -6,43 +6,197 @@
       "id": "1",
       "name": "RFL tiffine Box",
       "image": "https://image.pngaaa.com/523/612523-small.png",
-      "vendor": "RFL"
+      "vendor": "RFL",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "2",
       "name": "Super Star Bulb",
       "image": "https://www.kablewala.com.bd/images/detailed/31/SSG_1083,_1084__Emergency-10-Watt-380x324.png",
-      "vendor": "Super Star"
+      "vendor": "Super Star",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "3",
       "name": "KitKat",
       "image": "https://toppng.com/uploads/preview/kitkat-4-fingers-kit-kat-11562942497b5jizpnamz.png",
-      "vendor": "Nestle"
+      "vendor": "Nestle",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "4",
       "name": "Teer NajirShah",
       "image": "https://marsgiant.com/pub/media/catalog/product/cache/42b5eeaed503327e0c893d31d2d0f990/t/e/teer_nazirshile_rice_5kg.jpg",
-      "vendor": "Teer"
+      "vendor": "Teer",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5",
       "name": "Singer 30 inch Television",
       "image": "https://singer.pay-dev.razer.com/sites/default/files/TLE327.gif",
-      "vendor": "Singer"
+      "vendor": "Singer",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "6",
       "name": "Igloo Cone Ice Cream",
       "image": "https://toppng.com/uploads/preview/vanilla-ice-cream-png-11553727146neljxgrhgo.png",
-      "vendor": "Igloo"
+      "vendor": "Igloo",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "7",
       "name": "Wonder White Bead",
       "image": "https://www.pngfind.com/pngs/m/187-1871070_white-bread-wonder-hd-png-download.png",
-      "vendor": "Wonder"
+      "vendor": "Wonder",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }

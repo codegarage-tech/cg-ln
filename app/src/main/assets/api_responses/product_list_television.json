@@ -6,7 +6,29 @@
       "id": "1",
       "name": "Singer 30 inch Television",
       "image": "https://singer.pay-dev.razer.com/sites/default/files/TLE327.gif",
-      "vendor": "Singer"
+      "vendor": "Singer",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }

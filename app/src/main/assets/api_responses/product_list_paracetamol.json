@@ -6,7 +6,29 @@
       "id": "1",
       "name": "Napa Tablet",
       "image": "https://cdn.osudpotro.com/medicine/1598886410899.png",
-      "vendor": "Napa"
+      "vendor": "Napa",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -6,7 +6,29 @@
       "id": "1",
       "name": "Chocolate Cake",
       "image": "https://admin.mrbakerbd.com/public/images/products/1598514745.jpg",
-      "vendor": "Mr Baker"
+      "vendor": "Mr Baker",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }

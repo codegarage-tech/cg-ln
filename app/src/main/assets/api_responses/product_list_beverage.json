@@ -6,7 +6,29 @@
       "id": "1",
       "name": "Orange Juice",
       "image": "https://freepngimg.com/download/juice/5-orange-juice-png-image.png",
-      "vendor": ""
+      "vendor": "",
+      "note": "Friday, (10AM ~ 12PM)",
+      "availability": true,
+      "size": [
+        {
+          "name": "1 KG",
+          "price": [
+            {
+              "original": 100,
+              "offer": 90
+            }
+          ]
+        },
+        {
+          "name": "SACK(50 KG)",
+          "price": [
+            {
+              "original": 2000,
+              "offer": 1900
+            }
+          ]
+        }
+      ]
     }
   ]
 }
