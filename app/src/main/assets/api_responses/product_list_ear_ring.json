@@ -5,28 +5,26 @@
     {
       "id": "1",
       "name": "Long Ear Ring",
+      "isFavorite": true,
       "image": "https://toppng.com/uploads/preview/earring-transparent-images-png-11526417439bzfk6pg7zt.png",
       "vendor": "",
       "note": "Friday, (10AM ~ 12PM)",
+      "hasDependency": true,
       "availability": true,
       "size": [
         {
           "name": "1 KG",
-          "price": [
-            {
+          "price": {
               "original": 100,
               "offer": 90
             }
-          ]
         },
         {
           "name": "SACK(50 KG)",
-          "price": [
-            {
+          "price": {
               "original": 2000,
               "offer": 1900
             }
-          ]
         }
       ]
     }

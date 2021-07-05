@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.colormatchtab.Size;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
 import com.meembusoft.ln.model.colormatchtab.response.ResponseCategory;
 import com.meembusoft.ln.model.colormatchtab.response.ResponseProduct;
@@ -142,5 +143,17 @@ public class DataUtil {
         }
         Collections.sort(keys);
         return keys;
+    }
+
+    public static Size getSize(String sizeName, List<Size> sizes) {
+        Size size = null;
+        if (!TextUtils.isEmpty(sizeName) && sizes != null && !sizes.isEmpty()) {
+            for (Size mSize : sizes) {
+                if (mSize.getName().equalsIgnoreCase(sizeName)) {
+                    return mSize;
+                }
+            }
+        }
+        return size;
     }
 }

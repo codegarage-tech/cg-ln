@@ -14,6 +14,7 @@ import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Size;
 import com.meembusoft.ln.util.AppUtil;
+import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.RandomManager;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.nex3z.flowlayout.FlowLayout;
@@ -27,7 +28,7 @@ import me.wangyuwei.shoppoing.ShoppingView;
 
 public class ProductViewHolder extends BaseViewHolder<Product> {
 
-    private TextView tvProductName, tvProductAvailabilityTime, tvProductOriginalPrice, tvProductOfferPrice, tvProductSize;
+    private TextView tvProductName, tvProductNote, tvProductOriginalPrice, tvProductOfferPrice, tvProductSize;
     private ImageView ivProductImage, ivProductFavorite;
     private ShoppingView svAddToCart;
 
@@ -45,7 +46,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         ivProductFavorite = $(R.id.iv_product_favorite);
         tvProductName = $(R.id.tv_product_name);
         tvProductSize = $(R.id.tv_product_size);
-        tvProductAvailabilityTime = $(R.id.tv_product_availability_time);
+        tvProductNote = $(R.id.tv_product_availability_time);
         tvProductOriginalPrice = $(R.id.tv_product_original_price);
         tvProductOfferPrice = $(R.id.tv_product_offer_price);
         flowLayoutSize = $(R.id.fl_size);
@@ -57,6 +58,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     @Override
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
+        AppUtil.applyViewTint(ivProductFavorite, (data.isFavorite() ? R.color.colorBlueDark : R.color.colorBlue));
         Picasso.get().load(data.getImage()).into(ivProductImage);
         initSize(data.getSize());
 
@@ -109,48 +111,51 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
      * Methods for flow layout *
      ***************************/
     public void initSize(List<Size> sizes) {
-        List<String> keys = new ArrayList<>();
-        for (int i = 0; i < sizes.size(); i++) {
-            keys.add(sizes.get(i).getName());
-        }
-        if (!keys.isEmpty()) {
-            // Remove all previous keys
-            if (flowLayoutManagerSize != null) {
-                flowLayoutManagerSize.removeAllKeys();
+        if (sizes != null && !sizes.isEmpty()) {
+            List<String> keys = new ArrayList<>();
+            for (int i = 0; i < sizes.size(); i++) {
+                keys.add(sizes.get(i).getName());
             }
-
-            //Set flow layout with connection key
-            flowLayoutManagerSize = new FlowLayoutManager.FlowViewBuilder(getContext(), flowLayoutSize, keys, new FlowLayoutManager.onFlowViewClick() {
-                @Override
-                public void flowViewClick(TextView updatedTextView) {
-                    List<TextView> selectedSizeKeys = flowLayoutManagerSize.getSelectedFlowViews();
-                    String tempSelectedSize = (selectedSizeKeys.size() > 0) ? selectedSizeKeys.get(0).getText().toString() : "";
-                    Log.d(TAG, "tempSelectedSize: " + tempSelectedSize);
-
-                    updateSizeSelection(tempSelectedSize);
-
-                    // Close expansion layout
-                    expansionLayout.collapse(true);
-
-                    //Save temp selected size
+            if (!keys.isEmpty()) {
+                // Remove all previous keys
+                if (flowLayoutManagerSize != null) {
+                    flowLayoutManagerSize.removeAllKeys();
                 }
-            })
-                    .setSingleChoice(true)
-                    .build();
 
-            //Set last temp selected size key
+                //Set flow layout with connection key
+                flowLayoutManagerSize = new FlowLayoutManager.FlowViewBuilder(getContext(), flowLayoutSize, keys, new FlowLayoutManager.onFlowViewClick() {
+                    @Override
+                    public void flowViewClick(TextView updatedTextView) {
+                        List<TextView> selectedSizeKeys = flowLayoutManagerSize.getSelectedFlowViews();
+                        String tempSelectedSize = (selectedSizeKeys.size() > 0) ? selectedSizeKeys.get(0).getText().toString() : "";
+                        Log.d(TAG, "tempSelectedSize: " + tempSelectedSize);
+
+                        updateSizeSelection(DataUtil.getSize(tempSelectedSize, sizes));
+
+                        // Close expansion layout
+                        expansionLayout.collapse(true);
+
+                        //Save temp selected size
+                    }
+                })
+                        .setSingleChoice(true)
+                        .build();
+
+                //Set last temp selected size key
 //            String lastTempSelectedRoom = SessionUtil.getTempSelectedConnectionType(getActivity());
 //            if (!AllSettingsManager.isNullOrEmpty(lastTempSelectedRoom)) {
 //                flowLayoutManagerSize.clickFlowView(lastTempSelectedRoom);
 //            }
-            flowLayoutManagerSize.clickFlowView("1 KG");
+                flowLayoutManagerSize.clickFlowView(keys.get(0));
+            }
         }
     }
 
-    private void updateSizeSelection(String sizeKey) {
-        if (!TextUtils.isEmpty(sizeKey)) {
-            tvProductSize.setText(sizeKey);
-            tvProductOriginalPrice.setText(RandomManager.getRandom(5, 100) + " Tk");
+    private void updateSizeSelection(Size size) {
+        if (size != null) {
+            tvProductSize.setText(size.getName());
+            tvProductOriginalPrice.setText(size.getPrice().getOriginal() + " TK");
+            tvProductOfferPrice.setText(size.getPrice().getOffer()+ " TK");
 //            if (!isFirstTime) {
 //                svAddToCart.setTextNum(0);
 //            }

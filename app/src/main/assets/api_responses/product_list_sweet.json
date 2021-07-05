@@ -5,28 +5,26 @@
     {
       "id": "1",
       "name": "Sweet",
+      "isFavorite": true,
       "image": "https://www.pikpng.com/pngl/m/12-122972_free-png-sweets-free-png-png-images-transparent.png",
       "vendor": "",
       "note": "Friday, (10AM ~ 12PM)",
+      "hasDependency": true,
       "availability": true,
       "size": [
         {
           "name": "1 KG",
-          "price": [
-            {
+          "price": {
               "original": 100,
               "offer": 90
             }
-          ]
         },
         {
           "name": "SACK(50 KG)",
-          "price": [
-            {
+          "price": {
               "original": 2000,
               "offer": 1900
             }
-          ]
         }
       ]
     }

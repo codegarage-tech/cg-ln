@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -138,5 +141,19 @@ public class AppUtil {
                 .setMoveDuration(timeMilliSecond)
                 .setDestView(destinationView)
                 .setAnimationListener(animatorListener).startAnimation();
+    }
+
+    public static <T extends View> void applyViewTint(T view, @ColorRes int colorResource) {
+        if (view != null) {
+            if (view instanceof ImageView) {
+                ((ImageView) view).setColorFilter(ContextCompat.getColor(view.getContext(), colorResource));
+            } else {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP && view instanceof AppCompatButton) {
+                    ((AppCompatButton) view).setSupportBackgroundTintList(ContextCompat.getColorStateList(view.getContext().getApplicationContext(), colorResource));
+                } else {
+                    ViewCompat.setBackgroundTintList(view, ContextCompat.getColorStateList(view.getContext().getApplicationContext(), colorResource));
+                }
+            }
+        }
     }
 }

@@ -5,28 +5,26 @@
     {
       "id": "1",
       "name": "RFL tiffine Box",
+      "isFavorite": true,
       "image": "https://image.pngaaa.com/523/612523-small.png",
       "vendor": "RFL",
       "note": "Friday, (10AM ~ 12PM)",
+      "hasDependency": true,
       "availability": true,
       "size": [
         {
           "name": "1 KG",
-          "price": [
-            {
+          "price": {
               "original": 100,
               "offer": 90
             }
-          ]
         },
         {
           "name": "SACK(50 KG)",
-          "price": [
-            {
+          "price": {
               "original": 2000,
               "offer": 1900
             }
-          ]
         }
       ]
     }

@@ -5,28 +5,26 @@
     {
       "id": "1",
       "name": "Carrot Big",
+      "isFavorite": true,
       "image": "https://toppng.com/uploads/preview/carrot-transparent-11546979193sx09yyzr30.png",
       "vendor": "",
       "note": "Friday, (10AM ~ 12PM)",
+      "hasDependency": true,
       "availability": true,
       "size": [
         {
           "name": "1 KG",
-          "price": [
-            {
+          "price": {
               "original": 100,
               "offer": 90
             }
-          ]
         },
         {
           "name": "SACK(50 KG)",
-          "price": [
-            {
+          "price": {
               "original": 2000,
               "offer": 1900
             }
-          ]
         }
       ]
     }

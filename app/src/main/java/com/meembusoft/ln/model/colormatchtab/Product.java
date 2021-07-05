@@ -8,18 +8,22 @@ public class Product {
 
     private int id;
     private String name;
+    private boolean isFavorite = false;
     private String image;
     private String vendor;
     private String note;
+    private boolean hasDependency = false;
     private boolean availability = true;
     private List<Size> size = new ArrayList<>();
 
-    public Product(int id, String name, String image, String vendor, String note, boolean availability, List<Size> size) {
+    public Product(int id, String name, boolean isFavorite, String image, String vendor, String note, boolean hasDependency, boolean availability, List<Size> size) {
         this.id = id;
         this.name = name;
+        this.isFavorite = isFavorite;
         this.image = image;
         this.vendor = vendor;
         this.note = note;
+        this.hasDependency = hasDependency;
         this.availability = availability;
         this.size = size;
     }
@@ -38,6 +42,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 
     public String getImage() {
@@ -64,6 +76,14 @@ public class Product {
         this.note = note;
     }
 
+    public boolean isHasDependency() {
+        return hasDependency;
+    }
+
+    public void setHasDependency(boolean hasDependency) {
+        this.hasDependency = hasDependency;
+    }
+
     public boolean isAvailability() {
         return availability;
     }
@@ -85,9 +105,11 @@ public class Product {
         return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", isFavorite=" + isFavorite +
                 ", image='" + image + '\'' +
                 ", vendor='" + vendor + '\'' +
                 ", note='" + note + '\'' +
+                ", hasDependency=" + hasDependency +
                 ", availability=" + availability +
                 ", size=" + size +
                 '}';

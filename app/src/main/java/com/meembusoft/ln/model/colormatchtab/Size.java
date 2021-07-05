@@ -1,14 +1,13 @@
 package com.meembusoft.ln.model.colormatchtab;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Size {
 
     private String name;
-    private List<Price> price = new ArrayList<>();
+    private Price price;
 
-    public Size(String name, List<Price> price) {
+    public Size(String name, Price price) {
         this.name = name;
         this.price = price;
     }
@@ -21,11 +20,11 @@ public class Size {
         this.name = name;
     }
 
-    public List<Price> getPrice() {
+    public Price getPrice() {
         return price;
     }
 
-    public void setPrice(List<Price> price) {
+    public void setPrice(Price price) {
         this.price = price;
     }
 
