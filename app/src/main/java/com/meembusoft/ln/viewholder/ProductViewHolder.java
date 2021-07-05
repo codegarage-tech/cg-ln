@@ -38,7 +38,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     private String TAG = "ProductViewHolder";
 
     public ProductViewHolder(ViewGroup parent) {
-        super(parent, R.layout.row_item_product_grid);
+        super(parent, R.layout.row_item_product_linear_right);
 
         ivProductImage = $(R.id.iv_product_image);
         ivProductFavorite = $(R.id.iv_product_favorite);
