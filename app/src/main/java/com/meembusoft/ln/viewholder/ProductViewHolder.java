@@ -8,8 +8,9 @@ import android.widget.TextView;
 
 import com.github.florent37.expansionpanel.ExpansionHeader;
 import com.github.florent37.expansionpanel.ExpansionLayout;
+import com.meembusoft.addtocart.AddToCartManager;
+import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
-import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.util.AppUtil;
@@ -37,6 +38,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     private ExpansionHeader expansionHeader;
     private ExpansionLayout expansionLayout;
     private String TAG = "ProductViewHolder";
+    private Unit mSelectedUnit;
+    private CartItem cartItem;
 
     public ProductViewHolder(ViewGroup parent) {
         super(parent, R.layout.row_item_product_linear_right);
@@ -67,45 +70,84 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
             @Override
             public void onAddClick(int num) {
                 Log.d(TAG, "@=> " + "add.......num=> " + num);
-//                if (cartItem != null ) {
-//                    cartItem.setDiscountPercentage(5);
-//                    cartItem.setQuantity(num);
-//                    onOrderNowClick(cartItem, svAddToCart);
-//                }
+                if (cartItem == null) {
+                    cartItem = new CartItem(data.getId() + "", ((double) mSelectedUnit.getOriginalPrice()), data.getName(), mSelectedUnit.getName(), data.getImages().get(0).getUrl());
+                }
+                cartItem.setQuantity(num);
+                cartItem.setSize(mSelectedUnit.getName());
 
-                //make fly animation for adding item
-                AppUtil.makeFlyAnimation(((CategoryActivity) getContext()), svAddToCart, svAddToCart.getAddIcon(), ((CategoryActivity) getContext()).getCart(), 1000, new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-//                        resetCounterView();
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
+                // Add to cart
+                addToCart(cartItem, svAddToCart);
             }
 
             @Override
             public void onMinusClick(int num) {
                 Log.d(TAG, "@=> " + "minus.......num=> " + num);
-//                if (cartItem != null ) {
-//                    cartItem.setDiscountPercentage(5);
-//                    cartItem.setQuantity(num);
-//                    onOrderNowClick(cartItem, svAddToCart);
-//                }
+                if (cartItem == null) {
+                    cartItem = new CartItem(data.getId() + "", ((double) mSelectedUnit.getOriginalPrice()), data.getName(), mSelectedUnit.getName(), data.getImages().get(0).getUrl());
+                }
+                cartItem.setQuantity(num);
+                cartItem.setSize(mSelectedUnit.getName());
+
+                // Add to cart
+                addToCart(cartItem, svAddToCart);
             }
         });
+    }
+
+    public void addToCart(final CartItem cartItem, ShoppingView shoppingView) {
+        Log.d(TAG, "onOrderNowClick: " + "count: " + cartItem.getQuantity());
+
+//        if (cartItem.getQuantity() == 0) {
+//            if (AddToCartManager.getInstance().hasCartItem(CartItem.class)) {
+//                //Delete the CartItem from database
+//                AddToCartManager.getInstance().deleteItem(CartItem.class, cartItem.getName(), "smart home");
+//            }
+//        } else if (cartItem.getQuantity() == 1) {
+//            if (AddToCartManager.getInstance().hasCartItem(CartItem.class)) {
+//                //Update data into database
+//                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+//                Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.toString());
+//            } else {
+//
+//                //Add item into database
+//                Log.d(TAG, "onOrderNowClick: " + "<<Update>>>: " + cartItem.getQuantity());
+//
+//                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+//
+//                //make fly animation for adding item
+//                AppUtil.makeFlyAnimation(getActivity(), shoppingView, shoppingView.getAddIcon(), ivCart, 1000, new Animator.AnimatorListener() {
+//                    @Override
+//                    public void onAnimationStart(Animator animation) {
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        resetCounterView();
+//                    }
+//
+//                    @Override
+//                    public void onAnimationCancel(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animator animation) {
+//
+//                    }
+//                });
+//            }
+//        } else {
+//            //Update data into database
+//            Log.d(TAG, "onOrderNowClick: " + "Update: " + cartItem.getQuantity());
+//            Log.d(TAG, "onOrderNowClick: " + "Update: " + cartItem.toString());
+//
+//            AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+//
+//        }
+////
+////        //Reset counter view into toolbar
+//        resetCounterView();
     }
 
     /***************************
@@ -131,7 +173,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                         String tempSelectedSize = (selectedSizeKeys.size() > 0) ? selectedSizeKeys.get(0).getText().toString() : "";
                         Log.d(TAG, "tempSelectedSize: " + tempSelectedSize);
 
-                        updateUnitSelection(DataUtil.getUnit(tempSelectedSize, units));
+                        mSelectedUnit = DataUtil.getUnit(tempSelectedSize, units);
+                        updateUnitSelection(mSelectedUnit);
 
                         // Close expansion layout
                         expansionLayout.collapse(true);

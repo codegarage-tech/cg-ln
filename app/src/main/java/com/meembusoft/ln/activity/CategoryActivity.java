@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.collection.ArrayMap;
@@ -34,7 +35,8 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     // Toolbar
     private TextView tvTitle;
-    private LinearLayout llClose, llCart;
+    private LinearLayout llClose;
+    private RelativeLayout rlCart;
     private ImageView ivCart;
 
     private ViewPager viewPagerCategory;
@@ -72,7 +74,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         // Toolbar
         tvTitle = findViewById(R.id.tv_title);
         llClose = findViewById(R.id.ll_close);
-        llCart = findViewById(R.id.ll_cart);
+        rlCart = findViewById(R.id.rl_cart);
         ivCart = findViewById(R.id.iv_cart);
 
         viewPagerCategory = (ViewPager) findViewById(R.id.view_pager_category);

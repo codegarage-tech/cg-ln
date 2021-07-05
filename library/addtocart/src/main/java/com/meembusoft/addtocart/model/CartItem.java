@@ -34,6 +34,14 @@ public class CartItem extends RealmObject implements CartListener {
         this.name = name;
     }
 
+    public CartItem(String id, double price, String name, String size, String image) {
+        this.id = id;
+        this.price = price;
+        this.name = name;
+        this.size = size;
+        this.image = image;
+    }
+
     public CartItem(String id, String description, double price, String name, String image) {
         this.id = id;
         this.description = description;
