@@ -1,7 +1,6 @@
 package com.meembusoft.ln.viewholder;
 
 import android.animation.Animator;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,7 +11,7 @@ import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.model.colormatchtab.Product;
-import com.meembusoft.ln.model.colormatchtab.Size;
+import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.RandomManager;
@@ -33,8 +32,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     private ShoppingView svAddToCart;
 
     // Size
-    private FlowLayout flowLayoutSize;
-    private FlowLayoutManager flowLayoutManagerSize;
+    private FlowLayout flowLayoutUnit;
+    private FlowLayoutManager flowLayoutManagerUnit;
     private ExpansionHeader expansionHeader;
     private ExpansionLayout expansionLayout;
     private String TAG = "ProductViewHolder";
@@ -49,7 +48,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         tvProductNote = $(R.id.tv_product_availability_time);
         tvProductOriginalPrice = $(R.id.tv_product_original_price);
         tvProductOfferPrice = $(R.id.tv_product_offer_price);
-        flowLayoutSize = $(R.id.fl_size);
+        flowLayoutUnit = $(R.id.fl_size);
         svAddToCart = $(R.id.sv_add_to_cart);
         expansionHeader = $(R.id.eh_unit);
         expansionLayout = $(R.id.expansionLayout);
@@ -59,8 +58,10 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
         AppUtil.applyViewTint(ivProductFavorite, (data.isFavorite() ? R.color.colorBlueDark : R.color.colorBlue));
-        Picasso.get().load(data.getImage()).into(ivProductImage);
-        initSize(data.getSize());
+        if (data.getImages() != null && !data.getImages().isEmpty()) {
+            Picasso.get().load(data.getImages().get(RandomManager.getRandom(0, data.getImages().size())).getUrl()).into(ivProductImage);
+        }
+        initUnit(data.getUnits());
 
         svAddToCart.setOnShoppingClickListener(new ShoppingView.ShoppingClickListener() {
             @Override
@@ -110,27 +111,27 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     /***************************
      * Methods for flow layout *
      ***************************/
-    public void initSize(List<Size> sizes) {
-        if (sizes != null && !sizes.isEmpty()) {
+    public void initUnit(List<Unit> units) {
+        if (units != null && !units.isEmpty()) {
             List<String> keys = new ArrayList<>();
-            for (int i = 0; i < sizes.size(); i++) {
-                keys.add(sizes.get(i).getName());
+            for (int i = 0; i < units.size(); i++) {
+                keys.add(units.get(i).getName());
             }
             if (!keys.isEmpty()) {
                 // Remove all previous keys
-                if (flowLayoutManagerSize != null) {
-                    flowLayoutManagerSize.removeAllKeys();
+                if (flowLayoutManagerUnit != null) {
+                    flowLayoutManagerUnit.removeAllKeys();
                 }
 
                 //Set flow layout with connection key
-                flowLayoutManagerSize = new FlowLayoutManager.FlowViewBuilder(getContext(), flowLayoutSize, keys, new FlowLayoutManager.onFlowViewClick() {
+                flowLayoutManagerUnit = new FlowLayoutManager.FlowViewBuilder(getContext(), flowLayoutUnit, keys, new FlowLayoutManager.onFlowViewClick() {
                     @Override
                     public void flowViewClick(TextView updatedTextView) {
-                        List<TextView> selectedSizeKeys = flowLayoutManagerSize.getSelectedFlowViews();
+                        List<TextView> selectedSizeKeys = flowLayoutManagerUnit.getSelectedFlowViews();
                         String tempSelectedSize = (selectedSizeKeys.size() > 0) ? selectedSizeKeys.get(0).getText().toString() : "";
                         Log.d(TAG, "tempSelectedSize: " + tempSelectedSize);
 
-                        updateSizeSelection(DataUtil.getSize(tempSelectedSize, sizes));
+                        updateUnitSelection(DataUtil.getUnit(tempSelectedSize, units));
 
                         // Close expansion layout
                         expansionLayout.collapse(true);
@@ -146,16 +147,16 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 //            if (!AllSettingsManager.isNullOrEmpty(lastTempSelectedRoom)) {
 //                flowLayoutManagerSize.clickFlowView(lastTempSelectedRoom);
 //            }
-                flowLayoutManagerSize.clickFlowView(keys.get(0));
+                flowLayoutManagerUnit.clickFlowView(keys.get(0));
             }
         }
     }
 
-    private void updateSizeSelection(Size size) {
-        if (size != null) {
-            tvProductSize.setText(size.getName());
-            tvProductOriginalPrice.setText(size.getPrice().getOriginal() + " TK");
-            tvProductOfferPrice.setText(size.getPrice().getOffer()+ " TK");
+    private void updateUnitSelection(Unit unit) {
+        if (unit != null) {
+            tvProductSize.setText(unit.getName());
+            tvProductOriginalPrice.setText(unit.getOriginalPrice() + " TK");
+            tvProductOfferPrice.setText(unit.getOfferPrice() + " TK");
 //            if (!isFirstTime) {
 //                svAddToCart.setTextNum(0);
 //            }

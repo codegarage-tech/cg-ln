@@ -6,25 +6,26 @@
       "id": "1",
       "name": "Igloo Cone Ice Cream",
       "isFavorite": true,
-      "image": "https://toppng.com/uploads/preview/vanilla-ice-cream-png-11553727146neljxgrhgo.png",
+      "hasOffer": true,
+      "images": [
+        {
+          "url": "https://toppng.com/uploads/preview/vanilla-ice-cream-png-11553727146neljxgrhgo.png"
+        }
+      ],
       "vendor": "Igloo",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     }

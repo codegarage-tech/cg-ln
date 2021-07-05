@@ -6,25 +6,26 @@
       "id": "1",
       "name": "Poultry",
       "isFavorite": true,
-      "image": "https://i.pinimg.com/originals/ff/e6/8f/ffe68fb5755495c009e69a346956c1a6.png",
+      "hasOffer": true,
+      "images": [
+        {
+          "url": "https://i.pinimg.com/originals/ff/e6/8f/ffe68fb5755495c009e69a346956c1a6.png"
+        }
+      ],
       "vendor": "",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     },
@@ -32,25 +33,26 @@
       "id": "2",
       "name": "Deshi",
       "isFavorite": true,
-      "image": "https://img.pngio.com/big-cock-renderings-png-download-46913637-free-transparent-big-cock-png-900_700.jpg",
+      "hasOffer": true,
+      "images": [
+        {
+          "url": "https://img.pngio.com/big-cock-renderings-png-download-46913637-free-transparent-big-cock-png-900_700.jpg"
+        }
+      ],
       "vendor": "",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     }

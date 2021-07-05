@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.util.RandomManager;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +26,8 @@ public class PopularProductViewHolder extends BaseViewHolder<Product> {
     @Override
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
-        Picasso.get().load(data.getImage()).into(ivProductImage);
+        if (data.getImages() != null && !data.getImages().isEmpty()) {
+            Picasso.get().load(data.getImages().get(RandomManager.getRandom(0, data.getImages().size())).getUrl()).into(ivProductImage);
+        }
     }
 }

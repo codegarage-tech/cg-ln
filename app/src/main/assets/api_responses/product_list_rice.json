@@ -6,25 +6,26 @@
       "id": "1",
       "name": "White Binni",
       "isFavorite": true,
-      "image": "https://mehedimart.com.bd/images/product/feature/5f0d945b5d746.jpeg",
+      "hasOffer": false,
+      "images": [
+        {
+          "url": "https://mehedimart.com.bd/images/product/feature/5f0d945b5d746.jpeg"
+        }
+      ],
       "vendor": "BPM",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     },
@@ -32,25 +33,26 @@
       "id": "2",
       "name": "Pran ChiniGura",
       "isFavorite": false,
-      "image": "https://www.mehedimart.com.bd/images/product/feature/5f0d75179733c.jpeg",
+      "hasOffer": true,
+      "images": [
+        {
+          "url": "https://www.mehedimart.com.bd/images/product/feature/5f0d75179733c.jpeg"
+        }
+      ],
       "vendor": "Pran",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     },
@@ -58,25 +60,26 @@
       "id": "3",
       "name": "Teer NajirShah",
       "isFavorite": true,
-      "image": "https://marsgiant.com/pub/media/catalog/product/cache/42b5eeaed503327e0c893d31d2d0f990/t/e/teer_nazirshile_rice_5kg.jpg",
+      "hasOffer": true,
+      "images": [
+        {
+          "url": "https://marsgiant.com/pub/media/catalog/product/cache/42b5eeaed503327e0c893d31d2d0f990/t/e/teer_nazirshile_rice_5kg.jpg"
+        }
+      ],
       "vendor": "Teer",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     },
@@ -84,25 +87,26 @@
       "id": "4",
       "name": "Fresh ChiniGura",
       "isFavorite": false,
-      "image": "https://www.mehedimart.com.bd/images/product/feature/5f0d75e29709f.jpeg",
+      "hasOffer": true,
+      "images": [
+        {
+          "url": "https://www.mehedimart.com.bd/images/product/feature/5f0d75e29709f.jpeg"
+        }
+      ],
       "vendor": "Fresh",
       "note": "Friday, (10AM ~ 12PM)",
       "hasDependency": true,
       "availability": true,
-      "size": [
+      "units": [
         {
           "name": "1 KG",
-          "price": {
-              "original": 100,
-              "offer": 90
-            }
+          "originalPrice": 100,
+          "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
-          "price": {
-              "original": 2000,
-              "offer": 1900
-            }
+          "originalPrice": 2000,
+          "offerPrice": 1900
         }
       ]
     }

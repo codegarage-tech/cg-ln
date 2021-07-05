@@ -9,23 +9,25 @@ public class Product {
     private int id;
     private String name;
     private boolean isFavorite = false;
-    private String image;
+    private boolean hasOffer = false;
+    private List<Image> images;
     private String vendor;
     private String note;
     private boolean hasDependency = false;
     private boolean availability = true;
-    private List<Size> size = new ArrayList<>();
+    private List<Unit> units = new ArrayList<>();
 
-    public Product(int id, String name, boolean isFavorite, String image, String vendor, String note, boolean hasDependency, boolean availability, List<Size> size) {
+    public Product(int id, String name, boolean isFavorite, boolean hasOffer, List<Image> images, String vendor, String note, boolean hasDependency, boolean availability, List<Unit> units) {
         this.id = id;
         this.name = name;
         this.isFavorite = isFavorite;
-        this.image = image;
+        this.hasOffer = hasOffer;
+        this.images = images;
         this.vendor = vendor;
         this.note = note;
         this.hasDependency = hasDependency;
         this.availability = availability;
-        this.size = size;
+        this.units = units;
     }
 
     public int getId() {
@@ -52,12 +54,20 @@ public class Product {
         isFavorite = favorite;
     }
 
-    public String getImage() {
-        return image;
+    public boolean isHasOffer() {
+        return hasOffer;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setHasOffer(boolean hasOffer) {
+        this.hasOffer = hasOffer;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getVendor() {
@@ -92,12 +102,12 @@ public class Product {
         this.availability = availability;
     }
 
-    public List<Size> getSize() {
-        return size;
+    public List<Unit> getUnits() {
+        return units;
     }
 
-    public void setSize(List<Size> size) {
-        this.size = size;
+    public void setUnits(List<Unit> units) {
+        this.units = units;
     }
 
     @Override
@@ -106,12 +116,13 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", isFavorite=" + isFavorite +
-                ", image='" + image + '\'' +
+                ", hasOffer=" + hasOffer +
+                ", images=" + images +
                 ", vendor='" + vendor + '\'' +
                 ", note='" + note + '\'' +
                 ", hasDependency=" + hasDependency +
                 ", availability=" + availability +
-                ", size=" + size +
+                ", units=" + units +
                 '}';
     }
 }
