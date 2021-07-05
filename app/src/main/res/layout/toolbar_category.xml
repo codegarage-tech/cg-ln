@@ -40,7 +40,7 @@
         <ImageView
             android:id="@+id/iv_cart"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="match_parent"
             app:srcCompat="@drawable/vector_bag_empty"
             app:tint="@color/imageTintColor" />
 
@@ -60,7 +60,7 @@
 
         <ImageView
             android:id="@+id/iv_close"
-            android:layout_width="26dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/vector_close"
             app:tint="@color/imageTintColor" />

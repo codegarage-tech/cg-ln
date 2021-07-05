@@ -16,7 +16,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_35">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:paddingTop="@dimen/dp_3"
                 android:paddingRight="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_3"
-                android:text="1 KG"
+                android:text="KG"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
             <ImageView
@@ -47,7 +47,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 app:srcCompat="@drawable/ic_expansion_header_indicator_white"
-                app:tint="@color/colorBlueDark" />
+                app:tint="@color/colorShadeBlueDark" />
 
         </RelativeLayout>
 
