@@ -9,7 +9,7 @@
         android:topRightRadius="38dp"/>
 
     <solid android:color="@android:color/darker_gray"/>
-    <unit
+    <size
         android:width="76dp"
         android:height="76dp"/>
 </shape>
