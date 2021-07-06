@@ -116,7 +116,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                 AddToCartManager.getInstance().deleteItem(CartItem.class, DB_KEY_ID, cartItem.getId());
 
                 //Reset counter view into toolbar
-                ((CategoryActivity) getContext()).resetCartCounter();
+                AppUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
             }
         } else if (cartItem.getQuantity() == 1) {
             if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
@@ -136,7 +136,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        ((CategoryActivity) getContext()).resetCartCounter();
+                        AppUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
                     }
 
                     @Override

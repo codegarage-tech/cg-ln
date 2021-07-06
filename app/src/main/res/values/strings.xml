@@ -22,6 +22,7 @@
     <string name="txt_search">Search</string>
     <string name="txt_product">Product</string>
     <string name="txt_suggestion">Suggestion</string>
+    <string name="txt_cart">Cart</string>
 
     <!-- Order -->
     <string name="txt_plus">+</string>

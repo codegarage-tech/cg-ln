@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.meembusoft.ln.adapter.NewProductListAdapter;
 import com.meembusoft.ln.adapter.PopularProductListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.Language;
+import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.localemanager.LocaleManager;
 import com.meembusoft.localemanager.languagesupport.LanguagesSupport;
@@ -36,6 +38,9 @@ public class HomeActivity extends BaseActivity {
 
     // Toolbar
     private LinearLayout llSettings;
+    private TextView tvCart;
+    private RelativeLayout rlCart;
+    private ImageView ivCart;
 
     // Screen items
     private RelativeLayout rlSearch;
@@ -71,6 +76,9 @@ public class HomeActivity extends BaseActivity {
     public void initViews() {
         // Toolbar
         llSettings = findViewById(R.id.ll_settings);
+        tvCart = findViewById(R.id.tv_cart);
+        rlCart = findViewById(R.id.rl_cart);
+        ivCart = findViewById(R.id.iv_cart);
 
         rlSearch = findViewById(R.id.rl_search);
         rvCategory = findViewById(R.id.rv_category);
@@ -80,6 +88,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
+        //Reset counter view into toolbar
+        AppUtil.resetCartCounterView(tvCart);
+
         // Initialize menu
         initMenu();
 
@@ -128,6 +139,14 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 mFlourish.show();
+            }
+        });
+
+        rlCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCart = new Intent(getActivity(), CartActivity.class);
+                startActivity(intentCart);
             }
         });
 

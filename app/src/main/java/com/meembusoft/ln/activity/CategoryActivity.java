@@ -17,8 +17,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.athbk.ultimatetablayout.UltimateTabLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.meembusoft.addtocart.AddToCartManager;
-import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.CategoryViewPagerAdapter;
 import com.meembusoft.ln.base.BaseActivity;
@@ -26,6 +24,7 @@ import com.meembusoft.ln.fragment.CategoryFragment;
 import com.meembusoft.ln.fragment.SubCategoryFragment;
 import com.meembusoft.ln.fragment.filter.ProductFilterFragment;
 import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.FragmentUtilsManager;
 
@@ -91,7 +90,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         tvTitle.setText(R.string.txt_product);
 
         //Reset counter view into toolbar
-        resetCartCounter();
+        AppUtil.resetCartCounterView(tvCart);
 
         initCategories();
     }
@@ -117,6 +116,14 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
             @Override
             public void onClick(View view) {
                 initBackPress();
+            }
+        });
+
+        rlCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCart = new Intent(getActivity(), CartActivity.class);
+                startActivity(intentCart);
             }
         });
     }
@@ -308,16 +315,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         return ivCart;
     }
 
-    public void resetCartCounter() {
-        List<CartItem> data = AddToCartManager.getInstance().getAllCartItems(CartItem.class);
-
-        if (data != null && data.size() > 0) {
-            Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + data.size());
-            Log.d(TAG, "<<<onOrderNowClick>>>: " + "data: " + data.toString());
-            tvCart.setText(data.size() + "");
-            tvCart.setVisibility(View.VISIBLE);
-        } else {
-            tvCart.setVisibility(View.GONE);
-        }
+    public TextView getCartCounter() {
+        return tvCart;
     }
 }

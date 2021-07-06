@@ -22,6 +22,7 @@
     <string name="txt_search">খুঁজুন</string>
     <string name="txt_product">পণ্য</string>
     <string name="txt_suggestion">সাজেশন</string>
+    <string name="txt_cart">কার্ট</string>
 
     <!-- Order -->
     <string name="txt_plus">+</string>

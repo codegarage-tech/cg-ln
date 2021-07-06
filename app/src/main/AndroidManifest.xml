@@ -35,6 +35,10 @@
             android:name="com.meembusoft.ln.activity.CategoryActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.meembusoft.ln.activity.CartActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
