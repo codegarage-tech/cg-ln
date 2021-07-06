@@ -2,8 +2,6 @@ package com.meembusoft.realmmanager;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +11,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
@@ -51,7 +50,7 @@ public class RealmManager {
     public static void initialize(Application application, String dbName, long dbVersion, boolean forceUpdate) {
         REALM_NAME = dbName;
         REALM_SCHEMA_VERSION = dbVersion;
-        if(forceUpdate){
+        if (forceUpdate) {
             with(application);
         }
     }
@@ -67,6 +66,7 @@ public class RealmManager {
         Realm.setDefaultConfiguration(realmConfiguration);
 
         mRealm = Realm.getDefaultInstance();
+        Log.d(TAG, "DB Path: " + mRealm.getPath());
     }
 
     public static RealmManager with(Fragment fragment) {
@@ -188,6 +188,25 @@ public class RealmManager {
             mRealm.commitTransaction();
         } catch (Exception e) {
             Log.d(TAG, "Failed to deleteData: " + e.getMessage());
+        }
+    }
+
+    // TODO:>> This method is not tested.
+    public <E extends RealmObject> void deleteAllData(Class<E> modelClass, List<MutableVariable<String>> keyValues) {
+        try {
+            if (!mRealm.isInTransaction())
+                mRealm.beginTransaction();
+
+            RealmQuery realmQuery = mRealm.where(modelClass);
+            if (keyValues != null && !keyValues.isEmpty()) {
+                for (MutableVariable<String> mutableVariable : keyValues) {
+                    realmQuery.equalTo(mutableVariable.getName(), mutableVariable.getValue());
+                }
+            }
+            realmQuery.findAll().deleteAllFromRealm();
+            mRealm.commitTransaction();
+        } catch (Exception e) {
+            Log.d(TAG, "Failed to deleteAllData: " + e.getMessage());
         }
     }
 

@@ -17,6 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.athbk.ultimatetablayout.UltimateTabLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.meembusoft.addtocart.AddToCartManager;
+import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.CategoryViewPagerAdapter;
 import com.meembusoft.ln.base.BaseActivity;
@@ -34,7 +36,7 @@ import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
 public class CategoryActivity extends BaseActivity implements AAH_FabulousFragment.Callbacks, AAH_FabulousFragment.AnimationListener {
 
     // Toolbar
-    private TextView tvTitle;
+    private TextView tvTitle, tvCart;
     private LinearLayout llClose;
     private RelativeLayout rlCart;
     private ImageView ivCart;
@@ -73,6 +75,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void initViews() {
         // Toolbar
         tvTitle = findViewById(R.id.tv_title);
+        tvCart = findViewById(R.id.tv_cart);
         llClose = findViewById(R.id.ll_close);
         rlCart = findViewById(R.id.rl_cart);
         ivCart = findViewById(R.id.iv_cart);
@@ -86,6 +89,9 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_product);
+
+        //Reset counter view into toolbar
+        resetCartCounter();
 
         initCategories();
     }
@@ -298,7 +304,20 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         Log.d(TAG, "onPageSelected>>mCategoryFragment: " + mCategoryFragment.getCategory().getName());
     }
 
-    public ImageView getCart() {
+    public ImageView getCartIcon() {
         return ivCart;
+    }
+
+    public void resetCartCounter() {
+        List<CartItem> data = AddToCartManager.getInstance().getAllCartItems(CartItem.class);
+
+        if (data != null && data.size() > 0) {
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + data.size());
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "data: " + data.toString());
+            tvCart.setText(data.size() + "");
+            tvCart.setVisibility(View.VISIBLE);
+        } else {
+            tvCart.setVisibility(View.GONE);
+        }
     }
 }

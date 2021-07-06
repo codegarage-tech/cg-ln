@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
+import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.ln.util.Logger;
 import com.meembusoft.localemanager.LocaleManager;
 
@@ -45,6 +46,9 @@ public class BaseApp extends Application {
 
         //Multidex initialization
         MultiDex.install(mContext);
+
+        // Init add to cart db
+        AddToCartManager.initialize(mContext);
     }
 
     private void initTypeface() {

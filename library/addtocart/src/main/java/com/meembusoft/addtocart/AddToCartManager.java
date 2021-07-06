@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.meembusoft.addtocart.util.Util;
+import com.meembusoft.realmmanager.MutableVariable;
 import com.meembusoft.realmmanager.RealmManager;
 
 import java.util.List;
@@ -38,8 +39,9 @@ public class AddToCartManager {
 
     private static void createAddToCartDb(Application application, boolean forceUpdate) {
         // Initialize realm database
-        String dbName = Util.getApplicationName(application);
-        dbName = (!TextUtils.isEmpty(dbName) ? (dbName + ".realm").replaceAll(" ", "_") : "meembusoft.realm");
+        // String dbName = Util.getApplicationName(application);
+        String dbName = application.getPackageName();
+        dbName = (!TextUtils.isEmpty(dbName) ? (dbName + ".realm").replaceAll(".", "_") : "meembusoft.realm");
         long dbVersion = 1;
         RealmManager.initialize(application, dbName, dbVersion, forceUpdate);
     }
@@ -79,12 +81,20 @@ public class AddToCartManager {
         return null;
     }
 
-
     public <E extends RealmObject> void deleteItem(Class<E> modelClass, String fieldName, String value) {
         try {
             RealmManager.with(mApplication).deleteData(modelClass, fieldName, value);
         } catch (Exception e) {
             Log.d(TAG, "Failed to deleteItem: " + e.getMessage());
+        }
+    }
+
+    // TODO:>> This method is not tested.
+    public <E extends RealmObject> void deleteItems(Class<E> modelClass, List<MutableVariable<String>> keyValues) {
+        try {
+            RealmManager.with(mApplication).deleteAllData(modelClass, keyValues);
+        } catch (Exception e) {
+            Log.d(TAG, "Failed to deleteItems: " + e.getMessage());
         }
     }
 

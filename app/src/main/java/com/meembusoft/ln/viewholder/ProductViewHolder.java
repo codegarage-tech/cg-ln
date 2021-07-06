@@ -11,6 +11,7 @@ import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.util.AppUtil;
@@ -26,6 +27,8 @@ import java.util.List;
 
 import me.wangyuwei.shoppoing.ShoppingView;
 
+import static com.meembusoft.addtocart.util.Constant.DB_KEY_ID;
+
 public class ProductViewHolder extends BaseViewHolder<Product> {
 
     private TextView tvProductName, tvProductNote, tvProductOriginalPrice, tvProductOfferPrice, tvProductSize;
@@ -39,7 +42,6 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     private ExpansionLayout expansionLayout;
     private String TAG = "ProductViewHolder";
     private Unit mSelectedUnit;
-    private CartItem cartItem;
 
     public ProductViewHolder(ViewGroup parent) {
         super(parent, R.layout.row_item_product_linear_right);
@@ -70,11 +72,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
             @Override
             public void onAddClick(int num) {
                 Log.d(TAG, "@=> " + "add.......num=> " + num);
-                if (cartItem == null) {
-                    cartItem = new CartItem(data.getId() + "", ((double) mSelectedUnit.getOriginalPrice()), data.getName(), mSelectedUnit.getName(), data.getImages().get(0).getUrl());
-                }
-                cartItem.setQuantity(num);
-                cartItem.setSize(mSelectedUnit.getName());
+                // Prepare cart item
+                CartItem cartItem = prepareCartItem(data, mSelectedUnit, num);
 
                 // Add to cart
                 addToCart(cartItem, svAddToCart);
@@ -83,11 +82,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
             @Override
             public void onMinusClick(int num) {
                 Log.d(TAG, "@=> " + "minus.......num=> " + num);
-                if (cartItem == null) {
-                    cartItem = new CartItem(data.getId() + "", ((double) mSelectedUnit.getOriginalPrice()), data.getName(), mSelectedUnit.getName(), data.getImages().get(0).getUrl());
-                }
-                cartItem.setQuantity(num);
-                cartItem.setSize(mSelectedUnit.getName());
+                // Prepare cart item
+                CartItem cartItem = prepareCartItem(data, mSelectedUnit, num);
 
                 // Add to cart
                 addToCart(cartItem, svAddToCart);
@@ -95,59 +91,72 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         });
     }
 
-    public void addToCart(final CartItem cartItem, ShoppingView shoppingView) {
-        Log.d(TAG, "onOrderNowClick: " + "count: " + cartItem.getQuantity());
+    private CartItem prepareCartItem(Product data, Unit selectedUnit, int quantity) {
+        CartItem cartItem = new CartItem();
+        cartItem.setId(getCartId(data, selectedUnit));
+        cartItem.setName(data.getName());
+        cartItem.setSize(selectedUnit.getName());
+        cartItem.setPrice(((double) selectedUnit.getOriginalPrice()));
+        cartItem.setQuantity(quantity);
+        cartItem.setImage(data.getImages().get(0).getUrl());
+        return cartItem;
+    }
 
-//        if (cartItem.getQuantity() == 0) {
-//            if (AddToCartManager.getInstance().hasCartItem(CartItem.class)) {
-//                //Delete the CartItem from database
-//                AddToCartManager.getInstance().deleteItem(CartItem.class, cartItem.getName(), "smart home");
-//            }
-//        } else if (cartItem.getQuantity() == 1) {
-//            if (AddToCartManager.getInstance().hasCartItem(CartItem.class)) {
-//                //Update data into database
-//                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
-//                Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.toString());
-//            } else {
-//
-//                //Add item into database
-//                Log.d(TAG, "onOrderNowClick: " + "<<Update>>>: " + cartItem.getQuantity());
-//
-//                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
-//
-//                //make fly animation for adding item
-//                AppUtil.makeFlyAnimation(getActivity(), shoppingView, shoppingView.getAddIcon(), ivCart, 1000, new Animator.AnimatorListener() {
-//                    @Override
-//                    public void onAnimationStart(Animator animation) {
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        resetCounterView();
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animation) {
-//
-//                    }
-//                });
-//            }
-//        } else {
-//            //Update data into database
-//            Log.d(TAG, "onOrderNowClick: " + "Update: " + cartItem.getQuantity());
-//            Log.d(TAG, "onOrderNowClick: " + "Update: " + cartItem.toString());
-//
-//            AddToCartManager.getInstance().addOrUpdateCart(cartItem);
-//
-//        }
-////
-////        //Reset counter view into toolbar
-//        resetCounterView();
+    private String getCartId(Product product, Unit unit) {
+        return product.getId() + ">>" + unit.getName();
+    }
+
+    private void addToCart(CartItem cartItem, ShoppingView shoppingView) {
+        Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + cartItem.getQuantity());
+
+        if (cartItem.getQuantity() == 0) {
+            if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
+                Log.d(TAG, "<<<onOrderNowClick>>>: " + "Delete>>>: data is exist" + cartItem.toString());
+                //Delete the CartItem from database
+                AddToCartManager.getInstance().deleteItem(CartItem.class, DB_KEY_ID, cartItem.getId());
+
+                //Reset counter view into toolbar
+                ((CategoryActivity) getContext()).resetCartCounter();
+            }
+        } else if (cartItem.getQuantity() == 1) {
+            if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
+                Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.toString());
+                //Update data into database
+                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+            } else {
+                //Add item into database
+                Log.d(TAG, "<<<onOrderNowClick>>>: " + "<<Add>>>: " + cartItem.getQuantity());
+                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+
+                //make fly animation for adding item
+                AppUtil.makeFlyAnimation(((CategoryActivity) getContext()), shoppingView, shoppingView.getAddIcon(), ((CategoryActivity) getContext()).getCartIcon(), 1000, new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ((CategoryActivity) getContext()).resetCartCounter();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+            }
+        } else {
+            //Update data into database
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.getQuantity());
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.toString());
+
+            AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+        }
     }
 
     /***************************
