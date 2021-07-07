@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.collection.ArrayMap;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.meembusoft.ln.R;
@@ -57,11 +56,14 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
         mProductListAdapter = new ProductListAdapter(getActivity());
         // Load subcategory adapter
         rvProduct.setAdapter(mProductListAdapter);
-        // Load products into adapter
+        // Load products data
         mFilterKeys.clear();
         mAppliedFilterKeys.clear();
         mProducts.clear();
         mProducts.addAll(DataUtil.getAllProducts(getActivity(), mSubCategory));
+        // Set previous selected quantity
+        DataUtil.setUnitWiseQuantity(mProducts, DataUtil.getAllCartItems());
+        // Load products into adapter
         mProductListAdapter.clear();
         mProductListAdapter.addAll(mProducts);
 

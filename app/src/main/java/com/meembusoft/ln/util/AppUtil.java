@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +22,9 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.meembusoft.addtocart.AddToCartManager;
-import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.animationmanager.flytocart.CircleAnimationUtil;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.model.colormatchtab.Category;
-
-import java.util.List;
 
 public class AppUtil {
 
@@ -161,19 +156,6 @@ public class AppUtil {
                     ViewCompat.setBackgroundTintList(view, ContextCompat.getColorStateList(view.getContext().getApplicationContext(), colorResource));
                 }
             }
-        }
-    }
-
-    public static void resetCartCounterView(TextView counterView) {
-        List<CartItem> data = AddToCartManager.getInstance().getAllCartItems(CartItem.class);
-
-        if (data != null && data.size() > 0) {
-            Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + data.size());
-            Log.d(TAG, "<<<onOrderNowClick>>>: " + "data: " + data.toString());
-            counterView.setText(data.size() + "");
-            counterView.setVisibility(View.VISIBLE);
-        } else {
-            counterView.setVisibility(View.GONE);
         }
     }
 }

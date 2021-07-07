@@ -3,7 +3,7 @@
   "message": "Response successful",
   "data": [
     {
-      "id": "1",
+      "id": "21",
       "name": "RFL tiffine Box",
       "isFavorite": true,
       "hasOffer": true,
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": "22",
       "name": "Super Star Bulb",
       "isFavorite": true,
       "hasOffer": true,
@@ -57,7 +57,7 @@
       ]
     },
     {
-      "id": "3",
+      "id": "23",
       "name": "KitKat",
       "isFavorite": true,
       "hasOffer": true,
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "id": "4",
+      "id": "24",
       "name": "Teer NajirShah",
       "isFavorite": true,
       "hasOffer": true,
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "id": "5",
+      "id": "25",
       "name": "Singer 30 inch Television",
       "isFavorite": true,
       "hasOffer": true,
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "id": "6",
+      "id": "26",
       "name": "Igloo Cone Ice Cream",
       "isFavorite": true,
       "hasOffer": true,
@@ -165,7 +165,7 @@
       ]
     },
     {
-      "id": "7",
+      "id": "27",
       "name": "Wonder White Bead",
       "isFavorite": true,
       "hasOffer": true,

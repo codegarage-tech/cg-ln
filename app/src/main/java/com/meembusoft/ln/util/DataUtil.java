@@ -2,7 +2,12 @@ package com.meembusoft.ln.util;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
+import com.meembusoft.addtocart.AddToCartManager;
+import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
@@ -154,5 +159,61 @@ public class DataUtil {
             }
         }
         return null;
+    }
+
+    public static Product getProduct(List<Product> products, String productId) {
+        if (products != null && !products.isEmpty() && !TextUtils.isEmpty(productId)) {
+            for (Product product : products) {
+                String pId = product.getId() + "";
+                if (pId.contains(productId)) {
+                    return product;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static List<Product> setUnitWiseQuantity(List<Product> products, List<CartItem> cartItems) {
+        if (products != null && !products.isEmpty() && cartItems != null && !cartItems.isEmpty()) {
+            for (CartItem cartItem : cartItems) {
+                Product selectedProduct = getProduct(products, cartItem.getId().split(">>")[0]);
+                if (selectedProduct != null) {
+                    selectedProduct.setSelectedQuantity(cartItem.getSize(), cartItem.getQuantity());
+                }
+            }
+        }
+        return products;
+    }
+
+    public static String getCartId(Product product, Unit unit) {
+        return product.getId() + ">>" + unit.getName();
+    }
+
+    public static void resetCartCounterView(TextView counterView) {
+        List<CartItem> data = AddToCartManager.getInstance().getAllCartItems(CartItem.class);
+
+        if (data != null && data.size() > 0) {
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + data.size());
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "data: " + data.toString());
+            counterView.setText(data.size() + "");
+            counterView.setVisibility(View.VISIBLE);
+        } else {
+            counterView.setVisibility(View.GONE);
+        }
+    }
+
+    public static List<CartItem> getAllCartItems() {
+        return AddToCartManager.getInstance().getAllCartItems(CartItem.class);
+    }
+
+    public static CartItem prepareCartItem(Product data, Unit selectedUnit, int quantity) {
+        CartItem cartItem = new CartItem();
+        cartItem.setId(DataUtil.getCartId(data, selectedUnit));
+        cartItem.setName(data.getName());
+        cartItem.setSize(selectedUnit.getName());
+        cartItem.setPrice(((double) selectedUnit.getOriginalPrice()));
+        cartItem.setQuantity(quantity);
+        cartItem.setImage(data.getImages().get(0).getUrl());
+        return cartItem;
     }
 }

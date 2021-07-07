@@ -88,9 +88,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
-        //Reset counter view into toolbar
-        AppUtil.resetCartCounterView(tvCart);
-
         // Initialize menu
         initMenu();
 
@@ -180,6 +177,13 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void initDestroyTasks() {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Reset counter view into toolbar
+        DataUtil.resetCartCounterView(tvCart);
     }
 
     /****************

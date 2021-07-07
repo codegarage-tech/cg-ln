@@ -90,7 +90,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         tvTitle.setText(R.string.txt_product);
 
         //Reset counter view into toolbar
-        AppUtil.resetCartCounterView(tvCart);
+        DataUtil.resetCartCounterView(tvCart);
 
         initCategories();
     }

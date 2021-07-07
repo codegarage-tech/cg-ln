@@ -3,7 +3,7 @@
   "message": "Response successful",
   "data": [
     {
-      "id": "1",
+      "id": "7",
       "name": "Poultry",
       "isFavorite": true,
       "hasOffer": true,
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": "8",
       "name": "Deshi",
       "isFavorite": true,
       "hasOffer": true,

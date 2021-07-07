@@ -41,7 +41,6 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     private ExpansionHeader expansionHeader;
     private ExpansionLayout expansionLayout;
     private String TAG = "ProductViewHolder";
-    private Unit mSelectedUnit;
 
     public ProductViewHolder(ViewGroup parent) {
         super(parent, R.layout.row_item_product_linear_right);
@@ -66,48 +65,40 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         if (data.getImages() != null && !data.getImages().isEmpty()) {
             Picasso.get().load(data.getImages().get(RandomManager.getRandom(0, data.getImages().size())).getUrl()).into(ivProductImage);
         }
-        initUnit(data.getUnits());
+        initUnit(data);
 
+        initShoppingView(data);
+    }
+
+    private void initShoppingView(Product data) {
         svAddToCart.setOnShoppingClickListener(new ShoppingView.ShoppingClickListener() {
             @Override
             public void onAddClick(int num) {
                 Log.d(TAG, "@=> " + "add.......num=> " + num);
                 // Prepare cart item
-                CartItem cartItem = prepareCartItem(data, mSelectedUnit, num);
+                CartItem cartItem = DataUtil.prepareCartItem(data, data.getSelectedUnit(), num);
 
                 // Add to cart
-                addToCart(cartItem, svAddToCart);
+                addToCart(data, cartItem);
             }
 
             @Override
             public void onMinusClick(int num) {
                 Log.d(TAG, "@=> " + "minus.......num=> " + num);
                 // Prepare cart item
-                CartItem cartItem = prepareCartItem(data, mSelectedUnit, num);
+                CartItem cartItem = DataUtil.prepareCartItem(data, data.getSelectedUnit(), num);
 
                 // Add to cart
-                addToCart(cartItem, svAddToCart);
+                addToCart(data, cartItem);
             }
         });
     }
 
-    private CartItem prepareCartItem(Product data, Unit selectedUnit, int quantity) {
-        CartItem cartItem = new CartItem();
-        cartItem.setId(getCartId(data, selectedUnit));
-        cartItem.setName(data.getName());
-        cartItem.setSize(selectedUnit.getName());
-        cartItem.setPrice(((double) selectedUnit.getOriginalPrice()));
-        cartItem.setQuantity(quantity);
-        cartItem.setImage(data.getImages().get(0).getUrl());
-        return cartItem;
-    }
-
-    private String getCartId(Product product, Unit unit) {
-        return product.getId() + ">>" + unit.getName();
-    }
-
-    private void addToCart(CartItem cartItem, ShoppingView shoppingView) {
+    private void addToCart(Product product, CartItem cartItem) {
         Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + cartItem.getQuantity());
+
+        // Store and update cart information
+        product.setSelectedQuantity(product.getSelectedUnit().getName(), cartItem.getQuantity());
 
         if (cartItem.getQuantity() == 0) {
             if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
@@ -116,7 +107,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                 AddToCartManager.getInstance().deleteItem(CartItem.class, DB_KEY_ID, cartItem.getId());
 
                 //Reset counter view into toolbar
-                AppUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
+                DataUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
             }
         } else if (cartItem.getQuantity() == 1) {
             if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
@@ -129,14 +120,14 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                 AddToCartManager.getInstance().addOrUpdateCart(cartItem);
 
                 //make fly animation for adding item
-                AppUtil.makeFlyAnimation(((CategoryActivity) getContext()), shoppingView, shoppingView.getAddIcon(), ((CategoryActivity) getContext()).getCartIcon(), 1000, new Animator.AnimatorListener() {
+                AppUtil.makeFlyAnimation(((CategoryActivity) getContext()), svAddToCart, svAddToCart.getAddIcon(), ((CategoryActivity) getContext()).getCartIcon(), 1000, new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
                     }
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        AppUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
+                        DataUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
                     }
 
                     @Override
@@ -162,7 +153,8 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     /***************************
      * Methods for flow layout *
      ***************************/
-    public void initUnit(List<Unit> units) {
+    public void initUnit(Product product) {
+        List<Unit> units = product.getUnits();
         if (units != null && !units.isEmpty()) {
             List<String> keys = new ArrayList<>();
             for (int i = 0; i < units.size(); i++) {
@@ -182,8 +174,9 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                         String tempSelectedSize = (selectedSizeKeys.size() > 0) ? selectedSizeKeys.get(0).getText().toString() : "";
                         Log.d(TAG, "tempSelectedSize: " + tempSelectedSize);
 
-                        mSelectedUnit = DataUtil.getUnit(tempSelectedSize, units);
-                        updateUnitSelection(mSelectedUnit);
+                        // Store and update selected unit
+                        product.setSelectedUnit(DataUtil.getUnit(tempSelectedSize, units));
+                        updateUnitSelection(product);
 
                         // Close expansion layout
                         expansionLayout.collapse(true);
@@ -195,23 +188,29 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                         .build();
 
                 //Set last temp selected size key
-//            String lastTempSelectedRoom = SessionUtil.getTempSelectedConnectionType(getActivity());
-//            if (!AllSettingsManager.isNullOrEmpty(lastTempSelectedRoom)) {
-//                flowLayoutManagerSize.clickFlowView(lastTempSelectedRoom);
-//            }
-                flowLayoutManagerUnit.clickFlowView(keys.get(0));
+                if (product.getSelectedUnit() != null) {
+                    flowLayoutManagerUnit.clickFlowView(product.getSelectedUnit().getName());
+                } else {
+                    flowLayoutManagerUnit.clickFlowView(keys.get(0));
+                }
             }
         }
     }
 
-    private void updateUnitSelection(Unit unit) {
-        if (unit != null) {
-            tvProductSize.setText(unit.getName());
-            tvProductOriginalPrice.setText(unit.getOriginalPrice() + " TK");
-            tvProductOfferPrice.setText(unit.getOfferPrice() + " TK");
-//            if (!isFirstTime) {
-//                svAddToCart.setTextNum(0);
-//            }
+    private void updateUnitSelection(Product product) {
+        if (product != null) {
+            Unit unit = product.getSelectedUnit();
+            if (unit != null) {
+                tvProductSize.setText(unit.getName());
+                tvProductOriginalPrice.setText(unit.getOriginalPrice() + " TK");
+                tvProductOfferPrice.setText(unit.getOfferPrice() + " TK");
+
+                // Show previous selected quantity
+                int quantity = product.getSelectedQuantity(unit.getName());
+                if (svAddToCart.getText() > 0 || quantity > 0) {
+                    svAddToCart.setTextNum(quantity);
+                }
+            }
         }
     }
 }
