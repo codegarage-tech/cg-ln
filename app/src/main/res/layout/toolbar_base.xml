@@ -27,17 +27,18 @@
 
     <LinearLayout
         android:id="@+id/ll_close"
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_30"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_10"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_close"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             app:srcCompat="@drawable/vector_close"
             app:tint="@color/imageTintColor" />
 
