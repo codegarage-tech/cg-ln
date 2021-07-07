@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBgColor"
     android:orientation="vertical">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@drawable/shape_line_vertical_fading_edge"
+            android:backgroundTint="@color/colorBlue" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_select_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:text="ALL"
+            app:buttonTint="@color/colorBlue" />
+
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_checkout"
+            android:layout_toRightOf="@+id/cb_select_all"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="TK 1000000"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/colorBlueDark"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_checkout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/shape_rectangle_bg_primary"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:text="CHECK OUT (400)"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/whiteColor" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
+<!--    <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_2"
         android:background="@drawable/shape_line_vertical_fading_edge"
-        android:backgroundTint="@color/colorBlue" />
+        android:backgroundTint="@color/colorBlue" />-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout_sub_category"
