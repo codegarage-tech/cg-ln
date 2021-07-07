@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBgColor"
     android:orientation="vertical">
 
+    <com.meembusoft.recyclerview.MRecyclerView
+        android:id="@+id/rv_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_bottom_bar"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/row_item_cart" />
+
     <RelativeLayout
+        android:id="@+id/rl_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -38,7 +49,7 @@
             android:gravity="center"
             android:padding="@dimen/dp_5"
             android:text="TK 1000000"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorBlueDark"
             android:textStyle="bold" />
 

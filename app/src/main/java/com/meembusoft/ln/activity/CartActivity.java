@@ -6,14 +6,23 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.adapter.CartListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.recyclerview.MRecyclerView;
 
 public class CartActivity extends BaseActivity {
 
     // Toolbar
     private TextView tvTitle;
     private LinearLayout llClose;
+
+    // View items
+    private MRecyclerView rvCart;
+    private CartListAdapter mCartListAdapter;
 
     @Override
     public int initToolbarLayout() {
@@ -35,12 +44,23 @@ public class CartActivity extends BaseActivity {
         // Toolbar
         tvTitle = findViewById(R.id.tv_title);
         llClose = findViewById(R.id.ll_close);
+
+        // View items
+        rvCart = findViewById(R.id.rv_cart);
     }
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_cart);
+
+        // Setup cart recyclerview
+        rvCart.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCartListAdapter = new CartListAdapter(getActivity());
+        // Load cart adapter
+        rvCart.setAdapter(mCartListAdapter);
+        // Load cart items into adapter
+        mCartListAdapter.addAll(DataUtil.getAllCartItems());
     }
 
     @Override
