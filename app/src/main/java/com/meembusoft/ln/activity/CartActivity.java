@@ -26,7 +26,7 @@ public class CartActivity extends BaseActivity {
 
     @Override
     public int initToolbarLayout() {
-        return R.layout.toolbar_base;
+        return R.layout.toolbar_cart;
     }
 
     @Override

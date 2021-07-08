@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBgColor"
@@ -115,7 +114,7 @@
                         android:gravity="left"
                         android:padding="@dimen/dp_5"
                         android:text="Grand Total"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/subtitleTextColor"
                         android:textStyle="bold" />
 
@@ -127,7 +126,7 @@
                         android:gravity="right"
                         android:padding="@dimen/dp_5"
                         android:text="TK 5000"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/subtitleTextColor"
                         android:textStyle="bold" />
 
@@ -152,26 +151,17 @@
             android:background="@drawable/shape_line_vertical_fading_edge"
             android:backgroundTint="@color/colorBlue" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/cb_select_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:text="ALL"
-            app:buttonTint="@color/colorBlue" />
-
         <TextView
             android:id="@+id/tv_total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
             android:layout_toLeftOf="@+id/btn_order_now"
             android:layout_toRightOf="@+id/cb_select_all"
-            android:gravity="center"
+            android:gravity="left"
             android:padding="@dimen/dp_5"
-            android:text="TK 1000000"
+            android:text="Total TK 1000000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorBlueDark"
             android:textStyle="bold" />
