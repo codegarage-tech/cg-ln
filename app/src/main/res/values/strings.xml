@@ -22,12 +22,11 @@
     <string name="txt_search">Search</string>
     <string name="txt_product">Product</string>
     <string name="txt_suggestion">Suggestion</string>
-    <string name="txt_cart">Cart</string>
 
-    <!-- Order -->
+    <!-- Cart -->
+    <string name="txt_cart">Cart</string>
     <string name="txt_plus">+</string>
     <string name="txt_minus">-</string>
-
     <string name="complete_order_question">"Are you sure you want to complete order?</string>
     <string name="txt_cart_detail">CART DETAIL</string>
     <string name="clear_all">Clear All</string>
@@ -40,4 +39,7 @@
     <string name="failed_order">Something went wrong. :(</string>
     <string name="sending_order">Your order is being completed, please wait.</string>
     <string name="delete_all_orders">Are you sure you want to delete all orders?</string>
+    <string name="txt_there_is_no_item_into_cart">There is no item into cart</string>
+    <string name="txt_order_now">Order Now(%d)</string>
+    <string name="txt_item_quantity_should_more_than_zero">Item quantity should more than zero</string>
 </resources>

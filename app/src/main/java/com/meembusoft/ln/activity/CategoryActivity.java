@@ -122,8 +122,7 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         rlCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentCart = new Intent(getActivity(), CartActivity.class);
-                startActivity(intentCart);
+                AppUtil.navigateToCartScreen(getActivity());
             }
         });
     }

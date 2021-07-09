@@ -142,8 +142,7 @@ public class HomeActivity extends BaseActivity {
         rlCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentCart = new Intent(getActivity(), CartActivity.class);
-                startActivity(intentCart);
+                AppUtil.navigateToCartScreen(getActivity());
             }
         });
 

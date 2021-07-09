@@ -98,8 +98,9 @@
                     android:minWidth="@dimen/dp_50"
                     app:sv_bg_color="@color/colorShadeBlueDark"
                     app:sv_duration="600"
+                    app:sv_min_count="1"
                     app:sv_number_color="@color/brown"
-                    app:sv_text="Add to Cart" />
+                    app:sv_text="Add Item" />
 
                 <TextView
                     android:id="@+id/tv_product_sum_price"
@@ -134,6 +135,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll_delete"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
                         android:layout_weight=".5"
@@ -154,6 +156,7 @@
                         android:backgroundTint="@color/colorBlue" />
 
                     <LinearLayout
+                        android:id="@+id/ll_favorite"
                         android:layout_width="@dimen/dp_0"
                         android:layout_height="match_parent"
                         android:layout_weight=".5"

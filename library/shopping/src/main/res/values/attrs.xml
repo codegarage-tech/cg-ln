@@ -7,6 +7,7 @@
         <attr name="sv_text" format="string" />
         <attr name="sv_text_size" format="dimension" />
         <attr name="sv_duration" format="integer" />
+        <attr name="sv_min_count" format="integer" />
     </declare-styleable>
 
 </resources>

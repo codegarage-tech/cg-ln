@@ -3,6 +3,7 @@ package com.meembusoft.ln.util;
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
 import androidx.appcompat.widget.AppCompatButton;
@@ -22,8 +24,11 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.meembusoft.addtocart.AddToCartManager;
+import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.animationmanager.flytocart.CircleAnimationUtil;
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.CartActivity;
 import com.meembusoft.ln.model.colormatchtab.Category;
 
 public class AppUtil {
@@ -156,6 +161,15 @@ public class AppUtil {
                     ViewCompat.setBackgroundTintList(view, ContextCompat.getColorStateList(view.getContext().getApplicationContext(), colorResource));
                 }
             }
+        }
+    }
+
+    public static void navigateToCartScreen(Activity activity) {
+        if (AddToCartManager.getInstance().hasCartItem(CartItem.class)) {
+            Intent intentCart = new Intent(activity, CartActivity.class);
+            activity.startActivity(intentCart);
+        } else {
+            Toast.makeText(activity, activity.getString(R.string.txt_there_is_no_item_into_cart), Toast.LENGTH_SHORT).show();
         }
     }
 }

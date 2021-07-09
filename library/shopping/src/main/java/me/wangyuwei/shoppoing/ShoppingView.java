@@ -36,6 +36,7 @@ public class ShoppingView extends View {
     private final static int STATE_ROTATE_OVER = 4;
 
     private final static int DEFAULT_DURATION = 250;
+    private final static int DEFAULT_MIN_COUNT = 0;
     private final static String DEFAULT_SHOPPING_TEXT = "Order Now";
 
     private Paint mPaintBg, mPaintText, mPaintNum;
@@ -46,7 +47,8 @@ public class ShoppingView extends View {
     //动画时长
     private int mDuration;
     //购买数量
-    private int mNum = 0;
+    private int mMinNumber = DEFAULT_MIN_COUNT;
+    private int mNum = mMinNumber;
     //展示文案
     private String mShoppingText;
     //当前状态
@@ -83,6 +85,7 @@ public class ShoppingView extends View {
     private void init(AttributeSet attrs) {
         TypedArray typeArray = getContext().obtainStyledAttributes(attrs, R.styleable.ShoppingView);
         mDuration = typeArray.getInt(R.styleable.ShoppingView_sv_duration, DEFAULT_DURATION);
+        mMinNumber = typeArray.getInt(R.styleable.ShoppingView_sv_min_count, DEFAULT_MIN_COUNT);
         mShoppingText = TextUtils.isEmpty(typeArray.getString(R.styleable.ShoppingView_sv_text)) ? DEFAULT_SHOPPING_TEXT : typeArray.getString(R.styleable.ShoppingView_sv_text);
         //展示文案大小
         int textSize = (int) typeArray.getDimension(R.styleable.ShoppingView_sv_text_size, sp2px(16));
@@ -146,7 +149,7 @@ public class ShoppingView extends View {
                 drawShoppingText(canvas);
                 mState = STATE_NONE;
                 mIsForward = true;
-                mNum = 0;
+                mNum = mMinNumber;
             }
         } else if (mState == STATE_ROTATE) {
             mPaintMinus.setAlpha(mAlpha);
@@ -266,8 +269,8 @@ public class ShoppingView extends View {
                     Log.d("ShoppingView", "mState == STATE_ROTATE_OVER");
                     if (isPointInCircle(new PointF(event.getX(), event.getY()), new PointF(MAX_WIDTH - MAX_HEIGHT / 2, MAX_HEIGHT / 2), MAX_HEIGHT / 2)) {
                         Log.d("ShoppingView", "isPointInCircle == true");
-                        if (mNum >= 0) {
-                            Log.d("ShoppingView", "mNum > 0");
+                        if (mNum >= mMinNumber) {
+                            Log.d("ShoppingView", "mNum > mMinNumber");
                             mNum++;
                             mIsForward = true;
                             if (mShoppingClickListener != null) {
@@ -277,17 +280,17 @@ public class ShoppingView extends View {
                         invalidate();
                     } else if (isPointInCircle(new PointF(event.getX(), event.getY()), new PointF(MAX_HEIGHT / 2, MAX_HEIGHT / 2), MAX_HEIGHT / 2)) {
                         Log.d("ShoppingView", "isPointInCircle == false");
-                        if (mNum > 0) {
-                            Log.d("ShoppingView", "mNum > 0");
+                        if (mNum > mMinNumber) {
+                            Log.d("ShoppingView", "mNum > mMinNumber");
                             mNum--;
                             if (mShoppingClickListener != null) {
                                 mShoppingClickListener.onMinusClick(mNum);
                             }
                             invalidate();
-                        } else if (mNum == 0) {
-                            Log.d("ShoppingView", "mNum == 0");
+                        } else if (mNum == mMinNumber) {
+                            Log.d("ShoppingView", "mNum == mMinNumber");
                             if (mShoppingClickListener != null) {
-                                mShoppingClickListener.onMinusClick(0);
+                                mShoppingClickListener.onMinusClick(mMinNumber);
                             }
                             mState = STATE_ROTATE;
                             mIsForward = false;
@@ -466,7 +469,7 @@ public class ShoppingView extends View {
      * @param num 购买数量
      */
     public void setTextNum(int num) {
-        mNum = num;
+        mNum = ((num < mMinNumber) ? mMinNumber : num);
         mState = STATE_ROTATE_OVER;
         invalidate();
     }

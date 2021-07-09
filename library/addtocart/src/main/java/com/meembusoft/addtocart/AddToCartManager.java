@@ -4,7 +4,7 @@ import android.app.Application;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.meembusoft.addtocart.util.Util;
+import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.realmmanager.MutableVariable;
 import com.meembusoft.realmmanager.RealmManager;
 
@@ -108,7 +108,7 @@ public class AddToCartManager {
 
     public <E extends RealmObject> boolean isCartItemExist(Class<E> modelClass, String fieldName, String value) {
         try {
-            return RealmManager.with(mApplication).isDataExist(modelClass,fieldName,value);
+            return RealmManager.with(mApplication).isDataExist(modelClass, fieldName, value);
         } catch (Exception e) {
             Log.d(TAG, "Failed to isDataExist: " + e.getMessage());
         }
@@ -122,5 +122,45 @@ public class AddToCartManager {
             Log.d(TAG, "Failed to hasData: " + e.getMessage());
         }
         return false;
+    }
+
+    public int getSubTotalPrice() {
+        int subTotal = 0;
+        List<CartItem> cartItems = getAllCartItems(CartItem.class);
+        if (cartItems != null && cartItems.size() > 0) {
+            for (CartItem cartItem : cartItems) {
+                if (cartItem.isSelected()) {
+                    subTotal = subTotal + ((int) cartItem.getTotalPrice());
+                }
+            }
+        }
+        return subTotal;
+    }
+
+    public boolean isAllCartItemsSelected() {
+        List<CartItem> cartItems = getAllCartItems(CartItem.class);
+        if (cartItems != null && cartItems.size() > 0) {
+            for (CartItem cartItem : cartItems) {
+                if (!cartItem.isSelected()) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public int getSelectedCartItemCount() {
+        int selectedItemCount = 0;
+        List<CartItem> cartItems = getAllCartItems(CartItem.class);
+        if (cartItems != null && cartItems.size() > 0) {
+            for (CartItem cartItem : cartItems) {
+                if (cartItem.isSelected()) {
+                    selectedItemCount++;
+                }
+            }
+        }
+        return selectedItemCount;
     }
 }

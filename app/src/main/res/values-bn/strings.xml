@@ -22,14 +22,12 @@
     <string name="txt_search">খুঁজুন</string>
     <string name="txt_product">পণ্য</string>
     <string name="txt_suggestion">সাজেশন</string>
-    <string name="txt_cart">কার্ট</string>
 
-    <!-- Order -->
+    <!-- Cart -->
+    <string name="txt_cart">কার্ট</string>
     <string name="txt_plus">+</string>
     <string name="txt_minus">-</string>
-
     <string name="complete_order_question">"Are you sure you want to complete order?</string>
-
     <string name="txt_cart_detail">CART DETAIL</string>
     <string name="clear_all">Clear All</string>
     <string name="complete_order">COMPLETE ORDER</string>
@@ -41,4 +39,7 @@
     <string name="failed_order">Something went wrong. :(</string>
     <string name="delete_all_orders">Are you sure you want to delete all orders?</string>
     <string name="sending_order">Your order is being completed, please wait.</string>
+    <string name="txt_there_is_no_item_into_cart">কার্টে কোন আইটেম নাই</string>
+    <string name="txt_order_now">অর্ডার করুন(%d)</string>
+    <string name="txt_item_quantity_should_more_than_zero">অন্তত একটি আইটেম নির্বাচন করুন</string>
 </resources>

@@ -58,7 +58,7 @@
                         android:layout_weight=".6"
                         android:gravity="right"
                         android:padding="@dimen/dp_5"
-                        android:text="TK 5000"
+                        android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/subtitleTextColor" />
 
@@ -76,7 +76,7 @@
                         android:layout_weight=".7"
                         android:gravity="left"
                         android:padding="@dimen/dp_5"
-                        android:text="Delivery charg(may vary depending on the product weight)"
+                        android:text="Delivery charge(may vary depending on the product weight)"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/subtitleTextColor" />
 
@@ -87,7 +87,7 @@
                         android:layout_weight=".3"
                         android:gravity="right"
                         android:padding="@dimen/dp_5"
-                        android:text="TK 10"
+                        android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/subtitleTextColor" />
 
@@ -125,7 +125,7 @@
                         android:layout_weight=".6"
                         android:gravity="right"
                         android:padding="@dimen/dp_5"
-                        android:text="TK 5000"
+                        android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/subtitleTextColor"
                         android:textStyle="bold" />
@@ -143,7 +143,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:background="@drawable/drop_shadow_rectangle_top">
 
         <View
             android:layout_width="match_parent"
@@ -161,7 +161,7 @@
             android:layout_toRightOf="@+id/cb_select_all"
             android:gravity="left"
             android:padding="@dimen/dp_5"
-            android:text="Total TK 1000000"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorBlueDark"
             android:textStyle="bold" />
@@ -179,7 +179,7 @@
             android:backgroundTint="@color/colorBlue"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:text="ORDER NOW(400)"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/whiteColor" />
 

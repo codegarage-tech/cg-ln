@@ -140,6 +140,7 @@
                     android:minWidth="@dimen/dp_50"
                     app:sv_bg_color="@color/colorShadeBlueDark"
                     app:sv_duration="600"
+                    app:sv_min_count="0"
                     app:sv_number_color="@color/brown"
                     app:sv_text="Add to Cart" />
 
