@@ -7,7 +7,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
 
@@ -61,28 +60,24 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
         accbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (data.getQuantity() > 0) {
-                        // Update cart item
-                        data.setSelected(isChecked);
-                        updateCartItemView(data);
-                    } else {
-                        accbSelect.setChecked(false);
-                        Toast.makeText(getContext(), getContext().getString(R.string.txt_item_quantity_should_more_than_zero), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    // Update cart item
-                    data.setSelected(isChecked);
-                    updateCartItemView(data);
-                }
+                // Update cart item
+                data.setSelected(isChecked);
+                updateDBCartItemView(data);
 
-                // Finally update select all status
-                getOwnerRecyclerView().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((CartActivity) getContext()).updateAllCartItemsSelection();
-                    }
-                });
+                ((CartActivity) getContext()).updateSummery();
+
+//                int selectionCount = AddToCartManager.getInstance().getSelectedCartItemCount();
+//                int adapterItemCount = ((CartListAdapter)getOwnerAdapter()).getCount();
+//
+//                if (selectionCount == adapterItemCount) {
+//                    // All item selected
+//                    ((CartActivity) getContext()).updateAllCartItemsSelection(true);
+//                } else if (selectionCount == 0) {
+//                    // No item selected
+//                    ((CartActivity) getContext()).updateAllCartItemsSelection(false);
+//                } else {
+//                    ((CartActivity) getContext()).updateSummery();
+//                }
             }
         });
 
@@ -109,7 +104,9 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
                 Log.d(TAG, "@=> " + "add.......num=> " + num);
                 // Update cart item
                 cartItem.setQuantity(num);
-                updateCartItemView(cartItem);
+                updateDBCartItemView(cartItem);
+                // Update sum price
+                updateProductSumPrice(cartItem);
             }
 
             @Override
@@ -117,24 +114,18 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
                 Log.d(TAG, "@=> " + "minus.......num=> " + num);
                 // Update cart item
                 cartItem.setQuantity(num);
-                updateCartItemView(cartItem);
+                updateDBCartItemView(cartItem);
+                // Update sum price
+                updateProductSumPrice(cartItem);
             }
         });
     }
 
-    private void updateCartItemView(CartItem cartItem) {
+    private void updateDBCartItemView(CartItem cartItem) {
         //Update data into database
         if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
             Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: data is exist" + cartItem.toString());
             AddToCartManager.getInstance().addOrUpdateCart(cartItem);
-        }
-
-        // Update sum price
-        updateProductSumPrice(cartItem);
-
-        // if quantity is zero, then deselect the product
-        if (cartItem.getQuantity() == 0 && cartItem.isSelected()) {
-            accbSelect.setChecked(false);
         }
     }
 

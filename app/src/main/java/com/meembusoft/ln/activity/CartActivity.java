@@ -33,6 +33,7 @@ public class CartActivity extends BaseActivity {
     private CartListAdapter mCartListAdapter;
     private TextView tvSubtotal, tvDeliveryCharge, tvGrandTotal, tvTotal;
     private Button btnOrderNow;
+    private boolean isSingleSelection = false;
 
     @Override
     public int initToolbarLayout() {
@@ -69,7 +70,9 @@ public class CartActivity extends BaseActivity {
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_cart);
-        updateAllCartItemsSelection();
+        updateAllCartItemsSelection(AddToCartManager.getInstance().isAllCartItemsSelected());
+        // Update summery view
+        updateSummery();
 
         // Setup cart recyclerview
         rvCart.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,9 +81,6 @@ public class CartActivity extends BaseActivity {
         rvCart.setAdapter(mCartListAdapter);
         // Load cart items into adapter
         mCartListAdapter.addAll(DataUtil.getAllCartItems());
-
-        // Update summery view
-        updateSummery();
     }
 
     @Override
@@ -126,8 +126,8 @@ public class CartActivity extends BaseActivity {
 
     }
 
-    public void updateAllCartItemsSelection() {
-        accbSelectAll.setChecked(AddToCartManager.getInstance().isAllCartItemsSelected());
+    public void updateAllCartItemsSelection(boolean isSelected) {
+        accbSelectAll.setChecked(isSelected);
     }
 
     public void updateSummery() {
@@ -140,5 +140,13 @@ public class CartActivity extends BaseActivity {
         tvGrandTotal.setText(grandTotal + " Tk");
         tvTotal.setText(grandTotal + " Tk");
         btnOrderNow.setText(getString(R.string.txt_order_now, selectedItemCount));
+    }
+
+    public boolean isSingleSelection() {
+        return isSingleSelection;
+    }
+
+    public void setSingleSelection(boolean singleSelection) {
+        isSingleSelection = singleSelection;
     }
 }
