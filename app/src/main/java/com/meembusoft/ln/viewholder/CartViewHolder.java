@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -28,7 +27,7 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
     private ImageView ivProductImage;
     private ShoppingView svAddToCart;
     private AppCompatCheckBox accbSelect;
-    private LinearLayout llDelete, llFavorite;
+    private ImageView llDelete;
     private String TAG = "CartViewHolder";
 
     public CartViewHolder(ViewGroup parent) {
@@ -41,8 +40,7 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
         tvProductSumPrice = $(R.id.tv_product_sum_price);
         svAddToCart = $(R.id.sv_add_to_cart);
         accbSelect = $(R.id.cb_select);
-        llDelete = $(R.id.ll_delete);
-        llFavorite = $(R.id.ll_favorite);
+        llDelete = $(R.id.iv_product_delete);
     }
 
     @Override

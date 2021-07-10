@@ -25,6 +25,7 @@
 
     <!-- Cart -->
     <string name="txt_cart">কার্ট</string>
+    <string name="txt_summary">হিসাব</string>
     <string name="txt_plus">+</string>
     <string name="txt_minus">-</string>
     <string name="complete_order_question">"Are you sure you want to complete order?</string>
