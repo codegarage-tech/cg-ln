@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
+import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
@@ -189,7 +190,7 @@ public class DataUtil {
         return product.getId() + ">>" + unit.getName();
     }
 
-    public static void resetCartCounterView(TextView counterView) {
+    public static void resetCartCounterView(TextView counterView, OnCartResetListener onCartResetListener) {
         List<CartItem> data = AddToCartManager.getInstance().getAllCartItems(CartItem.class);
 
         if (data != null && data.size() > 0) {
@@ -197,8 +198,14 @@ public class DataUtil {
             Log.d(TAG, "<<<onOrderNowClick>>>: " + "data: " + data.toString());
             counterView.setText(data.size() + "");
             counterView.setVisibility(View.VISIBLE);
+            if(onCartResetListener != null){
+                onCartResetListener.onOrderCompleted(false);
+            }
         } else {
             counterView.setVisibility(View.GONE);
+            if(onCartResetListener != null){
+                onCartResetListener.onOrderCompleted(true);
+            }
         }
     }
 

@@ -23,7 +23,10 @@ import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.fragment.CategoryFragment;
 import com.meembusoft.ln.fragment.SubCategoryFragment;
 import com.meembusoft.ln.fragment.filter.ProductFilterFragment;
+import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.FragmentUtilsManager;
@@ -143,7 +146,46 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void onResume() {
         super.onResume();
         //Reset counter view into toolbar
-        DataUtil.resetCartCounterView(tvCart);
+        DataUtil.resetCartCounterView(tvCart, new OnCartResetListener() {
+            @Override
+            public void onOrderCompleted(boolean isOrderCompleted) {
+                if (isOrderCompleted) {
+                    List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                    if (fragments != null && fragments.size() > 0) {
+                        Log.d(TAG, "onOrderCompleted>>fragments>>size: " + fragments.size());
+                        for (Fragment mFragment : fragments) {
+
+                            if (mFragment instanceof CategoryFragment) {
+                                Log.d(TAG, "onOrderCompleted>>post>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
+                                CategoryFragment categoryFragment = (CategoryFragment) mFragment;
+                                List<Fragment> subFragments = categoryFragment.getChildFragmentManager().getFragments();
+                                if (subFragments != null && subFragments.size() > 0) {
+                                    Log.d(TAG, "onPageSelected>>subFragments>>size: " + subFragments.size());
+                                    for (Fragment subFragment : subFragments) {
+
+                                        if (subFragment instanceof SubCategoryFragment) {
+                                            Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+                                            SubCategoryFragment subCategoryFragment = (SubCategoryFragment) subFragment;
+                                            List<Product> allProducts = subCategoryFragment.getProductListAdapter().getAllData();
+                                            if (allProducts != null && allProducts.size() > 0) {
+                                                for (Product product : allProducts) {
+                                                    Log.d(TAG, "onOrderCompleted>>productName: " + product.getName());
+                                                    for (Unit unit : product.getUnits()) {
+                                                        Log.d(TAG, "onOrderCompleted>>unitName: " + unit.getName());
+                                                        product.setSelectedQuantity(unit.getName(), 0);
+                                                    }
+                                                }
+                                                subCategoryFragment.getProductListAdapter().notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void initCategories() {
@@ -203,39 +245,40 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         viewPagerCategory.post(new Runnable() {
             @Override
             public void run() {
-                viewPagerCategory.setCurrentItem(mSelectedCategoryPosition);
-//                List<Fragment> fragments = getSupportFragmentManager().getFragments();
-//                if (fragments != null && fragments.size() > 0) {
-//                    Log.d(TAG, "onPageSelected>>post>>fragments>>size: " + fragments.size());
-////                    for (Fragment mFragment : fragments) {
-////                        if (mFragment instanceof CategoryFragment) {
-////                            Log.d(TAG, "onPageSelected>>post>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
-////                        }
-////                    }
-//
-//                    Fragment visibleViewPagerFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getSupportFragmentManager(), viewPagerCategory);
-//                    if (visibleViewPagerFragment != null) {
-//                        CategoryFragment categoryFragment = (CategoryFragment) visibleViewPagerFragment;
-//                        setCategoryFragment(categoryFragment);
-//
-//                        List<Fragment> subFragments = categoryFragment.getChildFragmentManager().getFragments();
-//                        if (subFragments != null && subFragments.size() > 0) {
-//                            Log.d(TAG, "onPageSelected>>post>>subFragments>>size: " + subFragments.size());
-//
-////                            for (Fragment subFragment : subFragments) {
-////                                if (subFragment instanceof SubCategoryFragment) {
-////                                    Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
-////                                }
-////                            }
-//
-//                            Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(categoryFragment.getChildFragmentManager(), categoryFragment.getViewPagerSubCategory());
-//                            if (visibleViewPagerSubFragment != null) {
-//                                SubCategoryFragment subCategoryFragment = (SubCategoryFragment) visibleViewPagerSubFragment;
-//                                setSubCategoryFragment(subCategoryFragment);
-//                            }
+//                viewPagerCategory.setCurrentItem(mSelectedCategoryPosition);
+
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                if (fragments != null && fragments.size() > 0) {
+                    Log.d(TAG, "onPageSelected>>fragments>>size: " + fragments.size());
+//                    for (Fragment mFragment : fragments) {
+//                        if (mFragment instanceof CategoryFragment) {
+//                            Log.d(TAG, "onPageSelected>>post>>fragment>>name: " + ((CategoryFragment) mFragment).getCategory().getName());
 //                        }
 //                    }
-//                }
+
+                    Fragment visibleViewPagerFragment = FragmentUtilsManager.getVisibleViewPagerFragment(getSupportFragmentManager(), viewPagerCategory);
+                    if (visibleViewPagerFragment != null) {
+                        CategoryFragment categoryFragment = (CategoryFragment) visibleViewPagerFragment;
+                        setCategoryFragment(categoryFragment);
+
+                        List<Fragment> subFragments = categoryFragment.getChildFragmentManager().getFragments();
+                        if (subFragments != null && subFragments.size() > 0) {
+                            Log.d(TAG, "onPageSelected>>subFragments>>size: " + subFragments.size());
+
+//                            for (Fragment subFragment : subFragments) {
+//                                if (subFragment instanceof SubCategoryFragment) {
+//                                    Log.d(TAG, "onPageSelected>>post>>subFragment>>name: " + ((SubCategoryFragment) subFragment).getSubCategory().getName());
+//                                }
+//                            }
+
+                            Fragment visibleViewPagerSubFragment = FragmentUtilsManager.getVisibleViewPagerFragment(categoryFragment.getChildFragmentManager(), categoryFragment.getViewPagerSubCategory());
+                            if (visibleViewPagerSubFragment != null) {
+                                SubCategoryFragment subCategoryFragment = (SubCategoryFragment) visibleViewPagerSubFragment;
+                                setSubCategoryFragment(subCategoryFragment);
+                            }
+                        }
+                    }
+                }
             }
         });
     }

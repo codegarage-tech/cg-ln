@@ -150,4 +150,8 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
         mProductListAdapter.clear();
         mProductListAdapter.addAll(filteredProducts);
     }
+
+    public ProductListAdapter getProductListAdapter() {
+        return mProductListAdapter;
+    }
 }

@@ -12,6 +12,7 @@ import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
+import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.util.AppUtil;
@@ -107,7 +108,12 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                 AddToCartManager.getInstance().deleteItem(CartItem.class, DB_KEY_ID, cartItem.getId());
 
                 //Reset counter view into toolbar
-                DataUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
+                DataUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter(), new OnCartResetListener() {
+                    @Override
+                    public void onOrderCompleted(boolean isOrderCompleted) {
+
+                    }
+                });
             }
         } else if (cartItem.getQuantity() == 1) {
             if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
@@ -127,7 +133,12 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        DataUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter());
+                        DataUtil.resetCartCounterView(((CategoryActivity) getContext()).getCartCounter(), new OnCartResetListener() {
+                            @Override
+                            public void onOrderCompleted(boolean isOrderCompleted) {
+
+                            }
+                        });
                     }
 
                     @Override
@@ -202,8 +213,9 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
             Unit unit = product.getSelectedUnit();
             if (unit != null) {
                 tvProductSize.setText(unit.getName());
-                tvProductOriginalPrice.setText(unit.getOriginalPrice() + " TK");
-                tvProductOfferPrice.setText(unit.getOfferPrice() + " TK");
+
+                tvProductOriginalPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOriginalPrice()));
+                tvProductOfferPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOfferPrice()));
 
                 // Show previous selected quantity
                 int quantity = product.getSelectedQuantity(unit.getName());

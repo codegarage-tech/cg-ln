@@ -19,6 +19,7 @@ import com.meembusoft.ln.adapter.CartListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.view.GlobalProgressBar;
 import com.meembusoft.recyclerview.MRecyclerView;
 
 import java.util.List;
@@ -136,8 +137,16 @@ public class CartActivity extends BaseActivity {
                     return;
                 }
 
-                // Remove all cart items after success order
-                AddToCartManager.getInstance().deleteAllCartItems(CartItem.class);
+                try {
+                    // Show progress bar
+                    GlobalProgressBar.getInstance(getActivity()).showProgressBar();
+
+                    // Remove all cart items after success order
+                    AddToCartManager.getInstance().deleteAllCartItems(CartItem.class);
+                    Thread.sleep(3000);
+                    GlobalProgressBar.getInstance(getActivity()).dismissProgressBar();
+                } catch (Exception ex) {
+                }
             }
         });
     }

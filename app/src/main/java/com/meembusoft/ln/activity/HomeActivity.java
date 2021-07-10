@@ -19,6 +19,7 @@ import com.meembusoft.ln.adapter.NewProductListAdapter;
 import com.meembusoft.ln.adapter.PopularProductListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.Language;
+import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.localemanager.LocaleManager;
@@ -182,7 +183,12 @@ public class HomeActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
         //Reset counter view into toolbar
-        DataUtil.resetCartCounterView(tvCart);
+        DataUtil.resetCartCounterView(tvCart, new OnCartResetListener() {
+            @Override
+            public void onOrderCompleted(boolean isOrderCompleted) {
+
+            }
+        });
     }
 
     /****************
