@@ -43,4 +43,12 @@
     <string name="txt_there_is_no_item_into_cart">There is no item into cart</string>
     <string name="txt_order_now">Order Now(%d)</string>
     <string name="txt_item_quantity_should_more_than_zero">Item quantity should more than zero</string>
+    <string name="txt_select_at_least_one_product">Select at least one product</string>
+    <string name="txt_minimum_order_amount_excluding_delivery_charge">Minimum order amount %d Tk excluding delivery charge</string>
+    <string name="txt_taka">Tk</string>
+    <string name="txt_subtotal">Subtotal</string>
+    <string name="txt_grand_total">Grand Total</string>
+    <string name="txt_delivery_charge">Delivery Charge</string>
+    <string name="txt_delivery_charge_may_vary_depending_on_the_product_weight">Delivery charge(may vary depending on the product weight)</string>
+    <string name="txt_amount_with_taka">%d Tk</string>
 </resources>

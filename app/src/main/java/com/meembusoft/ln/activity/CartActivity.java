@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.CartListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
 
@@ -34,6 +36,7 @@ public class CartActivity extends BaseActivity {
     private TextView tvSubtotal, tvDeliveryCharge, tvGrandTotal, tvTotal;
     private Button btnOrderNow;
     private boolean isAbortAllSelection = false, isMultiSelection = false;
+    private int subTotal = 0;
 
     @Override
     public int initToolbarLayout() {
@@ -119,6 +122,24 @@ public class CartActivity extends BaseActivity {
                 }
             }
         });
+
+        btnOrderNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (AddToCartManager.getInstance().getSelectedCartItemCount() == 0) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_select_at_least_one_product), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (subTotal < (Constants.MINIMUM_ORDER_AMOUNT)) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_minimum_order_amount_excluding_delivery_charge, Constants.MINIMUM_ORDER_AMOUNT), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Remove all cart items after success order
+                AddToCartManager.getInstance().deleteAllCartItems(CartItem.class);
+            }
+        });
     }
 
     @Override
@@ -142,14 +163,14 @@ public class CartActivity extends BaseActivity {
     }
 
     public void updateSummery() {
-        int subTotal = AddToCartManager.getInstance().getSubTotalPrice();
-        int deliveryCharge = ((subTotal == 0) ? 0 : 10);
+        subTotal = AddToCartManager.getInstance().getSubTotalPrice();
+        int deliveryCharge = ((subTotal == 0) ? 0 : Constants.MINIMUM_DELIVERY_CHARGE);
         int grandTotal = subTotal + deliveryCharge;
         int selectedItemCount = AddToCartManager.getInstance().getSelectedCartItemCount();
-        tvSubtotal.setText(subTotal + "Tk");
-        tvDeliveryCharge.setText(deliveryCharge + " Tk");
-        tvGrandTotal.setText(grandTotal + " Tk");
-        tvTotal.setText(grandTotal + " Tk");
+        tvSubtotal.setText(getString(R.string.txt_amount_with_taka, subTotal));
+        tvDeliveryCharge.setText(getString(R.string.txt_amount_with_taka, deliveryCharge));
+        tvGrandTotal.setText(getString(R.string.txt_amount_with_taka, grandTotal));
+        tvTotal.setText(getString(R.string.txt_amount_with_taka, grandTotal));
         btnOrderNow.setText(getString(R.string.txt_order_now, selectedItemCount));
     }
 
