@@ -33,7 +33,7 @@ public class CartActivity extends BaseActivity {
     private CartListAdapter mCartListAdapter;
     private TextView tvSubtotal, tvDeliveryCharge, tvGrandTotal, tvTotal;
     private Button btnOrderNow;
-    private boolean isSingleSelection = false;
+    private boolean isAbortAllSelection = false, isMultiSelection = false;
 
     @Override
     public int initToolbarLayout() {
@@ -70,7 +70,7 @@ public class CartActivity extends BaseActivity {
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_cart);
-        updateAllCartItemsSelection(AddToCartManager.getInstance().isAllCartItemsSelected());
+        updateAllCartItemsSelection(AddToCartManager.getInstance().isAllCartItemsSelected(), false);
         // Update summery view
         updateSummery();
 
@@ -95,18 +95,28 @@ public class CartActivity extends BaseActivity {
         accbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (mCartListAdapter != null) {
-
-                    List<CartItem> cartItems = mCartListAdapter.getAllData();
-                    for (CartItem cartItem : cartItems) {
-                        cartItem.setSelected(isChecked);
-                        AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+                if (!isAbortAllSelection()) {
+                    setMultiSelection(true);
+                    if (mCartListAdapter != null) {
+                        List<CartItem> cartItems = mCartListAdapter.getAllData();
+                        for (CartItem cartItem : cartItems) {
+                            cartItem.setSelected(isChecked);
+                            AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+                        }
+                        mCartListAdapter.notifyDataSetChanged();
                     }
-                    mCartListAdapter.notifyDataSetChanged();
-                }
 
-                // Calculate total
-                updateSummery();
+                    // Calculate total
+                    updateSummery();
+                    rvCart.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            setMultiSelection(false);
+                        }
+                    });
+                } else {
+                    setAbortAllSelection(false);
+                }
             }
         });
     }
@@ -126,7 +136,8 @@ public class CartActivity extends BaseActivity {
 
     }
 
-    public void updateAllCartItemsSelection(boolean isSelected) {
+    public void updateAllCartItemsSelection(boolean isSelected, boolean isAbortAllSelection) {
+        setAbortAllSelection(isAbortAllSelection);
         accbSelectAll.setChecked(isSelected);
     }
 
@@ -142,11 +153,19 @@ public class CartActivity extends BaseActivity {
         btnOrderNow.setText(getString(R.string.txt_order_now, selectedItemCount));
     }
 
-    public boolean isSingleSelection() {
-        return isSingleSelection;
+    public boolean isAbortAllSelection() {
+        return isAbortAllSelection;
     }
 
-    public void setSingleSelection(boolean singleSelection) {
-        isSingleSelection = singleSelection;
+    public void setAbortAllSelection(boolean abortAllSelection) {
+        this.isAbortAllSelection = abortAllSelection;
+    }
+
+    public boolean isMultiSelection() {
+        return isMultiSelection;
+    }
+
+    public void setMultiSelection(boolean multiSelection) {
+        isMultiSelection = multiSelection;
     }
 }

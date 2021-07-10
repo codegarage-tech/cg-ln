@@ -89,9 +89,6 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         // Toolbar
         tvTitle.setText(R.string.txt_product);
 
-        //Reset counter view into toolbar
-        DataUtil.resetCartCounterView(tvCart);
-
         initCategories();
     }
 
@@ -140,6 +137,13 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     @Override
     public void initDestroyTasks() {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Reset counter view into toolbar
+        DataUtil.resetCartCounterView(tvCart);
     }
 
     private void initCategories() {

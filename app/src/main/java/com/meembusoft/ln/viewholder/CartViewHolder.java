@@ -60,24 +60,17 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
         accbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Update cart item
-                data.setSelected(isChecked);
-                updateDBCartItemView(data);
+                if (!((CartActivity) getContext()).isMultiSelection()) {
+                    // Update cart item
+                    data.setSelected(isChecked);
+                    updateDBCartItemView(data);
 
-                ((CartActivity) getContext()).updateSummery();
+                    // Update all calculation
+                    ((CartActivity) getContext()).updateSummery();
 
-//                int selectionCount = AddToCartManager.getInstance().getSelectedCartItemCount();
-//                int adapterItemCount = ((CartListAdapter)getOwnerAdapter()).getCount();
-//
-//                if (selectionCount == adapterItemCount) {
-//                    // All item selected
-//                    ((CartActivity) getContext()).updateAllCartItemsSelection(true);
-//                } else if (selectionCount == 0) {
-//                    // No item selected
-//                    ((CartActivity) getContext()).updateAllCartItemsSelection(false);
-//                } else {
-//                    ((CartActivity) getContext()).updateSummery();
-//                }
+                    // Update select all status
+                    ((CartActivity) getContext()).updateAllCartItemsSelection(AddToCartManager.getInstance().isAllCartItemsSelected(), true);
+                }
             }
         });
 
@@ -91,7 +84,13 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
 
                 // Finish activity if there is no items
                 if (((CartListAdapter) getOwnerAdapter()).getCount() == 0) {
+                    ((CartActivity) getContext()).setAbortAllSelection(false);
                     ((CartActivity) getContext()).finish();
+                } else {
+                    ((CartActivity) getContext()).updateSummery();
+
+                    // Update select all status
+                    ((CartActivity) getContext()).updateAllCartItemsSelection(AddToCartManager.getInstance().isAllCartItemsSelected(), true);
                 }
             }
         });
@@ -107,6 +106,8 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
                 updateDBCartItemView(cartItem);
                 // Update sum price
                 updateProductSumPrice(cartItem);
+                // Update all calculation
+                ((CartActivity) getContext()).updateSummery();
             }
 
             @Override
@@ -117,6 +118,8 @@ public class CartViewHolder extends BaseViewHolder<CartItem> {
                 updateDBCartItemView(cartItem);
                 // Update sum price
                 updateProductSumPrice(cartItem);
+                // Update all calculation
+                ((CartActivity) getContext()).updateSummery();
             }
         });
     }
