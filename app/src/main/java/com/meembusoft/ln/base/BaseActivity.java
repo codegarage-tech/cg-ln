@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.base.permission.PermissionActivity;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.Logger;
 import com.meembusoft.localemanager.LocaleManager;
@@ -25,7 +25,7 @@ import java.util.List;
  * @author Md. Rashadul Alam
  * Email: rashed.droid@gmail.com
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends PermissionActivity {
 
     private BaseActivity mActivity;
     public Bundle mSavedInstanceState;
@@ -97,7 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 

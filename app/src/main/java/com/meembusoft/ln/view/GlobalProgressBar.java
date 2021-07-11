@@ -69,7 +69,7 @@ public class GlobalProgressBar {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         } else {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
         }
         windowLayoutParams.type = LAYOUT_FLAG;
         windowLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;

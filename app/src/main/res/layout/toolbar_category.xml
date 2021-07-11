@@ -30,6 +30,7 @@
         android:layout_width="@dimen/dp_50"
         android:layout_height="@dimen/dp_50"
         android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
         android:layout_toLeftOf="@+id/ll_close">
 
         <ImageView

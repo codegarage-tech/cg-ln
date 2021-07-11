@@ -52,6 +52,11 @@
     <string name="txt_delivery_charge_may_vary_depending_on_the_product_weight">ডেলিভারি চার্জ(পণ্যের ওজনের উপর নির্ভর করে পরিবর্তিত হতে পারে)</string>
     <string name="txt_amount_with_taka">%d ৳</string>
 
+    <!-- Dialog -->
+    <string name="txt_ok">ঠিক আছে</string>
+    <string name="txt_cancel">বাতিল করুন</string>
+    <string name="txt_runtime_permission_dialog">প্রয়োজনীয় অনুমতি গ্রহণ না করে আপনি অ্যাপটি সঠিকভাবে ব্যবহার করতে পারবেন না। আপনি আবার অনুমতি গ্রহণ করতে চান?</string>
+
     <!-- Product Detail -->
     <string name="txt_product_detail">পণ্য বিবরণী</string>
 </resources>

@@ -166,6 +166,11 @@ public class CartActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onAllPermissionsAccepted() {
+
+    }
+
     public void updateAllCartItemsSelection(boolean isSelected, boolean isAbortAllSelection) {
         setAbortAllSelection(isAbortAllSelection);
         accbSelectAll.setChecked(isSelected);

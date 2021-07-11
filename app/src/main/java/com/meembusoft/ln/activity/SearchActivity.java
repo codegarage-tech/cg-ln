@@ -123,6 +123,11 @@ public class SearchActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onAllPermissionsAccepted() {
+
+    }
+
     /*****************************
      * screen item
      * */

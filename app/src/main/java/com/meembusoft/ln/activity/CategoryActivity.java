@@ -158,6 +158,11 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     }
 
     @Override
+    public void onAllPermissionsAccepted() {
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         //Reset counter view into toolbar
@@ -260,7 +265,8 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
         viewPagerCategory.post(new Runnable() {
             @Override
             public void run() {
-//                viewPagerCategory.setCurrentItem(mSelectedCategoryPosition);
+                // Open selected category from home screen
+                viewPagerCategory.setCurrentItem(mSelectedCategoryPosition);
 
                 List<Fragment> fragments = getSupportFragmentManager().getFragments();
                 if (fragments != null && fragments.size() > 0) {

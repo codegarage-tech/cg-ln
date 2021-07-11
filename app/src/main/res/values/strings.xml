@@ -52,6 +52,11 @@
     <string name="txt_delivery_charge_may_vary_depending_on_the_product_weight">Delivery charge(may vary depending on the product weight)</string>
     <string name="txt_amount_with_taka">%d Tk</string>
 
+    <!-- Dialog -->
+    <string name="txt_ok">Ok</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_runtime_permission_dialog">Without accepting the required permissions you cannot use the app properly. Do you want to accept the permission again?</string>
+
     <!-- Product Detail -->
     <string name="txt_product_detail">Product Detail</string>
 </resources>
