@@ -16,7 +16,14 @@ import com.claudiodegio.msv.SuggestionMaterialSearchView;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.SuggestionListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.model.colormatchtab.Suggestion;
 import com.meembusoft.ln.util.DataUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends BaseActivity {
 
@@ -30,6 +37,8 @@ public class SearchActivity extends BaseActivity {
 
     // Suggestion
     private SuggestionListAdapter mSuggestionListAdapter;
+    private List<Suggestion> mSuggestions = new ArrayList<>();
+    private List<String> mSuggestionKeys = new ArrayList<>();
 
     @Override
     public int initToolbarLayout() {
@@ -62,39 +71,11 @@ public class SearchActivity extends BaseActivity {
         // Toolbar
         tvTitle.setText(R.string.txt_search);
 
+        prepareData();
+
         initSuggestion();
 
-        SuggestionMaterialSearchView cast = (SuggestionMaterialSearchView) mMaterialSearchView;
-        String[] arrays = getResources().getStringArray(R.array.query_suggestions);
-        cast.setSuggestion(arrays, true);
-        rlSearchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMaterialSearchView.showSearch(true);
-            }
-        });
-
-        mMaterialSearchView.setOnSearchViewListener(new OnSearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-                rlSearchView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-                rlSearchView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public void onQueryTextChange(String newText) {
-
-            }
-        });
+        initSearchView();
     }
 
     @Override
@@ -127,10 +108,29 @@ public class SearchActivity extends BaseActivity {
 
     }
 
-    /*****************************
-     * screen item
-     * */
-    protected void initSuggestion() {
+    /******************
+     * Search methods *
+     ******************/
+    private void prepareData() {
+        // Prepare data
+        mSuggestions.clear();
+        mSuggestionKeys.clear();
+        mSuggestions.addAll(DataUtil.getAllSuggestions(getActivity()));
+        for (Suggestion data : mSuggestions) {
+            if (data instanceof Product) {
+                Product product = (Product) data;
+                mSuggestionKeys.add(product.getName());
+            } else if (data instanceof Category) {
+                Category category = (Category) data;
+                mSuggestionKeys.add(category.getName());
+            } else if (data instanceof Subcategory) {
+                Subcategory subcategory = (Subcategory) data;
+                mSuggestionKeys.add(subcategory.getName());
+            }
+        }
+    }
+
+    private void initSuggestion() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         mRvItem.setLayoutManager(gridLayoutManager);
         mRvItem.setHasFixedSize(true);
@@ -139,6 +139,39 @@ public class SearchActivity extends BaseActivity {
         mRvItem.setAdapter(mSuggestionListAdapter);
         // Load data
         mSuggestionListAdapter.removeAll();
-        mSuggestionListAdapter.addAll(DataUtil.getAllSuggestions(getActivity()));
+        mSuggestionListAdapter.addAll(mSuggestions);
+    }
+
+    private void initSearchView() {
+        SuggestionMaterialSearchView cast = (SuggestionMaterialSearchView) mMaterialSearchView;
+        cast.setSuggestion(mSuggestionKeys, true);
+        rlSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMaterialSearchView.showSearch(true);
+            }
+        });
+
+        mMaterialSearchView.setOnSearchViewListener(new OnSearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                rlSearchView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                rlSearchView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public void onQueryTextChange(String newText) {
+
+            }
+        });
     }
 }
