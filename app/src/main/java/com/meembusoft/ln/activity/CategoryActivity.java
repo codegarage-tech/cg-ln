@@ -2,6 +2,8 @@ package com.meembusoft.ln.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,8 @@ import androidx.collection.ArrayMap;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alexvasilkov.foldablelayout.UnfoldableView;
+import com.alexvasilkov.foldablelayout.shading.GlanceFoldShading;
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.athbk.ultimatetablayout.UltimateTabLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,6 +58,11 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     private FloatingActionButton fabFilter;
     private ProductFilterFragment productFilterFragment;
 
+    // Foldablelayout
+    private View listTouchInterceptor;
+    private LinearLayout detailsLayout;
+    private UnfoldableView unfoldableView;
+
     @Override
     public int initToolbarLayout() {
         return R.layout.toolbar_category;
@@ -91,6 +100,8 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_product);
+
+        initFoldableLayout();
 
         initCategories();
     }
@@ -363,5 +374,94 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     public TextView getCartCounter() {
         return tvCart;
+    }
+
+    /******************
+     * FoldableLayout *
+     ******************/
+//    private void setBackButtonAction(final UnfoldableView unfoldableView) {
+//        ivContentBack.setOnClickListener(new OnSingleClickListener() {
+//            @Override
+//            public void onSingleClick(View view) {
+//                if (unfoldableView.isUnfolded() || unfoldableView.isUnfolding()) {
+//                    unfoldableView.foldBack();
+//                }
+//            }
+//        });
+//    }
+
+    private void initFoldableLayout() {
+
+        listTouchInterceptor = (View) findViewById(R.id.touch_interceptor_view);
+        listTouchInterceptor.setClickable(false);
+
+        detailsLayout = (LinearLayout) findViewById(R.id.details_layout);
+        detailsLayout.setVisibility(View.INVISIBLE);
+
+        unfoldableView = (UnfoldableView) findViewById(R.id.unfoldable_view);
+
+        Bitmap glance = BitmapFactory.decodeResource(getResources(), R.drawable.unfold_glance);
+        unfoldableView.setFoldShading(new GlanceFoldShading(glance));
+
+        unfoldableView.setOnFoldingListener(new UnfoldableView.SimpleFoldingListener() {
+
+            @Override
+            public void onUnfolding(UnfoldableView unfoldableView) {
+                listTouchInterceptor.setClickable(true);
+                detailsLayout.setVisibility(View.VISIBLE);
+
+//                // change layout view while unfolding
+//                mFilter.setVisibility(View.INVISIBLE);
+//                ivListToGrid.setVisibility(View.INVISIBLE);
+//                tvTitle.setText(getString(R.string.title_activity_file_detail));
+//                ivContentHamburger.setVisibility(View.GONE);
+//                ivContentBack.setVisibility(View.VISIBLE);
+//
+//                // after folding view it always lost action when it is unfolded again
+//                setBackButtonAction(unfoldableView);
+            }
+
+            @Override
+            public void onUnfolded(UnfoldableView unfoldableView) {
+                listTouchInterceptor.setClickable(false);
+            }
+
+            @Override
+            public void onFoldingBack(UnfoldableView unfoldableView) {
+                listTouchInterceptor.setClickable(true);
+            }
+
+            @Override
+            public void onFoldedBack(UnfoldableView unfoldableView) {
+                listTouchInterceptor.setClickable(false);
+                detailsLayout.setVisibility(View.INVISIBLE);
+
+//                // change layout view while unfolding
+//                mFilter.setVisibility(View.VISIBLE);
+//                ivListToGrid.setVisibility(View.VISIBLE);
+//                tvTitle.setText(getString(R.string.title_activity_home));
+//                ivContentBack.setVisibility(View.GONE);
+//                ivContentHamburger.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void openDetails(View detailLayout, View rowItemView, Product deletedFile) {
+
+//        LinearLayout llImageBackground = (LinearLayout) detailsLayout.findViewById(R.id.ll_image_bg);
+//        TextView tvDetailFileName = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_name);
+//        TextView tvDetailFileLocation = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_location);
+//
+//        if (deletedFile.getTags().size() > 0) {
+//            Tag firstTag = deletedFile.getTags().get(0);
+//            GradientDrawable drawable = new GradientDrawable();
+//            drawable.setColor(firstTag.getColor());
+//            llImageBackground.setBackgroundDrawable(drawable);
+//        }
+//
+//        tvDetailFileName.setText(deletedFile.getOriginFileName());
+//        tvDetailFileLocation.setText(deletedFile.getOriginFilePath());
+
+        unfoldableView.unfold(rowItemView, detailsLayout);
     }
 }

@@ -2,6 +2,7 @@ package com.meembusoft.ln.viewholder;
 
 import android.animation.Animator;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,12 +13,14 @@ import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
+import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.RandomManager;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.nex3z.flowlayout.FlowLayout;
 import com.nex3z.flowlayout.FlowLayoutManager;
@@ -69,6 +72,13 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         initUnit(data);
 
         initShoppingView(data);
+
+        ((ProductListAdapter)getOwnerAdapter()).setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ((CategoryActivity)getContext()).openDetails(null,view.findViewById(R.id.item_view), data);
+            }
+        });
     }
 
     private void initShoppingView(Product data) {
