@@ -145,6 +145,10 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     @Override
     public void initBackPress() {
+        if (unfoldableView.isUnfolded() || unfoldableView.isUnfolding()) {
+            unfoldableView.foldBack();
+            return;
+        }
         finish();
     }
 
@@ -389,7 +393,6 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 //            }
 //        });
 //    }
-
     private void initFoldableLayout() {
 
         listTouchInterceptor = (View) findViewById(R.id.touch_interceptor_view);
@@ -419,11 +422,16 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 //
 //                // after folding view it always lost action when it is unfolded again
 //                setBackButtonAction(unfoldableView);
+
             }
 
             @Override
             public void onUnfolded(UnfoldableView unfoldableView) {
                 listTouchInterceptor.setClickable(false);
+
+                fabFilter.setVisibility(View.INVISIBLE);
+                rlCart.setVisibility(View.INVISIBLE);
+                tvTitle.setText(getString(R.string.txt_product_detail));
             }
 
             @Override
@@ -442,6 +450,10 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 //                tvTitle.setText(getString(R.string.title_activity_home));
 //                ivContentBack.setVisibility(View.GONE);
 //                ivContentHamburger.setVisibility(View.VISIBLE);
+
+                fabFilter.setVisibility(View.VISIBLE);
+                rlCart.setVisibility(View.VISIBLE);
+                tvTitle.setText(getString(R.string.txt_product));
             }
         });
     }
