@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Product {
+public class Product implements Suggestion, Comparable<Product> {
 
     private int id;
     private String name;
@@ -145,6 +145,11 @@ public class Product {
 
     public void setSelectedUnit(Unit selectedUnit) {
         this.selectedUnit = selectedUnit;
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return getName().compareToIgnoreCase(o.getName());
     }
 
     @Override

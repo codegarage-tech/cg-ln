@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Parcel
-public class Category {
+public class Category implements Suggestion, Comparable<Category> {
 
     private int id;
     private String name;
@@ -64,6 +64,11 @@ public class Category {
 
     public void setSubcategory(List<Subcategory> subcategory) {
         this.subcategory = subcategory;
+    }
+
+    @Override
+    public int compareTo(Category o) {
+        return getName().compareToIgnoreCase(o.getName());
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.meembusoft.ln.model.colormatchtab;
 import org.parceler.Parcel;
 
 @Parcel
-public class Subcategory {
+public class Subcategory implements Suggestion, Comparable<Subcategory> {
 
     private int id;
     private String name;
@@ -50,6 +50,11 @@ public class Subcategory {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    @Override
+    public int compareTo(Subcategory o) {
+        return getName().compareToIgnoreCase(o.getName());
     }
 
     @Override

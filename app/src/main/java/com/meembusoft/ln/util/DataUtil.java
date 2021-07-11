@@ -12,6 +12,7 @@ import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.colormatchtab.Category;
 import com.meembusoft.ln.model.colormatchtab.Product;
 import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.model.colormatchtab.Suggestion;
 import com.meembusoft.ln.model.colormatchtab.Unit;
 import com.meembusoft.ln.model.colormatchtab.response.ResponseCategory;
 import com.meembusoft.ln.model.colormatchtab.response.ResponseProduct;
@@ -46,6 +47,28 @@ public class DataUtil {
             categories.addAll(offlineCategory.getData());
         }
         return categories;
+    }
+
+    public static List<Suggestion> getAllSuggestions(Context context) {
+        List<Suggestion> suggestions = new ArrayList<>();
+
+        // Category
+        List<Category> categories = new ArrayList<>();
+        categories.addAll(getAllCategoriesWithSubcategories(context));
+
+        // Subcategory
+        List<Subcategory> subcategories = new ArrayList<>();
+        for (Category category : categories) {
+            subcategories.addAll(category.getSubcategory());
+        }
+
+        // Suggestion
+        suggestions.addAll(subcategories);
+        suggestions.addAll(categories);
+
+        Collections.sort(subcategories);
+
+        return suggestions;
     }
 
     public static List<Product> getAllProducts(Context context, Subcategory subcategory) {
@@ -198,12 +221,12 @@ public class DataUtil {
             Log.d(TAG, "<<<onOrderNowClick>>>: " + "data: " + data.toString());
             counterView.setText(data.size() + "");
             counterView.setVisibility(View.VISIBLE);
-            if(onCartResetListener != null){
+            if (onCartResetListener != null) {
                 onCartResetListener.onOrderCompleted(false);
             }
         } else {
             counterView.setVisibility(View.GONE);
-            if(onCartResetListener != null){
+            if (onCartResetListener != null) {
                 onCartResetListener.onOrderCompleted(true);
             }
         }
