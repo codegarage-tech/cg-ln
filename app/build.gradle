@@ -240,6 +240,9 @@ dependencies {
     implementation "org.parceler:parceler-api:$parcelerVersion"
     annotationProcessor "org.parceler:parceler:$parcelerVersion"
 
+    // Barcode
+    implementation "com.journeyapps:zxing-android-embedded:$zxingVersion"
+
     // Library projects
     implementation project(":library:localemanager")
     implementation project(":library:recolor")

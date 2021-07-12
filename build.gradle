@@ -76,6 +76,7 @@ allprojects {
     ext.realmPluginVersion = '6.0.0'
     ext.picassoVersion = '2.71828'
     ext.parcelerVersion = '1.1.12'
+    ext.zxingVersion = '3.6.0'
 }
 
 task clean(type: Delete) {

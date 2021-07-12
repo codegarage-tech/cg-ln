@@ -25,6 +25,8 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.zxing.BarcodeFormat;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.animationmanager.flytocart.CircleAnimationUtil;
@@ -180,5 +182,28 @@ public class AppUtil {
         } else {
             textView.setPaintFlags(textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
+    }
+
+    public static void applyMarqueeOnTextView(TextView textView) {
+        textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setSingleLine(true);
+        textView.setMarqueeRepeatLimit(-1);
+        textView.setSelected(true);
+    }
+
+    public static void generateQRCode(String text, ImageView imageView, int width, int height) {
+        try {
+            if (!TextUtils.isEmpty(text)) {
+                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                Bitmap bitmap = barcodeEncoder.encodeBitmap(text, BarcodeFormat.QR_CODE, width, height);
+                imageView.setImageBitmap(bitmap);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static String getPlayStoreUrl(Activity activity) {
+        return "https://play.google.com/store/apps/details?id=" + activity.getPackageName();
     }
 }

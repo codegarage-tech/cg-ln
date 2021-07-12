@@ -77,4 +77,6 @@
 
     <!-- Product Detail -->
     <string name="txt_product_detail">Product Detail</string>
+
+    <!-- Download App -->
 </resources>

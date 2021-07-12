@@ -1,6 +1,7 @@
 package com.meembusoft.ln.controller;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.DownloadAppActivity;
 import com.meembusoft.ln.enumeration.Language;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
@@ -189,8 +191,8 @@ public class SettingsController {
         rlDownloadApp.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intent = new Intent(getActivity(), DownloadAppActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(mActivity, DownloadAppActivity.class);
+                mActivity.startActivity(intent);
             }
         });
 
