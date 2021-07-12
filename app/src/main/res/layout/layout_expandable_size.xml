@@ -22,6 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:textColor="@color/paragraphTextColor"
                 android:text="Unit"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
@@ -30,13 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/chip_unselected"
+                android:background="@drawable/chip_selected"
                 android:gravity="center"
                 android:minWidth="@dimen/dp_50"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_3"
                 android:paddingRight="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_3"
+                android:textColor="@color/paragraphTextColor"
                 android:text="KG"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
@@ -47,7 +49,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 app:srcCompat="@drawable/ic_expansion_header_indicator_white"
-                app:tint="@color/colorShadeBlueDark" />
+                app:tint="@color/paragraphTextColor" />
 
         </RelativeLayout>
 

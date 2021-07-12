@@ -224,11 +224,11 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
             if (appliedFilter != null && appliedFilter.get(filterType.name()) != null && appliedFilter.get(filterType.name()).contains(keys.get(finalI))) {
                 tv.setTag("selected");
                 tv.setBackgroundResource(R.drawable.chip_selected);
-                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.subtitleTextColor));
+                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
             } else {
                 tv.setTag("unselected");
                 tv.setBackgroundResource(R.drawable.chip_unselected);
-                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
+                tv.setTextColor(ContextCompat.getColor(getContext(), R.color.brown));
             }
             textViews.add(tv);
 
@@ -297,7 +297,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     private void selectTextView(TextView textView) {
         textView.setTag("selected");
         textView.setBackgroundResource(R.drawable.chip_selected);
-        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.subtitleTextColor));
+        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
 
         updateTextView(textView);
     }
@@ -305,7 +305,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
     private void unSelectTextView(TextView textView) {
         textView.setTag("unselected");
         textView.setBackgroundResource(R.drawable.chip_unselected);
-        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
+        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.brown));
 
         updateTextView(textView);
     }

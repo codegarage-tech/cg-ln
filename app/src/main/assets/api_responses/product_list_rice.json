@@ -20,12 +20,12 @@
         {
           "name": "1 KG",
           "originalPrice": 100,
-          "offerPrice": 90
+          "offerPrice": 0
         },
         {
           "name": "SACK(50 KG)",
           "originalPrice": 2000,
-          "offerPrice": 1900
+          "offerPrice": 0
         }
       ]
     },
@@ -47,12 +47,12 @@
         {
           "name": "1 KG",
           "originalPrice": 100,
-          "offerPrice": 90
+          "offerPrice": 0
         },
         {
           "name": "SACK(50 KG)",
           "originalPrice": 2000,
-          "offerPrice": 1900
+          "offerPrice": 0
         }
       ]
     },

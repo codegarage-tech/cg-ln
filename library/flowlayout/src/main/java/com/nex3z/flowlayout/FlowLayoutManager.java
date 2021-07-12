@@ -126,7 +126,7 @@ public class FlowLayoutManager {
     private TextView selectFlowView(TextView textView) {
         textView.setTag(TEXT_TYPE.SELECTED.name());
         textView.setBackgroundResource(R.drawable.chip_selected);
-        textView.setTextColor(ContextCompat.getColor(context, R.color.brown));
+        textView.setTextColor(ContextCompat.getColor(context, R.color.blueDarkWhite));
         return textView;
     }
 

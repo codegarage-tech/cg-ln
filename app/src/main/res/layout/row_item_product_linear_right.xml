@@ -67,8 +67,7 @@
                                 android:id="@+id/iv_product_favorite"
                                 android:layout_width="@dimen/dp_25"
                                 android:layout_height="@dimen/dp_25"
-                                app:srcCompat="@drawable/vector_favourite_fill_primary"
-                                app:tint="@color/colorShadeBlueDark" />
+                                app:srcCompat="@drawable/vector_favourite_fill_primary" />
 
                         </LinearLayout>
 
@@ -95,7 +94,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Price"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                android:textColor="@color/hintsTextColor" />
+                                android:textColor="@color/paragraphTextColor" />
 
                         </LinearLayout>
 
@@ -112,7 +111,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="10,0050 TK"
                                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                                android:textColor="@color/hintsTextColor" />
+                                android:textColor="@color/paragraphTextColor" />
 
                             <TextView
                                 android:id="@+id/tv_product_offer_price"
@@ -121,7 +120,7 @@
                                 android:layout_marginLeft="@dimen/dp_10"
                                 android:text="50,0000 TK"
                                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                                android:textColor="@color/hintsTextColor"
+                                android:textColor="@color/paragraphTextColor"
                                 android:visibility="visible" />
 
                         </LinearLayout>
@@ -135,8 +134,8 @@
                         android:layout_marginBottom="@dimen/dp_10"
                         android:text="Notice: Friday, (10 AM ~ 12 PM)"
                         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-                        android:textColor="@color/hintsTextColor"
-                        android:visibility="gone" />
+                        android:textColor="@color/paragraphTextColor"
+                        android:visibility="visible" />
 
                     <me.wangyuwei.shoppoing.ShoppingView
                         android:id="@+id/sv_add_to_cart"
@@ -144,10 +143,10 @@
                         android:layout_height="@dimen/dp_20"
                         android:layout_gravity="center_horizontal"
                         android:minWidth="@dimen/dp_50"
-                        app:sv_bg_color="@color/colorShadeBlueDark"
+                        app:sv_bg_color="@color/subtitleTextColor"
                         app:sv_duration="600"
                         app:sv_min_count="0"
-                        app:sv_number_color="@color/brown"
+                        app:sv_number_color="@color/paragraphTextColor"
                         app:sv_text="Add to Cart" />
 
                 </LinearLayout>

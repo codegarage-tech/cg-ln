@@ -3,12 +3,12 @@ package com.meembusoft.ln.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -35,7 +35,7 @@ public class CartActivity extends BaseActivity {
     private MRecyclerView rvCart;
     private CartListAdapter mCartListAdapter;
     private TextView tvSubtotal, tvDeliveryCharge, tvGrandTotal, tvTotal;
-    private Button btnOrderNow;
+    private AppCompatButton btnOrderNow;
     private boolean isAbortAllSelection = false, isMultiSelection = false;
     private int subTotal = 0;
 

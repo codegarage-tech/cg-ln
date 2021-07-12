@@ -7,20 +7,20 @@
     <path
         android:pathData="M2,5L22,5"
         android:strokeWidth="3"
-        android:strokeColor="#000"
+        android:strokeColor="#F1FBFB"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
 
     <path
         android:pathData="M5,12L19,12"
         android:strokeWidth="3"
-        android:strokeColor="#000"
+        android:strokeColor="#F1FBFB"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M8,19L16,19"
         android:strokeWidth="3"
-        android:strokeColor="#000"
+        android:strokeColor="#F1FBFB"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
 </vector>

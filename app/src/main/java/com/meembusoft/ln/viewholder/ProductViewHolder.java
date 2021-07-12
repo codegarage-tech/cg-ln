@@ -65,7 +65,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     @Override
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
-        AppUtil.applyViewTint(ivProductFavorite, (data.isFavorite() ? R.color.colorBlueDark : R.color.colorBlue));
+        AppUtil.applyViewTint(ivProductFavorite, (data.isFavorite() ? R.color.colorPink : R.color.subtitleTextColor));
         if (data.getImages() != null && !data.getImages().isEmpty()) {
             Picasso.get().load(data.getImages().get(RandomManager.getRandom(0, data.getImages().size())).getUrl()).into(ivProductImage);
         }
@@ -73,10 +73,10 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
 
         initShoppingView(data);
 
-        ((ProductListAdapter)getOwnerAdapter()).setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+        ((ProductListAdapter) getOwnerAdapter()).setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ((CategoryActivity)getContext()).openDetails(null,view.findViewById(R.id.item_view), data);
+                ((CategoryActivity) getContext()).openDetails(null, view.findViewById(R.id.item_view), data);
             }
         });
     }
@@ -224,8 +224,17 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
             if (unit != null) {
                 tvProductSize.setText(unit.getName());
 
-                tvProductOriginalPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOriginalPrice()));
-                tvProductOfferPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOfferPrice()));
+                if (unit.getOfferPrice() > 0) {
+                    tvProductOriginalPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOriginalPrice()));
+                    AppUtil.applyStrike(tvProductOriginalPrice, true);
+                    tvProductOfferPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOfferPrice()));
+                    tvProductOfferPrice.setVisibility(View.VISIBLE);
+                } else {
+                    tvProductOriginalPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOriginalPrice()));
+                    AppUtil.applyStrike(tvProductOriginalPrice, false);
+                    tvProductOfferPrice.setText(getContext().getString(R.string.txt_amount_with_taka, unit.getOfferPrice()));
+                    tvProductOfferPrice.setVisibility(View.GONE);
+                }
 
                 // Show previous selected quantity
                 int quantity = product.getSelectedQuantity(unit.getName());

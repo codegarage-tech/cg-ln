@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimaryDark"
+            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:statusBarScrim="?attr/colorPrimaryDark"
+            app:statusBarScrim="?attr/colorPrimary"
             app:titleEnabled="false">
 
             <RelativeLayout
@@ -65,11 +65,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right|end"
         android:layout_margin="@dimen/dp_8"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/blueLight"
         app:elevation="@dimen/dp_10"
         app:fabCustomSize="@dimen/dp_50"
         app:srcCompat="@drawable/ic_filter"
-        app:tint="@color/blue_300" />
+        app:tint="@color/paragraphTextColor" />
 
     <FrameLayout
         android:layout_width="match_parent"

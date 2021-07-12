@@ -38,22 +38,25 @@
                         android:layout_width="@dimen/dp_22"
                         android:layout_height="@dimen/dp_22"
                         android:layout_gravity="center_vertical"
-                        app:srcCompat="@drawable/vector_trash" />
+                        app:srcCompat="@drawable/vector_trash"
+                        app:tint="@color/paragraphTextColor" />
 
                     <View
                         android:layout_width="@dimen/dp_1"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dp_30"
-                        android:layout_marginRight="@dimen/dp_30"
+                        android:layout_marginLeft="@dimen/dp_25"
+                        android:layout_marginRight="@dimen/dp_25"
                         android:background="@drawable/shape_line_horizontal_fading_edge"
-                        android:backgroundTint="@color/colorBlue" />
+                        android:backgroundTint="@color/paragraphTextColor" />
 
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/cb_select"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_minus_10"
+                        android:layout_marginRight="@dimen/dp_minus_10"
                         android:gravity="center"
-                        app:buttonTint="@color/colorBlue" />
+                        app:buttonTint="@color/paragraphTextColor" />
 
                 </LinearLayout>
 
@@ -63,7 +66,7 @@
                     android:layout_marginTop="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:background="@drawable/shape_line_vertical_fading_edge"
-                    android:backgroundTint="@color/colorBlue" />
+                    android:backgroundTint="@color/paragraphTextColor" />
 
                 <TextView
                     android:id="@+id/tv_product_name"
@@ -108,7 +111,7 @@
                         android:gravity="right"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/subtitleTextColor" />
+                        android:textColor="@color/paragraphTextColor" />
 
                 </RelativeLayout>
 
@@ -123,10 +126,10 @@
                         android:layout_height="@dimen/dp_20"
                         android:layout_centerVertical="true"
                         android:minWidth="@dimen/dp_50"
-                        app:sv_bg_color="@color/colorShadeBlueDark"
+                        app:sv_bg_color="@color/subtitleTextColor"
                         app:sv_duration="600"
                         app:sv_min_count="1"
-                        app:sv_number_color="@color/brown"
+                        app:sv_number_color="@color/paragraphTextColor"
                         app:sv_text="Add Item" />
 
                     <TextView
@@ -139,7 +142,7 @@
                         android:gravity="right"
                         android:text=""
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/subtitleTextColor" />
+                        android:textColor="@color/paragraphTextColor" />
 
                 </RelativeLayout>
 
@@ -152,9 +155,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_20"
-        android:layout_centerVertical="true"
         android:background="@drawable/drop_shadow_rounded_rectangle"
         android:orientation="vertical">
 

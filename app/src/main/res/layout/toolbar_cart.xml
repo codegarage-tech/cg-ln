@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:button="@drawable/selector_check_box_select_all"
-            app:buttonTint="@color/colorBlueDark" />
+            app:buttonTint="@color/titleTextColor" />
 
     </LinearLayout>
 

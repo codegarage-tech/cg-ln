@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -170,6 +171,14 @@ public class AppUtil {
             activity.startActivity(intentCart);
         } else {
             Toast.makeText(activity, activity.getString(R.string.txt_there_is_no_item_into_cart), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void applyStrike(TextView textView, boolean isStrike) {
+        if (isStrike) {
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            textView.setPaintFlags(textView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
     }
 }

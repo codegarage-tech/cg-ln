@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#2aede4</color>
-    <color name="colorPrimaryDark">#0dc4c2</color>
-    <color name="colorAccent">#00C1E1</color>
+    <color name="colorPrimary">@color/blueDarkLight</color>
+    <color name="colorPrimaryDark">@color/blueDark</color>
+    <color name="colorAccent">@color/blueDarkLightWhite</color>
+    <color name="screenBgColor">@color/blueDark</color>
+    <color name="titleTextColor">@color/blueDarkWhite</color>
+    <color name="subtitleTextColor">@color/blueDarkLightWhite</color>
+    <color name="paragraphTextColor">@color/blueDarkWhite</color>
+    <color name="hintsTextColor">@color/blueDarkLightDeeper</color>
+    <color name="successTextColor">#43A047</color>
+    <color name="failureTextColor">#F44336</color>
+    <color name="imageTintColor">@color/blueDarkLightDeeper</color>
+    <color name="statusBarColor">@color/blueDark</color>
+    <color name="navigationBarColor">@color/blueDark</color>
+
+    <color name="blueDark">#112C80</color>
+    <color name="blueDarkLight">#005B82</color>
+    <color name="blueDarkLightDeeper">#DFEDF4</color>
+    <color name="blueDarkLightWhite">#9AC6DC</color>
+    <color name="blueDarkWhite">#F1FBFB</color>
+    <color name="blueDarkWhiteLight">#E0FBFB</color>
+    <color name="blueLight">#2B92FF</color>
+    <color name="colorPink">#F71463</color>
 
     <color name="bg">#f5f5f5</color>
     <color name="bgnew">#464756</color>
