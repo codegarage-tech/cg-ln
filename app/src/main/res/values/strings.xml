@@ -4,8 +4,26 @@
 
     <!-- Settings -->
     <string name="txt_settings">Settings</string>
+    <string name="txt_account">Account</string>
     <string name="txt_more">More</string>
+    <string name="txt_about_profile">About Profile</string>
+    <string name="txt_logn_or_create_account">Login/Create Account</string>
+    <string name="txt_logn_via_qr_code">Login via QR Code</string>
+    <string name="txt_orders">Orders</string>
+    <string name="txt_favorite_product">Favorite Product</string>
+    <string name="txt_logout">Logout</string>
+    <string name="txt_notification">Notification</string>
+    <string name="txt_stop_notification">Stop Notification</string>
+    <string name="txt_app_notifications">App Notifications</string>
     <string name="txt_app_language">App Language</string>
+    <string name="txt_about_app">About App</string>
+    <string name="txt_download_app">Download App</string>
+    <string name="txt_support">Support</string>
+    <string name="txt_scan_qr_code_to_download_the_app">Scan QR code to download the app!</string>
+    <string name="txt_settings_or">or</string>
+    <string name="txt_share_with">Share with</string>
+
+    <!-- Settings>> Language -->
     <string name="txt_language_english">App Language(English)</string>
     <string name="txt_language_bengali">App Language(Bengali)</string>
 
