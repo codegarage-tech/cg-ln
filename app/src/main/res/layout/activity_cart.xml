@@ -168,7 +168,6 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_toLeftOf="@+id/btn_order_now"
-            android:layout_toRightOf="@+id/cb_select_all"
             android:gravity="left"
             android:padding="@dimen/dp_5"
             android:text=""

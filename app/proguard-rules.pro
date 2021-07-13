@@ -28,15 +28,13 @@
 
 -keepattributes *Annotation*,Exceptions,Signature,SourceFile,LineNumberTable,InnerClass
 
-# Activity, Application, Service, BroadcastReceiver等
-# Androidシステム上難読化できないクラスは除外
+# Activity, Application, Service, BroadcastReceiver etc.
+# Excludes classes that cannot be obfuscated on Android systems
 
 -keep public class * extends android.app.*
 -keep public class * extends android.content.*
 -keep public class * extends android.os.Binder
 -keep public class * extends android.widget.*
--keep public class * extends android.support.v4.app.Fragment
--keep public class * extends android.support.v7.app.AppCompatActivity
 -keep public class * extends androidx.fragment.app.Fragment
 -keep public class * extends androidx.appcompat.app.AppCompatActivity
 
@@ -89,7 +87,7 @@
  public static *** i(...);
  public static *** v(...);
 }
--keep class ""Logger {*;}
+-keep class com.meembusoft.ln.util.Logger {*;}
 
 ########## Android Test ##########
 # Proguard rules that are applied to your test apk/code.
@@ -110,16 +108,12 @@
 -dontwarn org.mockito.**
 
 ########## Android Support Library ##########
--dontwarn android.support.v4.**
--keep class android.support.v4.** { *; }
--dontwarn android.support.v7.**
--keep class android.support.v7.** { *; }
--keep interface android.support.v7.** { *; }
--dontwarn android.support.design.**
--keep class android.support.design.** { *; }
--keep interface android.support.design.** { *; }
--keep public class android.support.design.R$* { *; }
-
+-keep class com.google.android.material.** { *; }
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-keep class androidx.** { *; }
+-keep interface androidx.** { *; }
+-dontwarn androidx.**
 
 ########## Google Play Service ##########
 -keep class com.google.android.gms.** { *; }
@@ -214,14 +208,10 @@
 -keepclassmembers enum * { *; }
 
 ### TODO declare the classes which use GSON
-#-keep class tech.codegarage.tidetwist.model.FcmApp {*;}
-#-keep class tech.codegarage.tidetwist.model.FcmLink {*;}
-#-keep class tech.codegarage.tidetwist.model.FcmPing {*;}
-#-keep class tech.codegarage.tidetwist.model.FcmText {*;}
--keep class com.meembusoft.iot.model.** {*;}
--keep class com.meembusoft.iot.retrofit.** {*;}
--keep class com.reversecoder.library.event.** {*;}
--keep class com.reversecoder.library.event.** {*;}
+-keep class com.meembusoft.ln.model.** {*;}
+#-keep class com.meembusoft.retrofitmanager.APIResponse
+#-keep class com.meembusoft.addtocart.model.** {*;}
+#-keep class com.reversecoder.attributionpresenter.model.** {*;}
 #-keep class me.jerryhanks.countrypicker.Country {*;}
 #-keep class me.jerryhanks.countrypicker.Util {*;}
 

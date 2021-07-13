@@ -133,7 +133,6 @@ public class SearchActivity extends BaseActivity {
     private void initSuggestion() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         mRvItem.setLayoutManager(gridLayoutManager);
-        mRvItem.setHasFixedSize(true);
         // Initialize adapter
         mSuggestionListAdapter = new SuggestionListAdapter(getActivity());
         mRvItem.setAdapter(mSuggestionListAdapter);
