@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorShadeBlue"
+    android:background="@color/screenBgColor"
     android:orientation="vertical">
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text=""
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/titleTextColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text=""
-        android:textColor="@color/color_grey_800"
+        android:textColor="@color/subtitleTextColor"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text=""
-        android:textColor="@color/color_grey_500"
+        android:textColor="@color/paragraphTextColor"
         android:textSize="18sp" />
 
 </LinearLayout>

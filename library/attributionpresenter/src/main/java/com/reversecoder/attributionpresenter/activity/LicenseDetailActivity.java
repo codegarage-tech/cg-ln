@@ -10,14 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.reversecoder.attributionpresenter.R;
 import com.reversecoder.attributionpresenter.model.Attribution;
 import com.reversecoder.attributionpresenter.model.LicenseInfo;
-import com.reversecoder.attributionpresenter.view.AnimatedImageView;
-import com.reversecoder.attributionpresenter.view.AnimatedTextView;
-import com.reversecoder.attributionpresenter.view.ArcView;
 
 import static com.reversecoder.attributionpresenter.util.Constants.INTENT_KEY_ATTRIBUTION;
 
@@ -25,13 +21,11 @@ public class LicenseDetailActivity extends AppCompatActivity {
 
     Attribution mAttribution;
 
-    //toolbar
-    ArcView arcMenuView;
-    AnimatedImageView arcMenuImage;
-    AnimatedTextView toolbarTitle;
-    Toolbar toolbar;
+    // Toolbar
+    private TextView tvTitle;
+    private LinearLayout llClose;
 
-    //License info
+    // License info
 //    TextView tvLicenseName, tvLicenseCopyright, tvLicenseDetail;
     LinearLayout llLicenseDetail;
 
@@ -59,16 +53,14 @@ public class LicenseDetailActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-        toolbarTitle = (AnimatedTextView) findViewById(R.id.toolbarTitle);
-        arcMenuImage = (AnimatedImageView) findViewById(R.id.arcImage);
-        arcMenuView = (ArcView) findViewById(R.id.arcView);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Toolbar
+        tvTitle = findViewById(R.id.tv_title);
+        llClose = findViewById(R.id.ll_close);
 
         if (mAttribution != null) {
-            toolbarTitle.setAnimatedText(mAttribution.getAttributionName(), 0L);
+            tvTitle.setText(mAttribution.getAttributionName());
         }
-        arcMenuImage.setAnimatedImage(R.drawable.arrow_left, 0L);
-        arcMenuView.setOnClickListener(new View.OnClickListener() {
+        llClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
