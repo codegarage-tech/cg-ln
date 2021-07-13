@@ -78,5 +78,18 @@
     <!-- Product Detail -->
     <string name="txt_product_detail">Product Detail</string>
 
-    <!-- Download App -->
+    <!--Log In Screen-->
+    <string name="title_activity_log_in">Log In</string>
+    <string name="title_activity_login_mobile_no">Mobile No</string>
+    <string name="title_activity_back">Back</string>
+    <string name="title_activity_connect">or connect with</string>
+    <string name="title_activity_sign_up">Don\'t have account? Sign up now</string>
+    <string name="title_facebook">Facebook</string>
+    <string name="title_gmail">Gmail</string>
+    <string name="title_forgot_password">Forgot password? Reset now</string>
+
+    <!--Sign Up Screen-->
+    <string name="title_activity_signup_username">Username</string>
+    <string name="title_activity_signup_email">Email</string>
+    <string name="title_activity_signup_acct">Already have account? Sign in now</string>
 </resources>

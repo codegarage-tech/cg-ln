@@ -214,8 +214,8 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginRight="@dimen/dp_10"
-                    app:tint="@color/subtitleTextColor"
-                    app:srcCompat="@drawable/vector_notification_empty" />
+                    app:srcCompat="@drawable/vector_notification_empty"
+                    app:tint="@color/subtitleTextColor" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -286,7 +286,8 @@
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_15"
-                    app:srcCompat="@drawable/vector_arrow_right" />
+                    app:srcCompat="@drawable/vector_arrow_right"
+                    app:tint="@color/subtitleTextColor" />
 
             </RelativeLayout>
 
@@ -338,7 +339,7 @@
                     android:layout_marginLeft="@dimen/dp_25"
                     android:text="@string/txt_app_language"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/subtitleTextColor"/>
+                    android:textColor="@color/subtitleTextColor" />
 
                 <ImageView
                     android:layout_width="25dp"
@@ -390,7 +391,7 @@
                     android:layout_marginLeft="@dimen/dp_25"
                     android:text="@string/txt_download_app"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/subtitleTextColor"/>
+                    android:textColor="@color/subtitleTextColor" />
 
                 <ImageView
                     android:layout_width="25dp"

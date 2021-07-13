@@ -48,6 +48,33 @@
             android:name="com.meembusoft.ln.activity.DownloadAppActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.meembusoft.ln.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.SignUpActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.SupportActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.AboutProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.OrdersActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.FavoriteProductActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.AppNotificationsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

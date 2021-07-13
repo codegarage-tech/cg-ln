@@ -11,8 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.AboutProfileActivity;
+import com.meembusoft.ln.activity.AppNotificationsActivity;
 import com.meembusoft.ln.activity.DownloadAppActivity;
+import com.meembusoft.ln.activity.FavoriteProductActivity;
+import com.meembusoft.ln.activity.LoginActivity;
+import com.meembusoft.ln.activity.OrdersActivity;
+import com.meembusoft.ln.activity.SupportActivity;
 import com.meembusoft.ln.enumeration.Language;
+import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.meembusoft.localemanager.LocaleManager;
@@ -120,39 +127,39 @@ public class SettingsController {
         rlLoginOrCreateAccount.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intentLogin = new Intent(getActivity(), LoginActivity.class);
-//                getActivity().startActivityForResult(intentLogin, INTENT_KEY_REQUEST_CODE_LOGIN);
+                Intent intentLogin = new Intent(mActivity, LoginActivity.class);
+                mActivity.startActivityForResult(intentLogin, Constants.INTENT_KEY_REQUEST_CODE_LOGIN);
             }
         });
 
         rlAboutProfile.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intentAboutProfile = new Intent(getActivity(), AboutProfileActivity.class);
-//                getActivity().startActivity(intentAboutProfile);
+                Intent intentAboutProfile = new Intent(mActivity, AboutProfileActivity.class);
+                mActivity.startActivity(intentAboutProfile);
             }
         });
 
         rlOrders.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intentOrders = new Intent(getActivity(), OrdersActivity.class);
-//                getActivity().startActivity(intentOrders);
+                Intent intentOrders = new Intent(mActivity, OrdersActivity.class);
+                mActivity.startActivity(intentOrders);
             }
         });
 
         rlFavoriteProduct.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intentFavorite = new Intent(getActivity(), FavoriteProductActivity.class);
-//                getActivity().startActivity(intentFavorite);
+                Intent intentFavorite = new Intent(mActivity, FavoriteProductActivity.class);
+                mActivity.startActivity(intentFavorite);
             }
         });
 
         rlLogout.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                ((HomeActivity) getActivity()).doLogout(NavigationId.SETTINGS);
+//                ((HomeActivity) mActivity).doLogout(NavigationId.SETTINGS);
 //                refreshAccountView();
             }
         });
@@ -169,19 +176,19 @@ public class SettingsController {
         rlAppNotifications.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intentAppNotifications = new Intent(getActivity(), AppNotificationsActivity.class);
-//                getActivity().startActivity(intentAppNotifications);
+                Intent intentAppNotifications = new Intent(mActivity, AppNotificationsActivity.class);
+                mActivity.startActivity(intentAppNotifications);
             }
         });
 
         rlAboutApp.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                AboutActivity.launch(getActivity());
+//                AboutActivity.launch(mActivity);
 //                AboutActivity.setLicenseListener(new LicenseClickListener() {
 //                    @Override
 //                    public void onLicenseClick() {
-//                        Intent intentLicense = new Intent(getActivity(), LicenseActivity.class);
+//                        Intent intentLicense = new Intent(mActivity, LicenseActivity.class);
 //                        startActivity(intentLicense);
 //                    }
 //                });
@@ -199,8 +206,8 @@ public class SettingsController {
         rlSupport.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                Intent intentOnlineSupport = new Intent(getActivity(), OnlineSupportActivity.class);
-//                startActivity(intentOnlineSupport);
+                Intent intentSupport = new Intent(mActivity, SupportActivity.class);
+                mActivity.startActivity(intentSupport);
             }
         });
     }
@@ -250,8 +257,8 @@ public class SettingsController {
                 .setTextGravity(Gravity.CENTER)
                 .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
                 .setSelectedTextColorResource(R.color.titleTextColor)
-                .setMenuColorResource(R.color.colorPrimary)
-                .setSelectedMenuColorResource(R.color.yellow90)
+                .setMenuColorResource(R.color.colorPrimaryDark)
+                .setSelectedMenuColorResource(R.color.colorPrimary)
                 .setOnMenuItemClickListener(onMenuItemClickListener)
                 .build();
         mPowerMenu.showAtCenter(parentView);

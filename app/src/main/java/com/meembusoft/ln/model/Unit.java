@@ -1,7 +1,5 @@
 package com.meembusoft.ln.model;
 
-import java.util.List;
-
 public class Unit {
 
     private String name;
