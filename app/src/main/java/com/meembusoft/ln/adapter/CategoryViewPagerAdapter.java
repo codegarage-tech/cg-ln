@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.athbk.ultimatetablayout.IFTabAdapter;
 import com.meembusoft.ln.fragment.CategoryFragment;
-import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,17 +1,17 @@
-package com.meembusoft.ln.model.colormatchtab.response;
+package com.meembusoft.ln.model.response;
 
-import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseCategory {
+public class ResponseProduct {
 
     private int status = 0;
     private String message = "";
-    private List<Category> data = new ArrayList<>();
+    private List<Product> data = new ArrayList<>();
 
-    public ResponseCategory() {
+    public ResponseProduct() {
     }
 
     public int getStatus() {
@@ -30,18 +30,18 @@ public class ResponseCategory {
         this.message = message;
     }
 
-    public List<Category> getData() {
+    public List<Product> getData() {
         return data;
     }
 
-    public void setData(List<Category> data) {
+    public void setData(List<Product> data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "status='" + status + '\'' +
+        return "ResponseProduct{" +
+                "status=" + status +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';

@@ -1,4 +1,4 @@
-package com.meembusoft.ln.model.colormatchtab;
+package com.meembusoft.ln.model;
 
 /**
  * @author Md. Rashadul Alam

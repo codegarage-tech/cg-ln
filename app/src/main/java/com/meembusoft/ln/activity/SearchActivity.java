@@ -16,10 +16,10 @@ import com.claudiodegio.msv.SuggestionMaterialSearchView;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.SuggestionListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
-import com.meembusoft.ln.model.colormatchtab.Category;
-import com.meembusoft.ln.model.colormatchtab.Product;
-import com.meembusoft.ln.model.colormatchtab.Subcategory;
-import com.meembusoft.ln.model.colormatchtab.Suggestion;
+import com.meembusoft.ln.model.Category;
+import com.meembusoft.ln.model.Product;
+import com.meembusoft.ln.model.Subcategory;
+import com.meembusoft.ln.model.Suggestion;
 import com.meembusoft.ln.util.DataUtil;
 
 import java.util.ArrayList;

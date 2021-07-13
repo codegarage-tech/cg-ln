@@ -3,7 +3,7 @@ package com.meembusoft.ln.util;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.meembusoft.ln.model.colormatchtab.User;
+import com.meembusoft.ln.model.User;
 import com.meembusoft.retrofitmanager.APIResponse;
 
 /**

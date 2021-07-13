@@ -12,8 +12,8 @@ import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.enumeration.FilterType;
 import com.meembusoft.ln.interfaces.OnProductFilter;
-import com.meembusoft.ln.model.colormatchtab.Product;
-import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.model.Product;
+import com.meembusoft.ln.model.Subcategory;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
 

@@ -3,7 +3,7 @@ package com.meembusoft.ln.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import com.meembusoft.ln.model.colormatchtab.Suggestion;
+import com.meembusoft.ln.model.Suggestion;
 import com.meembusoft.ln.viewholder.SuggestionViewHolder;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;

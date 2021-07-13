@@ -32,7 +32,7 @@ import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.animationmanager.flytocart.CircleAnimationUtil;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CartActivity;
-import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.Category;
 
 public class AppUtil {
 

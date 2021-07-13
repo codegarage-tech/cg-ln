@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.meembusoft.ln.fragment.SubCategoryFragment;
-import com.meembusoft.ln.model.colormatchtab.Subcategory;
+import com.meembusoft.ln.model.Subcategory;
 
 import java.util.ArrayList;
 import java.util.List;

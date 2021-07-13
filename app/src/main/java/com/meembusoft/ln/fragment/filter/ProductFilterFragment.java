@@ -339,7 +339,7 @@ public class ProductFilterFragment extends AAH_FabulousFragment {
         for (TextView tv : textViews) {
             tv.setTag("unselected");
             tv.setBackgroundResource(R.drawable.chip_unselected);
-            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.paragraphTextColor));
+            tv.setTextColor(ContextCompat.getColor(getContext(), R.color.brown));
         }
         appliedFilter.clear();
     }

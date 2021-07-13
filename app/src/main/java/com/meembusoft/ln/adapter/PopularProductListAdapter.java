@@ -3,7 +3,7 @@ package com.meembusoft.ln.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.viewholder.PopularProductViewHolder;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;

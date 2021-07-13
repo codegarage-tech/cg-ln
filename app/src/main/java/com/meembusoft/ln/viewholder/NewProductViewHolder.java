@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
-import com.meembusoft.ln.model.colormatchtab.Product;
+import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.util.RandomManager;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.squareup.picasso.Picasso;

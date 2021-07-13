@@ -13,7 +13,7 @@ import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.adapter.SubCategoryViewPagerAdapter;
 import com.meembusoft.ln.base.BaseFragment;
-import com.meembusoft.ln.model.colormatchtab.Category;
+import com.meembusoft.ln.model.Category;
 import com.meembusoft.ln.util.FragmentUtilsManager;
 
 import java.util.List;
