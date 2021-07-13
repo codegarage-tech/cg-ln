@@ -75,6 +75,10 @@
         <activity
             android:name="com.meembusoft.ln.activity.AppNotificationsActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.meembusoft.ln.activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

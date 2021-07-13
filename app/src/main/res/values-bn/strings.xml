@@ -107,4 +107,10 @@
     <string name="app_publisher_privacy_html_path">http://codegarage.tech/privacy_and_policy.html</string>
     <string name="app_publisher_acknowledgment_html_path">http://codegarage.tech/terms_and_conditions.html</string>
     <string name="app_play_store_url">https://play.google.com/store/apps/details?id=%1$s</string>
+
+    <!-- Forgot Password -->
+    <string name="txt_forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
+    <string name="txt_just_submit_the_email_address">আপনার রেজিস্ট্রিকৃত ইমেল এড্রেস সাবমিট করুন, আমরা আপনাকে পাসওয়ার্ড রিসেট করার লিঙ্ক পাঠাবো!</string>
+    <string name="txt_input_registered_email_address">রেজিস্ট্রিকৃত ইমেল এড্রেস ইনপুট দিন</string>
+    <string name="txt_submit_email_address">ইমেল এড্রেস সাবমিট করুন</string>
 </resources>
