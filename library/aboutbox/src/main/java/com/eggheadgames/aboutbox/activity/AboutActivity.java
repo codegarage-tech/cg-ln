@@ -5,9 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity;
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem;
@@ -22,19 +23,14 @@ import com.eggheadgames.aboutbox.R;
 import com.eggheadgames.aboutbox.listener.LicenseClickListener;
 import com.eggheadgames.aboutbox.share.EmailUtil;
 import com.eggheadgames.aboutbox.share.ShareUtil;
-import com.eggheadgames.aboutbox.view.AnimatedImageView;
-import com.eggheadgames.aboutbox.view.AnimatedTextView;
-import com.eggheadgames.aboutbox.view.ArcView;
 
 public class AboutActivity extends MaterialAboutActivity {
 
     private static LicenseClickListener mLicenseClickListener;
 
-    //toolbar
-    ArcView arcMenuView;
-    AnimatedImageView arcMenuImage;
-    AnimatedTextView toolbarTitle;
-    Toolbar toolbar;
+    // Toolbar
+    private TextView tvTitle;
+    private LinearLayout llClose;
 
     public static void launch(Activity activity) {
         Intent intent = new Intent(activity, AboutActivity.class);
@@ -47,18 +43,12 @@ public class AboutActivity extends MaterialAboutActivity {
 
     @Override
     public void setToolbar() {
-        toolbarTitle = (AnimatedTextView) findViewById(R.id.toolbarTitle);
-        arcMenuImage = (AnimatedImageView) findViewById(R.id.arcImage);
-        arcMenuView = (ArcView) findViewById(R.id.arcView);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Toolbar
+        tvTitle = findViewById(R.id.tv_title);
+        llClose = findViewById(R.id.ll_close);
 
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        toolbarTitle.setAnimatedText(getString(R.string.mal_title_about), 0L);
-
-        arcMenuImage.setAnimatedImage(R.drawable.arrow_left, 0L);
-        arcMenuView.setOnClickListener(new View.OnClickListener() {
+        tvTitle.setText(getString(R.string.mal_title_about));
+        llClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();

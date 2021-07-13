@@ -4,6 +4,9 @@ import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.os.Build;
@@ -205,5 +208,39 @@ public class AppUtil {
 
     public static String getPlayStoreUrl(Activity activity) {
         return "https://play.google.com/store/apps/details?id=" + activity.getPackageName();
+    }
+
+
+    /**
+     * Get application version.
+     *
+     * @param context only the application context.
+     * @return String the value in string is the application's version name.
+     */
+    public static String getApplicationVersion(Context context) {
+        PackageInfo pInfo = null;
+        try {
+            pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return (pInfo != null ? pInfo.versionName : "(unknown)");
+    }
+
+    /**
+     * Get application name.
+     *
+     * @param context only the application context.
+     * @return String the value in string is the application's name.
+     */
+    public static String getApplicationName(Context context) {
+        final PackageManager pm = context.getPackageManager();
+        ApplicationInfo ai;
+        try {
+            ai = pm.getApplicationInfo(context.getPackageName(), 0);
+        } catch (final PackageManager.NameNotFoundException e) {
+            ai = null;
+        }
+        return (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
     }
 }

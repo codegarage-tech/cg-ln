@@ -3,14 +3,13 @@
     android:id="@+id/mal_material_about_activity_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/screenBgColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorShadeBlue"
         android:orientation="vertical">
 
         <include
@@ -20,8 +19,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mal_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="12dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

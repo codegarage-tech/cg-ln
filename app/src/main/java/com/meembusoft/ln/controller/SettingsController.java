@@ -10,6 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.eggheadgames.aboutbox.AboutConfig;
+import com.eggheadgames.aboutbox.IAnalytic;
+import com.eggheadgames.aboutbox.IDialog;
+import com.eggheadgames.aboutbox.activity.AboutActivity;
+import com.eggheadgames.aboutbox.listener.LicenseClickListener;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.AboutProfileActivity;
 import com.meembusoft.ln.activity.AppNotificationsActivity;
@@ -19,11 +26,13 @@ import com.meembusoft.ln.activity.LoginActivity;
 import com.meembusoft.ln.activity.OrdersActivity;
 import com.meembusoft.ln.activity.SupportActivity;
 import com.meembusoft.ln.enumeration.Language;
+import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.meembusoft.localemanager.LocaleManager;
 import com.meembusoft.localemanager.languagesupport.LanguagesSupport;
+import com.reversecoder.attributionpresenter.activity.LicenseActivity;
 import com.skydoves.flourish.Flourish;
 import com.skydoves.flourish.FlourishAnimation;
 import com.skydoves.flourish.FlourishOrientation;
@@ -55,6 +64,7 @@ public class SettingsController {
         initMenu();
         initView();
         initActions();
+        initAboutPage();
     }
 
     private void initMenu() {
@@ -184,14 +194,14 @@ public class SettingsController {
         rlAboutApp.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                AboutActivity.launch(mActivity);
-//                AboutActivity.setLicenseListener(new LicenseClickListener() {
-//                    @Override
-//                    public void onLicenseClick() {
-//                        Intent intentLicense = new Intent(mActivity, LicenseActivity.class);
-//                        startActivity(intentLicense);
-//                    }
-//                });
+                AboutActivity.launch(mActivity);
+                AboutActivity.setLicenseListener(new LicenseClickListener() {
+                    @Override
+                    public void onLicenseClick() {
+                        Intent intentLicense = new Intent(mActivity, LicenseActivity.class);
+                        mActivity.startActivity(intentLicense);
+                    }
+                });
             }
         });
 
@@ -262,5 +272,57 @@ public class SettingsController {
                 .setOnMenuItemClickListener(onMenuItemClickListener)
                 .build();
         mPowerMenu.showAtCenter(parentView);
+    }
+
+    /**************************
+     * Methods for about page *
+     **************************/
+    private void initAboutPage() {
+        AboutConfig aboutConfig = AboutConfig.getInstance();
+        aboutConfig.appName = mActivity.getString(R.string.app_name);
+        aboutConfig.appIcon = R.mipmap.ic_launcher;
+        aboutConfig.version = AppUtil.getApplicationVersion(mActivity);
+        aboutConfig.author = mActivity.getString(R.string.app_author);
+        aboutConfig.aboutLabelTitle = mActivity.getString(R.string.mal_title_about);
+        aboutConfig.packageName = mActivity.getPackageName();
+        aboutConfig.buildType = AboutConfig.BuildType.GOOGLE;
+
+        aboutConfig.facebookUserName = mActivity.getString(R.string.app_publisher_facebook_id);
+        aboutConfig.twitterUserName = mActivity.getString(R.string.app_publisher_twitter_id);
+        aboutConfig.webHomePage = mActivity.getString(R.string.app_publisher_profile_website);
+
+        // app publisher for "Try Other Apps" item
+        aboutConfig.appPublisherId = mActivity.getString(R.string.app_publisher_id);
+
+        // if pages are stored locally, then you need to override aboutConfig.dialog to be able use custom WebView
+        aboutConfig.companyHtmlPath = mActivity.getString(R.string.app_publisher_company_html_path);
+        aboutConfig.privacyHtmlPath = mActivity.getString(R.string.app_publisher_privacy_html_path);
+        aboutConfig.acknowledgmentHtmlPath = mActivity.getString(R.string.app_publisher_acknowledgment_html_path);
+
+        aboutConfig.dialog = new IDialog() {
+            @Override
+            public void open(AppCompatActivity appCompatActivity, String url, String tag) {
+                // handle custom implementations of WebView. It will be called when user click to web items. (Example: "Privacy", "Acknowledgments" and "About")
+            }
+        };
+
+        aboutConfig.analytics = new IAnalytic() {
+            @Override
+            public void logUiEvent(String s, String s1) {
+                // handle log events.
+            }
+
+            @Override
+            public void logException(Exception e, boolean b) {
+                // handle exception events.
+            }
+        };
+        // set it only if aboutConfig.analytics is defined.
+        aboutConfig.logUiEventName = "Log";
+
+        // Contact Support email details
+        aboutConfig.emailAddress = mActivity.getString(R.string.app_author_email);
+        aboutConfig.emailSubject = "[" + mActivity.getString(R.string.app_name) + "]" + "[" + AppUtil.getApplicationVersion(mActivity) + "]" + " " + mActivity.getString(R.string.app_contact_subject);
+        aboutConfig.emailBody = mActivity.getString(R.string.app_contact_body);
     }
 }

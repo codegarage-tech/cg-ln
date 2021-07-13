@@ -13,8 +13,8 @@
     <color name="subtitleTextColor">@color/blueDarkLightWhite</color>
     <color name="paragraphTextColor">@color/blueDarkWhite</color>
     <color name="hintsTextColor">@color/blueDarkLightDeeper</color>
-    <color name="successTextColor">@color/green_600</color>
-    <color name="failureTextColor">@color/red_500</color>
+    <color name="successTextColor">#43A047</color>
+    <color name="failureTextColor">#F44336</color>
     <color name="imageTintColor">@color/blueDarkLightDeeper</color>
     <color name="statusBarColor">@color/blueDark</color>
     <color name="navigationBarColor">@color/blueDark</color>

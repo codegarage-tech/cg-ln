@@ -14,7 +14,6 @@ import com.danielstone.materialaboutlibrary.util.ViewTypeManager;
 
 import java.util.ArrayList;
 
-
 public class MaterialAboutItemAdapter extends RecyclerView.Adapter<MaterialAboutItemViewHolder> {
 
     private static final String TAG = MaterialAboutItemAdapter.class.getSimpleName();
