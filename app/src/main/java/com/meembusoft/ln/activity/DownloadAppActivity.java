@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.eggheadgames.aboutbox.AboutBoxUtils;
+import com.eggheadgames.aboutbox.AboutConfig;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.util.AppUtil;
@@ -70,7 +72,7 @@ public class DownloadAppActivity extends BaseActivity {
         tvPlayStoreUrl.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                AboutBoxUtils.openApp(getActivity(), AboutConfig.BuildType.GOOGLE, packageName);
+                AboutBoxUtils.openApp(getActivity(), AboutConfig.BuildType.GOOGLE, getActivity().getPackageName());
             }
         });
     }
