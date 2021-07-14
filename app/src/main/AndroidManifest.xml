@@ -49,7 +49,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.meembusoft.ln.activity.LoginActivity"
+            android:name="com.meembusoft.ln.activity.SignInActivity"
             android:screenOrientation="portrait" />
 
         <activity

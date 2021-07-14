@@ -170,6 +170,20 @@ public class AppUtil {
         }
     }
 
+    public static <T extends View> void removeViewTint(T view) {
+        if (view != null) {
+            if (view instanceof ImageView) {
+                ((ImageView) view).clearColorFilter();
+            } else {
+//                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP && view instanceof AppCompatButton) {
+//                    ((AppCompatButton) view).setSupportBackgroundTintList(ContextCompat.getColorStateList(view.getContext().getApplicationContext(), colorResource));
+//                } else {
+//                    ViewCompat.setBackgroundTintList(view, ContextCompat.getColorStateList(view.getContext().getApplicationContext(), colorResource));
+//                }
+            }
+        }
+    }
+
     public static void navigateToCartScreen(Activity activity) {
         if (AddToCartManager.getInstance().hasCartItem(CartItem.class)) {
             Intent intentCart = new Intent(activity, CartActivity.class);

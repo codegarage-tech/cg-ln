@@ -24,7 +24,7 @@ public class SignUpActivity extends BaseActivity {
 
     @Override
     public int initScreenLayout() {
-        return R.layout.activity_signup;
+        return R.layout.activity_sign_up;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SignUpActivity extends BaseActivity {
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
-        tvTitle.setText(R.string.title_activity_sign_up);
+        tvTitle.setText(getString(R.string.txt_sign_up));
     }
 
     @Override

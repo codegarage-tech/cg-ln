@@ -78,20 +78,21 @@
     <!-- Product Detail -->
     <string name="txt_product_detail">পণ্য বিবরণী</string>
 
-    <!--Log In Screen-->
-    <string name="title_activity_log_in">Log In</string>
-    <string name="title_activity_login_mobile_no">Mobile No</string>
-    <string name="title_activity_back">Back</string>
-    <string name="title_activity_connect">or connect with</string>
-    <string name="title_activity_sign_up">Don\'t have account? Sign up now</string>
-    <string name="title_facebook">Facebook</string>
-    <string name="title_gmail">Gmail</string>
-    <string name="title_forgot_password">Forgot password? Reset now</string>
+    <!--Sign In Screen-->
+    <string name="txt_sign_in">সাইন ইন করুন</string>
+    <string name="txt_mobile_no">মোবাইল নম্বর</string>
+    <string name="txt_password">পাসওয়ার্ড</string>
+    <string name="txt_or_connect_with">অথবা সংযুক্ত হোন</string>
+    <string name="txt_dont_have_any_account_sign_up_now">কোন অ্যাকাউন্ট নেই? এখন সাইন আপ করুন</string>
+    <string name="txt_facebook">ফেসবুক</string>
+    <string name="txt_gmail">জিমেইল</string>
+    <string name="txt_forgot_password_reset_now">পাসওয়ার্ড ভুলে গেছেন? এখনই রিসেট করুন</string>
 
     <!--Sign Up Screen-->
-    <string name="title_activity_signup_username">Username</string>
-    <string name="title_activity_signup_email">Email</string>
-    <string name="title_activity_signup_acct">Already have account? Sign in now</string>
+    <string name="txt_sign_up">নিবন্ধন করুন</string>
+    <string name="txt_name">নাম</string>
+    <string name="txt_email">ইমেল</string>
+    <string name="txt_already_have_account_sign_in_now">ইতিমধ্যে অ্যাকাউন্ট আছে? এখনই সাইন ইন করুন</string>
 
     <!-- About App -->
     <string name="app_version_text">ভার্সন:</string>

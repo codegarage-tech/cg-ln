@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
 import com.meembusoft.addtocart.AddToCartManager;
+import com.meembusoft.ln.BuildConfig;
 import com.meembusoft.ln.util.Logger;
 import com.meembusoft.localemanager.LocaleManager;
 
@@ -34,8 +35,7 @@ public class BaseApp extends Application {
 
         //Initialize logger
         new Logger.Builder()
-//                .isLoggable(AppUtil.isDebug(mContext))
-                .isLoggable(true)
+                .isLoggable(BuildConfig.DEBUG)
                 .build();
 
         //For using vector drawable

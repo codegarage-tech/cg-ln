@@ -21,9 +21,7 @@
         <ImageView
             android:id="@+id/iv_user"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/vector_user"
-            app:tint="@color/imageTintColor" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

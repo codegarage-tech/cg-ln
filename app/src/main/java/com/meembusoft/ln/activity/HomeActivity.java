@@ -1,5 +1,6 @@
 package com.meembusoft.ln.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,9 +23,13 @@ import com.meembusoft.ln.adapter.PopularProductListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.controller.SettingsController;
 import com.meembusoft.ln.interfaces.OnCartResetListener;
+import com.meembusoft.ln.model.User;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.util.OnSingleClickListener;
+import com.meembusoft.ln.util.SessionUtil;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
+import com.squareup.picasso.Picasso;
 
 import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
 
@@ -30,7 +39,7 @@ public class HomeActivity extends BaseActivity {
     private LinearLayout llSettings;
     private TextView tvCart;
     private RelativeLayout rlCart;
-    private ImageView ivCart;
+    private ImageView ivCart, ivUser;
 
     // Screen items
     private RelativeLayout rlSearch;
@@ -43,6 +52,16 @@ public class HomeActivity extends BaseActivity {
     private CategoryListAdapter mCategoryListAdapter;
     private PopularProductListAdapter mPopularProductListAdapter;
     private NewProductListAdapter mNewProductListAdapter;
+    private ActivityResultLauncher<Intent> activityResultLauncherLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        mSettingsController.refreshAccountView();
+                        refreshUserView();
+                    }
+                }
+            });
 
     @Override
     public int initToolbarLayout() {
@@ -66,6 +85,7 @@ public class HomeActivity extends BaseActivity {
         tvCart = findViewById(R.id.tv_cart);
         rlCart = findViewById(R.id.rl_cart);
         ivCart = findViewById(R.id.iv_cart);
+        ivUser = findViewById(R.id.iv_user);
 
         rlSearch = findViewById(R.id.rl_search);
         rvCategory = findViewById(R.id.rv_category);
@@ -75,6 +95,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
+        refreshUserView();
         // Initialize settings
         mSettingsController = new SettingsController(getActivity(), getParentView());
 
@@ -140,6 +161,18 @@ public class HomeActivity extends BaseActivity {
                 startActivity(intentSearch);
             }
         });
+
+        ivUser.setOnClickListener(new OnSingleClickListener() {
+            @Override
+            public void onSingleClick(View var1) {
+                User user = SessionUtil.getUser(getActivity());
+                if (user != null) {
+
+                } else {
+                    navigateToLogin();
+                }
+            }
+        });
     }
 
     @Override
@@ -175,5 +208,53 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void onAllPermissionsAccepted() {
 
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        switch (requestCode) {
+//            case INTENT_KEY_REQUEST_CODE_LOGIN:
+//                if (data != null) {
+//                    Parcelable parcelable = data.getParcelableExtra("loginResult");
+//
+//                    if (parcelable != null) {
+//                        Logger.d(TAG, TAG_LOGIN + "onActivityResult>>loginResult: " + parcelable);
+//                        AlertDialog.Builder(this)
+//                                .setMessage(result.toString())
+//                                .setTitle("Login result")
+//                                .setPositiveButton(android.R.string.ok, null)
+//                                .apply {
+//                            if (result?.isSuccess == true) {
+//                                setNeutralButton("Logout") { _, _ ->
+//                                        SocialLogin.logout(
+//                                                this@MainActivity,
+//                                    SocialLogin.LoginType.GOOGLE
+//                                    )
+//                                }
+//                            }
+//                        }
+//                        .show()
+//                    }
+//                }
+//                break;
+//        }
+//    }
+
+    public void refreshUserView() {
+        User user = SessionUtil.getUser(getActivity());
+        if (user != null) {
+            AppUtil.removeViewTint(ivUser);
+            Picasso.get().load(user.getUser_image().getUrl()).into(ivUser);
+        } else {
+            ivUser.setImageResource(R.drawable.vector_user);
+            AppUtil.applyViewTint(ivUser, R.color.imageTintColor);
+        }
+    }
+
+    public void navigateToLogin() {
+        Intent intentLogin = new Intent(getActivity(), SignInActivity.class);
+        activityResultLauncherLogin.launch(intentLogin);
     }
 }

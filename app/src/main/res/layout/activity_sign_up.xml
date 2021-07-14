@@ -23,7 +23,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:background="@drawable/drop_shadow_rectangle"
                     android:gravity="center_vertical"
@@ -42,7 +41,7 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:hint="@string/title_activity_signup_username"
+                        android:hint="@string/txt_name"
                         android:inputType="text"
                         android:paddingLeft="@dimen/dp_15"
                         android:paddingRight="@dimen/dp_15"
@@ -90,7 +89,7 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:hint="@string/title_activity_signup_email"
+                        android:hint="@string/txt_email"
                         android:inputType="text"
                         android:paddingLeft="@dimen/dp_15"
                         android:paddingRight="@dimen/dp_15"
@@ -137,7 +136,7 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:hint="@string/title_activity_login_mobile_no"
+                        android:hint="@string/txt_mobile_no"
                         android:inputType="text"
                         android:paddingLeft="@dimen/dp_15"
                         android:paddingRight="@dimen/dp_15"
@@ -162,7 +161,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_20">
+                android:layout_marginBottom="@dimen/dp_10">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,6 +212,7 @@
                 android:layout_height="@dimen/dp_45"
                 android:layout_gravity="right|bottom"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:background="@drawable/drop_shadow_circle"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -221,26 +221,25 @@
                     android:layout_width="21dp"
                     android:layout_height="22dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/vector_right_arrow"
-                    android:scaleType="fitXY" />
+                    android:background="@drawable/vector_right_arrow" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_login_now"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:gravity="center"
-                android:text="@string/title_activity_signup_acct"
+                android:layout_height="@dimen/dp_40"
+                android:gravity="right|center"
+                android:text="@string/txt_already_have_account_sign_in_now"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/paragraphTextColor"
+                android:textColor="@color/subtitleTextColor"
                 android:textStyle="italic" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_30">
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_20">
 
                 <View
                     android:layout_width="match_parent"
@@ -255,7 +254,7 @@
                     android:background="@color/screenBgColor"
                     android:paddingLeft="@dimen/dp_5"
                     android:paddingRight="@dimen/dp_5"
-                    android:text="@string/title_activity_connect"
+                    android:text="@string/txt_or_connect_with"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/paragraphTextColor" />
 
@@ -264,7 +263,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginBottom="@dimen/dp_20"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -287,7 +286,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_30"
-                        android:text="@string/title_facebook"
+                        android:text="@string/txt_facebook"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/paragraphTextColor"
                         android:textStyle="bold" />
@@ -313,7 +312,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_30"
-                        android:text="@string/title_gmail"
+                        android:text="@string/txt_gmail"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/paragraphTextColor"
                         android:textStyle="bold" />

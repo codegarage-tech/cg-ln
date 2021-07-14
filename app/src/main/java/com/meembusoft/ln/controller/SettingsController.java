@@ -22,12 +22,11 @@ import com.meembusoft.ln.activity.AboutProfileActivity;
 import com.meembusoft.ln.activity.AppNotificationsActivity;
 import com.meembusoft.ln.activity.DownloadAppActivity;
 import com.meembusoft.ln.activity.FavoriteProductActivity;
-import com.meembusoft.ln.activity.LoginActivity;
+import com.meembusoft.ln.activity.HomeActivity;
 import com.meembusoft.ln.activity.OrdersActivity;
 import com.meembusoft.ln.activity.SupportActivity;
 import com.meembusoft.ln.enumeration.Language;
 import com.meembusoft.ln.util.AppUtil;
-import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.meembusoft.localemanager.LocaleManager;
@@ -65,6 +64,7 @@ public class SettingsController {
         initView();
         initActions();
         initAboutPage();
+        refreshAccountView();
     }
 
     private void initMenu() {
@@ -137,8 +137,7 @@ public class SettingsController {
         rlLoginOrCreateAccount.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-                Intent intentLogin = new Intent(mActivity, LoginActivity.class);
-                mActivity.startActivityForResult(intentLogin, Constants.INTENT_KEY_REQUEST_CODE_LOGIN);
+                ((HomeActivity) mActivity).navigateToLogin();
             }
         });
 
@@ -169,8 +168,9 @@ public class SettingsController {
         rlLogout.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-//                ((HomeActivity) mActivity).doLogout(NavigationId.SETTINGS);
-//                refreshAccountView();
+                SessionUtil.setUser(mActivity, "");
+                refreshAccountView();
+                ((HomeActivity) mActivity).refreshUserView();
             }
         });
 
@@ -222,7 +222,7 @@ public class SettingsController {
         });
     }
 
-    private void refreshAccountView() {
+    public void refreshAccountView() {
         if (SessionUtil.getUser(mActivity) != null) {
             llAccountLoggedIn.setVisibility(View.VISIBLE);
             llAccountLoggedOut.setVisibility(View.GONE);
