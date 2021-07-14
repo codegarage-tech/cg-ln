@@ -44,7 +44,7 @@ public class ForgotPasswordActivity extends BaseActivity {
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
-        tvTitle.setText(R.string.txt_forgot_password_reset_now);
+        tvTitle.setText(R.string.txt_forgot_password);
     }
 
     @Override

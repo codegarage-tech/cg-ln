@@ -7,11 +7,11 @@
     <string name="txt_account">অ্যাকাউন্ট</string>
     <string name="txt_more">আরও</string>
     <string name="txt_about_profile">প্রোফাইল সম্পর্কে</string>
-    <string name="txt_logn_or_create_account">লগইন করুন / অ্যাকাউন্ট তৈরি করুন</string>
-    <string name="txt_logn_via_qr_code">QR Code-এর মাধ্যমে লগইন করুন</string>
+    <string name="txt_sign_in_or_create_account">সাইন ইন করুন/অ্যাকাউন্ট তৈরি করুন</string>
+    <string name="txt_sign_in_via_qr_code">QR Code-এর মাধ্যমে সাইন ইন করুন</string>
     <string name="txt_orders">অর্ডারস</string>
     <string name="txt_favorite_product">ফেভারেট পণ্য</string>
-    <string name="txt_logout">লগ আউট</string>
+    <string name="txt_sign_out">সাইন আউট</string>
     <string name="txt_notification">নোটিফিকেশান</string>
     <string name="txt_stop_notification">নোটিফিকেশান বন্ধ করুন</string>
     <string name="txt_app_notifications">অ্যাপ নোটিফিকেশানস</string>

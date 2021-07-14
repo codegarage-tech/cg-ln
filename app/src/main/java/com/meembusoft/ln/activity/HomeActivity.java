@@ -2,7 +2,9 @@ package com.meembusoft.ln.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +31,10 @@ import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
+import com.skydoves.powermenu.MenuAnimation;
+import com.skydoves.powermenu.OnMenuItemClickListener;
+import com.skydoves.powermenu.PowerMenu;
+import com.skydoves.powermenu.PowerMenuItem;
 import com.squareup.picasso.Picasso;
 
 import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
@@ -40,6 +46,7 @@ public class HomeActivity extends BaseActivity {
     private TextView tvCart;
     private RelativeLayout rlCart;
     private ImageView ivCart, ivUser;
+    private PowerMenu mPowerMenuUser;
 
     // Screen items
     private RelativeLayout rlSearch;
@@ -167,7 +174,7 @@ public class HomeActivity extends BaseActivity {
             public void onSingleClick(View var1) {
                 User user = SessionUtil.getUser(getActivity());
                 if (user != null) {
-
+                    showUserMenu();
                 } else {
                     navigateToLogin();
                 }
@@ -242,7 +249,7 @@ public class HomeActivity extends BaseActivity {
 //        }
 //    }
 
-    public void refreshUserView() {
+    private void refreshUserView() {
         User user = SessionUtil.getUser(getActivity());
         if (user != null) {
             AppUtil.removeViewTint(ivUser);
@@ -256,5 +263,46 @@ public class HomeActivity extends BaseActivity {
     public void navigateToLogin() {
         Intent intentLogin = new Intent(getActivity(), SignInActivity.class);
         activityResultLauncherLogin.launch(intentLogin);
+    }
+
+    private void showUserMenu() {
+        OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+            @Override
+            public void onItemClick(int position, PowerMenuItem item) {
+                if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.txt_about_profile))) {
+                    Intent intentAboutProfile = new Intent(HomeActivity.this, AboutProfileActivity.class);
+                    startActivity(intentAboutProfile);
+                } else if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.txt_sign_out))) {
+                    doSignOut();
+                }
+
+                mPowerMenuUser.setSelectedPosition(position);
+                mPowerMenuUser.dismiss();
+            }
+        };
+        mPowerMenuUser = new PowerMenu.Builder(getActivity())
+                .addItem(new PowerMenuItem(getString(R.string.txt_about_profile), false))
+                .addItem(new PowerMenuItem(getString(R.string.txt_sign_out), false))
+                .setWidth(400)
+                .setHeight(300)
+                .setAnimation(MenuAnimation.DROP_DOWN) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColorResource(R.color.paragraphTextColor)
+                .setTextSize(16)
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
+                .setSelectedTextColorResource(R.color.titleTextColor)
+                .setMenuColorResource(R.color.colorPrimaryDark)
+                .setSelectedMenuColorResource(R.color.colorPrimary)
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .build();
+        mPowerMenuUser.showAsDropDown(ivUser);
+    }
+
+    public void doSignOut() {
+        SessionUtil.setUser(getActivity(), "");
+        refreshUserView();
+        mSettingsController.refreshAccountView();
     }
 }

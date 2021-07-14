@@ -139,7 +139,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rl_logout"
+                    android:id="@+id/rl_sign_out"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
                     android:background="@drawable/selector_rectangle_border_transparent_bg_transparent"
@@ -150,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="@dimen/dp_25"
-                        android:text="@string/txt_logout"
+                        android:text="@string/txt_sign_out"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/subtitleTextColor" />
 
@@ -184,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="@dimen/dp_25"
-                        android:text="@string/txt_logn_or_create_account"
+                        android:text="@string/txt_sign_in_or_create_account"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/subtitleTextColor" />
 

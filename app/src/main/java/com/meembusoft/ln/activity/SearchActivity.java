@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,8 @@ import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Subcategory;
 import com.meembusoft.ln.model.Suggestion;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.recyclerview.decoration.DividerDecoration;
+import com.meembusoft.recyclerview.decoration.SpaceDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

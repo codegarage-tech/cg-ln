@@ -7,11 +7,11 @@
     <string name="txt_account">Account</string>
     <string name="txt_more">More</string>
     <string name="txt_about_profile">About Profile</string>
-    <string name="txt_logn_or_create_account">Login/Create Account</string>
-    <string name="txt_logn_via_qr_code">Login via QR Code</string>
+    <string name="txt_sign_in_or_create_account">Sign In/Sign Up</string>
+    <string name="txt_sign_in_via_qr_code">Sign in via QR Code</string>
     <string name="txt_orders">Orders</string>
     <string name="txt_favorite_product">Favorite Product</string>
-    <string name="txt_logout">Logout</string>
+    <string name="txt_sign_out">Logout</string>
     <string name="txt_notification">Notification</string>
     <string name="txt_stop_notification">Stop Notification</string>
     <string name="txt_app_notifications">App Notifications</string>
@@ -112,6 +112,6 @@
     <!-- Forgot Password -->
     <string name="txt_forgot_password">Forgot Password?</string>
     <string name="txt_just_submit_the_email_address">Just submit the email address you\'ve used to register with us and we will send you a password reset link!</string>
-    <string name="txt_input_registered_email_address">Input Registered Email Address</string>
+    <string name="txt_input_registered_email_address">Input registered email address</string>
     <string name="txt_submit_email_address">SUBMIT EMAIL ADDRESS</string>
 </resources>

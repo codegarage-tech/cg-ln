@@ -52,7 +52,7 @@ public class SettingsController {
     // View elements
 //    private SwitchIconView switchStopNotification;
     private LinearLayout llAccountLoggedIn, llAccountLoggedOut;
-    private RelativeLayout rlLoginOrCreateAccount, rlAboutProfile, rlOrders, rlFavoriteProduct, rlLogout, rlStopNotification, rlAppNotifications, rlAboutApp, rlDownloadApp, rlSupport;
+    private RelativeLayout rlLoginOrCreateAccount, rlAboutProfile, rlOrders, rlFavoriteProduct, rlSignOUt, rlStopNotification, rlAppNotifications, rlAboutApp, rlDownloadApp, rlSupport;
     private String mSelectedAppLanguageCode = "";
     private TextView tvAppLanguage;
 
@@ -124,7 +124,7 @@ public class SettingsController {
         rlAboutProfile = parentView.findViewById(R.id.rl_about_profile);
         rlOrders = parentView.findViewById(R.id.rl_orders);
         rlFavoriteProduct = parentView.findViewById(R.id.rl_favorite_product);
-        rlLogout = parentView.findViewById(R.id.rl_logout);
+        rlSignOUt = parentView.findViewById(R.id.rl_sign_out);
 //        switchStopNotification = parentView.findViewById(R.id.switch_stop_notification);
         rlStopNotification = parentView.findViewById(R.id.rl_stop_notification);
         rlAppNotifications = parentView.findViewById(R.id.rl_app_notifications);
@@ -165,12 +165,10 @@ public class SettingsController {
             }
         });
 
-        rlLogout.setOnClickListener(new OnSingleClickListener() {
+        rlSignOUt.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-                SessionUtil.setUser(mActivity, "");
-                refreshAccountView();
-                ((HomeActivity) mActivity).refreshUserView();
+                ((HomeActivity) mActivity).doSignOut();
             }
         });
 
