@@ -32,7 +32,6 @@ import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.nex3z.flowlayout.FlowLayout;
 import com.nex3z.flowlayout.FlowLayoutManager;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class AboutProfileActivity extends BaseActivity {
     // View items
     private EditText edtFullName, edtMobileNumber, edtPassword, edtEmail, edtOccupation, edtAddress;
     private ImageView ivProfileImage, ivAttachment;
-    private LinearLayout llProfileImage, ll;
+    private LinearLayout llProfileImage;
 
     // Gender
     private FlowLayout flowLayoutGender;
@@ -236,10 +235,12 @@ public class AboutProfileActivity extends BaseActivity {
         User user = SessionUtil.getUser(getActivity());
         if (user != null) {
             if (TextUtils.isEmpty(user.getUser_image().getUrl())) {
-                ivProfileImage.setImageResource(R.drawable.vector_user);
+//                ivProfileImage.setImageResource(R.drawable.vector_user);
+                GlideManager.setImage(getActivity(), ivProfileImage, R.drawable.vector_user, true);
                 AppUtil.applyViewTint(ivProfileImage, R.color.imageTintColor);
             } else {
-                Picasso.get().load(user.getUser_image().getUrl()).into(ivProfileImage);
+//                Picasso.get().load(user.getUser_image().getUrl()).into(ivProfileImage);
+                GlideManager.setImage(getActivity(), ivProfileImage, user.getUser_image().getUrl(), true);
             }
             edtFullName.setText(user.getUser_name());
             edtMobileNumber.setText(user.getUser_phone());
