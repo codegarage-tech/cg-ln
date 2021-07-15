@@ -19,7 +19,7 @@ public class AboutProfileActivity extends BaseActivity {
 
     @Override
     public int initToolbarLayout() {
-        return R.layout.toolbar_base;
+        return R.layout.toolbar_about_profile;
     }
 
     @Override
