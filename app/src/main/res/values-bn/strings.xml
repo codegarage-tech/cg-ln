@@ -6,7 +6,7 @@
     <string name="txt_settings">সেটিংস</string>
     <string name="txt_account">অ্যাকাউন্ট</string>
     <string name="txt_more">আরও</string>
-    <string name="txt_about_profile">প্রোফাইল সম্পর্কে</string>
+    <string name="txt_about_profile">প্রোফাইল</string>
     <string name="txt_sign_in_or_create_account">সাইন ইন করুন/অ্যাকাউন্ট তৈরি করুন</string>
     <string name="txt_sign_in_via_qr_code">QR Code-এর মাধ্যমে সাইন ইন করুন</string>
     <string name="txt_orders">অর্ডারস</string>
@@ -95,7 +95,7 @@
 
     <!--Sign Up Screen-->
     <string name="txt_sign_up">নিবন্ধন করুন</string>
-    <string name="txt_name">নাম</string>
+    <string name="txt_full_name">পুরো নাম</string>
     <string name="txt_email">ইমেল</string>
     <string name="txt_already_have_account_sign_in_now">ইতিমধ্যে অ্যাকাউন্ট আছে? এখনই সাইন ইন করুন</string>
 

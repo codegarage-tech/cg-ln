@@ -7,6 +7,7 @@
     <dimen name="dp_minus_15">-15dp</dimen>
     <dimen name="dp_minus_20">-20dp</dimen>
     <dimen name="dp_minus_25">-25dp</dimen>
+    <dimen name="dp_minus_35">-35dp</dimen>
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_1_8">1.8dp</dimen>

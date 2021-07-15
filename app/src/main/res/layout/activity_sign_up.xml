@@ -41,7 +41,7 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:hint="@string/txt_name"
+                        android:hint="@string/txt_full_name"
                         android:inputType="text"
                         android:paddingLeft="@dimen/dp_15"
                         android:paddingRight="@dimen/dp_15"

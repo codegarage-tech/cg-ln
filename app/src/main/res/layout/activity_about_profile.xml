@@ -27,9 +27,10 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/drop_shadow_circle"
                     android:orientation="vertical"
-                    android:padding="@dimen/dp_20">
+                    android:padding="@dimen/dp_30">
 
                     <ImageView
+                        android:id="@+id/iv_profile_image"
                         android:layout_width="@dimen/dp_120"
                         android:layout_height="@dimen/dp_120"
                         app:srcCompat="@drawable/vector_user" />
@@ -37,12 +38,11 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/iv_profile_image_attachment"
+                    android:id="@+id/iv_attachment"
                     android:layout_width="@dimen/dp_30"
                     android:layout_height="@dimen/dp_30"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/dp_minus_25"
-                    android:layout_marginTop="@dimen/dp_minus_25"
+                    android:layout_marginLeft="@dimen/dp_minus_35"
                     android:layout_toRightOf="@+id/ll_profile_image"
                     app:srcCompat="@drawable/vector_add_attachment"
                     app:tint="@color/imageTintColor" />
@@ -52,6 +52,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp_10"
                 android:background="@drawable/drop_shadow_rounded_rectangle_top"
                 android:orientation="vertical"
                 android:padding="@dimen/dp_20">
@@ -70,43 +71,12 @@
                         app:tint="@color/imageTintColor" />
 
                     <EditText
-                        android:id="@+id/edt_username"
+                        android:id="@+id/edt_full_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/selector_line_edt"
                         android:gravity="center_vertical"
-                        android:hint="@string/txt_name"
-                        android:inputType="text"
-                        android:paddingLeft="@dimen/dp_15"
-                        android:paddingRight="@dimen/dp_15"
-                        android:text=""
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/paragraphTextColor"
-                        android:textColorHint="@color/hintsTextColor" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginRight="@dimen/dp_20"
-                        app:srcCompat="@drawable/vector_email"
-                        app:tint="@color/imageTintColor" />
-
-                    <EditText
-                        android:id="@+id/edt_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/selector_line_edt"
-                        android:gravity="center_vertical"
-                        android:hint="@string/txt_email"
+                        android:hint="@string/txt_full_name"
                         android:inputType="text"
                         android:paddingLeft="@dimen/dp_15"
                         android:paddingRight="@dimen/dp_15"
@@ -163,7 +133,7 @@
                         app:tint="@color/imageTintColor" />
 
                     <EditText
-                        android:id="@+id/edt_user_password"
+                        android:id="@+id/edt_password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/selector_line_edt"
@@ -181,8 +151,10 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
+                    android:gravity="center_vertical|bottom"
+                    android:minHeight="@dimen/dp_50"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -193,12 +165,31 @@
                         app:srcCompat="@drawable/vector_gender"
                         app:tint="@color/imageTintColor" />
 
+                    <include layout="@layout/layout_expandable_gender" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="@dimen/dp_20"
+                        app:srcCompat="@drawable/vector_email"
+                        app:tint="@color/imageTintColor" />
+
                     <EditText
+                        android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/selector_line_edt"
                         android:gravity="center_vertical"
-                        android:hint="@string/txt_gender"
+                        android:hint="@string/txt_email"
                         android:inputType="text"
                         android:paddingLeft="@dimen/dp_15"
                         android:paddingRight="@dimen/dp_15"

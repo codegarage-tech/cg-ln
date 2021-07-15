@@ -13,12 +13,14 @@ public class User {
     private String user_email = "";
     private String user_address = "";
     private String user_password = "";
+    private String user_occupation = "";
+    private String user_gender= "";
     private Image user_image;
 
     public User() {
     }
 
-    public User(String user_id, String user_facebook_id, String user_name, String user_phone, String user_email, String user_address, String user_password, Image user_image) {
+    public User(String user_id, String user_facebook_id, String user_name, String user_phone, String user_email, String user_address, String user_password, String user_occupation, String user_gender, Image user_image) {
         this.user_id = user_id;
         this.user_facebook_id = user_facebook_id;
         this.user_name = user_name;
@@ -26,6 +28,8 @@ public class User {
         this.user_email = user_email;
         this.user_address = user_address;
         this.user_password = user_password;
+        this.user_occupation = user_occupation;
+        this.user_gender = user_gender;
         this.user_image = user_image;
     }
 
@@ -85,6 +89,22 @@ public class User {
         this.user_password = user_password;
     }
 
+    public String getUser_occupation() {
+        return user_occupation;
+    }
+
+    public void setUser_occupation(String user_occupation) {
+        this.user_occupation = user_occupation;
+    }
+
+    public String getUser_gender() {
+        return user_gender;
+    }
+
+    public void setUser_gender(String user_gender) {
+        this.user_gender = user_gender;
+    }
+
     public Image getUser_image() {
         return user_image;
     }
@@ -93,9 +113,10 @@ public class User {
         this.user_image = user_image;
     }
 
+
     @Override
     public String toString() {
-        return "{" +
+        return "User{" +
                 "user_id='" + user_id + '\'' +
                 ", user_facebook_id='" + user_facebook_id + '\'' +
                 ", user_name='" + user_name + '\'' +
@@ -103,6 +124,8 @@ public class User {
                 ", user_email='" + user_email + '\'' +
                 ", user_address='" + user_address + '\'' +
                 ", user_password='" + user_password + '\'' +
+                ", user_occupation='" + user_occupation + '\'' +
+                ", user_gender='" + user_gender + '\'' +
                 ", user_image=" + user_image +
                 '}';
     }
