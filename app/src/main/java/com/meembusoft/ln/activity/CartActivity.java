@@ -2,8 +2,10 @@ package com.meembusoft.ln.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.meembusoft.ln.adapter.CartListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.util.ValidationManager;
 import com.meembusoft.ln.view.GlobalProgressBar;
 import com.meembusoft.recyclerview.MRecyclerView;
 
@@ -38,6 +41,7 @@ public class CartActivity extends BaseActivity {
     private AppCompatButton btnOrderNow;
     private boolean isAbortAllSelection = false, isMultiSelection = false;
     private int subTotal = 0;
+    private EditText edtDeliveryName, edtDeliveryMobileNumber, edtDeliveryAddress;
 
     @Override
     public int initToolbarLayout() {
@@ -68,6 +72,9 @@ public class CartActivity extends BaseActivity {
         tvGrandTotal = findViewById(R.id.tv_product_grand_total);
         tvTotal = findViewById(R.id.tv_total_price);
         btnOrderNow = findViewById(R.id.btn_order_now);
+        edtDeliveryMobileNumber = findViewById(R.id.edt_delivery_mobile_no);
+        edtDeliveryAddress = findViewById(R.id.edt_delivery_address);
+        edtDeliveryName = findViewById(R.id.edt_delivery_name);
     }
 
     @Override
@@ -127,16 +134,33 @@ public class CartActivity extends BaseActivity {
         btnOrderNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Validate oder items
                 if (AddToCartManager.getInstance().getSelectedCartItemCount() == 0) {
                     Toast.makeText(getActivity(), getString(R.string.txt_select_at_least_one_product), Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // Validate total
                 if (subTotal < (Constants.MINIMUM_ORDER_AMOUNT)) {
                     Toast.makeText(getActivity(), getString(R.string.txt_minimum_order_amount_excluding_delivery_charge, Constants.MINIMUM_ORDER_AMOUNT), Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // Validate delivery information
+                if (TextUtils.isEmpty(edtDeliveryName.getText().toString())) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_name), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edtDeliveryMobileNumber.getText().toString())) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_mobile_number), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (ValidationManager.isValidBangladeshiMobileNumber(edtDeliveryMobileNumber.getText().toString())) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_valid_delivery_mobile_number), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(edtDeliveryAddress.getText())) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_address), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 try {
                     // Show progress bar
                     GlobalProgressBar.getInstance(getActivity()).showProgressBar();
