@@ -243,6 +243,12 @@ dependencies {
     // Barcode
     implementation "com.journeyapps:zxing-android-embedded:$zxingVersion"
 
+    // Image picker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    // Cookiebar 2
+    implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
+
     // Library projects
     implementation project(":library:localemanager")
     implementation project(":library:recolor")

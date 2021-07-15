@@ -26,11 +26,10 @@ import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.User;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.util.GlideManager;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
-import com.skydoves.powermenu.PowerMenu;
-import com.squareup.picasso.Picasso;
 
 import static com.meembusoft.ln.util.Constants.INTENT_KEY_CATEGORY;
 
@@ -257,9 +256,11 @@ public class HomeActivity extends BaseActivity {
         User user = SessionUtil.getUser(getActivity());
         if (user != null) {
             AppUtil.removeViewTint(ivUser);
-            Picasso.get().load(user.getUser_image().getUrl()).into(ivUser);
+//            Picasso.get().load(user.getUser_image().getUrl()).into(ivUser);
+            GlideManager.setImage(getActivity(), ivUser, user.getUser_image().getUrl(), true);
         } else {
-            ivUser.setImageResource(R.drawable.vector_user);
+//            ivUser.setImageResource(R.drawable.vector_user);
+            GlideManager.setImage(getActivity(), ivUser, R.drawable.vector_user, true);
             AppUtil.applyViewTint(ivUser, R.color.imageTintColor);
         }
     }

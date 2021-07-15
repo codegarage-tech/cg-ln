@@ -1,6 +1,8 @@
 package com.meembusoft.ln.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,8 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.github.dhaval2404.imagepicker.constant.ImageProvider;
+import com.github.dhaval2404.imagepicker.listener.DismissListener;
 import com.github.florent37.expansionpanel.ExpansionHeader;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.meembusoft.ln.R;
@@ -21,6 +27,7 @@ import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.GenderType;
 import com.meembusoft.ln.model.User;
 import com.meembusoft.ln.util.AppUtil;
+import com.meembusoft.ln.util.GlideManager;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.nex3z.flowlayout.FlowLayout;
@@ -29,6 +36,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class AboutProfileActivity extends BaseActivity {
 
@@ -50,6 +60,10 @@ public class AboutProfileActivity extends BaseActivity {
     private TextView tvSelectedGender;
     private LinearLayout llExpandableHeaderGender;
     private ImageView ivHeaderIndicator;
+
+    // Image picker
+    private static final int PROFILE_IMAGE_REQ_CODE = 101;
+    private Uri mProfileUri;
 
     @Override
     public int initToolbarLayout() {
@@ -133,7 +147,24 @@ public class AboutProfileActivity extends BaseActivity {
         llProfileImage.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View var1) {
-
+                ImagePicker.with(getActivity())
+                        // Crop Square image
+                        .cropSquare()
+                        .setImageProviderInterceptor(new Function1<ImageProvider, Unit>() {
+                            @Override
+                            public Unit invoke(ImageProvider imageProvider) {
+                                Log.d("ImagePicker", "Selected ImageProvider: " + imageProvider.toString());
+                                return null;
+                            }
+                        }).setDismissListener(new DismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        Log.d("ImagePicker", "Dialog Dismiss");
+                    }
+                })
+                        // Image resolution will be less than 512 x 512
+                        .maxResultSize(200, 200)
+                        .start(PROFILE_IMAGE_REQ_CODE);
             }
         });
     }
@@ -258,6 +289,22 @@ public class AboutProfileActivity extends BaseActivity {
                 flowLayoutManagerGender.clickFlowView(user.getUser_gender());
             } else {
                 flowLayoutManagerGender.clickFlowView(keys.get(0));
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            // Uri object will not be null for RESULT_OK
+            Uri uri = data.getData();
+
+            switch (requestCode) {
+                case PROFILE_IMAGE_REQ_CODE:
+                    mProfileUri = uri;
+                    GlideManager.setImage(getActivity(), ivProfileImage, uri, true);
+                    break;
             }
         }
     }
