@@ -66,7 +66,7 @@ public class DateManager {
         return timeInMilliseconds;
     }
 
-    public static String convertEnglishDateToBengali(String selectedText) {
+    public static String convertEnglishDigitToBengali(String selectedText) {
         HashMap<Integer, String> hash = new HashMap<Integer, String>() {{
             put(0, "০");
             put(1, "১");
@@ -79,16 +79,42 @@ public class DateManager {
             put(8, "৮");
             put(9, "৯");
         }};
-        String bengaliDate = "";
+        String bengaliText = "";
         char[] chars = selectedText.toCharArray();
         for (char digit : chars) {
             try {
                 int selectedDigit = Integer.parseInt(String.valueOf(digit));
-                bengaliDate += hash.get(selectedDigit);
+                bengaliText += hash.get(selectedDigit);
             } catch (Exception ex) {
-                bengaliDate += digit;
+                bengaliText += digit;
             }
         }
-        return bengaliDate;
+        return bengaliText;
+    }
+
+    public static String convertBengaliDigitToEnglish(String selectedText) {
+        HashMap<String, Integer> hash = new HashMap<String, Integer>() {{
+            put("০", 0);
+            put("১", 1);
+            put("২", 2);
+            put("৩", 3);
+            put("৪", 4);
+            put("৫", 5);
+            put("৬", 6);
+            put("৭", 7);
+            put("৮", 8);
+            put("৯", 9);
+        }};
+        String englishText = "";
+        char[] chars = selectedText.toCharArray();
+        for (char digit : chars) {
+            try {
+                String selectedDigit = String.valueOf(digit);
+                englishText += hash.get(selectedDigit);
+            } catch (Exception ex) {
+                englishText += digit;
+            }
+        }
+        return englishText;
     }
 }

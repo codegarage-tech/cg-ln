@@ -80,6 +80,7 @@
 
     <!-- Dialog -->
     <string name="txt_ok">Ok</string>
+    <string name="txt_warning">Warning</string>
     <string name="txt_cancel">Cancel</string>
     <string name="txt_runtime_permission_dialog">Without accepting the required permissions you cannot use the app properly. Do you want to accept the permission again?</string>
 
@@ -131,4 +132,12 @@
     <string name="txt_male">Male</string>
     <string name="txt_female">Female</string>
     <string name="txt_third_gender">Third Gender</string>
+    <string name="txt_please_input_a_full_name">Please input a full name</string>
+    <string name="txt_please_input_a_mobile_number">Please input a mobile number</string>
+    <string name="txt_please_input_a_valid_mobile_number">Please input a valid mobile number</string>
+    <string name="txt_please_input_a_password">Please input a password</string>
+    <string name="txt_please_select_a_gender">Please select a gender</string>
+    <string name="txt_optional">(optional)</string>
+    <string name="txt_offer">Offer</string>
+    <string name="txt_add_your_birth_date">Add your birth date for getting a special gift on your upcoming birthday</string>
 </resources>

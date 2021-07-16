@@ -55,7 +55,7 @@
         android:orientation="vertical"
         android:padding="@dimen/dp_10">
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <com.meembusoft.ln.view.MCheckBox
             android:id="@+id/cb_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

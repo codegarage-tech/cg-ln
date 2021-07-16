@@ -80,6 +80,7 @@
 
     <!-- Dialog -->
     <string name="txt_ok">ঠিক আছে</string>
+    <string name="txt_warning">সতর্কবাণী</string>
     <string name="txt_cancel">বাতিল করুন</string>
     <string name="txt_runtime_permission_dialog">প্রয়োজনীয় অনুমতি গ্রহণ না করে আপনি অ্যাপটি সঠিকভাবে ব্যবহার করতে পারবেন না। আপনি আবার অনুমতি গ্রহণ করতে চান?</string>
 
@@ -131,4 +132,12 @@
     <string name="txt_male">পুরুষ</string>
     <string name="txt_female">মহিলা</string>
     <string name="txt_third_gender">তৃতীয় লিঙ্গ</string>
+    <string name="txt_please_input_a_full_name">একটি সম্পূর্ণ নাম ইনপুট করুন</string>
+    <string name="txt_please_input_a_mobile_number">দয়া করে একটি মোবাইল নম্বর ইনপুট করুন</string>
+    <string name="txt_please_input_a_valid_mobile_number">দয়া করে একটি বৈধ মোবাইল নম্বর ইনপুট করুন</string>
+    <string name="txt_please_input_a_password">দয়া করে একটি পাসওয়ার্ড ইনপুট করুন</string>
+    <string name="txt_please_select_a_gender">একটি লিঙ্গ নির্বাচন করুন</string>
+    <string name="txt_optional">(ঐচ্ছিক)</string>
+    <string name="txt_offer">অফার</string>
+    <string name="txt_add_your_birth_date">আপনার আসন্ন জন্মদিনে একটি বিশেষ উপহার পেতে আপনার জন্ম তারিখ যুক্ত করুন</string>
 </resources>

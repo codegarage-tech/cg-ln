@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatCheckBox;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.github.dhaval2404.imagepicker.constant.ImageProvider;
@@ -33,6 +32,8 @@ import com.meembusoft.ln.util.DateManager;
 import com.meembusoft.ln.util.GlideManager;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
+import com.meembusoft.ln.util.ValidationManager;
+import com.meembusoft.ln.view.MCheckBox;
 import com.meembusoft.localemanager.LocaleManager;
 import com.meembusoft.localemanager.languagesupport.LanguagesSupport;
 import com.nex3z.flowlayout.FlowLayout;
@@ -51,7 +52,7 @@ public class AboutProfileActivity extends BaseActivity {
     // Toolbar
     private TextView tvTitle;
     private LinearLayout llClose, llSignOut;
-    private AppCompatCheckBox accbEdit;
+    private MCheckBox accbEdit;
 
     // View items
     private EditText edtFullName, edtMobileNumber, edtPassword, edtEmail, edtOccupation, edtAddress;
@@ -76,27 +77,10 @@ public class AboutProfileActivity extends BaseActivity {
     private static final int PROFILE_IMAGE_REQ_CODE = 101;
 
     // Profile update information
+    private boolean isBengaliLocale = false;
     private Uri mProfileUri;
     private String mFullName = "", mMobileNumber = "", mPassword = "", mBirthDate = "", mEmail = "", mOccupation = "", mAddress = "";
     private int mGender = 0;
-
-    // Class variables
-    private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                syncAboutProfile(true);
-            } else {
-//                if (TextUtils.isEmpty(edtFullName.getText().toString())) {
-//                    CookieBarUtil.showCookieBarError(getActivity(), "Warning", "Please input full name");
-//                    revertToEditState();
-//                    return;
-//                }
-
-                syncAboutProfile(false);
-            }
-        }
-    };
 
     @Override
     public int initToolbarLayout() {
@@ -120,7 +104,6 @@ public class AboutProfileActivity extends BaseActivity {
         llClose = findViewById(R.id.ll_close);
         llSignOut = findViewById(R.id.ll_sign_out);
         accbEdit = findViewById(R.id.cb_edit);
-
         // View items
         ivProfileImage = findViewById(R.id.iv_profile_image);
         llProfileImage = findViewById(R.id.ll_profile_image);
@@ -150,6 +133,7 @@ public class AboutProfileActivity extends BaseActivity {
         tvTitle.setText(R.string.txt_about_profile);
         accbEdit.setChecked(false);
 
+        isBengaliLocale = LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI);
         setProfileInformation();
         syncAboutProfile(false);
     }
@@ -169,7 +153,43 @@ public class AboutProfileActivity extends BaseActivity {
                 finish();
             }
         });
-        accbEdit.setOnCheckedChangeListener(onCheckedChangeListener);
+        accbEdit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    syncAboutProfile(true);
+                } else {
+                    if (TextUtils.isEmpty(edtFullName.getText().toString())) {
+                        CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_full_name));
+                        accbEdit.setChecked(true, false);
+                        return;
+                    }
+                    if (TextUtils.isEmpty(edtMobileNumber.getText().toString())) {
+                        CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_mobile_number));
+                        accbEdit.setChecked(true, false);
+                        return;
+                    }
+                    if (!ValidationManager.isValidBangladeshiMobileNumber(isBengaliLocale ? DateManager.convertBengaliDigitToEnglish(edtMobileNumber.getText().toString()) : edtMobileNumber.getText().toString())) {
+                        CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_valid_mobile_number));
+                        accbEdit.setChecked(true, false);
+                        return;
+                    }
+                    if (TextUtils.isEmpty(edtPassword.getText().toString())) {
+                        CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_password));
+                        accbEdit.setChecked(true, false);
+                        return;
+                    }
+                    if (tvSelectedGender.getText().toString().equalsIgnoreCase(getString(R.string.txt_gender))) {
+                        CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_select_a_gender));
+                        accbEdit.setChecked(true, false);
+                        return;
+                    }
+                    syncAboutProfile(false);
+                    showOffer();
+                }
+            }
+        });
+
         ivAttachment.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View var1) {
@@ -201,11 +221,7 @@ public class AboutProfileActivity extends BaseActivity {
                             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                                 String selectedDate = String.format("%02d", dayOfMonth) + "-" + String.format("%02d", (monthOfYear + 1)) + "-" + year;
                                 Log.d(TAG, "selectedDate: " + selectedDate);
-                                if (LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI)) {
-                                    tvSelectedDate.setText(DateManager.convertEnglishDateToBengali(selectedDate));
-                                } else {
-                                    tvSelectedDate.setText(selectedDate);
-                                }
+                                tvSelectedDate.setText(isBengaliLocale ? DateManager.convertEnglishDigitToBengali(selectedDate) : selectedDate);
                             }
                         },
                         now.get(Calendar.YEAR), // Initial year selection
@@ -295,17 +311,9 @@ public class AboutProfileActivity extends BaseActivity {
                 GlideManager.setImage(getActivity(), ivProfileImage, user.getUser_image().getUrl(), true);
             }
             edtFullName.setText(user.getUser_name());
-            if (LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI)) {
-                edtMobileNumber.setText(DateManager.convertEnglishDateToBengali(user.getUser_phone()));
-            } else {
-                edtMobileNumber.setText(user.getUser_phone());
-            }
+            edtMobileNumber.setText(isBengaliLocale ? DateManager.convertEnglishDigitToBengali(user.getUser_phone()) : user.getUser_phone());
             edtPassword.setText(user.getUser_password());
-            if (LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI)) {
-                tvSelectedDate.setText(DateManager.convertEnglishDateToBengali(user.getUser_birth_date()));
-            } else {
-                tvSelectedDate.setText(user.getUser_birth_date());
-            }
+            tvSelectedDate.setText((TextUtils.isEmpty(user.getUser_birth_date()) ? getString(R.string.txt_birth_date) : (isBengaliLocale ? DateManager.convertEnglishDigitToBengali(user.getUser_birth_date()) : user.getUser_birth_date())));
             edtEmail.setText(user.getUser_email());
             edtOccupation.setText(user.getUser_occupation());
             edtAddress.setText(user.getUser_address());
@@ -393,9 +401,10 @@ public class AboutProfileActivity extends BaseActivity {
         }
     }
 
-//    private void revertToEditState() {
-//        accbEdit.setOnCheckedChangeListener(null);
-//        accbEdit.setChecked(false);
-//        accbEdit.setOnCheckedChangeListener(onCheckedChangeListener);
-//    }
+    private void showOffer() {
+        User user = SessionUtil.getUser(getActivity());
+        if (user != null && TextUtils.isEmpty(user.getUser_birth_date())) {
+            CookieBarUtil.showCookieBarOffer(getActivity(), getString(R.string.txt_add_your_birth_date));
+        }
+    }
 }

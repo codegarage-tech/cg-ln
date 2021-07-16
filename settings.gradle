@@ -15,4 +15,5 @@ include ':app',
         ':library:realmmanager',
         ':library:addtocart',
         ':library:attributionpresenter',
-        ':library:aboutbox'
+        ':library:aboutbox',
+        ':library:cookiebar2'
