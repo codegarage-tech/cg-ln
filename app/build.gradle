@@ -249,6 +249,9 @@ dependencies {
     // Cookiebar 2
     implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
 
+    // Date time picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+
     // Library projects
     implementation project(":library:localemanager")
     implementation project(":library:recolor")

@@ -126,5 +126,9 @@
     <!-- About Profile -->
     <string name="txt_occupation">পেশা</string>
     <string name="txt_gender">লিঙ্গ</string>
+    <string name="txt_birth_date">জন্ম তারিখ</string>
     <string name="txt_address">ঠিকানা</string>
+    <string name="txt_male">পুরুষ</string>
+    <string name="txt_female">মহিলা</string>
+    <string name="txt_third_gender">তৃতীয় লিঙ্গ</string>
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_expandable_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/ll_expandable_layout"
     android:gravity="center_vertical"
     android:orientation="vertical">
 
@@ -24,9 +24,9 @@
                 android:id="@+id/tv_selected_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/paragraphTextColor"
                 android:text="@string/txt_gender"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/paragraphTextColor" />
 
             <ImageView
                 android:id="@+id/headerIndicator"

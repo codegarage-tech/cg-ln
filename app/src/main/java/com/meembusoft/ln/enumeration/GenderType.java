@@ -1,12 +1,15 @@
 package com.meembusoft.ln.enumeration;
 
+import com.meembusoft.ln.R;
+import com.meembusoft.ln.base.BaseApp;
+
 /**
  * @author Md. Rashadul Alam
  * Email: rashed.droid@gmail.com
  */
 public enum GenderType {
 
-    MALE("Male"), FEMALE("Female"), THIRD_GENDER("Third Gender");
+    MALE(BaseApp.getGlobalContext().getString(R.string.txt_male)), FEMALE(BaseApp.getGlobalContext().getString(R.string.txt_female)), THIRD_GENDER(BaseApp.getGlobalContext().getString(R.string.txt_third_gender));
 
     private final String genderType;
 

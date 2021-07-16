@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -27,13 +28,16 @@ import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.GenderType;
 import com.meembusoft.ln.model.User;
 import com.meembusoft.ln.util.AppUtil;
+import com.meembusoft.ln.util.DateManager;
 import com.meembusoft.ln.util.GlideManager;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
 import com.nex3z.flowlayout.FlowLayout;
 import com.nex3z.flowlayout.FlowLayoutManager;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import kotlin.Unit;
@@ -50,6 +54,11 @@ public class AboutProfileActivity extends BaseActivity {
     private EditText edtFullName, edtMobileNumber, edtPassword, edtEmail, edtOccupation, edtAddress;
     private ImageView ivProfileImage, ivAttachment;
     private LinearLayout llProfileImage;
+
+    // Birth date
+    private RelativeLayout rlBirthDate;
+    private TextView tvSelectedDate;
+    private ImageView ivBirthDateIndicator;
 
     // Gender
     private FlowLayout flowLayoutGender;
@@ -104,6 +113,10 @@ public class AboutProfileActivity extends BaseActivity {
         tvSelectedGender = findViewById(R.id.tv_selected_gender);
         llExpandableHeaderGender = findViewById(R.id.ll_expandable_layout);
         ivHeaderIndicator = findViewById(R.id.headerIndicator);
+        // Birth date
+        rlBirthDate = findViewById(R.id.rl_birth_date);
+        tvSelectedDate = findViewById(R.id.tv_selected_date);
+        ivBirthDateIndicator = findViewById(R.id.iv_birth_date_indicator);
     }
 
     @Override
@@ -140,30 +153,32 @@ public class AboutProfileActivity extends BaseActivity {
         ivAttachment.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View var1) {
-
+                setProfileImage();
             }
         });
         llProfileImage.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View var1) {
-                ImagePicker.with(getActivity())
-                        // Crop Square image
-                        .cropSquare()
-                        .setImageProviderInterceptor(new Function1<ImageProvider, Unit>() {
+                setProfileImage();
+            }
+        });
+        rlBirthDate.setOnClickListener(new OnSingleClickListener() {
+            @Override
+            public void onSingleClick(View var1) {
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public Unit invoke(ImageProvider imageProvider) {
-                                Log.d("ImagePicker", "Selected ImageProvider: " + imageProvider.toString());
-                                return null;
+                            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                                String selectedDate = String.format("%02d", dayOfMonth) + "-" + String.format("%02d", (monthOfYear + 1)) + "-" + year;
+                                tvSelectedDate.setText(DateManager.convertEnglishDateToBengaliDate(selectedDate));
                             }
-                        }).setDismissListener(new DismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        Log.d("ImagePicker", "Dialog Dismiss");
-                    }
-                })
-                        // Image resolution will be less than 512 x 512
-                        .maxResultSize(200, 200)
-                        .start(PROFILE_IMAGE_REQ_CODE);
+                        },
+                        now.get(Calendar.YEAR), // Initial year selection
+                        now.get(Calendar.MONTH), // Initial month selection
+                        now.get(Calendar.DAY_OF_MONTH) // Initial day selection
+                );
+                dpd.show(getSupportFragmentManager(), "Datepickerdialog");
             }
         });
     }
@@ -196,11 +211,13 @@ public class AboutProfileActivity extends BaseActivity {
         edtEmail.setEnabled(isEditable);
         edtOccupation.setEnabled(isEditable);
         edtAddress.setEnabled(isEditable);
+        rlBirthDate.setEnabled(isEditable);
         llExpandableHeaderGender.setEnabled(isEditable);
         // Add/Remove background and change gravity
         if (isEditable) {
             ivAttachment.setVisibility(View.VISIBLE);
             ivHeaderIndicator.setVisibility(View.VISIBLE);
+            ivBirthDateIndicator.setVisibility(View.VISIBLE);
             edtFullName.setGravity(Gravity.CENTER_VERTICAL);
             edtFullName.setBackgroundResource(R.drawable.selector_line_edt);
             edtMobileNumber.setGravity(Gravity.CENTER_VERTICAL);
@@ -216,6 +233,7 @@ public class AboutProfileActivity extends BaseActivity {
         } else {
             ivAttachment.setVisibility(View.GONE);
             ivHeaderIndicator.setVisibility(View.GONE);
+            ivBirthDateIndicator.setVisibility(View.GONE);
             edtFullName.setGravity(Gravity.BOTTOM);
             edtFullName.setBackgroundResource(0);
             edtMobileNumber.setGravity(Gravity.BOTTOM);
@@ -307,6 +325,29 @@ public class AboutProfileActivity extends BaseActivity {
                     GlideManager.setImage(getActivity(), ivProfileImage, uri, true);
                     break;
             }
+        }
+    }
+
+    private void setProfileImage() {
+        if (accbEdit.isChecked()) {
+            ImagePicker.with(getActivity())
+                    // Crop Square image
+                    .cropSquare()
+                    .setImageProviderInterceptor(new Function1<ImageProvider, Unit>() {
+                        @Override
+                        public Unit invoke(ImageProvider imageProvider) {
+                            Log.d("ImagePicker", "Selected ImageProvider: " + imageProvider.toString());
+                            return null;
+                        }
+                    }).setDismissListener(new DismissListener() {
+                @Override
+                public void onDismiss() {
+                    Log.d("ImagePicker", "Dialog Dismiss");
+                }
+            })
+                    // Image resolution will be less than 512 x 512
+                    .maxResultSize(200, 200)
+                    .start(PROFILE_IMAGE_REQ_CODE);
         }
     }
 }
