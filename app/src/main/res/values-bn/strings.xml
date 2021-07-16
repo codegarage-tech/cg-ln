@@ -45,6 +45,9 @@
     <string name="txt_cart">শপিং কার্ট</string>
     <string name="txt_summary">হিসাব</string>
     <string name="txt_delivery_information">ডেলিভারি তথ্য</string>
+    <string name="txt_delivery_name">বিতরণ নাম</string>
+    <string name="txt_delivery_mobile_number">বিতরণ মোবাইল নম্বর</string>
+    <string name="txt_delivery_address">সরবরাহের ঠিকানা</string>
     <string name="txt_payment_system">পরিশোধ পদ্ধতি</string>
     <string name="txt_i_will_pay_cash_on_delivery">আমি ডেলিভারি নেয়ার সময় নগদ প্রদান করব</string>
     <string name="txt_plus">+</string>

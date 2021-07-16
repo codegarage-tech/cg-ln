@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.ColorRes;
 import androidx.appcompat.widget.AppCompatButton;
@@ -189,7 +188,7 @@ public class AppUtil {
             Intent intentCart = new Intent(activity, CartActivity.class);
             activity.startActivity(intentCart);
         } else {
-            Toast.makeText(activity, activity.getString(R.string.txt_there_is_no_item_into_cart), Toast.LENGTH_SHORT).show();
+            CookieBarUtil.showCookieBarWarning(activity, activity.getString(R.string.txt_there_is_no_item_into_cart));
         }
     }
 

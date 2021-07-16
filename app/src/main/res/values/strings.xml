@@ -45,6 +45,9 @@
     <string name="txt_cart">Cart</string>
     <string name="txt_summary">Summary</string>
     <string name="txt_delivery_information">Delivery Information</string>
+    <string name="txt_delivery_name">Delivery Name</string>
+    <string name="txt_delivery_mobile_number">Delivery Mobile Number</string>
+    <string name="txt_delivery_address">Delivery Address</string>
     <string name="txt_payment_system">Payment System</string>
     <string name="txt_i_will_pay_cash_on_delivery">I will pay cash on delivery</string>
     <string name="txt_plus">+</string>

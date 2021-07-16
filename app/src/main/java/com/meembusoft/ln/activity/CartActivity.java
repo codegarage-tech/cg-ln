@@ -8,7 +8,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -20,6 +19,7 @@ import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.CartListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.util.Constants;
+import com.meembusoft.ln.util.CookieBarUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.ValidationManager;
 import com.meembusoft.ln.view.GlobalProgressBar;
@@ -138,33 +138,33 @@ public class CartActivity extends BaseActivity {
             public void onClick(View v) {
                 // Validate oder items
                 if (AddToCartManager.getInstance().getSelectedCartItemCount() == 0) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_select_at_least_one_product), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_select_at_least_one_product));
                     return;
                 }
                 // Validate total
                 if (subTotal < (Constants.MINIMUM_ORDER_AMOUNT)) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_minimum_order_amount_excluding_delivery_charge, Constants.MINIMUM_ORDER_AMOUNT), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_minimum_order_amount_excluding_delivery_charge));
                     return;
                 }
                 // Validate delivery information
                 if (TextUtils.isEmpty(edtDeliveryName.getText().toString())) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_name), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_delivery_name));
                     return;
                 }
                 if (TextUtils.isEmpty(edtDeliveryMobileNumber.getText().toString())) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_mobile_number), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_delivery_mobile_number));
                     return;
                 }
                 if (!ValidationManager.isValidBangladeshiMobileNumber(edtDeliveryMobileNumber.getText().toString())) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_valid_delivery_mobile_number), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_valid_delivery_mobile_number));
                     return;
                 }
                 if (TextUtils.isEmpty(edtDeliveryAddress.getText())) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_address), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_delivery_address));
                     return;
                 }
                 if (!accbCashOnDelivery.isChecked()) {
-                    Toast.makeText(getActivity(), getString(R.string.txt_please_select_the_payment_system), Toast.LENGTH_SHORT).show();
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_select_the_payment_system));
                     return;
                 }
                 try {
