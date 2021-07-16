@@ -45,6 +45,8 @@
     <string name="txt_cart">শপিং কার্ট</string>
     <string name="txt_summary">হিসাব</string>
     <string name="txt_delivery_information">ডেলিভারি তথ্য</string>
+    <string name="txt_payment_system">পরিশোধ পদ্ধতি</string>
+    <string name="txt_i_will_pay_cash_on_delivery">আমি ডেলিভারি নেয়ার সময় নগদ প্রদান করব</string>
     <string name="txt_plus">+</string>
     <string name="txt_minus">-</string>
     <string name="complete_order_question">"Are you sure you want to complete order?</string>
@@ -74,6 +76,7 @@
     <string name="txt_please_input_a_delivery_mobile_number">একটি ডেলিভারি মোবাইল নম্বর ইনপুট করুন</string>
     <string name="txt_please_input_a_valid_delivery_mobile_number">দয়া করে একটি বৈধ ডেলিভারি মোবাইল নম্বর ইনপুট করুন</string>
     <string name="txt_please_input_a_delivery_address">একটি বিতরণ ঠিকানা ইনপুট করুন</string>
+    <string name="txt_please_select_the_payment_system">পেমেন্ট সিস্টেম নির্বাচন করুন</string>
 
     <!-- Dialog -->
     <string name="txt_ok">ঠিক আছে</string>

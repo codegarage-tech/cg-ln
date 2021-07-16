@@ -42,6 +42,7 @@ public class CartActivity extends BaseActivity {
     private boolean isAbortAllSelection = false, isMultiSelection = false;
     private int subTotal = 0;
     private EditText edtDeliveryName, edtDeliveryMobileNumber, edtDeliveryAddress;
+    private AppCompatCheckBox accbCashOnDelivery;
 
     @Override
     public int initToolbarLayout() {
@@ -75,6 +76,7 @@ public class CartActivity extends BaseActivity {
         edtDeliveryMobileNumber = findViewById(R.id.edt_delivery_mobile_no);
         edtDeliveryAddress = findViewById(R.id.edt_delivery_address);
         edtDeliveryName = findViewById(R.id.edt_delivery_name);
+        accbCashOnDelivery = findViewById(R.id.cb_cash_on_delivery);
     }
 
     @Override
@@ -153,12 +155,16 @@ public class CartActivity extends BaseActivity {
                     Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_mobile_number), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (ValidationManager.isValidBangladeshiMobileNumber(edtDeliveryMobileNumber.getText().toString())) {
+                if (!ValidationManager.isValidBangladeshiMobileNumber(edtDeliveryMobileNumber.getText().toString())) {
                     Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_valid_delivery_mobile_number), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(edtDeliveryAddress.getText())) {
                     Toast.makeText(getActivity(), getString(R.string.txt_please_input_a_delivery_address), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!accbCashOnDelivery.isChecked()) {
+                    Toast.makeText(getActivity(), getString(R.string.txt_please_select_the_payment_system), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
