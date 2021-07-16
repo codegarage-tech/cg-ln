@@ -14,13 +14,14 @@ public class User {
     private String user_address = "";
     private String user_password = "";
     private String user_occupation = "";
-    private String user_gender= "";
+    private int user_gender = 0;
+    private String user_birth_date = "";
     private Image user_image;
 
     public User() {
     }
 
-    public User(String user_id, String user_facebook_id, String user_name, String user_phone, String user_email, String user_address, String user_password, String user_occupation, String user_gender, Image user_image) {
+    public User(String user_id, String user_facebook_id, String user_name, String user_phone, String user_email, String user_address, String user_password, String user_occupation, int user_gender, String user_birth_date, Image user_image) {
         this.user_id = user_id;
         this.user_facebook_id = user_facebook_id;
         this.user_name = user_name;
@@ -30,6 +31,7 @@ public class User {
         this.user_password = user_password;
         this.user_occupation = user_occupation;
         this.user_gender = user_gender;
+        this.user_birth_date = user_birth_date;
         this.user_image = user_image;
     }
 
@@ -97,12 +99,20 @@ public class User {
         this.user_occupation = user_occupation;
     }
 
-    public String getUser_gender() {
+    public int getUser_gender() {
         return user_gender;
     }
 
-    public void setUser_gender(String user_gender) {
+    public void setUser_gender(int user_gender) {
         this.user_gender = user_gender;
+    }
+
+    public String getUser_birth_date() {
+        return user_birth_date;
+    }
+
+    public void setUser_birth_date(String user_birth_date) {
+        this.user_birth_date = user_birth_date;
     }
 
     public Image getUser_image() {
@@ -112,7 +122,6 @@ public class User {
     public void setUser_image(Image user_image) {
         this.user_image = user_image;
     }
-
 
     @Override
     public String toString() {
@@ -125,7 +134,8 @@ public class User {
                 ", user_address='" + user_address + '\'' +
                 ", user_password='" + user_password + '\'' +
                 ", user_occupation='" + user_occupation + '\'' +
-                ", user_gender='" + user_gender + '\'' +
+                ", user_gender=" + user_gender +
+                ", user_birth_date='" + user_birth_date + '\'' +
                 ", user_image=" + user_image +
                 '}';
     }

@@ -66,7 +66,7 @@ public class DateManager {
         return timeInMilliseconds;
     }
 
-    public static String convertEnglishDateToBengaliDate(String selectedDate) {
+    public static String convertEnglishDateToBengali(String selectedText) {
         HashMap<Integer, String> hash = new HashMap<Integer, String>() {{
             put(0, "০");
             put(1, "১");
@@ -80,7 +80,7 @@ public class DateManager {
             put(9, "৯");
         }};
         String bengaliDate = "";
-        char[] chars = selectedDate.toCharArray();
+        char[] chars = selectedText.toCharArray();
         for (char digit : chars) {
             try {
                 int selectedDigit = Integer.parseInt(String.valueOf(digit));

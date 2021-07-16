@@ -90,7 +90,7 @@ public class SignInActivity extends BaseActivity {
         llLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("1", "", "Md. Rashadul Alam", "01794620787", "rashed.droid@gmail.com", "Ka-13, South Kuril", "123456", "Software Project Manager", "Male", new Image("https://www.pngfind.com/pngs/m/292-2924858_user-icon-business-man-flat-png-transparent-png.png"));
+                User user = new User("1", "", "Md. Rashadul Alam", "01794620787", "rashed.droid@gmail.com", "Ka-13, South Kuril", "123456", "Software Project Manager", 1, "10-07-2021", new Image("https://www.pngfind.com/pngs/m/292-2924858_user-icon-business-man-flat-png-transparent-png.png"));
                 SessionUtil.setUser(getActivity(), APIResponse.getJSONStringFromObject(user));
                 setResult(RESULT_OK, getIntent());
                 finish();

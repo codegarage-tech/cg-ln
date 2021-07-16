@@ -55,6 +55,7 @@ public abstract class BaseActivity extends PermissionActivity {
 
     public BaseActivity() {
         this.mActivity = this;
+        BaseApp.setCurrentActivity(mActivity);
         this.TAG = getClass().getSimpleName();
     }
 

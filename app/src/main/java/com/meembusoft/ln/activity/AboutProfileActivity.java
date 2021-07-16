@@ -28,10 +28,13 @@ import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.enumeration.GenderType;
 import com.meembusoft.ln.model.User;
 import com.meembusoft.ln.util.AppUtil;
+import com.meembusoft.ln.util.CookieBarUtil;
 import com.meembusoft.ln.util.DateManager;
 import com.meembusoft.ln.util.GlideManager;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
+import com.meembusoft.localemanager.LocaleManager;
+import com.meembusoft.localemanager.languagesupport.LanguagesSupport;
 import com.nex3z.flowlayout.FlowLayout;
 import com.nex3z.flowlayout.FlowLayoutManager;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -71,7 +74,29 @@ public class AboutProfileActivity extends BaseActivity {
 
     // Image picker
     private static final int PROFILE_IMAGE_REQ_CODE = 101;
+
+    // Profile update information
     private Uri mProfileUri;
+    private String mFullName = "", mMobileNumber = "", mPassword = "", mBirthDate = "", mEmail = "", mOccupation = "", mAddress = "";
+    private int mGender = 0;
+
+    // Class variables
+    private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                syncAboutProfile(true);
+            } else {
+//                if (TextUtils.isEmpty(edtFullName.getText().toString())) {
+//                    CookieBarUtil.showCookieBarError(getActivity(), "Warning", "Please input full name");
+//                    revertToEditState();
+//                    return;
+//                }
+
+                syncAboutProfile(false);
+            }
+        }
+    };
 
     @Override
     public int initToolbarLayout() {
@@ -144,12 +169,7 @@ public class AboutProfileActivity extends BaseActivity {
                 finish();
             }
         });
-        accbEdit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                syncAboutProfile(isChecked);
-            }
-        });
+        accbEdit.setOnCheckedChangeListener(onCheckedChangeListener);
         ivAttachment.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View var1) {
@@ -166,12 +186,26 @@ public class AboutProfileActivity extends BaseActivity {
             @Override
             public void onSingleClick(View var1) {
                 Calendar now = Calendar.getInstance();
+                User user = SessionUtil.getUser(getActivity());
+                if (user != null) {
+                    String birthInformation[] = user.getUser_birth_date().split("-");
+                    if (birthInformation.length == 3) {
+                        now.set(Calendar.YEAR, Integer.parseInt(birthInformation[2]));
+                        now.set(Calendar.MONTH, Integer.parseInt(birthInformation[1]));
+                        now.set(Calendar.DAY_OF_MONTH, Integer.parseInt(birthInformation[0]));
+                    }
+                }
                 DatePickerDialog dpd = DatePickerDialog.newInstance(
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                                 String selectedDate = String.format("%02d", dayOfMonth) + "-" + String.format("%02d", (monthOfYear + 1)) + "-" + year;
-                                tvSelectedDate.setText(DateManager.convertEnglishDateToBengaliDate(selectedDate));
+                                Log.d(TAG, "selectedDate: " + selectedDate);
+                                if (LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI)) {
+                                    tvSelectedDate.setText(DateManager.convertEnglishDateToBengali(selectedDate));
+                                } else {
+                                    tvSelectedDate.setText(selectedDate);
+                                }
                             }
                         },
                         now.get(Calendar.YEAR), // Initial year selection
@@ -261,12 +295,20 @@ public class AboutProfileActivity extends BaseActivity {
                 GlideManager.setImage(getActivity(), ivProfileImage, user.getUser_image().getUrl(), true);
             }
             edtFullName.setText(user.getUser_name());
-            edtMobileNumber.setText(user.getUser_phone());
+            if (LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI)) {
+                edtMobileNumber.setText(DateManager.convertEnglishDateToBengali(user.getUser_phone()));
+            } else {
+                edtMobileNumber.setText(user.getUser_phone());
+            }
             edtPassword.setText(user.getUser_password());
+            if (LocaleManager.getSelectedLanguageId(getActivity()).equalsIgnoreCase(LanguagesSupport.Language.BENGALI)) {
+                tvSelectedDate.setText(DateManager.convertEnglishDateToBengali(user.getUser_birth_date()));
+            } else {
+                tvSelectedDate.setText(user.getUser_birth_date());
+            }
             edtEmail.setText(user.getUser_email());
             edtOccupation.setText(user.getUser_occupation());
             edtAddress.setText(user.getUser_address());
-            tvSelectedGender.setText(user.getUser_gender());
 
             // Init gender
             initGender(user);
@@ -277,7 +319,9 @@ public class AboutProfileActivity extends BaseActivity {
         List<String> keys = new ArrayList<>();
         GenderType[] genderTypes = GenderType.values();
         for (int i = 0; i < genderTypes.length; i++) {
-            keys.add(genderTypes[i].toString());
+            if (genderTypes[i].getGenderType() > 0) {
+                keys.add(GenderType.getGenderName(genderTypes[i].getGenderType()));
+            }
         }
         if (!keys.isEmpty()) {
             // Remove all previous keys
@@ -290,7 +334,7 @@ public class AboutProfileActivity extends BaseActivity {
                 @Override
                 public void flowViewClick(TextView updatedTextView) {
                     List<TextView> selectedGenderKeys = flowLayoutManagerGender.getSelectedFlowViews();
-                    String tempSelectedGender = (selectedGenderKeys.size() > 0) ? selectedGenderKeys.get(0).getText().toString() : "";
+                    String tempSelectedGender = (selectedGenderKeys.size() > 0) ? selectedGenderKeys.get(0).getText().toString() : getString(R.string.txt_gender);
                     Log.d(TAG, "tempSelectedGender: " + tempSelectedGender);
 
                     // Update selection
@@ -304,10 +348,8 @@ public class AboutProfileActivity extends BaseActivity {
                     .build();
 
             // Select gender for the very first time
-            if (!TextUtils.isEmpty(user.getUser_gender())) {
-                flowLayoutManagerGender.clickFlowView(user.getUser_gender());
-            } else {
-                flowLayoutManagerGender.clickFlowView(keys.get(0));
+            if (user.getUser_gender() > 0) {
+                flowLayoutManagerGender.clickFlowView(GenderType.getGenderName(user.getUser_gender()));
             }
         }
     }
@@ -350,4 +392,10 @@ public class AboutProfileActivity extends BaseActivity {
                     .start(PROFILE_IMAGE_REQ_CODE);
         }
     }
+
+//    private void revertToEditState() {
+//        accbEdit.setOnCheckedChangeListener(null);
+//        accbEdit.setChecked(false);
+//        accbEdit.setOnCheckedChangeListener(onCheckedChangeListener);
+//    }
 }

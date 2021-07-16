@@ -1,4 +1,4 @@
-package com.meembusoft.ln.enumeration;
+package com.meembusoft.ln.base.flavor;
 
 import com.meembusoft.ln.BuildConfig;
 

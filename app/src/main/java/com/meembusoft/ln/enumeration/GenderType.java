@@ -9,28 +9,29 @@ import com.meembusoft.ln.base.BaseApp;
  */
 public enum GenderType {
 
-    MALE(BaseApp.getGlobalContext().getString(R.string.txt_male)), FEMALE(BaseApp.getGlobalContext().getString(R.string.txt_female)), THIRD_GENDER(BaseApp.getGlobalContext().getString(R.string.txt_third_gender));
+    NONE(0), MALE(1), FEMALE(2), THIRD_GENDER(3);
 
-    private final String genderType;
+    private final int genderType;
 
-    GenderType(String value) {
+    GenderType(int value) {
         genderType = value;
     }
 
-    public boolean equalsName(String otherName) {
-        return genderType.equals(otherName);
+    public int getGenderType() {
+        return genderType;
     }
 
-    public String toString() {
-        return this.genderType;
-    }
-
-    public static GenderType getGenderType(String value) {
-        for (GenderType genderType : GenderType.values()) {
-            if (genderType.toString().equalsIgnoreCase(value)) {
-                return genderType;
-            }
+    public static String getGenderName(int genderType) {
+        String genderName = "";
+        if (genderType == NONE.getGenderType()) {
+            genderName = BaseApp.getCurrentActivity().getString(R.string.txt_gender);
+        } else if (genderType == MALE.getGenderType()) {
+            genderName = BaseApp.getCurrentActivity().getString(R.string.txt_male);
+        } else if (genderType == FEMALE.getGenderType()) {
+            genderName = BaseApp.getCurrentActivity().getString(R.string.txt_female);
+        } else if (genderType == THIRD_GENDER.getGenderType()) {
+            genderName = BaseApp.getCurrentActivity().getString(R.string.txt_third_gender);
         }
-        return null;
+        return genderName;
     }
 }
