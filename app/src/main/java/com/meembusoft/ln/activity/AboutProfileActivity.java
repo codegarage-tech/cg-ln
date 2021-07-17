@@ -169,7 +169,7 @@ public class AboutProfileActivity extends BaseActivity {
                         accbEdit.setChecked(true, false);
                         return;
                     }
-                    if (!ValidationManager.isValidBangladeshiMobileNumber(isBengaliLocale ? DateManager.convertBengaliDigitToEnglish(edtMobileNumber.getText().toString()) : edtMobileNumber.getText().toString())) {
+                    if (!ValidationManager.isValidBangladeshiMobileNumber(edtMobileNumber.getText().toString())) {
                         CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_valid_mobile_number));
                         accbEdit.setChecked(true, false);
                         return;
@@ -311,7 +311,7 @@ public class AboutProfileActivity extends BaseActivity {
                 GlideManager.setImage(getActivity(), ivProfileImage, user.getUser_image().getUrl(), true);
             }
             edtFullName.setText(user.getUser_name());
-            edtMobileNumber.setText(isBengaliLocale ? DateManager.convertEnglishDigitToBengali(user.getUser_phone()) : user.getUser_phone());
+            edtMobileNumber.setText(user.getUser_phone());
             edtPassword.setText(user.getUser_password());
             tvSelectedDate.setText((TextUtils.isEmpty(user.getUser_birth_date()) ? getString(R.string.txt_birth_date) : (isBengaliLocale ? DateManager.convertEnglishDigitToBengali(user.getUser_birth_date()) : user.getUser_birth_date())));
             edtEmail.setText(user.getUser_email());

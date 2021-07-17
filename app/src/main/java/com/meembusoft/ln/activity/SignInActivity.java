@@ -2,17 +2,22 @@ package com.meembusoft.ln.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.base.flavor.BuildType;
 import com.meembusoft.ln.model.Image;
 import com.meembusoft.ln.model.User;
+import com.meembusoft.ln.util.CookieBarUtil;
 import com.meembusoft.ln.util.OnSingleClickListener;
 import com.meembusoft.ln.util.SessionUtil;
+import com.meembusoft.ln.util.ValidationManager;
 import com.meembusoft.retrofitmanager.APIResponse;
 
 public class SignInActivity extends BaseActivity {
@@ -22,8 +27,9 @@ public class SignInActivity extends BaseActivity {
     private LinearLayout llClose;
 
     // View items
-    private TextView tvSignupNow, tvForgotPassword;
-    private LinearLayout llLogin;
+    private EditText edtMobileNumber, edtPassword;
+    private TextView tvSignUpNow, tvForgotPassword;
+    private LinearLayout llSignIn;
     private RelativeLayout rlFacebookLogin, rlGoogleLogin;
 
     @Override
@@ -48,17 +54,24 @@ public class SignInActivity extends BaseActivity {
         llClose = findViewById(R.id.ll_close);
 
         // View items
-        tvSignupNow = (TextView) findViewById(R.id.tv_signup_now);
-        tvForgotPassword = (TextView) findViewById(R.id.tv_forgot_password);
-        llLogin = (LinearLayout) findViewById(R.id.ll_login);
-        rlFacebookLogin = (RelativeLayout) findViewById(R.id.rl_fb_login);
-        rlGoogleLogin = (RelativeLayout) findViewById(R.id.rl_google_login);
+        edtMobileNumber = findViewById(R.id.edt_mobile_number);
+        edtPassword = findViewById(R.id.edt_password);
+        tvSignUpNow = findViewById(R.id.tv_signup_now);
+        tvForgotPassword = findViewById(R.id.tv_forgot_password);
+        llSignIn = findViewById(R.id.ll_sign_in);
+        rlFacebookLogin = findViewById(R.id.rl_fb_login);
+        rlGoogleLogin = findViewById(R.id.rl_google_login);
     }
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_sign_in);
+
+        if (BuildType.getBuildType() == BuildType.DEBUG) {
+            edtMobileNumber.setText("01794620787");
+            edtPassword.setText("123456");
+        }
     }
 
     @Override
@@ -70,11 +83,11 @@ public class SignInActivity extends BaseActivity {
             }
         });
 
-        tvSignupNow.setOnClickListener(new View.OnClickListener() {
+        tvSignUpNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentSignup = new Intent(getActivity(), SignUpActivity.class);
-                startActivity(intentSignup);
+                Intent intentSignUp = new Intent(getActivity(), SignUpActivity.class);
+                startActivity(intentSignUp);
                 finish();
             }
         });
@@ -87,10 +100,23 @@ public class SignInActivity extends BaseActivity {
             }
         });
 
-        llLogin.setOnClickListener(new View.OnClickListener() {
+        llSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User("1", "", "Md. Rashadul Alam", "01794620787", "", "", "123456", "", 0, "", new Image("https://www.pngfind.com/pngs/m/292-2924858_user-icon-business-man-flat-png-transparent-png.png"));
+                if (TextUtils.isEmpty(edtMobileNumber.getText().toString())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_mobile_number));
+                    return;
+                }
+                if (!ValidationManager.isValidBangladeshiMobileNumber(edtMobileNumber.getText().toString())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_valid_mobile_number));
+                    return;
+                }
+                if (TextUtils.isEmpty(edtPassword.getText().toString())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_password));
+                    return;
+                }
+
+                User user = new User("1", "", "Md. Rashadul Alam", edtMobileNumber.getText().toString(), "", "", edtPassword.getText().toString(), "", 0, "", new Image("https://www.pngfind.com/pngs/m/292-2924858_user-icon-business-man-flat-png-transparent-png.png"));
                 SessionUtil.setUser(getActivity(), APIResponse.getJSONStringFromObject(user));
                 setResult(RESULT_OK, getIntent());
                 finish();
