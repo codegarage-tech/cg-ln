@@ -33,6 +33,26 @@ public class CookieBarUtil {
                 .show();
     }
 
+    public static void showCookieBarConfirmation(Activity activity, String message, OnActionClickListener onActionClickListener) {
+        CookieBar.build(activity)
+                .setTitle(activity.getString(R.string.txt_confirmation))
+                .setMessage(message)
+                .setIcon(R.drawable.vector_cookie_ask)
+                .setIconAnimation(R.animator.iconspin)
+                .setTitleColor(R.color.titleTextColor)
+                .setActionColor(R.color.blueLight)
+                .setMessageColor(R.color.subtitleTextColor)
+                .setBackgroundColor(R.color.screenBgColor)
+                .setTitleTextSize(18)
+                .setMessageTextSize(16)
+                .setActionTextSize(20)
+                .setEnableAutoDismiss(false)
+                .setSwipeToDismiss(true)
+                .setCookiePosition(CookieBar.BOTTOM)
+                .setAction(activity.getString(R.string.txt_ok).toUpperCase(), onActionClickListener)
+                .show();
+    }
+
     public static void showCookieBarOffer(Activity activity, String message) {
         CookieBar.build(activity)
                 .setTitle(activity.getString(R.string.txt_offer))

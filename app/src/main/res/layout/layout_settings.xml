@@ -138,7 +138,7 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
+                <!--<RelativeLayout
                     android:id="@+id/rl_sign_out"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
@@ -163,7 +163,7 @@
                         app:tint="@color/subtitleTextColor" />
 
                 </RelativeLayout>
-
+-->
             </LinearLayout>
 
             <LinearLayout

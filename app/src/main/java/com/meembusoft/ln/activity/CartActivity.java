@@ -22,8 +22,9 @@ import com.meembusoft.ln.util.Constants;
 import com.meembusoft.ln.util.CookieBarUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.ValidationManager;
-import com.meembusoft.ln.view.GlobalProgressBar;
 import com.meembusoft.recyclerview.MRecyclerView;
+
+import org.aviran.cookiebar2.OnActionClickListener;
 
 import java.util.List;
 
@@ -167,16 +168,16 @@ public class CartActivity extends BaseActivity {
                     CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_select_the_payment_system));
                     return;
                 }
-                try {
-                    // Show progress bar
-                    GlobalProgressBar.getInstance(getActivity()).showProgressBar();
+                // Remove all cart items after success order
+                AddToCartManager.getInstance().deleteAllCartItems(CartItem.class);
 
-                    // Remove all cart items after success order
-                    AddToCartManager.getInstance().deleteAllCartItems(CartItem.class);
-                    Thread.sleep(3000);
-                    GlobalProgressBar.getInstance(getActivity()).dismissProgressBar();
-                } catch (Exception ex) {
-                }
+                // Check confirmation for saving address
+                CookieBarUtil.showCookieBarConfirmation(getActivity(), getString(R.string.txt_do_you_want_to_save_the_address), new OnActionClickListener() {
+                    @Override
+                    public void onClick() {
+
+                    }
+                });
             }
         });
     }

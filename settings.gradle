@@ -16,4 +16,5 @@ include ':app',
         ':library:addtocart',
         ':library:attributionpresenter',
         ':library:aboutbox',
-        ':library:cookiebar2'
+        ':library:cookiebar2',
+        ':library:timelineview'

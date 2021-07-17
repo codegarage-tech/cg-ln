@@ -268,4 +268,5 @@ dependencies {
     implementation project(":library:attributionpresenter")
     implementation project(":library:aboutbox")
     implementation project(":library:cookiebar2")
+    implementation project(":library:timelineview")
 }

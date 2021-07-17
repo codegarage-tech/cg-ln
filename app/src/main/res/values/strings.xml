@@ -44,10 +44,11 @@
     <!-- Cart -->
     <string name="txt_cart">Cart</string>
     <string name="txt_summary">Summary</string>
-    <string name="txt_delivery_information">Delivery Information</string>
-    <string name="txt_delivery_name">Delivery Name</string>
-    <string name="txt_delivery_mobile_number">Delivery Mobile Number</string>
-    <string name="txt_delivery_address">Delivery Address</string>
+    <string name="txt_shipping_information">Shipping Information</string>
+    <string name="txt_receivers_name">Receiver\'s Name</string>
+    <string name="txt_receivers_mobile_number">Receiver\'s Mobile Number</string>
+    <string name="txt_receivers_address">Receiver\'s Address</string>
+    <string name="txt_shipping_time">Normally we ship your order within one hour. But in case if there is any problem due to any kind of interruption, we will notify the receiver over the phone</string>
     <string name="txt_payment_system">Payment System</string>
     <string name="txt_i_will_pay_cash_on_delivery">I will pay cash on delivery</string>
     <string name="txt_plus">+</string>
@@ -80,10 +81,12 @@
     <string name="txt_please_input_a_valid_delivery_mobile_number">Please input a valid delivery mobile number</string>
     <string name="txt_please_input_a_delivery_address">Please input a delivery address</string>
     <string name="txt_please_select_the_payment_system">Please select the payment system</string>
+    <string name="txt_do_you_want_to_save_the_address">Do you want to save address?</string>
 
     <!-- Dialog -->
     <string name="txt_ok">Ok</string>
     <string name="txt_warning">Warning</string>
+    <string name="txt_confirmation">Confirmation</string>
     <string name="txt_cancel">Cancel</string>
     <string name="txt_runtime_permission_dialog">Without accepting the required permissions you cannot use the app properly. Do you want to accept the permission again?</string>
 
