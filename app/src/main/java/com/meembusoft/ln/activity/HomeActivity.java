@@ -1,6 +1,5 @@
 package com.meembusoft.ln.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,25 +48,25 @@ public class HomeActivity extends BaseActivity {
     private CategoryListAdapter mCategoryListAdapter;
     private PopularProductListAdapter mPopularProductListAdapter;
     private NewProductListAdapter mNewProductListAdapter;
-    private ActivityResultLauncher<Intent> activityResultLauncherLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        mSettingsController.refreshAccountView();
-                        refreshUserView();
-                    }
-                }
-            });
-    private ActivityResultLauncher<Intent> activityResultLauncherAboutProfile = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        doSignOut();
-                    }
-                }
-            });
+//    private ActivityResultLauncher<Intent> activityResultLauncherLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//                @Override
+//                public void onActivityResult(ActivityResult result) {
+//                    if (result.getResultCode() == Activity.RESULT_OK) {
+//                        mSettingsController.refreshAccountView();
+//                        refreshUserView();
+//                    }
+//                }
+//            });
+//    private ActivityResultLauncher<Intent> activityResultLauncherAboutProfile = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//                @Override
+//                public void onActivityResult(ActivityResult result) {
+//                    if (result.getResultCode() == Activity.RESULT_OK) {
+//                        doSignOut();
+//                    }
+//                }
+//            });
 
     @Override
     public int initToolbarLayout() {
@@ -105,7 +100,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
-        refreshUserView();
         // Initialize settings
         mSettingsController = new SettingsController(getActivity(), getParentView());
 
@@ -213,6 +207,8 @@ public class HomeActivity extends BaseActivity {
 
             }
         });
+        // Sync user account from settings and user icon of home
+        syncUserAccount();
     }
 
     @Override
@@ -267,12 +263,14 @@ public class HomeActivity extends BaseActivity {
 
     public void navigateToLogin() {
         Intent intentLogin = new Intent(getActivity(), SignInActivity.class);
-        activityResultLauncherLogin.launch(intentLogin);
+//        activityResultLauncherLogin.launch(intentLogin);
+        startActivity(intentLogin);
     }
 
     private void navigateToAboutProfile() {
         Intent intentAboutProfile = new Intent(HomeActivity.this, AboutProfileActivity.class);
-        activityResultLauncherAboutProfile.launch(intentAboutProfile);
+//        activityResultLauncherAboutProfile.launch(intentAboutProfile);
+        startActivity(intentAboutProfile);
     }
 
 //    private void showUserMenu() {
@@ -314,5 +312,10 @@ public class HomeActivity extends BaseActivity {
         SessionUtil.setUser(getActivity(), "");
         refreshUserView();
         mSettingsController.refreshAccountView();
+    }
+
+    private void syncUserAccount() {
+        mSettingsController.refreshAccountView();
+        refreshUserView();
     }
 }

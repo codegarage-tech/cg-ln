@@ -125,7 +125,12 @@
     <string name="txt_forgot_password">Forgot Password?</string>
     <string name="txt_just_submit_the_email_address">Just submit the email address you\'ve used to register with us and we will send you a password reset link!</string>
     <string name="txt_input_registered_email_address">Input registered email address</string>
+    <string name="txt_input_registered_mobile_number">Input registered mobile number</string>
+    <string name="txt_just_submit_the_mobile_number">Just submit the mobile number you\'ve used to register with us and we will send you a password reset link!</string>
     <string name="txt_submit_email_address">SUBMIT EMAIL ADDRESS</string>
+    <string name="txt_or">or</string>
+    <string name="txt_please_input_an_email_address">Please input an email address</string>
+    <string name="txt_please_input_a_valid_email_address">Please input a valid email address</string>
 
     <!-- About Profile -->
     <string name="txt_occupation">Occupation</string>

@@ -101,7 +101,6 @@ public class SignUpActivity extends BaseActivity {
 
                 User user = new User("1", "", edtFullName.getText().toString(), edtMobileNumber.getText().toString(), "", "", edtPassword.getText().toString(), "", 0, "", new Image("https://www.pngfind.com/pngs/m/292-2924858_user-icon-business-man-flat-png-transparent-png.png"));
                 SessionUtil.setUser(getActivity(), APIResponse.getJSONStringFromObject(user));
-                setResult(RESULT_OK, getIntent());
                 finish();
             }
         });

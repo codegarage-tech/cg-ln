@@ -149,7 +149,7 @@ public class AboutProfileActivity extends BaseActivity {
         llSignOut.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View var1) {
-                setResult(RESULT_OK, getIntent());
+                SessionUtil.setUser(getActivity(), "");
                 finish();
             }
         });

@@ -144,7 +144,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="21dp"
+                    android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_gravity="center"
                     android:background="@drawable/vector_right_arrow" />

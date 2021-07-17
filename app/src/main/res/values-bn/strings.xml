@@ -124,8 +124,13 @@
     <!-- Forgot Password -->
     <string name="txt_forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
     <string name="txt_just_submit_the_email_address">আপনার রেজিস্ট্রিকৃত ইমেল এড্রেস সাবমিট করুন, আমরা আপনাকে পাসওয়ার্ড রিসেট করার লিঙ্ক পাঠাবো!</string>
+    <string name="txt_just_submit_the_mobile_number">আপনার রেজিস্ট্রিকৃত মোবাইল নম্বর সাবমিট করুন, আমরা আপনাকে পাসওয়ার্ড রিসেট করার লিঙ্ক পাঠাবো!</string>
     <string name="txt_input_registered_email_address">রেজিস্ট্রিকৃত ইমেল এড্রেস ইনপুট দিন</string>
+    <string name="txt_input_registered_mobile_number">রেজিস্ট্রিকৃত মোবাইল নম্বর ইনপুট দিন</string>
     <string name="txt_submit_email_address">ইমেল এড্রেস সাবমিট করুন</string>
+    <string name="txt_or">অথবা</string>
+    <string name="txt_please_input_an_email_address">দয়া করে একটি ইমেল ঠিকানা ইনপুট করুন</string>
+    <string name="txt_please_input_a_valid_email_address">দয়া করে একটি বৈধ ইমেল ঠিকানা ইনপুট করুন</string>
 
     <!-- About Profile -->
     <string name="txt_occupation">পেশা</string>
