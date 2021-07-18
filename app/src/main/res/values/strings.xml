@@ -48,7 +48,7 @@
     <string name="txt_receivers_name">Receiver\'s Name</string>
     <string name="txt_receivers_mobile_number">Receiver\'s Mobile Number</string>
     <string name="txt_receivers_address">Receiver\'s Address</string>
-    <string name="txt_shipping_time">Normally we ship your order within one hour. But in case if there is any problem due to any kind of interruption, we will notify the receiver over the phone</string>
+    <string name="txt_shipping_time">Usually, we ship your order within one hour. But in case if there is any problem due to any kind of interruption, we will notify the receiver over the phone</string>
     <string name="txt_payment_system">Payment System</string>
     <string name="txt_i_will_pay_cash_on_delivery">I will pay cash on delivery</string>
     <string name="txt_plus">+</string>
@@ -69,19 +69,21 @@
     <string name="txt_order_now">Order Now(%d)</string>
     <string name="txt_item_quantity_should_more_than_zero">Item quantity should more than zero</string>
     <string name="txt_select_at_least_one_product">Select at least one product</string>
-    <string name="txt_minimum_order_amount_excluding_delivery_charge">Minimum order amount %d Tk excluding delivery charge</string>
+    <string name="txt_minimum_order_amount_excluding_shipping_charge">Minimum order amount %d Tk excluding shipping charge</string>
     <string name="txt_taka">Tk</string>
     <string name="txt_subtotal">Subtotal</string>
     <string name="txt_grand_total">Grand Total</string>
-    <string name="txt_delivery_charge">Delivery Charge</string>
-    <string name="txt_delivery_charge_may_vary_depending_on_the_product_weight">Delivery charge(may vary depending on the product weight)</string>
+    <string name="txt_shipping_charge">Shipping Charge</string>
+    <string name="txt_minimum_shipping_charge_may_vary_depending_on_the_product_weight_and_distance">Minimum Shipping charge(may vary depending on the product weight and distance)</string>
     <string name="txt_amount_with_taka">%d Tk</string>
-    <string name="txt_please_input_a_delivery_name">Please input a delivery name</string>
-    <string name="txt_please_input_a_delivery_mobile_number">Please input a delivery mobile number</string>
-    <string name="txt_please_input_a_valid_delivery_mobile_number">Please input a valid delivery mobile number</string>
-    <string name="txt_please_input_a_delivery_address">Please input a delivery address</string>
+    <string name="txt_please_input_a_receivers_name">Please input a receiver\'s name</string>
+    <string name="txt_please_input_a_receivers_mobile_number">Please input a receiver\'s mobile number</string>
+    <string name="txt_please_input_a_valid_receivers_mobile_number">Please input a valid receiver\'s mobile number</string>
+    <string name="txt_please_input_a_receivers_address">Please input a receiver\'s address</string>
     <string name="txt_please_select_the_payment_system">Please select the payment system</string>
     <string name="txt_do_you_want_to_save_the_address">Do you want to save address?</string>
+    <string name="txt_please_confirm_the_shipping_charge">Please confirm shipping charge</string>
+    <string name="txt_please_confirm_the_shipping_time">Please confirm shipping time</string>
 
     <!-- Dialog -->
     <string name="txt_ok">Ok</string>

@@ -38,12 +38,12 @@ public class CartActivity extends BaseActivity {
     // View items
     private MRecyclerView rvCart;
     private CartListAdapter mCartListAdapter;
-    private TextView tvSubtotal, tvDeliveryCharge, tvGrandTotal, tvTotal;
+    private TextView tvSubtotal, tvShippingCharge, tvGrandTotal, tvTotal;
     private AppCompatButton btnOrderNow;
     private boolean isAbortAllSelection = false, isMultiSelection = false;
     private int subTotal = 0;
-    private EditText edtDeliveryName, edtDeliveryMobileNumber, edtDeliveryAddress;
-    private AppCompatCheckBox accbCashOnDelivery;
+    private EditText edtReceiversName, edtReceiversMobileNumber, edtReceiversAddress;
+    private AppCompatCheckBox accbShippingCharge, accbShippingTime, accbCashOnDelivery;
 
     @Override
     public int initToolbarLayout() {
@@ -70,13 +70,15 @@ public class CartActivity extends BaseActivity {
         // View items
         rvCart = findViewById(R.id.rv_cart);
         tvSubtotal = findViewById(R.id.tv_product_subtotal);
-        tvDeliveryCharge = findViewById(R.id.tv_product_delivery_charge);
+        tvShippingCharge = findViewById(R.id.tv_product_shipping_charge);
         tvGrandTotal = findViewById(R.id.tv_product_grand_total);
         tvTotal = findViewById(R.id.tv_total_price);
         btnOrderNow = findViewById(R.id.btn_order_now);
-        edtDeliveryMobileNumber = findViewById(R.id.edt_delivery_mobile_no);
-        edtDeliveryAddress = findViewById(R.id.edt_delivery_address);
-        edtDeliveryName = findViewById(R.id.edt_delivery_name);
+        edtReceiversMobileNumber = findViewById(R.id.edt_receivers_mobile_no);
+        edtReceiversAddress = findViewById(R.id.edt_receivers_address);
+        edtReceiversName = findViewById(R.id.edt_receivers_name);
+        accbShippingCharge = findViewById(R.id.cb_shipping_charge);
+        accbShippingTime = findViewById(R.id.cb_shipping_time);
         accbCashOnDelivery = findViewById(R.id.cb_cash_on_delivery);
     }
 
@@ -144,24 +146,32 @@ public class CartActivity extends BaseActivity {
                 }
                 // Validate total
                 if (subTotal < (Constants.MINIMUM_ORDER_AMOUNT)) {
-                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_minimum_order_amount_excluding_delivery_charge));
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_minimum_order_amount_excluding_shipping_charge));
                     return;
                 }
                 // Validate delivery information
-                if (TextUtils.isEmpty(edtDeliveryName.getText().toString())) {
-                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_delivery_name));
+                if (!accbShippingCharge.isChecked()) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_confirm_the_shipping_charge));
                     return;
                 }
-                if (TextUtils.isEmpty(edtDeliveryMobileNumber.getText().toString())) {
-                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_delivery_mobile_number));
+                if (TextUtils.isEmpty(edtReceiversName.getText().toString())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_receivers_name));
                     return;
                 }
-                if (!ValidationManager.isValidBangladeshiMobileNumber(edtDeliveryMobileNumber.getText().toString())) {
-                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_valid_delivery_mobile_number));
+                if (TextUtils.isEmpty(edtReceiversMobileNumber.getText().toString())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_receivers_mobile_number));
                     return;
                 }
-                if (TextUtils.isEmpty(edtDeliveryAddress.getText())) {
-                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_delivery_address));
+                if (!ValidationManager.isValidBangladeshiMobileNumber(edtReceiversMobileNumber.getText().toString())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_valid_receivers_mobile_number));
+                    return;
+                }
+                if (TextUtils.isEmpty(edtReceiversAddress.getText())) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_input_a_receivers_address));
+                    return;
+                }
+                if (!accbShippingTime.isChecked()) {
+                    CookieBarUtil.showCookieBarWarning(getActivity(), getString(R.string.txt_please_confirm_the_shipping_time));
                     return;
                 }
                 if (!accbCashOnDelivery.isChecked()) {
@@ -213,7 +223,7 @@ public class CartActivity extends BaseActivity {
         int grandTotal = subTotal + deliveryCharge;
         int selectedItemCount = AddToCartManager.getInstance().getSelectedCartItemCount();
         tvSubtotal.setText(getString(R.string.txt_amount_with_taka, subTotal));
-        tvDeliveryCharge.setText(getString(R.string.txt_amount_with_taka, deliveryCharge));
+        tvShippingCharge.setText(getString(R.string.txt_amount_with_taka, deliveryCharge));
         tvGrandTotal.setText(getString(R.string.txt_amount_with_taka, grandTotal));
         tvTotal.setText(getString(R.string.txt_amount_with_taka, grandTotal));
         btnOrderNow.setText(getString(R.string.txt_order_now, selectedItemCount));
