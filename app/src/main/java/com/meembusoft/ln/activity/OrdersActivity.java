@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.adapter.OrderListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.controller.OrderDetailController;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
 
@@ -23,6 +24,7 @@ public class OrdersActivity extends BaseActivity {
     // View items
     private MRecyclerView rvOrders;
     private OrderListAdapter mOrderListAdapter;
+    private OrderDetailController mOrderDetailController;
 
     @Override
     public int initToolbarLayout() {
@@ -51,6 +53,8 @@ public class OrdersActivity extends BaseActivity {
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
+        // Initialize order detail
+        mOrderDetailController = new OrderDetailController(getActivity(), findViewById(R.id.root));
         // Toolbar
         tvTitle.setText(R.string.txt_orders);
 
@@ -91,5 +95,9 @@ public class OrdersActivity extends BaseActivity {
     @Override
     public void onAllPermissionsAccepted() {
 
+    }
+
+    public OrderDetailController getOrderDetailController() {
+        return mOrderDetailController;
     }
 }

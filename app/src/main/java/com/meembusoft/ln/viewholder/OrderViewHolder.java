@@ -6,8 +6,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.CategoryActivity;
+import com.meembusoft.ln.activity.OrdersActivity;
+import com.meembusoft.ln.adapter.OrderListAdapter;
+import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.enumeration.OrderStatusType;
 import com.meembusoft.ln.model.Order;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 
 public class OrderViewHolder extends BaseViewHolder<Order> {
@@ -45,5 +50,13 @@ public class OrderViewHolder extends BaseViewHolder<Order> {
         } else {
             llOrderTick.setVisibility(View.GONE);
         }
+
+        // Open order detail
+        ((OrderListAdapter) getOwnerAdapter()).setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ((OrdersActivity) getContext()).getOrderDetailController().openDetails(null, view.findViewById(R.id.item_view), data);
+            }
+        });
     }
 }
