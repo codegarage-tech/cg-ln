@@ -74,7 +74,7 @@
     <string name="txt_subtotal">উপ-মোট</string>
     <string name="txt_grand_total">সর্বমোট</string>
     <string name="txt_shipping_charge">বহন খরচ</string>
-    <string name="txt_minimum_shipping_charge_may_vary_depending_on_the_product_weight_and_distance">সর্বনিম্ন শিপিং চার্জ(পণ্যের ওজন এবং দূরত্বের উপর নির্ভর করে পৃথক হতে পারে)</string>
+    <string name="txt_minimum_shipping_charge_may_vary_depending_on_the_product_weight_and_distance">সর্বনিম্ন শিপিং চার্জ(পণ্যের ওজন এবং শিপিংয়ের দূরত্বের উপর নির্ভর করে পরিবর্তিত হতে পারে)</string>
     <string name="txt_amount_with_taka">%d ৳</string>
     <string name="txt_please_input_a_receivers_name">দয়া করে কোনও প্রাপকের নাম ইনপুট করুন</string>
     <string name="txt_please_input_a_receivers_mobile_number">দয়া করে কোনও প্রাপকের মোবাইল নম্বর ইনপুট করুন</string>

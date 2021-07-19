@@ -74,7 +74,7 @@
     <string name="txt_subtotal">Subtotal</string>
     <string name="txt_grand_total">Grand Total</string>
     <string name="txt_shipping_charge">Shipping Charge</string>
-    <string name="txt_minimum_shipping_charge_may_vary_depending_on_the_product_weight_and_distance">Minimum Shipping charge(may vary depending on the product weight and distance)</string>
+    <string name="txt_minimum_shipping_charge_may_vary_depending_on_the_product_weight_and_distance">Minimum Shipping charge(may vary depending on the product weight and shipping distance)</string>
     <string name="txt_amount_with_taka">%d Tk</string>
     <string name="txt_please_input_a_receivers_name">Please input a receiver\'s name</string>
     <string name="txt_please_input_a_receivers_mobile_number">Please input a receiver\'s mobile number</string>

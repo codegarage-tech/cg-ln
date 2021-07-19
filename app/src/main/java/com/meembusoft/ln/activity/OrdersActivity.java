@@ -6,8 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.adapter.OrderListAdapter;
 import com.meembusoft.ln.base.BaseActivity;
+import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.recyclerview.MRecyclerView;
 
 public class OrdersActivity extends BaseActivity {
 
@@ -16,6 +21,8 @@ public class OrdersActivity extends BaseActivity {
     private LinearLayout llClose;
 
     // View items
+    private MRecyclerView rvOrders;
+    private OrderListAdapter mOrderListAdapter;
 
     @Override
     public int initToolbarLayout() {
@@ -39,12 +46,21 @@ public class OrdersActivity extends BaseActivity {
         llClose = findViewById(R.id.ll_close);
 
         // View items
+        rvOrders = findViewById(R.id.rv_order);
     }
 
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Toolbar
         tvTitle.setText(R.string.txt_orders);
+
+        // Setup order recyclerview
+        rvOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mOrderListAdapter = new OrderListAdapter(getActivity());
+        // Load order adapter
+        rvOrders.setAdapter(mOrderListAdapter);
+        // Load order items into adapter
+        mOrderListAdapter.addAll(DataUtil.getAllOrders(getActivity()));
     }
 
     @Override

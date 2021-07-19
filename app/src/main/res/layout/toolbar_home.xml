@@ -67,7 +67,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp_2"
-            android:background="@drawable/shape_circle_border_blue"
+            android:background="@drawable/shape_circle_bg_blue"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/white"

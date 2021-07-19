@@ -10,11 +10,13 @@ import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.Category;
+import com.meembusoft.ln.model.Order;
 import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Subcategory;
 import com.meembusoft.ln.model.Suggestion;
 import com.meembusoft.ln.model.Unit;
 import com.meembusoft.ln.model.response.ResponseCategory;
+import com.meembusoft.ln.model.response.ResponseOrder;
 import com.meembusoft.ln.model.response.ResponseProduct;
 import com.meembusoft.retrofitmanager.APIResponse;
 
@@ -33,9 +35,11 @@ public class DataUtil {
     // Asset file path
     public static final String ASSET_API_RESPONSE_BASE_PATH = "api_responses/";
     public static final String ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY = "category_with_subcategory.json";
+    public static final String ASSET_FILE_NAME_ORDERS = "order_list.json";
     //    public static final String ASSET_FILE_NAME_PRODUCT_RICE = "product_list_rice.json";
     public static final String ASSET_FILE_PATH_CATEGORY_WITH_SUBCATEGORY = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY;
-//    public static final String ASSET_FILE_PATH_PRODUCT = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT;
+    //    public static final String ASSET_FILE_PATH_PRODUCT = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT;
+    public static final String ASSET_FILE_PATH_ORDERS = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_ORDERS;
 
     public static List<Category> getAllCategoriesWithSubcategories(Context context) {
         List<Category> categories = new ArrayList<>();
@@ -47,6 +51,18 @@ public class DataUtil {
             categories.addAll(offlineCategory.getData());
         }
         return categories;
+    }
+
+    public static List<Order> getAllOrders(Context context) {
+        List<Order> orders = new ArrayList<>();
+        String jsonResponse = AndroidAssetManager.readTextFileFromAsset(context, ASSET_FILE_PATH_ORDERS);
+        Logger.d(TAG, TAG + ">>getAllOrders>>jsonResponse: " + jsonResponse);
+        ResponseOrder offlineOrders = APIResponse.getObjectFromJSONString(jsonResponse, ResponseOrder.class);
+        if (offlineOrders != null) {
+            Logger.d(TAG, "offlineOrders: " + offlineOrders.toString());
+            orders.addAll(offlineOrders.getData());
+        }
+        return orders;
     }
 
     public static List<Suggestion> getAllSuggestions(Context context) {
