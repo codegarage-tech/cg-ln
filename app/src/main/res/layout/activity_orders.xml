@@ -3,40 +3,25 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screenBgColor"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:background="@color/screenBgColor">
 
-    <LinearLayout
+    <com.meembusoft.recyclerview.MRecyclerView
+        android:id="@+id/rv_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <View
+        android:id="@+id/touch_interceptor_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-            <com.meembusoft.recyclerview.MRecyclerView
-                android:id="@+id/rv_order"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbarStyle="insideOverlay"
-                android:scrollbars="vertical" />
+    <include layout="@layout/layout_order_detail" />
 
-            <View
-                android:id="@+id/touch_interceptor_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <include layout="@layout/layout_unfoldable_detail" />
-
-            <com.alexvasilkov.foldablelayout.UnfoldableView
-                android:id="@+id/unfoldable_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
-
-    </LinearLayout>
+    <com.alexvasilkov.foldablelayout.UnfoldableView
+        android:id="@+id/unfoldable_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

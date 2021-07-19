@@ -7,10 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.core.widget.NestedScrollView;
+
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.alexvasilkov.foldablelayout.shading.GlanceFoldShading;
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.OrdersActivity;
 import com.meembusoft.ln.model.Order;
+import com.meembusoft.ln.util.Logger;
 
 public class OrderDetailController {
 
@@ -21,6 +25,11 @@ public class OrderDetailController {
     private View listTouchInterceptor;
     private LinearLayout detailsLayout;
     private UnfoldableView unfoldableView;
+
+    // View items
+    private Order mOrder;
+    private NestedScrollView nsvOrderDetail;
+    private String TAG = "OrderDetail";
 
     public OrderDetailController(Activity activity, ViewGroup view) {
         mActivity = activity;
@@ -35,6 +44,8 @@ public class OrderDetailController {
         listTouchInterceptor = parentView.findViewById(R.id.touch_interceptor_view);
         detailsLayout = parentView.findViewById(R.id.details_layout);
         unfoldableView = parentView.findViewById(R.id.unfoldable_view);
+        // View items
+        nsvOrderDetail = parentView.findViewById(R.id.nsv_order_detail);
     }
 
     private void initViewData() {
@@ -43,6 +54,25 @@ public class OrderDetailController {
 
         Bitmap glance = BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.unfold_glance);
         unfoldableView.setFoldShading(new GlanceFoldShading(glance));
+
+        // View items
+        nsvOrderDetail.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY) {
+                    Logger.d(TAG, TAG + "nsvOrderDetail>>Scroll DOWN");
+                }
+                if (scrollY < oldScrollY) {
+                    Logger.d(TAG, TAG + "nsvOrderDetail>>Scroll UP");
+                }
+                if (scrollY == 0) {
+                    Logger.d(TAG, TAG + "nsvOrderDetail>>TOP SCROLL");
+                }
+                if (scrollY == (v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight())) {
+                    Logger.d(TAG, TAG + "nsvOrderDetail>>BOTTOM SCROLL");
+                }
+            }
+        });
     }
 
     private void initActions() {
@@ -52,26 +82,12 @@ public class OrderDetailController {
             public void onUnfolding(UnfoldableView unfoldableView) {
                 listTouchInterceptor.setClickable(true);
                 detailsLayout.setVisibility(View.VISIBLE);
-
-//                // change layout view while unfolding
-//                mFilter.setVisibility(View.INVISIBLE);
-//                ivListToGrid.setVisibility(View.INVISIBLE);
-//                tvTitle.setText(getString(R.string.title_activity_file_detail));
-//                ivContentHamburger.setVisibility(View.GONE);
-//                ivContentBack.setVisibility(View.VISIBLE);
-//
-//                // after folding view it always lost action when it is unfolded again
-//                setBackButtonAction(unfoldableView);
-
             }
 
             @Override
             public void onUnfolded(UnfoldableView unfoldableView) {
                 listTouchInterceptor.setClickable(false);
-
-//                fabFilter.setVisibility(View.INVISIBLE);
-//                rlCart.setVisibility(View.INVISIBLE);
-//                tvTitle.setText(getString(R.string.txt_product_detail));
+                updateTitle(mOrder.getOrder_id_name());
             }
 
             @Override
@@ -83,16 +99,13 @@ public class OrderDetailController {
             public void onFoldedBack(UnfoldableView unfoldableView) {
                 listTouchInterceptor.setClickable(false);
                 detailsLayout.setVisibility(View.INVISIBLE);
-
-//                // change layout view while unfolding
-//                fabFilter.setVisibility(View.VISIBLE);
-//                rlCart.setVisibility(View.VISIBLE);
-//                tvTitle.setText(getString(R.string.txt_product));
+                updateTitle(mActivity.getString(R.string.txt_orders));
             }
         });
     }
 
-    public void openDetails(View detailLayout, View rowItemView, Order order) {
+    public void openDetails(View rowItemView, Order order) {
+        mOrder = order;
 
 //        LinearLayout llImageBackground = (LinearLayout) detailsLayout.findViewById(R.id.ll_image_bg);
 //        TextView tvDetailFileName = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_name);
@@ -109,5 +122,17 @@ public class OrderDetailController {
 //        tvDetailFileLocation.setText(deletedFile.getOriginFilePath());
 
         unfoldableView.unfold(rowItemView, detailsLayout);
+    }
+
+    public boolean isDetailFolded() {
+        if (unfoldableView.isUnfolded() || unfoldableView.isUnfolding()) {
+            unfoldableView.foldBack();
+            return true;
+        }
+        return false;
+    }
+
+    private void updateTitle(String title) {
+        ((OrdersActivity) mActivity).updateTitle(title);
     }
 }

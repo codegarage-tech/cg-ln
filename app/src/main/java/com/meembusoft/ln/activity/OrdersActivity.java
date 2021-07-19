@@ -14,6 +14,7 @@ import com.meembusoft.ln.base.BaseActivity;
 import com.meembusoft.ln.controller.OrderDetailController;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 
 public class OrdersActivity extends BaseActivity {
 
@@ -54,13 +55,19 @@ public class OrdersActivity extends BaseActivity {
     @Override
     public void initViewsData(Bundle savedInstanceState) {
         // Initialize order detail
-        mOrderDetailController = new OrderDetailController(getActivity(), findViewById(R.id.root));
+        mOrderDetailController = new OrderDetailController(getActivity(), getParentView());
         // Toolbar
         tvTitle.setText(R.string.txt_orders);
 
         // Setup order recyclerview
         rvOrders.setLayoutManager(new LinearLayoutManager(getActivity()));
         mOrderListAdapter = new OrderListAdapter(getActivity());
+        mOrderListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int i) {
+                mOrderDetailController.openDetails((view.findViewById(R.id.item_view)), mOrderListAdapter.getItem(i));
+            }
+        });
         // Load order adapter
         rvOrders.setAdapter(mOrderListAdapter);
         // Load order items into adapter
@@ -84,6 +91,9 @@ public class OrdersActivity extends BaseActivity {
 
     @Override
     public void initBackPress() {
+        if (mOrderDetailController.isDetailFolded()) {
+            return;
+        }
         finish();
     }
 
@@ -97,7 +107,7 @@ public class OrdersActivity extends BaseActivity {
 
     }
 
-    public OrderDetailController getOrderDetailController() {
-        return mOrderDetailController;
+    public void updateTitle(String title) {
+        tvTitle.setText(title);
     }
 }
