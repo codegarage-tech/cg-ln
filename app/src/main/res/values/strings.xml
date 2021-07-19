@@ -70,7 +70,7 @@
     <string name="txt_item_quantity_should_more_than_zero">Item quantity should more than zero</string>
     <string name="txt_select_at_least_one_product">Select at least one product</string>
     <string name="txt_minimum_order_amount_excluding_shipping_charge">Minimum order amount %d Tk excluding shipping charge</string>
-    <string name="txt_taka">Tk</string>
+    <string name="txt_tk">Tk</string>
     <string name="txt_subtotal">Subtotal</string>
     <string name="txt_grand_total">Grand Total</string>
     <string name="txt_shipping_charge">Shipping Charge</string>
@@ -153,4 +153,17 @@
     <string name="txt_optional">(optional)</string>
     <string name="txt_offer">Offer</string>
     <string name="txt_add_your_birth_date">Add your birth date for getting a special gift on your upcoming birthday</string>
+
+    <!-- Order -->
+    <string name="txt_pending">Pending</string>
+    <string name="txt_order_has_been_placed_and_under_review">Order has been placed and under review</string>
+    <string name="txt_order_order_has_been_accepted">Order has been accepted</string>
+    <string name="txt_order_has_been_canceled">Order has been canceled</string>
+    <string name="txt_order_processing_has_been_started">Order processing has been started</string>
+    <string name="txt_order_processing_has_been_finished">Order processing has been finished</string>
+    <string name="txt_delivery_man_has_started_moving">Delivery man has started moving with your products</string>
+    <string name="txt_delivery_man_has_reached">Delivery man has reached with your products</string>
+    <string name="txt_payment_has_been_received_by_delivery_man">Payment has been received by delivery man</string>
+    <string name="txt_order_is_completed">Order is completed</string>
+
 </resources>

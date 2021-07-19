@@ -70,7 +70,7 @@
     <string name="txt_item_quantity_should_more_than_zero">অন্তত একটি আইটেম নির্বাচন করুন</string>
     <string name="txt_select_at_least_one_product">কমপক্ষে একটি পণ্য নির্বাচন করুন</string>
     <string name="txt_minimum_order_amount_excluding_shipping_charge">শিপিং চার্জ বাদে সর্বনিম্ন অর্ডার পরিমাণ %d টাকা</string>
-    <string name="txt_taka">টাকা</string>
+    <string name="txt_tk">টাকা</string>
     <string name="txt_subtotal">উপ-মোট</string>
     <string name="txt_grand_total">সর্বমোট</string>
     <string name="txt_shipping_charge">বহন খরচ</string>
@@ -153,4 +153,17 @@
     <string name="txt_optional">(ঐচ্ছিক)</string>
     <string name="txt_offer">অফার</string>
     <string name="txt_add_your_birth_date">আপনার আসন্ন জন্মদিনে একটি বিশেষ উপহার পেতে আপনার জন্ম তারিখ যুক্ত করুন</string>
+
+    <!-- Order -->
+    <string name="txt_pending">বিচারাধীন</string>
+    <string name="txt_order_has_been_placed_and_under_review">অর্ডার দেওয়া হয়েছে এবং পর্যালোচনাধীন রয়েছে</string>
+    <string name="txt_order_order_has_been_accepted">অর্ডার গ্রহণ করা হয়েছে</string>
+    <string name="txt_order_has_been_canceled">অর্ডার বাতিল করা হয়েছে</string>
+    <string name="txt_order_processing_has_been_started">অর্ডার প্রসেসিং শুরু হয়েছে</string>
+    <string name="txt_order_processing_has_been_finished">অর্ডার প্রক্রিয়াজাতকরণ শেষ হয়েছে</string>
+    <string name="txt_delivery_man_has_started_moving">ডেলিভারি ম্যান আপনার পণ্যগুলি নিয়ে চলতে শুরু করেছে</string>
+    <string name="txt_delivery_man_has_reached">ডেলিভারি ম্যান আপনার পণ্যগুলি নিয়ে পৌঁছেছে</string>
+    <string name="txt_payment_has_been_received_by_delivery_man">পেমেন্ট ডেলিভারি ম্যান পেয়েছে</string>
+    <string name="txt_order_is_completed">অর্ডার সম্পন্ন হয়েছে</string>
+
 </resources>

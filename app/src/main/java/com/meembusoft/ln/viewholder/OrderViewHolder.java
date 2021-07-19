@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.enumeration.OrderStatusType;
 import com.meembusoft.ln.model.Order;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 
@@ -34,14 +35,14 @@ public class OrderViewHolder extends BaseViewHolder<Order> {
         tvOrderTimestamp.setText(data.getOrder_timestamp());
         tvReceiverName.setText(data.getReceiver_name());
         tvShippingAddress.setText(data.getShipping_address());
-        tvTotalPrice.setText(data.getTotal_price() + "");
+        tvTotalPrice.setText(data.getTotal_price() + " " + getContext().getString(R.string.txt_tk));
         tvCartQuantity.setText(data.getCart_quantity() + "");
+        tvOrderStatus.setText(OrderStatusType.getOrderStatusTypeDescription(data.getOrder_status()));
 
-        if (data.getOrder_status() == 5) {
-            tvOrderStatus.setText("Completed");
+        OrderStatusType orderStatusType = OrderStatusType.getOrderStatusType(data.getOrder_status());
+        if (orderStatusType == OrderStatusType.ORDER_COMPLETED) {
             llOrderTick.setVisibility(View.VISIBLE);
         } else {
-            tvOrderStatus.setText("Delivery on the way");
             llOrderTick.setVisibility(View.GONE);
         }
     }

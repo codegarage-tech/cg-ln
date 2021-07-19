@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_8"
-            android:background="@drawable/shape_rectangle_round_leftop_round_rightbottom"
+            android:background="@drawable/drop_shadow_rectangle_round_lefttop_round_rightbottom"
             android:backgroundTint="@color/colorPrimary"
             android:minHeight="@dimen/dp_90"
             android:orientation="vertical"
@@ -106,10 +106,8 @@
 
                 <TextView
                     android:id="@+id/tv_shipping_address"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:singleLine="true"
                     android:text="Pingna, SorishaBari, Jamalpur"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/paragraphTextColor" />
@@ -119,48 +117,92 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_10"
-                    app:srcCompat="@drawable/vector_price"
-                    app:tint="@color/imageTintColor" />
-
-                <TextView
-                    android:id="@+id/tv_total_price"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:text="10000 Tk"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/paragraphTextColor" />
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_10"
+                        app:srcCompat="@drawable/vector_price"
+                        app:tint="@color/imageTintColor" />
+
+                    <TextView
+                        android:id="@+id/tv_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text="10000 Tk"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/paragraphTextColor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_10"
+                        app:srcCompat="@drawable/vector_cart"
+                        app:tint="@color/imageTintColor" />
+
+                    <TextView
+                        android:id="@+id/tv_cart_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text="5"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/paragraphTextColor" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/ll_order_status"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_5"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_10"
-                    app:srcCompat="@drawable/vector_cart"
-                    app:tint="@color/imageTintColor" />
+                android:background="@drawable/selector_rounded_rectangle_primary"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10"
+                android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/tv_cart_count"
+                    android:id="@+id/tv_order_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:text="5"
+                    android:text="Order has been completed"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/paragraphTextColor" />
+
+                <LinearLayout
+                    android:id="@+id/ll_order_tick"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:background="@drawable/shape_circle_bg_blue"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_order_tick"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/vector_accepted"
+                        app:tint="@color/imageTintColor" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -168,7 +210,7 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/ll_order_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -207,6 +249,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </RelativeLayout>
