@@ -1,0 +1,26 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": {
+    "id": "1",
+    "order_id_name": "S23DWFDS343",
+    "order_timestamp": "02:30, Thursday, 22-07-2021",
+    "receiver_name": "Md. Rashadul Alam",
+    "shipping_address": "Pingna, Sorishabari, Jamalpur",
+    "total_price": 10000,
+    "cart_quantity": 5,
+    "current_status": 8,
+    "status_list":[
+      {
+        "status": 0,
+        "timestamp": "02:30, Thursday, 22-07-2021",
+        "isFinished": 1
+      },
+      {
+        "status": 8,
+        "timestamp": "02:30, Thursday, 22-07-2021",
+        "isFinished": 1
+      }
+    ]
+  }
+}

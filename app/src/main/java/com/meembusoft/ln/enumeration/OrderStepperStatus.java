@@ -6,27 +6,22 @@ package com.meembusoft.ln.enumeration;
  */
 public enum OrderStepperStatus {
 
-    COMPLETED("1"),
-    INACTIVE("0");
+    INACTIVE(0),
+    COMPLETED(1);
 
-    private final String orderStepperStatus;
+    private final int orderStepperStatus;
 
-    private OrderStepperStatus(String value) {
+    private OrderStepperStatus(int value) {
         orderStepperStatus = value;
     }
 
-    public boolean equalsName(String otherName) {
-        return orderStepperStatus.equals(otherName);
-    }
-
-    @Override
-    public String toString() {
+    public int getOrderStepperStatus() {
         return this.orderStepperStatus;
     }
 
-    public static OrderStepperStatus getOrderStepperStatus(String value) {
+    public static OrderStepperStatus getOrderStepperStatus(int value) {
         for (OrderStepperStatus stepperStatus : OrderStepperStatus.values()) {
-            if (stepperStatus.toString().equalsIgnoreCase(value)) {
+            if (stepperStatus.getOrderStepperStatus() == value) {
                 return stepperStatus;
             }
         }

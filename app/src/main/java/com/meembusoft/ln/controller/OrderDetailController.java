@@ -7,14 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import androidx.core.widget.NestedScrollView;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.alexvasilkov.foldablelayout.shading.GlanceFoldShading;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.OrdersActivity;
+import com.meembusoft.ln.adapter.OrderDetailStatusAdapter;
 import com.meembusoft.ln.model.Order;
-import com.meembusoft.ln.util.Logger;
+import com.meembusoft.ln.model.OrderDetail;
+import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.recyclerview.MRecyclerView;
 
 public class OrderDetailController {
 
@@ -27,9 +31,10 @@ public class OrderDetailController {
     private UnfoldableView unfoldableView;
 
     // View items
-    private Order mOrder;
-    private NestedScrollView nsvOrderDetail;
+    private OrderDetail mOrderDetail;
     private String TAG = "OrderDetail";
+    private MRecyclerView rvOrderDetailStatus;
+    private OrderDetailStatusAdapter orderDetailStatusAdapter;
 
     public OrderDetailController(Activity activity, ViewGroup view) {
         mActivity = activity;
@@ -45,34 +50,20 @@ public class OrderDetailController {
         detailsLayout = parentView.findViewById(R.id.details_layout);
         unfoldableView = parentView.findViewById(R.id.unfoldable_view);
         // View items
-        nsvOrderDetail = parentView.findViewById(R.id.nsv_order_detail);
+        rvOrderDetailStatus = parentView.findViewById(R.id.rv_order_detail_status);
     }
 
     private void initViewData() {
         listTouchInterceptor.setClickable(false);
         detailsLayout.setVisibility(View.INVISIBLE);
+        // This is for enabling scrollview inside detail view
+        unfoldableView.setGesturesEnabled(false);
 
         Bitmap glance = BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.unfold_glance);
         unfoldableView.setFoldShading(new GlanceFoldShading(glance));
 
         // View items
-        nsvOrderDetail.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY > oldScrollY) {
-                    Logger.d(TAG, TAG + "nsvOrderDetail>>Scroll DOWN");
-                }
-                if (scrollY < oldScrollY) {
-                    Logger.d(TAG, TAG + "nsvOrderDetail>>Scroll UP");
-                }
-                if (scrollY == 0) {
-                    Logger.d(TAG, TAG + "nsvOrderDetail>>TOP SCROLL");
-                }
-                if (scrollY == (v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight())) {
-                    Logger.d(TAG, TAG + "nsvOrderDetail>>BOTTOM SCROLL");
-                }
-            }
-        });
+
     }
 
     private void initActions() {
@@ -87,7 +78,7 @@ public class OrderDetailController {
             @Override
             public void onUnfolded(UnfoldableView unfoldableView) {
                 listTouchInterceptor.setClickable(false);
-                updateTitle(mOrder.getOrder_id_name());
+                updateTitle(mOrderDetail.getOrder_id_name());
             }
 
             @Override
@@ -105,7 +96,9 @@ public class OrderDetailController {
     }
 
     public void openDetails(View rowItemView, Order order) {
-        mOrder = order;
+        mOrderDetail = DataUtil.getOrderDetail(mActivity, order.getCurrent_status());
+
+        initOrderDetailStatus();
 
 //        LinearLayout llImageBackground = (LinearLayout) detailsLayout.findViewById(R.id.ll_image_bg);
 //        TextView tvDetailFileName = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_name);
@@ -134,5 +127,17 @@ public class OrderDetailController {
 
     private void updateTitle(String title) {
         ((OrdersActivity) mActivity).updateTitle(title);
+    }
+
+    private void initOrderDetailStatus() {
+        orderDetailStatusAdapter = new OrderDetailStatusAdapter(mActivity);
+        rvOrderDetailStatus.setLayoutManager(new LinearLayoutManager(mActivity));
+
+        //Disable nested scrolling
+        rvOrderDetailStatus.setNestedScrollingEnabled(false);
+        ViewCompat.setNestedScrollingEnabled(rvOrderDetailStatus, false);
+
+        rvOrderDetailStatus.setAdapter(orderDetailStatusAdapter);
+        orderDetailStatusAdapter.addAll(mOrderDetail.getStatus_list());
     }
 }

@@ -10,7 +10,7 @@
       "shipping_address": "Pingna, Sorishabari, Jamalpur",
       "total_price": 10000,
       "cart_quantity": 5,
-      "order_status": 3
+      "current_status": 8
     },
     {
       "id": "2",
@@ -20,7 +20,17 @@
       "shipping_address": "Pingna, Sorishabari, Jamalpur",
       "total_price": 10000,
       "cart_quantity": 3,
-      "order_status": 5
+      "current_status": 2
+    },
+    {
+      "id": "3",
+      "order_id_name": "NNSDF343NN",
+      "order_timestamp": "02:30, Thursday, 22-07-2021",
+      "receiver_name": "Rashed",
+      "shipping_address": "Pingna, Sorishabari, Jamalpur",
+      "total_price": 100,
+      "cart_quantity": 2,
+      "current_status": 7
     }
   ]
 }

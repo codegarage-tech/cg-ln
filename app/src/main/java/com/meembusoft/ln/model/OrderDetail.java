@@ -1,6 +1,9 @@
 package com.meembusoft.ln.model;
 
-public class Order {
+import java.util.ArrayList;
+import java.util.List;
+
+public class OrderDetail {
 
     private String id = "";
     private String order_id_name = "";
@@ -10,8 +13,10 @@ public class Order {
     private int total_price = 0;
     private int cart_quantity = 0;
     private int current_status = 0;
+    private List<OrderStatus> status_list = new ArrayList<>();
+//    private List<OrderItem> items = new ArrayList<>();
 
-    public Order() {
+    public OrderDetail() {
     }
 
     public String getId() {
@@ -78,17 +83,26 @@ public class Order {
         this.current_status = current_status;
     }
 
+    public List<OrderStatus> getStatus_list() {
+        return status_list;
+    }
+
+    public void setStatus_list(List<OrderStatus> status_list) {
+        this.status_list = status_list;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id='" + id + '\'' +
-                ", id_name='" + order_id_name + '\'' +
+                ", order_id_name='" + order_id_name + '\'' +
                 ", order_timestamp='" + order_timestamp + '\'' +
                 ", receiver_name='" + receiver_name + '\'' +
-                ", receiver_address='" + shipping_address + '\'' +
-                ", total_amount=" + total_price +
+                ", shipping_address='" + shipping_address + '\'' +
+                ", total_price=" + total_price +
                 ", cart_quantity=" + cart_quantity +
-                ", order_status=" + current_status +
+                ", current_status=" + current_status +
+                ", status_list=" + status_list +
                 '}';
     }
 }

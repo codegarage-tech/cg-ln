@@ -166,4 +166,6 @@
     <string name="txt_payment_has_been_received_by_delivery_man">পেমেন্ট ডেলিভারি ম্যান পেয়েছে</string>
     <string name="txt_order_is_completed">অর্ডার সম্পন্ন হয়েছে</string>
 
+    <!-- Order Detail -->
+    <string name="txt_order_status">অর্ডারের অবস্থা</string>
 </resources>

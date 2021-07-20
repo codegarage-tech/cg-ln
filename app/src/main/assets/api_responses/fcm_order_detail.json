@@ -4,6 +4,6 @@
   "message": "This is a order",
   "data": {
     "order_id": "50",
-    "order_status": 5
+    "current_status": 5
   }
 }

@@ -9,16 +9,15 @@ import com.meembusoft.ln.base.BaseApp;
  */
 public enum OrderStatusType {
 
-    NONE(0),
-    ORDER_PLACED(1),
-    ORDER_ACCEPTED(2),
-    ORDER_CANCELED(3),
-    ORDER_PROCESSING_STARTED(4),
-    ORDER_PROCESSING_FINISHED(5),
-    SHIPPING_STARTED(6),
-    SHIPPING_FINISHED(7),
-    PAYMENT_RECEIVED(8),
-    ORDER_COMPLETED(9);
+    ORDER_PLACED(0),
+    ORDER_ACCEPTED(1),
+    ORDER_PROCESSING_STARTED(2),
+    ORDER_PROCESSING_FINISHED(3),
+    SHIPPING_STARTED(4),
+    SHIPPING_FINISHED(5),
+    PAYMENT_RECEIVED(6),
+    ORDER_COMPLETED(7),
+    ORDER_CANCELED(8);
 
     private final int orderStatusType;
 
@@ -41,9 +40,7 @@ public enum OrderStatusType {
 
     public static String getOrderStatusTypeDescription(int orderStatusType) {
         String orderStatusDescription = "";
-        if (orderStatusType == NONE.getOrderStatusType()) {
-            orderStatusDescription = "";
-        } else if (orderStatusType == ORDER_PLACED.getOrderStatusType()) {
+        if (orderStatusType == ORDER_PLACED.getOrderStatusType()) {
             orderStatusDescription = BaseApp.getCurrentActivity().getString(R.string.txt_order_has_been_placed_and_under_review);
         } else if (orderStatusType == ORDER_ACCEPTED.getOrderStatusType()) {
             orderStatusDescription = BaseApp.getCurrentActivity().getString(R.string.txt_order_order_has_been_accepted);

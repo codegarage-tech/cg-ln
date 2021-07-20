@@ -166,4 +166,6 @@
     <string name="txt_payment_has_been_received_by_delivery_man">Payment has been received by delivery man</string>
     <string name="txt_order_is_completed">Order is completed</string>
 
+    <!-- Order Detail -->
+    <string name="txt_order_status">Order Status</string>
 </resources>

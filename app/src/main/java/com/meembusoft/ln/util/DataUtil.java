@@ -11,12 +11,14 @@ import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.Category;
 import com.meembusoft.ln.model.Order;
+import com.meembusoft.ln.model.OrderDetail;
 import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Subcategory;
 import com.meembusoft.ln.model.Suggestion;
 import com.meembusoft.ln.model.Unit;
 import com.meembusoft.ln.model.response.ResponseCategory;
 import com.meembusoft.ln.model.response.ResponseOrder;
+import com.meembusoft.ln.model.response.ResponseOrderDetail;
 import com.meembusoft.ln.model.response.ResponseProduct;
 import com.meembusoft.retrofitmanager.APIResponse;
 
@@ -36,9 +38,10 @@ public class DataUtil {
     public static final String ASSET_API_RESPONSE_BASE_PATH = "api_responses/";
     public static final String ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY = "category_with_subcategory.json";
     public static final String ASSET_FILE_NAME_ORDERS = "order_list.json";
-    //    public static final String ASSET_FILE_NAME_PRODUCT_RICE = "product_list_rice.json";
+    public static final String ASSET_FILE_NAME_ORDER_DETAIL_ACCEPTED = "order_detail_accepted.json";
+    public static final String ASSET_FILE_NAME_ORDER_DETAIL_CANCELED = "order_detail_canceled.json";
+    public static final String ASSET_FILE_NAME_ORDER_DETAIL_COMPLETED = "order_detail_completed.json";
     public static final String ASSET_FILE_PATH_CATEGORY_WITH_SUBCATEGORY = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY;
-    //    public static final String ASSET_FILE_PATH_PRODUCT = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT;
     public static final String ASSET_FILE_PATH_ORDERS = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_ORDERS;
 
     public static List<Category> getAllCategoriesWithSubcategories(Context context) {
@@ -63,6 +66,26 @@ public class DataUtil {
             orders.addAll(offlineOrders.getData());
         }
         return orders;
+    }
+
+    public static OrderDetail getOrderDetail(Context context, int currentStatus) {
+        String filePath = "";
+        if (currentStatus == 8) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_ORDER_DETAIL_CANCELED;
+        } else if (currentStatus == 7) {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_ORDER_DETAIL_COMPLETED;
+        } else {
+            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_ORDER_DETAIL_ACCEPTED;
+        }
+        String jsonResponse = AndroidAssetManager.readTextFileFromAsset(context, filePath);
+        Logger.d(TAG, TAG + ">>getOrderDetail>>jsonResponse: " + jsonResponse);
+        ResponseOrderDetail offlineOrderDetail = APIResponse.getObjectFromJSONString(jsonResponse, ResponseOrderDetail.class);
+        if (offlineOrderDetail != null) {
+            Logger.d(TAG, "offlineOrderDetail: " + offlineOrderDetail.toString());
+            return offlineOrderDetail.getData();
+        }
+
+        return null;
     }
 
     public static List<Suggestion> getAllSuggestions(Context context) {

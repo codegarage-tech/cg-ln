@@ -37,9 +37,9 @@ public class OrderViewHolder extends BaseViewHolder<Order> {
         tvShippingAddress.setText(data.getShipping_address());
         tvTotalPrice.setText(data.getTotal_price() + " " + getContext().getString(R.string.txt_tk));
         tvCartQuantity.setText(data.getCart_quantity() + "");
-        tvOrderStatus.setText(OrderStatusType.getOrderStatusTypeDescription(data.getOrder_status()));
+        tvOrderStatus.setText(OrderStatusType.getOrderStatusTypeDescription(data.getCurrent_status()));
 
-        OrderStatusType orderStatusType = OrderStatusType.getOrderStatusType(data.getOrder_status());
+        OrderStatusType orderStatusType = OrderStatusType.getOrderStatusType(data.getCurrent_status());
         if (orderStatusType == OrderStatusType.ORDER_COMPLETED) {
             llOrderTick.setVisibility(View.VISIBLE);
         } else {
