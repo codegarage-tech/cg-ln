@@ -18,6 +18,7 @@
     <color name="imageTintColor">@color/blueDarkLightDeeper</color>
     <color name="statusBarColor">@color/blueDark</color>
     <color name="navigationBarColor">@color/blueDark</color>
+    <color name="disableParagraphTextColor">@color/blueDarkWhiteLight</color>
 
     <color name="blueDark">#112C80</color>
     <color name="blueDarkLight">#005B82</color>

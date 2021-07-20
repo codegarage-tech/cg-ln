@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.alexvasilkov.foldablelayout.shading.GlanceFoldShading;
@@ -17,8 +18,12 @@ import com.meembusoft.ln.activity.OrdersActivity;
 import com.meembusoft.ln.adapter.OrderDetailStatusAdapter;
 import com.meembusoft.ln.model.Order;
 import com.meembusoft.ln.model.OrderDetail;
+import com.meembusoft.ln.model.OrderStatus;
 import com.meembusoft.ln.util.DataUtil;
+import com.meembusoft.ln.util.Logger;
 import com.meembusoft.recyclerview.MRecyclerView;
+
+import java.util.List;
 
 public class OrderDetailController {
 
@@ -32,8 +37,8 @@ public class OrderDetailController {
 
     // View items
     private OrderDetail mOrderDetail;
-    private String TAG = "OrderDetail";
-    private MRecyclerView rvOrderDetailStatus;
+    private String TAG = "OrderDetailController";
+    private RecyclerView rvOrderDetailStatus;
     private OrderDetailStatusAdapter orderDetailStatusAdapter;
 
     public OrderDetailController(Activity activity, ViewGroup view) {
@@ -98,7 +103,7 @@ public class OrderDetailController {
     public void openDetails(View rowItemView, Order order) {
         mOrderDetail = DataUtil.getOrderDetail(mActivity, order.getCurrent_status());
 
-        initOrderDetailStatus();
+        initOrderDetailStatus(mOrderDetail.getStatus_list());
 
 //        LinearLayout llImageBackground = (LinearLayout) detailsLayout.findViewById(R.id.ll_image_bg);
 //        TextView tvDetailFileName = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_name);
@@ -129,15 +134,16 @@ public class OrderDetailController {
         ((OrdersActivity) mActivity).updateTitle(title);
     }
 
-    private void initOrderDetailStatus() {
+    private void initOrderDetailStatus(List<OrderStatus> orderStatuses) {
+        Logger.d(TAG, "orderStatuses: " + orderStatuses.size());
         orderDetailStatusAdapter = new OrderDetailStatusAdapter(mActivity);
         rvOrderDetailStatus.setLayoutManager(new LinearLayoutManager(mActivity));
 
-        //Disable nested scrolling
+        // Disable nested scrolling
         rvOrderDetailStatus.setNestedScrollingEnabled(false);
         ViewCompat.setNestedScrollingEnabled(rvOrderDetailStatus, false);
 
         rvOrderDetailStatus.setAdapter(orderDetailStatusAdapter);
-        orderDetailStatusAdapter.addAll(mOrderDetail.getStatus_list());
+        orderDetailStatusAdapter.addAll(orderStatuses);
     }
 }

@@ -10,6 +10,7 @@ import com.meembusoft.ln.R;
 import com.meembusoft.ln.enumeration.OrderStatusType;
 import com.meembusoft.ln.enumeration.OrderStepperStatus;
 import com.meembusoft.ln.model.OrderStatus;
+import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.reversecoder.timelineview.TimeLineView;
 
@@ -23,6 +24,7 @@ public class OrderDetailStatusViewHolder extends BaseViewHolder<OrderStatus> {
     private TextView tvOrderDetailStatusTimestamp, tvOrderDetailStatusName;
     private LinearLayout llCompleted;
     private ImageView ivStepperStatus;
+    private String TAG = "OrderDetailStatusViewHolder";
 
     public OrderDetailStatusViewHolder(ViewGroup parent) {
         super(parent, R.layout.row_item_order_detail_status);
@@ -62,19 +64,21 @@ public class OrderDetailStatusViewHolder extends BaseViewHolder<OrderStatus> {
         switch (orderStepperStatus) {
             case COMPLETED:
                 if (data.getStatus() == OrderStatusType.ORDER_CANCELED.getOrderStatusType()) {
-                    ivStepperStatus.setBackgroundResource(R.drawable.vector_canceled);
+                    ivStepperStatus.setImageResource(R.drawable.vector_canceled);
                 } else {
-                    ivStepperStatus.setBackgroundResource(R.drawable.vector_accepted);
+                    ivStepperStatus.setImageResource(R.drawable.vector_accepted);
                 }
-                tvOrderDetailStatusName.setTextColor(getContext().getResources().getColor(R.color.white));
+                AppUtil.applyViewTint(ivStepperStatus, R.color.paragraphTextColor);
+                tvOrderDetailStatusName.setTextColor(getContext().getResources().getColor(R.color.paragraphTextColor));
                 break;
             case INACTIVE:
                 if (data.getStatus() == OrderStatusType.ORDER_CANCELED.getOrderStatusType()) {
-                    ivStepperStatus.setBackgroundResource(R.drawable.vector_canceled_grey);
+                    ivStepperStatus.setImageResource(R.drawable.vector_canceled_grey);
                 } else {
-                    ivStepperStatus.setBackgroundResource(R.drawable.vector_accepted_grey);
+                    ivStepperStatus.setImageResource(R.drawable.vector_accepted_grey);
                 }
-                tvOrderDetailStatusName.setTextColor(getContext().getResources().getColor(R.color.white80));
+                AppUtil.applyViewTint(ivStepperStatus, android.R.color.darker_gray);
+                tvOrderDetailStatusName.setTextColor(getContext().getResources().getColor(android.R.color.darker_gray));
                 break;
         }
 
@@ -96,7 +100,12 @@ public class OrderDetailStatusViewHolder extends BaseViewHolder<OrderStatus> {
             llCompleted.setVisibility(View.GONE);
         }
 
-        tvOrderDetailStatusTimestamp.setText(data.getIsFinished() == 1 ? data.getTimestamp() : "---");
+        tvOrderDetailStatusTimestamp.setText(data.getTimestamp());
+        if(data.getIsFinished() == 1){
+            tvOrderDetailStatusTimestamp.setVisibility(View.VISIBLE);
+        } else {
+            tvOrderDetailStatusTimestamp.setVisibility(View.GONE);
+        }
         tvOrderDetailStatusName.setText(OrderStatusType.getOrderStatusTypeDescription(data.getStatus()));
     }
 }
