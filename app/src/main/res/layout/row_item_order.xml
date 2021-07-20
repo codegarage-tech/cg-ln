@@ -17,8 +17,6 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_8"
             android:background="@drawable/drop_shadow_rectangle_round_lefttop_round_rightbottom"
-            android:backgroundTint="@color/colorPrimary"
-            android:minHeight="@dimen/dp_90"
             android:orientation="vertical"
             android:padding="@dimen/dp_12">
 

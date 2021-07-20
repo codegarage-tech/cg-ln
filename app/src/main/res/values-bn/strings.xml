@@ -168,4 +168,6 @@
 
     <!-- Order Detail -->
     <string name="txt_order_status">অর্ডারের অবস্থা</string>
+    <string name="txt_products">পণ্যসমূহ</string>
+    <string name="txt_orders_information">অর্ডারের তথ্য</string>
 </resources>
