@@ -85,8 +85,8 @@ android {
             dimension "clientType"
 
             applicationIdSuffix ".bd"
-            versionCode bdVersionCode
-            versionName bdVersionName
+            versionCode userBDVersionCode
+            versionName userBDVersionName
 
             resValue 'string', 'app_name', 'Lagbe Naki?'
         }

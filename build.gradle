@@ -50,8 +50,8 @@ allprojects {
         resolutionStrategy.cacheChangingModulesFor(5, TimeUnit.MINUTES)
     }
 
-    ext.bdVersionCode = 1000
-    ext.bdVersionName = '1.0.00'
+    ext.userBDVersionCode = 1001
+    ext.userBDVersionName = '1.0.01'
     ext.rashedShopVersionCode = 1000
     ext.rashedShopVersionName = '1.0.00'
     ext.appMinSdkVersion = 21 // Need to reset 16, test purpose 21 is being used.
