@@ -9,7 +9,7 @@
       "receiver_name": "Md. Rashadul Alam",
       "shipping_address": "Pingna, Sorishabari, Jamalpur",
       "total_price": 10000,
-      "cart_quantity": 5,
+      "order_item_count": 5,
       "current_status": 8
     },
     {
@@ -19,7 +19,7 @@
       "receiver_name": "Mofazzol",
       "shipping_address": "Pingna, Sorishabari, Jamalpur",
       "total_price": 10000,
-      "cart_quantity": 3,
+      "order_item_count": 3,
       "current_status": 2
     },
     {
@@ -29,7 +29,7 @@
       "receiver_name": "Rashed",
       "shipping_address": "Pingna, Sorishabari, Jamalpur",
       "total_price": 100,
-      "cart_quantity": 2,
+      "order_item_count": 2,
       "current_status": 7
     }
   ]

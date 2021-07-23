@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,13 +16,15 @@ import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.alexvasilkov.foldablelayout.shading.GlanceFoldShading;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.OrdersActivity;
+import com.meembusoft.ln.adapter.OrderDetailItemListAdapter;
 import com.meembusoft.ln.adapter.OrderDetailStatusAdapter;
 import com.meembusoft.ln.model.Order;
 import com.meembusoft.ln.model.OrderDetail;
+import com.meembusoft.ln.model.OrderInformation;
+import com.meembusoft.ln.model.OrderItem;
 import com.meembusoft.ln.model.OrderStatus;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.Logger;
-import com.meembusoft.recyclerview.MRecyclerView;
 
 import java.util.List;
 
@@ -38,8 +41,10 @@ public class OrderDetailController {
     // View items
     private OrderDetail mOrderDetail;
     private String TAG = "OrderDetailController";
-    private RecyclerView rvOrderDetailStatus;
+    private RecyclerView rvOrderDetailStatus, rvOrderDetailItem;
     private OrderDetailStatusAdapter orderDetailStatusAdapter;
+    private OrderDetailItemListAdapter orderDetailItemListAdapter;
+    private TextView tvOrderReceiversName, tvOrderReceiversMobileNumber, tvOrderReceiverAddress, tvOrderPaymentSystem, tvOrderSubtotal, tvOrderShippingCharge;
 
     public OrderDetailController(Activity activity, ViewGroup view) {
         mActivity = activity;
@@ -56,6 +61,13 @@ public class OrderDetailController {
         unfoldableView = parentView.findViewById(R.id.unfoldable_view);
         // View items
         rvOrderDetailStatus = parentView.findViewById(R.id.rv_order_detail_status);
+        rvOrderDetailItem = parentView.findViewById(R.id.rv_order_detail_items);
+        tvOrderReceiversName = parentView.findViewById(R.id.tv_order_receiver_name);
+        tvOrderReceiversMobileNumber = parentView.findViewById(R.id.tv_order_receiver_mobile_number);
+        tvOrderReceiverAddress = parentView.findViewById(R.id.tv_order_receiver_address);
+        tvOrderPaymentSystem = parentView.findViewById(R.id.tv_order_payment_system);
+        tvOrderSubtotal = parentView.findViewById(R.id.tv_order_subtotal);
+        tvOrderShippingCharge = parentView.findViewById(R.id.tv_order_shipping_charge);
     }
 
     private void initViewData() {
@@ -103,22 +115,12 @@ public class OrderDetailController {
     public void openDetails(View rowItemView, Order order) {
         mOrderDetail = DataUtil.getOrderDetail(mActivity, order.getCurrent_status());
 
-        initOrderDetailStatus(mOrderDetail.getStatus_list());
+        // Initialize order detail views
+        initOrderDetailStatus(mOrderDetail.getOrder_status());
+        initOrderDetailInformation(mOrderDetail.getOrder_information());
+        initOrderDetailItems(mOrderDetail.getOrder_items());
 
-//        LinearLayout llImageBackground = (LinearLayout) detailsLayout.findViewById(R.id.ll_image_bg);
-//        TextView tvDetailFileName = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_name);
-//        TextView tvDetailFileLocation = (TextView) detailsLayout.findViewById(R.id.tv_detail_file_location);
-//
-//        if (deletedFile.getTags().size() > 0) {
-//            Tag firstTag = deletedFile.getTags().get(0);
-//            GradientDrawable drawable = new GradientDrawable();
-//            drawable.setColor(firstTag.getColor());
-//            llImageBackground.setBackgroundDrawable(drawable);
-//        }
-//
-//        tvDetailFileName.setText(deletedFile.getOriginFileName());
-//        tvDetailFileLocation.setText(deletedFile.getOriginFilePath());
-
+        // Unfold view
         unfoldableView.unfold(rowItemView, detailsLayout);
     }
 
@@ -145,5 +147,29 @@ public class OrderDetailController {
 
         rvOrderDetailStatus.setAdapter(orderDetailStatusAdapter);
         orderDetailStatusAdapter.addAll(orderStatuses);
+    }
+
+    private void initOrderDetailInformation(OrderInformation orderInformation) {
+        if (orderInformation != null) {
+            tvOrderReceiversName.setText(orderInformation.getReceiver_name());
+            tvOrderReceiversMobileNumber.setText(orderInformation.getReceiver_mobile_number());
+            tvOrderReceiverAddress.setText(orderInformation.getReceiver_address());
+            tvOrderPaymentSystem.setText(orderInformation.getPayment_system());
+            tvOrderSubtotal.setText(mActivity.getString(R.string.txt_amount_with_taka, orderInformation.getSubtotal()));
+            tvOrderShippingCharge.setText(mActivity.getString(R.string.txt_amount_with_taka, orderInformation.getShipping_charge()));
+        }
+    }
+
+    private void initOrderDetailItems(List<OrderItem> orderItems) {
+        Logger.d(TAG, "orderItems: " + orderItems.size());
+        orderDetailItemListAdapter = new OrderDetailItemListAdapter(mActivity);
+        rvOrderDetailItem.setLayoutManager(new LinearLayoutManager(mActivity));
+
+        // Disable nested scrolling
+        rvOrderDetailItem.setNestedScrollingEnabled(false);
+        ViewCompat.setNestedScrollingEnabled(rvOrderDetailItem, false);
+
+        rvOrderDetailItem.setAdapter(orderDetailItemListAdapter);
+        orderDetailItemListAdapter.addAll(orderItems);
     }
 }

@@ -4,13 +4,8 @@
   "data": {
     "id": "1",
     "order_id_name": "S23DWFDS343",
-    "order_timestamp": "02:30, Thursday, 22-07-2021",
-    "receiver_name": "Md. Rashadul Alam",
-    "shipping_address": "Pingna, Sorishabari, Jamalpur",
-    "total_price": 10000,
-    "cart_quantity": 5,
     "current_status": 7,
-    "status_list":[
+    "order_status": [
       {
         "status": 0,
         "timestamp": "02:30, Thursday, 22-07-2021",
@@ -35,18 +30,55 @@
         "status": 4,
         "timestamp": "02:30, Thursday, 22-07-2021",
         "isFinished": 1
-      },{
+      },
+      {
         "status": 5,
         "timestamp": "02:30, Thursday, 22-07-2021",
         "isFinished": 1
-      },{
+      },
+      {
         "status": 6,
         "timestamp": "02:30, Thursday, 22-07-2021",
         "isFinished": 1
-      },{
+      },
+      {
         "status": 7,
         "timestamp": "02:30, Thursday, 22-07-2021",
         "isFinished": 1
+      }
+    ],
+    "order_information": {
+      "receiver_name": "Md. Rashadul Alam",
+      "receiver_mobile_number": "+8801794620787",
+      "receiver_address": "Pingna, SorishaBari, Jamalpur",
+      "payment_system": "Cash on delivery",
+      "subtotal": 1000,
+      "shipping_charge": 10
+    },
+    "order_items": [
+      {
+        "product_id": "1",
+        "product_name": "Long Ear Ring",
+        "product_image": "https://toppng.com/uploads/preview/earring-transparent-images-png-11526417439bzfk6pg7zt.png",
+        "product_unit": "1 Pair",
+        "product_unit_price": 1000,
+        "quantity": 10
+      },
+      {
+        "product_id": "2",
+        "product_name": "RFL tiffine Box",
+        "product_image": "https://image.pngaaa.com/523/612523-small.png",
+        "product_unit": "1 Piece",
+        "product_unit_price": 100,
+        "quantity": 5
+      },
+      {
+        "product_id": "3",
+        "product_name": "Chocolate Cake",
+        "product_image": "https://admin.mrbakerbd.com/public/images/products/1598514745.jpg",
+        "product_unit": "1 Pound",
+        "product_unit_price": 2000,
+        "quantity": 1
       }
     ]
   }

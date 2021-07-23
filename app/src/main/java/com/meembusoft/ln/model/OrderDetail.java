@@ -7,16 +7,21 @@ public class OrderDetail {
 
     private String id = "";
     private String order_id_name = "";
-    private String order_timestamp = "";
-    private String receiver_name = "";
-    private String shipping_address = "";
-    private int total_price = 0;
-    private int cart_quantity = 0;
     private int current_status = 0;
-    private List<OrderStatus> status_list = new ArrayList<>();
-//    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderStatus> order_status = new ArrayList<>();
+    private OrderInformation order_information;
+    private List<OrderItem> order_items = new ArrayList<>();
 
     public OrderDetail() {
+    }
+
+    public OrderDetail(String id, String order_id_name, int current_status, List<OrderStatus> order_status, OrderInformation order_information, List<OrderItem> order_items) {
+        this.id = id;
+        this.order_id_name = order_id_name;
+        this.current_status = current_status;
+        this.order_status = order_status;
+        this.order_information = order_information;
+        this.order_items = order_items;
     }
 
     public String getId() {
@@ -35,46 +40,6 @@ public class OrderDetail {
         this.order_id_name = order_id_name;
     }
 
-    public String getOrder_timestamp() {
-        return order_timestamp;
-    }
-
-    public void setOrder_timestamp(String order_timestamp) {
-        this.order_timestamp = order_timestamp;
-    }
-
-    public String getReceiver_name() {
-        return receiver_name;
-    }
-
-    public void setReceiver_name(String receiver_name) {
-        this.receiver_name = receiver_name;
-    }
-
-    public String getShipping_address() {
-        return shipping_address;
-    }
-
-    public void setShipping_address(String shipping_address) {
-        this.shipping_address = shipping_address;
-    }
-
-    public int getTotal_price() {
-        return total_price;
-    }
-
-    public void setTotal_price(int total_price) {
-        this.total_price = total_price;
-    }
-
-    public int getCart_quantity() {
-        return cart_quantity;
-    }
-
-    public void setCart_quantity(int cart_quantity) {
-        this.cart_quantity = cart_quantity;
-    }
-
     public int getCurrent_status() {
         return current_status;
     }
@@ -83,26 +48,39 @@ public class OrderDetail {
         this.current_status = current_status;
     }
 
-    public List<OrderStatus> getStatus_list() {
-        return status_list;
+    public List<OrderStatus> getOrder_status() {
+        return order_status;
     }
 
-    public void setStatus_list(List<OrderStatus> status_list) {
-        this.status_list = status_list;
+    public void setOrder_status(List<OrderStatus> order_status) {
+        this.order_status = order_status;
+    }
+
+    public OrderInformation getOrder_information() {
+        return order_information;
+    }
+
+    public void setOrder_information(OrderInformation order_information) {
+        this.order_information = order_information;
+    }
+
+    public List<OrderItem> getOrder_items() {
+        return order_items;
+    }
+
+    public void setOrder_items(List<OrderItem> order_items) {
+        this.order_items = order_items;
     }
 
     @Override
     public String toString() {
-        return "{" +
+        return "OrderDetail{" +
                 "id='" + id + '\'' +
                 ", order_id_name='" + order_id_name + '\'' +
-                ", order_timestamp='" + order_timestamp + '\'' +
-                ", receiver_name='" + receiver_name + '\'' +
-                ", shipping_address='" + shipping_address + '\'' +
-                ", total_price=" + total_price +
-                ", cart_quantity=" + cart_quantity +
                 ", current_status=" + current_status +
-                ", status_list=" + status_list +
+                ", order_status=" + order_status +
+                ", order_information=" + order_information +
+                ", order_items=" + order_items +
                 '}';
     }
 }

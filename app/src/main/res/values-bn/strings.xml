@@ -170,4 +170,6 @@
     <string name="txt_order_status">অর্ডারের অবস্থা</string>
     <string name="txt_products">পণ্যসমূহ</string>
     <string name="txt_orders_information">অর্ডারের তথ্য</string>
+    <string name="txt_cash_on_delivery">ডেলিভারি নেয়ার সময় নগদ প্রদান</string>
+    <string name="txt_x">X</string>
 </resources>

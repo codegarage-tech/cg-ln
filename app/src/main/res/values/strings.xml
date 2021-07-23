@@ -170,4 +170,6 @@
     <string name="txt_order_status">Order Status</string>
     <string name="txt_products">Products</string>
     <string name="txt_orders_information">Order\'s Information</string>
+    <string name="txt_cash_on_delivery">Cash on delivery</string>
+    <string name="txt_x">X</string>
 </resources>

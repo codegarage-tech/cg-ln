@@ -36,7 +36,7 @@ public class OrderViewHolder extends BaseViewHolder<Order> {
         tvReceiverName.setText(data.getReceiver_name());
         tvShippingAddress.setText(data.getShipping_address());
         tvTotalPrice.setText(data.getTotal_price() + " " + getContext().getString(R.string.txt_tk));
-        tvCartQuantity.setText(data.getCart_quantity() + "");
+        tvCartQuantity.setText(data.getOrder_item_count() + "");
         tvOrderStatus.setText(OrderStatusType.getOrderStatusTypeDescription(data.getCurrent_status()));
 
         OrderStatusType orderStatusType = OrderStatusType.getOrderStatusType(data.getCurrent_status());

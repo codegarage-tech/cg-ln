@@ -8,7 +8,7 @@ public class Order {
     private String receiver_name = "";
     private String shipping_address = "";
     private int total_price = 0;
-    private int cart_quantity = 0;
+    private int order_item_count = 0;
     private int current_status = 0;
 
     public Order() {
@@ -62,12 +62,12 @@ public class Order {
         this.total_price = total_price;
     }
 
-    public int getCart_quantity() {
-        return cart_quantity;
+    public int getOrder_item_count() {
+        return order_item_count;
     }
 
-    public void setCart_quantity(int cart_quantity) {
-        this.cart_quantity = cart_quantity;
+    public void setOrder_item_count(int order_item_count) {
+        this.order_item_count = order_item_count;
     }
 
     public int getCurrent_status() {
@@ -87,7 +87,7 @@ public class Order {
                 ", receiver_name='" + receiver_name + '\'' +
                 ", receiver_address='" + shipping_address + '\'' +
                 ", total_amount=" + total_price +
-                ", cart_quantity=" + cart_quantity +
+                ", order_item_count=" + order_item_count +
                 ", order_status=" + current_status +
                 '}';
     }
