@@ -388,12 +388,10 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
             tvTitle.setText(getString(R.string.txt_product));
 
             fabFilter.setVisibility(View.VISIBLE);
-            rlCart.setVisibility(View.VISIBLE);
         } else {
             tvTitle.setText(getString(R.string.txt_product_detail));
 
             fabFilter.setVisibility(View.GONE);
-            rlCart.setVisibility(View.GONE);
         }
     }
 }
