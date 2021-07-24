@@ -37,4 +37,19 @@
     <color name="gray_light">#97F4F4F4</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="waterMelon">#EC5A4F</color>
+    <color name="greenLemon">#1BCA09</color>
+    <color name="yellowLemon">#F1EC00</color>
+
+
+    <color name="greenPrimary">#AADFAB</color>
+    <color name="greenPrimaryDark">#CAFF97</color>
+    <color name="greenAccent">#64E323</color>
+    <color name="greenTitle">#007100</color>
+    <color name="greenSubtitle">#017403</color>
+    <color name="greenParagraph">#098F0B</color>
+    <color name="greenHints">#55AB5F</color>
+    <color name="greenScreenBg">#D9F0CC</color>
 </resources>
