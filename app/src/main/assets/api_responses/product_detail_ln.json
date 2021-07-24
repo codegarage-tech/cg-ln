@@ -1,0 +1,40 @@
+{
+  "status": 1,
+  "message": "Response successful",
+  "data": {
+    "id": "1",
+    "name": "Wonder White Bead",
+    "isFavorite": true,
+    "hasOffer": true,
+    "images": [
+      {
+        "url": "https://www.pngfind.com/pngs/m/187-1871070_white-bread-wonder-hd-png-download.png"
+      },
+      {
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSIAhkUnyI0qeIxTGBbgrQcYqtERl8al78IA&usqp=CAU"
+      },
+      {
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6gCNKVPlwiEy1a87pu5AXQ62JYqT3JLyYPA&usqp=CAU"
+      },
+      {
+        "url": "https://spng.pngfind.com/pngs/s/172-1723542_hotdog-png-wonder-bread-transparent-png-download.png"
+      }
+    ],
+    "vendor": "Wonder",
+    "note": "Friday, (10AM ~ 12PM)",
+    "hasDependency": true,
+    "availability": true,
+    "units": [
+      {
+        "name": "1 KG",
+        "originalPrice": 100,
+        "offerPrice": 90
+      },
+      {
+        "name": "SACK(50 KG)",
+        "originalPrice": 2000,
+        "offerPrice": 1900
+      }
+    ]
+  }
+}

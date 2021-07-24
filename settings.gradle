@@ -17,4 +17,5 @@ include ':app',
         ':library:attributionpresenter',
         ':library:aboutbox',
         ':library:cookiebar2',
-        ':library:timelineview'
+        ':library:timelineview',
+        ':library:autoimageslider'
