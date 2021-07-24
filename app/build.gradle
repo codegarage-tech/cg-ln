@@ -249,6 +249,9 @@ dependencies {
     // Date time picker
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 
+    // Image slider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
     // Library projects
     implementation project(":library:localemanager")
     implementation project(":library:recolor")
