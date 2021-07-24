@@ -57,7 +57,7 @@ public class OrdersActivity extends BaseActivity {
         // Initialize order detail
         mOrderDetailController = new OrderDetailController(getActivity(), getParentView());
         // Toolbar
-        tvTitle.setText(R.string.txt_orders);
+        updateTitle(getString(R.string.txt_orders));
 
         // Setup order recyclerview
         rvOrders.setLayoutManager(new LinearLayoutManager(getActivity()));

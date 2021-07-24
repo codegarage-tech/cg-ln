@@ -13,14 +13,12 @@ import com.meembusoft.addtocart.AddToCartManager;
 import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
-import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Unit;
 import com.meembusoft.ln.util.AppUtil;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.RandomManager;
-import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 import com.meembusoft.recyclerview.viewholder.BaseViewHolder;
 import com.nex3z.flowlayout.FlowLayout;
 import com.nex3z.flowlayout.FlowLayoutManager;
@@ -72,13 +70,6 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         initUnit(data);
 
         initShoppingView(data);
-
-        ((ProductListAdapter) getOwnerAdapter()).setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                ((CategoryActivity) getContext()).openDetails(null, view.findViewById(R.id.item_view), data);
-            }
-        });
     }
 
     private void initShoppingView(Product data) {

@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <include layout="@layout/layout_unfoldable_detail" />
+        <include layout="@layout/layout_product_detail" />
 
         <com.alexvasilkov.foldablelayout.UnfoldableView
             android:id="@+id/unfoldable_view"

@@ -8,6 +8,7 @@ import androidx.collection.ArrayMap;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.meembusoft.ln.R;
+import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.adapter.ProductListAdapter;
 import com.meembusoft.ln.base.BaseFragment;
 import com.meembusoft.ln.enumeration.FilterType;
@@ -16,6 +17,7 @@ import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Subcategory;
 import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.recyclerview.MRecyclerView;
+import com.meembusoft.recyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,12 @@ public class SubCategoryFragment extends BaseFragment implements OnProductFilter
         // Setup product recyclerview
         rvProduct.setLayoutManager(new LinearLayoutManager(getActivity()));
         mProductListAdapter = new ProductListAdapter(getActivity());
+        mProductListAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int i) {
+                ((CategoryActivity) getActivity()).openProductDetail((view.findViewById(R.id.item_view)), mProductListAdapter.getItem(i));
+            }
+        });
         // Load subcategory adapter
         rvProduct.setAdapter(mProductListAdapter);
         // Load products data
