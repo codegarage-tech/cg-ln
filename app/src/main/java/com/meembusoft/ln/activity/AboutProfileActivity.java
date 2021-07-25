@@ -353,6 +353,7 @@ public class AboutProfileActivity extends BaseActivity {
                 }
             })
                     .setSingleChoice(true)
+                    .setStickyModeForSingleChoice(true)
                     .build();
 
             // Select gender for the very first time

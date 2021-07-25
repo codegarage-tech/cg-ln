@@ -216,6 +216,7 @@ public class ProductDetailController {
                         }
                     })
                             .setSingleChoice(true)
+                            .setStickyModeForSingleChoice(true)
                             .build();
 
                     //Set last temp selected size key

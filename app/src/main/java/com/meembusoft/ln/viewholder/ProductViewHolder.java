@@ -197,6 +197,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
                     }
                 })
                         .setSingleChoice(true)
+                        .setStickyModeForSingleChoice(true)
                         .build();
 
                 //Set last temp selected size key

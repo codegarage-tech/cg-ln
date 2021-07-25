@@ -24,6 +24,7 @@ public class FlowLayoutManager {
     private List<TextView> flowViews = new ArrayList<>();
     private onFlowViewClick onFlowViewClick;
     private boolean isSingleChoice = false;
+    private boolean isStickyModeForSingleChoice = false;
 
     private FlowLayoutManager(Context context, FlowLayout flowLayout, List<String> keys, onFlowViewClick onFlowViewClick, boolean isSingleChoice) {
         this.context = context;
@@ -58,7 +59,11 @@ public class FlowLayoutManager {
     private void clickFlowView(TextView textView) {
         TextView updatedTextView;
         if (textView.getTag().toString().equalsIgnoreCase(TEXT_TYPE.SELECTED.name())) {
-            updatedTextView = unSelectFlowView(textView);
+            if (getSelectedFlowViews().size() == 1 && isStickyModeForSingleChoice) {
+                updatedTextView = textView;
+            } else {
+                updatedTextView = unSelectFlowView(textView);
+            }
         } else {
             updatedTextView = selectFlowView(textView);
         }
@@ -78,7 +83,11 @@ public class FlowLayoutManager {
         TextView textView = getFlowView(itemName);
         TextView updatedTextView;
         if (textView.getTag().toString().equalsIgnoreCase(TEXT_TYPE.SELECTED.name())) {
-            updatedTextView = unSelectFlowView(textView);
+            if (getSelectedFlowViews().size() == 1 && isStickyModeForSingleChoice) {
+                updatedTextView = textView;
+            } else {
+                updatedTextView = unSelectFlowView(textView);
+            }
         } else {
             updatedTextView = selectFlowView(textView);
         }
@@ -179,6 +188,7 @@ public class FlowLayoutManager {
         flowViews.clear();
         onFlowViewClick = null;
         isSingleChoice = false;
+        isStickyModeForSingleChoice = false;
         flowLayout.removeAllViews();
     }
 
@@ -210,12 +220,17 @@ public class FlowLayoutManager {
         return data;
     }
 
+    public void setStickyModeForSingleChoice(boolean stickyModeForSingleChoice) {
+        isStickyModeForSingleChoice = stickyModeForSingleChoice;
+    }
+
     public static class FlowViewBuilder {
 
         private Context mContext;
         private FlowLayout mFlowLayout;
         private List<String> mKeys;
         private boolean mIsSingleChoice = false;
+        private boolean mIsStickyModeForSingleChoice = false;
         private onFlowViewClick mOnFlowViewClick;
 
         public FlowViewBuilder(Context context, FlowLayout flowLayout, List<String> keys, onFlowViewClick onFlowViewClick) {
@@ -230,8 +245,14 @@ public class FlowLayoutManager {
             return this;
         }
 
+        public FlowViewBuilder setStickyModeForSingleChoice(boolean isStickyModeForSingleChoice) {
+            mIsStickyModeForSingleChoice = isStickyModeForSingleChoice;
+            return this;
+        }
+
         public FlowLayoutManager build() {
             FlowLayoutManager flowLayoutManager = new FlowLayoutManager(mContext, mFlowLayout, mKeys, mOnFlowViewClick, mIsSingleChoice).buildFlowView();
+            flowLayoutManager.setStickyModeForSingleChoice(mIsStickyModeForSingleChoice);
             return flowLayoutManager;
         }
     }
