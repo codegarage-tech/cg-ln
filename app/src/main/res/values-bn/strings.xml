@@ -94,6 +94,11 @@
 
     <!-- Product Detail -->
     <string name="txt_product_detail">পণ্য বিবরণী</string>
+    <string name="txt_unit">একক</string>
+    <string name="txt_providers">সরবরাহকারী</string>
+    <string name="txt_price">মূল্য</string>
+    <string name="txt_note">বিঃদ্রঃ</string>
+    <string name="txt_name">নাম</string>
 
     <!--Sign In Screen-->
     <string name="txt_sign_in">সাইন ইন করুন</string>

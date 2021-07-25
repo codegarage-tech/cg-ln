@@ -55,9 +55,9 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         tvProductOriginalPrice = $(R.id.tv_product_original_price);
         tvProductOfferPrice = $(R.id.tv_product_offer_price);
         flowLayoutUnit = $(R.id.fl_size);
-        svAddToCart = $(R.id.sv_add_to_cart);
         expansionHeader = $(R.id.eh_unit);
         expansionLayout = $(R.id.expansionLayout);
+        svAddToCart = $(R.id.sv_add_to_cart);
     }
 
     @Override

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:textColor="@color/paragraphTextColor"
-                android:text="Unit"
+                android:text="@string/txt_unit"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
             <TextView

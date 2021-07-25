@@ -81,6 +81,7 @@ allprojects {
     ext.parcelerVersion = '1.1.12'
     ext.zxingVersion = '3.6.0'
     ext.flexBoxVersion = '3.0.0'
+    ext.materialRatingBarVersion = '1.4.0'
 }
 
 task clean(type: Delete) {

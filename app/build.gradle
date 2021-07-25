@@ -249,6 +249,9 @@ dependencies {
     // Date time picker
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 
+    // Rating bar
+    implementation "me.zhanghai.android.materialratingbar:library:$materialRatingBarVersion"
+
     // Library projects
     implementation project(":library:localemanager")
     implementation project(":library:recolor")

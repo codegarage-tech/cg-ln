@@ -94,6 +94,11 @@
 
     <!-- Product Detail -->
     <string name="txt_product_detail">Product Detail</string>
+    <string name="txt_unit">Unit</string>
+    <string name="txt_providers">Providers</string>
+    <string name="txt_price">Price</string>
+    <string name="txt_note">Note</string>
+    <string name="txt_name">Name</string>
 
     <!--Sign In Screen-->
     <string name="txt_sign_in">Sign In</string>

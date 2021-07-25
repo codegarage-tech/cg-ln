@@ -51,8 +51,7 @@ public class OrderDetailController {
         parentView = view;
 
         initView();
-        initViewData();
-        initActions();
+        initFoldableLayout();
     }
 
     private void initView() {
@@ -70,7 +69,7 @@ public class OrderDetailController {
         tvOrderShippingCharge = parentView.findViewById(R.id.tv_order_shipping_charge);
     }
 
-    private void initViewData() {
+    private void initFoldableLayout() {
         listTouchInterceptor.setClickable(false);
         detailsLayout.setVisibility(View.INVISIBLE);
         // This is for enabling scrollview inside detail view
@@ -79,11 +78,6 @@ public class OrderDetailController {
         Bitmap glance = BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.unfold_glance);
         unfoldableView.setFoldShading(new GlanceFoldShading(glance));
 
-        // View items
-
-    }
-
-    private void initActions() {
         unfoldableView.setOnFoldingListener(new UnfoldableView.SimpleFoldingListener() {
 
             @Override

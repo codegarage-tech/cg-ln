@@ -73,7 +73,7 @@
 
                     </LinearLayout>
 
-                    <include layout="@layout/layout_expandable_size" />
+                    <include layout="@layout/layout_expandable_unit_product" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

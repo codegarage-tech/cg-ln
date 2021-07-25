@@ -13,7 +13,6 @@ import com.meembusoft.ln.model.Category;
 import com.meembusoft.ln.model.Order;
 import com.meembusoft.ln.model.OrderDetail;
 import com.meembusoft.ln.model.Product;
-import com.meembusoft.ln.model.ProductDetail;
 import com.meembusoft.ln.model.Subcategory;
 import com.meembusoft.ln.model.Suggestion;
 import com.meembusoft.ln.model.Unit;
@@ -21,7 +20,6 @@ import com.meembusoft.ln.model.response.ResponseCategory;
 import com.meembusoft.ln.model.response.ResponseOrder;
 import com.meembusoft.ln.model.response.ResponseOrderDetail;
 import com.meembusoft.ln.model.response.ResponseProduct;
-import com.meembusoft.ln.model.response.ResponseProductDetail;
 import com.meembusoft.retrofitmanager.APIResponse;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class DataUtil {
     public static final String ASSET_FILE_NAME_ORDER_DETAIL_ACCEPTED = "order_detail_accepted.json";
     public static final String ASSET_FILE_NAME_ORDER_DETAIL_CANCELED = "order_detail_canceled.json";
     public static final String ASSET_FILE_NAME_ORDER_DETAIL_COMPLETED = "order_detail_completed.json";
-    public static final String ASSET_FILE_NAME_PRODUCT_DETAIL = "product_detail_ln.json";
+    //    public static final String ASSET_FILE_NAME_PRODUCT_DETAIL = "product_detail_ln.json";
     public static final String ASSET_FILE_PATH_CATEGORY_WITH_SUBCATEGORY = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_CATEGORY_WITH_SUBCATEGORY;
     public static final String ASSET_FILE_PATH_ORDERS = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_ORDERS;
 
@@ -71,23 +69,23 @@ public class DataUtil {
         return orders;
     }
 
-    public static ProductDetail getProductDetail(Context context, int id) {
-        String filePath = "";
-        if (id == 1) {
-            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT_DETAIL;
-        } else {
-            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT_DETAIL;
-        }
-        String jsonResponse = AndroidAssetManager.readTextFileFromAsset(context, filePath);
-        Logger.d(TAG, TAG + ">>getProductDetail>>jsonResponse: " + jsonResponse);
-        ResponseProductDetail offlineProductDetail = APIResponse.getObjectFromJSONString(jsonResponse, ResponseProductDetail.class);
-        if (offlineProductDetail != null) {
-            Logger.d(TAG, "offlineProductDetail: " + offlineProductDetail.toString());
-            return offlineProductDetail.getData();
-        }
-
-        return null;
-    }
+//    public static ProductDetail getProductDetail(Context context, int id) {
+//        String filePath = "";
+//        if (id == 1) {
+//            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT_DETAIL;
+//        } else {
+//            filePath = ASSET_API_RESPONSE_BASE_PATH + ASSET_FILE_NAME_PRODUCT_DETAIL;
+//        }
+//        String jsonResponse = AndroidAssetManager.readTextFileFromAsset(context, filePath);
+//        Logger.d(TAG, TAG + ">>getProductDetail>>jsonResponse: " + jsonResponse);
+//        ResponseProductDetail offlineProductDetail = APIResponse.getObjectFromJSONString(jsonResponse, ResponseProductDetail.class);
+//        if (offlineProductDetail != null) {
+//            Logger.d(TAG, "offlineProductDetail: " + offlineProductDetail.toString());
+//            return offlineProductDetail.getData();
+//        }
+//
+//        return null;
+//    }
 
     public static OrderDetail getOrderDetail(Context context, int currentStatus) {
         String filePath = "";
