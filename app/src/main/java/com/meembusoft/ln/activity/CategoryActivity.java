@@ -139,7 +139,8 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
 
     @Override
     public void initBackPress() {
-        if (mProductDetailController.isDetailFolded()) {
+        if (mProductDetailController.isDetailOpen()) {
+            mProductDetailController.closeDetail();
             return;
         }
         finish();
@@ -159,6 +160,10 @@ public class CategoryActivity extends BaseActivity implements AAH_FabulousFragme
     public void onResume() {
         super.onResume();
         //Reset counter view into toolbar
+        refreshProducts();
+    }
+
+    public void refreshProducts() {
         DataUtil.resetCartCounterView(tvCart, new OnCartResetListener() {
             @Override
             public void onOrderCompleted(boolean isOrderCompleted) {

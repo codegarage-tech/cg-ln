@@ -91,7 +91,8 @@ public class OrdersActivity extends BaseActivity {
 
     @Override
     public void initBackPress() {
-        if (mOrderDetailController.isDetailFolded()) {
+        if (mOrderDetailController.isDetailOpen()) {
+            mOrderDetailController.closeDetail();
             return;
         }
         finish();

@@ -118,12 +118,13 @@ public class OrderDetailController {
         unfoldableView.unfold(rowItemView, detailsLayout);
     }
 
-    public boolean isDetailFolded() {
-        if (unfoldableView.isUnfolded() || unfoldableView.isUnfolding()) {
-            unfoldableView.foldBack();
-            return true;
-        }
-        return false;
+
+    public boolean isDetailOpen() {
+        return unfoldableView.isUnfolded() || unfoldableView.isUnfolding();
+    }
+
+    public void closeDetail(){
+        unfoldableView.foldBack();
     }
 
     private void updateTitle(String title) {

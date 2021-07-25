@@ -1,5 +1,6 @@
 package com.meembusoft.ln.controller;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,9 +20,12 @@ import com.alexvasilkov.foldablelayout.UnfoldableView;
 import com.alexvasilkov.foldablelayout.shading.GlanceFoldShading;
 import com.github.florent37.expansionpanel.ExpansionHeader;
 import com.github.florent37.expansionpanel.ExpansionLayout;
+import com.meembusoft.addtocart.AddToCartManager;
+import com.meembusoft.addtocart.model.CartItem;
 import com.meembusoft.ln.R;
 import com.meembusoft.ln.activity.CategoryActivity;
 import com.meembusoft.ln.adapter.ImageSliderAdapter;
+import com.meembusoft.ln.interfaces.OnCartResetListener;
 import com.meembusoft.ln.model.Image;
 import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Unit;
@@ -41,6 +45,8 @@ import java.util.List;
 
 import me.wangyuwei.shoppoing.ShoppingView;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
+
+import static com.meembusoft.addtocart.util.Constant.DB_KEY_ID;
 
 public class ProductDetailController {
 
@@ -151,12 +157,12 @@ public class ProductDetailController {
         unfoldableView.unfold(rowItemView, detailsLayout);
     }
 
-    public boolean isDetailFolded() {
-        if (unfoldableView.isUnfolded() || unfoldableView.isUnfolding()) {
-            unfoldableView.foldBack();
-            return true;
-        }
-        return false;
+    public boolean isDetailOpen() {
+        return unfoldableView.isUnfolded() || unfoldableView.isUnfolding();
+    }
+
+    public void closeDetail() {
+        unfoldableView.foldBack();
     }
 
     private void initImageSlider(List<Image> productImages) {
@@ -224,6 +230,8 @@ public class ProductDetailController {
             }
 
             initUnit(product);
+
+            initShoppingView(product);
         }
     }
 
@@ -255,11 +263,6 @@ public class ProductDetailController {
                             // Store and update selected unit
                             product.setSelectedUnit(DataUtil.getUnit(tempSelectedSize, units));
                             updateUnitSelection(product);
-//
-//                            // Close expansion layout
-//                            expansionLayout.collapse(true);
-//
-//                            //Save temp selected size
                         }
                     })
                             .setSingleChoice(true)
@@ -299,6 +302,98 @@ public class ProductDetailController {
                     svAddToCart.setTextNum(quantity);
                 }
             }
+        }
+    }
+
+    private void initShoppingView(Product data) {
+        if (data != null) {
+            svAddToCart.setOnShoppingClickListener(new ShoppingView.ShoppingClickListener() {
+                @Override
+                public void onAddClick(int num) {
+                    Log.d(TAG, "@=> " + "add.......num=> " + num);
+                    // Prepare cart item
+                    CartItem cartItem = DataUtil.prepareCartItem(data, data.getSelectedUnit(), num);
+
+                    // Add to cart
+                    addToCart(data, cartItem);
+                }
+
+                @Override
+                public void onMinusClick(int num) {
+                    Log.d(TAG, "@=> " + "minus.......num=> " + num);
+                    // Prepare cart item
+                    CartItem cartItem = DataUtil.prepareCartItem(data, data.getSelectedUnit(), num);
+
+                    // Add to cart
+                    addToCart(data, cartItem);
+                }
+            });
+        }
+    }
+
+    private void addToCart(Product product, CartItem cartItem) {
+        Log.d(TAG, "<<<onOrderNowClick>>>: " + "count: " + cartItem.getQuantity());
+
+        // Store and update cart information
+        product.setSelectedQuantity(product.getSelectedUnit().getName(), cartItem.getQuantity());
+
+        if (cartItem.getQuantity() == 0) {
+            if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
+                Log.d(TAG, "<<<onOrderNowClick>>>: " + "Delete>>>: data is exist" + cartItem.toString());
+                //Delete the CartItem from database
+                AddToCartManager.getInstance().deleteItem(CartItem.class, DB_KEY_ID, cartItem.getId());
+
+                //Reset counter view into toolbar
+                DataUtil.resetCartCounterView(((CategoryActivity) mActivity).getCartCounter(), new OnCartResetListener() {
+                    @Override
+                    public void onOrderCompleted(boolean isOrderCompleted) {
+
+                    }
+                });
+            }
+        } else if (cartItem.getQuantity() == 1) {
+            if (AddToCartManager.getInstance().isCartItemExist(CartItem.class, DB_KEY_ID, cartItem.getId())) {
+                Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.toString());
+                //Update data into database
+                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+            } else {
+                //Add item into database
+                Log.d(TAG, "<<<onOrderNowClick>>>: " + "<<Add>>>: " + cartItem.getQuantity());
+                AddToCartManager.getInstance().addOrUpdateCart(cartItem);
+
+                //make fly animation for adding item
+                AppUtil.makeFlyAnimation(((CategoryActivity) mActivity), svAddToCart, svAddToCart.getAddIcon(), ((CategoryActivity) mActivity).getCartIcon(), 1000, new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        DataUtil.resetCartCounterView(((CategoryActivity) mActivity).getCartCounter(), new OnCartResetListener() {
+                            @Override
+                            public void onOrderCompleted(boolean isOrderCompleted) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+            }
+        } else {
+            //Update data into database
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.getQuantity());
+            Log.d(TAG, "<<<onOrderNowClick>>>: " + "Update>>>: " + cartItem.toString());
+
+            AddToCartManager.getInstance().addOrUpdateCart(cartItem);
         }
     }
 }

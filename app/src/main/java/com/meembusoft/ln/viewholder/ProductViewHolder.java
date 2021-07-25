@@ -73,6 +73,10 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
         initShoppingView(data);
     }
 
+
+    /*****************************
+     * Methods for Shopping view *
+     *****************************/
     private void initShoppingView(Product data) {
         svAddToCart.setOnShoppingClickListener(new ShoppingView.ShoppingClickListener() {
             @Override
