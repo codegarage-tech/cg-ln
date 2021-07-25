@@ -9,11 +9,13 @@ public class Product implements Suggestion, Comparable<Product> {
 
     private int id;
     private String name;
+    private float rating = 0f;
     private boolean isFavorite = false;
     private boolean hasOffer = false;
     private List<Image> images;
     private String vendor;
     private String note;
+    private String description;
     private boolean hasDependency = false;
     private boolean availability = true;
     private List<Unit> units = new ArrayList<>();
@@ -26,14 +28,16 @@ public class Product implements Suggestion, Comparable<Product> {
         selectedQuantity.clear();
     }
 
-    public Product(int id, String name, boolean isFavorite, boolean hasOffer, List<Image> images, String vendor, String note, boolean hasDependency, boolean availability, List<Unit> units) {
+    public Product(int id, String name, float rating, boolean isFavorite, boolean hasOffer, List<Image> images, String vendor, String note, String description, boolean hasDependency, boolean availability, List<Unit> units) {
         this.id = id;
         this.name = name;
+        this.rating = rating;
         this.isFavorite = isFavorite;
         this.hasOffer = hasOffer;
         this.images = images;
         this.vendor = vendor;
         this.note = note;
+        this.description = description;
         this.hasDependency = hasDependency;
         this.availability = availability;
         this.units = units;
@@ -54,6 +58,14 @@ public class Product implements Suggestion, Comparable<Product> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public boolean isFavorite() {
@@ -94,6 +106,14 @@ public class Product implements Suggestion, Comparable<Product> {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isHasDependency() {
@@ -157,11 +177,13 @@ public class Product implements Suggestion, Comparable<Product> {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", rating='" + rating + '\'' +
                 ", isFavorite=" + isFavorite +
                 ", hasOffer=" + hasOffer +
                 ", images=" + images +
                 ", vendor='" + vendor + '\'' +
                 ", note='" + note + '\'' +
+                ", description='" + description + '\'' +
                 ", hasDependency=" + hasDependency +
                 ", availability=" + availability +
                 ", units=" + units +

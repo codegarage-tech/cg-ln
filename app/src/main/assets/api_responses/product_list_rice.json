@@ -5,6 +5,8 @@
     {
       "id": "28",
       "name": "White Binni",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": false,
       "images": [
@@ -19,11 +21,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 0
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 0
         }
@@ -32,6 +36,8 @@
     {
       "id": "29",
       "name": "Pran ChiniGura",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": false,
       "hasOffer": true,
       "images": [
@@ -46,11 +52,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 0
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 0
         }
@@ -59,6 +67,8 @@
     {
       "id": "30",
       "name": "Teer NajirShah",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -73,11 +83,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -86,6 +98,8 @@
     {
       "id": "31",
       "name": "Fresh ChiniGura",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": false,
       "hasOffer": true,
       "images": [
@@ -100,11 +114,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }

@@ -3,11 +3,13 @@ package com.meembusoft.ln.model;
 public class Unit {
 
     private String name;
+    private int factoryPrice;
     private int originalPrice;
     private int offerPrice;
 
-    public Unit(String name, int originalPrice, int offerPrice) {
+    public Unit(String name, int factoryPrice, int originalPrice, int offerPrice) {
         this.name = name;
+        this.factoryPrice = factoryPrice;
         this.originalPrice = originalPrice;
         this.offerPrice = offerPrice;
     }
@@ -18,6 +20,14 @@ public class Unit {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getFactoryPrice() {
+        return factoryPrice;
+    }
+
+    public void setFactoryPrice(int factoryPrice) {
+        this.factoryPrice = factoryPrice;
     }
 
     public int getOriginalPrice() {
@@ -40,6 +50,7 @@ public class Unit {
     public String toString() {
         return "{" +
                 "name='" + name + '\'' +
+                ", factoryPrice=" + factoryPrice +
                 ", originalPrice=" + originalPrice +
                 ", offerPrice=" + offerPrice +
                 '}';

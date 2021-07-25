@@ -5,6 +5,8 @@
     {
       "id": "7",
       "name": "Poultry",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -19,11 +21,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -32,6 +36,8 @@
     {
       "id": "8",
       "name": "Deshi",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -46,11 +52,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }

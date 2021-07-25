@@ -63,6 +63,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> {
     @Override
     public void setData(final Product data) {
         tvProductName.setText(data.getName());
+        tvProductNote.setText(data.getNote());
         AppUtil.applyViewTint(ivProductFavorite, (data.isFavorite() ? R.color.colorPink : R.color.subtitleTextColor));
         if (data.getImages() != null && !data.getImages().isEmpty()) {
             Picasso.get().load(data.getImages().get(RandomManager.getRandom(0, data.getImages().size())).getUrl()).into(ivProductImage);

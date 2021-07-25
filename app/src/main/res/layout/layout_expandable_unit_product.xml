@@ -39,7 +39,7 @@
                 android:paddingRight="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_3"
                 android:textColor="@color/paragraphTextColor"
-                android:text="KG"
+                android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
             <ImageView

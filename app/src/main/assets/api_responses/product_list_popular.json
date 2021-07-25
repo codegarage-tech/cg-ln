@@ -5,6 +5,8 @@
     {
       "id": "21",
       "name": "RFL tiffine Box",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -19,11 +21,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -32,6 +36,8 @@
     {
       "id": "22",
       "name": "Super Star Bulb",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -46,11 +52,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -59,6 +67,8 @@
     {
       "id": "23",
       "name": "KitKat",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -73,11 +83,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -86,6 +98,8 @@
     {
       "id": "24",
       "name": "Teer NajirShah",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -100,11 +114,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -113,6 +129,8 @@
     {
       "id": "25",
       "name": "Singer 30 inch Television",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -127,11 +145,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -140,6 +160,8 @@
     {
       "id": "26",
       "name": "Igloo Cone Ice Cream",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -154,11 +176,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }
@@ -167,6 +191,8 @@
     {
       "id": "27",
       "name": "Wonder White Bead",
+      "rating": 3.5,
+      "description": "The product is good",
       "isFavorite": true,
       "hasOffer": true,
       "images": [
@@ -181,11 +207,13 @@
       "units": [
         {
           "name": "1 KG",
+          "factoryPrice": 100,
           "originalPrice": 100,
           "offerPrice": 90
         },
         {
           "name": "SACK(50 KG)",
+          "factoryPrice": 100,
           "originalPrice": 2000,
           "offerPrice": 1900
         }

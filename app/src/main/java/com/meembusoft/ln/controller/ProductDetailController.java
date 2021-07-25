@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ import com.meembusoft.ln.adapter.ImageSliderAdapter;
 import com.meembusoft.ln.model.Image;
 import com.meembusoft.ln.model.Product;
 import com.meembusoft.ln.model.Unit;
+import com.meembusoft.ln.util.AppUtil;
+import com.meembusoft.ln.util.DataUtil;
 import com.meembusoft.ln.util.Logger;
 import com.nex3z.flowlayout.FlowLayout;
 import com.nex3z.flowlayout.FlowLayoutManager;
@@ -34,6 +38,9 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.wangyuwei.shoppoing.ShoppingView;
+import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class ProductDetailController {
 
@@ -48,7 +55,10 @@ public class ProductDetailController {
     // View items
     private Product mProduct;
     private String TAG = "ProductDetailController";
-    private TextView tvProductName, tvProductOriginalPrice, tvProductOfferPrice, tvProductVendor, tvProductNote, tvProductDescription;
+    private ImageView ivProductFavorite;
+    private TextView tvProductName, tvProductOriginalPrice, tvProductOfferPrice, tvProductVendor, tvProductNote, tvProductDescription, tvProviders, tvNote, tvDescription;
+    private ShoppingView svAddToCart;
+    private MaterialRatingBar mrbRating;
 
     // Unit
     private FlowLayout flowLayoutUnit;
@@ -74,12 +84,18 @@ public class ProductDetailController {
         unfoldableView = parentView.findViewById(R.id.unfoldable_view);
         // View items
         sliderViewProduct = parentView.findViewById(R.id.sliderview_product);
+        mrbRating = parentView.findViewById(R.id.mrb_rating);
+        svAddToCart = parentView.findViewById(R.id.sv_add_to_cart);
+        ivProductFavorite = parentView.findViewById(R.id.iv_product_favorite);
         tvProductName = parentView.findViewById(R.id.tv_product_name);
         tvProductOriginalPrice = parentView.findViewById(R.id.tv_product_original_price);
         tvProductOfferPrice = parentView.findViewById(R.id.tv_product_offer_price);
         tvProductVendor = parentView.findViewById(R.id.tv_product_vendor);
         tvProductNote = parentView.findViewById(R.id.tv_product_note);
         tvProductDescription = parentView.findViewById(R.id.tv_product_description);
+        tvProviders = parentView.findViewById(R.id.tv_providers);
+        tvNote = parentView.findViewById(R.id.tv_note);
+        tvDescription = parentView.findViewById(R.id.tv_description);
         // Unit
         flowLayoutUnit = parentView.findViewById(R.id.fl_size);
         expansionHeader = parentView.findViewById(R.id.eh_unit);
@@ -177,10 +193,36 @@ public class ProductDetailController {
 
     private void initDetailInfo(Product product) {
         if (product != null) {
+            AppUtil.applyViewTint(ivProductFavorite, (product.isFavorite() ? R.color.colorPink : R.color.subtitleTextColor));
+            mrbRating.setRating(product.getRating());
+            mrbRating.setEnabled(false);
+            expansionHeader.setEnabled(false);
             tvProductName.setText(product.getName());
-            tvProductVendor.setText(product.getVendor());
-            tvProductNote.setText(product.getNote());
-//            tvProductDescription.setText(product.des());
+            if (!TextUtils.isEmpty(product.getVendor())) {
+                tvProviders.setVisibility(View.VISIBLE);
+                tvProductVendor.setVisibility(View.VISIBLE);
+                tvProductVendor.setText(product.getVendor());
+            } else {
+                tvProviders.setVisibility(View.GONE);
+                tvProductVendor.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(product.getNote())) {
+                tvNote.setVisibility(View.VISIBLE);
+                tvProductNote.setVisibility(View.VISIBLE);
+                tvProductNote.setText(product.getNote());
+            } else {
+                tvNote.setVisibility(View.GONE);
+                tvProductNote.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(product.getDescription())) {
+                tvDescription.setVisibility(View.VISIBLE);
+                tvProductDescription.setVisibility(View.VISIBLE);
+                tvProductDescription.setText(product.getDescription());
+            } else {
+                tvDescription.setVisibility(View.GONE);
+                tvProductDescription.setVisibility(View.GONE);
+            }
+
             initUnit(product);
         }
     }
@@ -211,8 +253,8 @@ public class ProductDetailController {
                             Log.d(TAG, "tempSelectedSize: " + tempSelectedSize);
 
                             // Store and update selected unit
-//                            product.setSelectedUnit(DataUtil.getUnit(tempSelectedSize, units));
-//                            updateUnitSelection(product);
+                            product.setSelectedUnit(DataUtil.getUnit(tempSelectedSize, units));
+                            updateUnitSelection(product);
 //
 //                            // Close expansion layout
 //                            expansionLayout.collapse(true);
@@ -230,6 +272,31 @@ public class ProductDetailController {
                     } else {
                         flowLayoutManagerUnit.clickFlowView(keys.get(0));
                     }
+                }
+            }
+        }
+    }
+
+    private void updateUnitSelection(Product product) {
+        if (product != null) {
+            Unit unit = product.getSelectedUnit();
+            if (unit != null) {
+                if (unit.getOfferPrice() > 0) {
+                    tvProductOriginalPrice.setText(mActivity.getString(R.string.txt_amount_with_taka, unit.getOriginalPrice()));
+                    AppUtil.applyStrike(tvProductOriginalPrice, true);
+                    tvProductOfferPrice.setText(mActivity.getString(R.string.txt_amount_with_taka, unit.getOfferPrice()));
+                    tvProductOfferPrice.setVisibility(View.VISIBLE);
+                } else {
+                    tvProductOriginalPrice.setText(mActivity.getString(R.string.txt_amount_with_taka, unit.getOriginalPrice()));
+                    AppUtil.applyStrike(tvProductOriginalPrice, false);
+                    tvProductOfferPrice.setText(mActivity.getString(R.string.txt_amount_with_taka, unit.getOfferPrice()));
+                    tvProductOfferPrice.setVisibility(View.GONE);
+                }
+
+                // Show previous selected quantity
+                int quantity = product.getSelectedQuantity(unit.getName());
+                if (svAddToCart.getText() > 0 || quantity > 0) {
+                    svAddToCart.setTextNum(quantity);
                 }
             }
         }

@@ -49,7 +49,7 @@
                                 android:id="@+id/tv_product_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Name"
+                                android:text=""
                                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                                 android:textColor="@color/paragraphTextColor"
                                 android:textStyle="bold" />
@@ -85,14 +85,14 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight=".2"
+                            android:layout_weight=".35"
                             android:gravity="center_vertical"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Price"
+                                android:text="@string/txt_unit_price"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/paragraphTextColor" />
 
@@ -101,7 +101,7 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight=".8"
+                            android:layout_weight=".65"
                             android:gravity="right"
                             android:orientation="horizontal">
 
@@ -109,7 +109,7 @@
                                 android:id="@+id/tv_product_original_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10,0050 TK"
+                                android:text=""
                                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                                 android:textColor="@color/paragraphTextColor" />
 
@@ -118,7 +118,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dp_10"
-                                android:text="50,0000 TK"
+                                android:text=""
                                 android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                                 android:textColor="@color/paragraphTextColor"
                                 android:visibility="visible" />
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dp_10"
-                        android:text="Notice: Friday, (10 AM ~ 12 PM)"
+                        android:text=""
                         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
                         android:textColor="@color/paragraphTextColor"
                         android:visibility="visible" />
