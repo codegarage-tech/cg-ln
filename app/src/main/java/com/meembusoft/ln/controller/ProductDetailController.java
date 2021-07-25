@@ -48,14 +48,13 @@ public class ProductDetailController {
     // View items
     private Product mProduct;
     private String TAG = "ProductDetailController";
-    private TextView tvProductName;
+    private TextView tvProductName, tvProductOriginalPrice, tvProductOfferPrice, tvProductVendor, tvProductNote, tvProductDescription;
 
     // Unit
     private FlowLayout flowLayoutUnit;
     private FlowLayoutManager flowLayoutManagerUnit;
     private ExpansionHeader expansionHeader;
     private ExpansionLayout expansionLayout;
-    private TextView tvProductOriginalPrice, tvProductOfferPrice;
 
     // Image slider
     private SliderView sliderViewProduct;
@@ -76,9 +75,12 @@ public class ProductDetailController {
         // View items
         sliderViewProduct = parentView.findViewById(R.id.sliderview_product);
         tvProductName = parentView.findViewById(R.id.tv_product_name);
-        // Unit
         tvProductOriginalPrice = parentView.findViewById(R.id.tv_product_original_price);
         tvProductOfferPrice = parentView.findViewById(R.id.tv_product_offer_price);
+        tvProductVendor = parentView.findViewById(R.id.tv_product_vendor);
+        tvProductNote = parentView.findViewById(R.id.tv_product_note);
+        tvProductDescription = parentView.findViewById(R.id.tv_product_description);
+        // Unit
         flowLayoutUnit = parentView.findViewById(R.id.fl_size);
         expansionHeader = parentView.findViewById(R.id.eh_unit);
         expansionLayout = parentView.findViewById(R.id.expansionLayout);
@@ -176,6 +178,9 @@ public class ProductDetailController {
     private void initDetailInfo(Product product) {
         if (product != null) {
             tvProductName.setText(product.getName());
+            tvProductVendor.setText(product.getVendor());
+            tvProductNote.setText(product.getNote());
+//            tvProductDescription.setText(product.des());
             initUnit(product);
         }
     }

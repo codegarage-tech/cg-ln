@@ -23,8 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/txt_unit"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/paragraphTextColor"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/subtitleTextColor"
                 android:textStyle="bold" />
 
         </RelativeLayout>
