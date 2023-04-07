@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion appCompileSdkVersion
-    buildToolsVersion appBuildToolsVersion
+    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
+    buildToolsVersion "$libraryVersions.appBuildTools"
 
     defaultConfig {
-        minSdkVersion appMinSdkVersion
-        targetSdkVersion appTargetSdkVersion
-        versionCode 5
-        versionName "1.3.2"
+        minSdkVersion "$libraryVersions.minSdk"
+        targetSdkVersion "$libraryVersions.targetSdk"
+        versionCode "$libraryVersions.autoimagesliderVersionCode".toInteger()
+        versionName "$libraryVersions.autoimagesliderVersionName"
     }
 
     buildTypes {
@@ -20,5 +20,5 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
+    implementation libraries.androidXAppCompat
 }

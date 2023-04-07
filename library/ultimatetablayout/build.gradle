@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion appCompileSdkVersion
-    buildToolsVersion appBuildToolsVersion
+    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
+    buildToolsVersion "$libraryVersions.appBuildTools"
 
     defaultConfig {
-        minSdkVersion appMinSdkVersion
-        targetSdkVersion appTargetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion "$libraryVersions.minSdk"
+        targetSdkVersion "$libraryVersions.targetSdk"
+        versionCode "$libraryVersions.ultimatetablayoutVersionCode".toInteger()
+        versionName "$libraryVersions.ultimatetablayoutVersionName"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -22,10 +22,10 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$androidXConstraintLayoutVersion"
+    implementation libraries.androidXAppCompat
+    implementation libraries.material
+    implementation libraries.androidXConstraintLayout
 
     // Image loader
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation libraries.picasso
 }

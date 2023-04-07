@@ -3,15 +3,14 @@ plugins {
 }
 
 android {
-
-    compileSdkVersion appCompileSdkVersion
-    buildToolsVersion appBuildToolsVersion
+    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
+    buildToolsVersion "$libraryVersions.appBuildTools"
 
     defaultConfig {
-        minSdkVersion appMinSdkVersion
-        targetSdkVersion appTargetSdkVersion
-        versionCode 2
-        versionName "1.0.1"
+        minSdkVersion "$libraryVersions.minSdk"
+        targetSdkVersion "$libraryVersions.targetSdk"
+        versionCode "$libraryVersions.attributionpresenterVersionCode".toInteger()
+        versionName "$libraryVersions.attributionpresenterVersionName"
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -32,10 +31,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
-    implementation "androidx.cardview:cardview:$androidXCardViewVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$androidXConstraintLayoutVersion"
-    implementation "com.google.android.flexbox:flexbox:$flexBoxVersion"
+    implementation libraries.androidXAppCompat
+    implementation libraries.androidXCardView
+    implementation libraries.androidXConstraintLayout
+    implementation libraries.flexBox
 }

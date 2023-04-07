@@ -1,19 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-
-    compileSdkVersion appCompileSdkVersion
-    buildToolsVersion appBuildToolsVersion
+    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
+    buildToolsVersion "$libraryVersions.appBuildTools"
 
     defaultConfig {
-        minSdkVersion appMinSdkVersion
-        targetSdkVersion appTargetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion "$libraryVersions.minSdk"
+        targetSdkVersion "$libraryVersions.targetSdk"
+        versionCode "$libraryVersions.expansionpanelVersionCode".toInteger()
+        versionName "$libraryVersions.expansionpanelVersionName"
     }
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$androidXConstraintLayoutVersion"
+    implementation libraries.androidXAppCompat
+    implementation libraries.androidXConstraintLayout
 }

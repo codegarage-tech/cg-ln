@@ -7,19 +7,19 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "io.realm:realm-gradle-plugin:$realmPluginVersion"
+        classpath gradlePlugins.realmGradlePlugin
     }
 }
 
 android {
-    compileSdkVersion appCompileSdkVersion
-    buildToolsVersion appBuildToolsVersion
+    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
+    buildToolsVersion "$libraryVersions.appBuildTools"
 
     defaultConfig {
-        minSdkVersion appMinSdkVersion
-        targetSdkVersion appTargetSdkVersion
-        versionCode 100
-        versionName "1.0.0"
+        minSdkVersion "$libraryVersions.minSdk"
+        targetSdkVersion "$libraryVersions.targetSdk"
+        versionCode "$libraryVersions.realmmanagerVersionCode".toInteger()
+        versionName "$libraryVersions.realmmanagerVersionName"
     }
 
     buildTypes {
@@ -35,10 +35,9 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
+    implementation libraries.androidXAppCompat
 
     // Parceler
-    implementation "org.parceler:parceler-api:$parcelerVersion"
-    annotationProcessor "org.parceler:parceler:$parcelerVersion"
+    implementation libraries.parcelerApi
+    annotationProcessor libraries.parceler
 }

@@ -4,9 +4,11 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply from: "../dependencies.gradle"
+
 android {
-    compileSdkVersion appCompileSdkVersion
-    buildToolsVersion appBuildToolsVersion
+    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
+    buildToolsVersion "$libraryVersions.appBuildTools"
 
     signingConfigs {
         releaseConfig {
@@ -23,8 +25,8 @@ android {
 
     defaultConfig {
         applicationId "com.meembusoft.ln"
-        minSdkVersion appMinSdkVersion
-        targetSdkVersion appTargetSdkVersion
+        minSdkVersion "$libraryVersions.minSdk"
+        targetSdkVersion "$libraryVersions.targetSdk"
         versionCode 1
         versionName "1.0"
 
@@ -85,8 +87,8 @@ android {
             dimension "clientType"
 
             applicationIdSuffix ".bd"
-            versionCode userBDVersionCode
-            versionName userBDVersionName
+            versionCode "$libraryVersions.userBDVersionCode".toInteger()
+            versionName "$libraryVersions.userBDVersionName"
 
             resValue 'string', 'app_name', 'Lagbe Naki?'
         }
@@ -94,8 +96,8 @@ android {
             dimension "clientType"
 
             applicationIdSuffix ".rashedshop"
-            versionCode rashedShopVersionCode
-            versionName rashedShopVersionName
+            versionCode "$libraryVersions.rashedShopVersionCode".toInteger()
+            versionName "$libraryVersions.rashedShopVersionName"
 
             resValue 'string', 'app_name', 'RashedShop'
         }
@@ -193,64 +195,64 @@ def static String convertToCamelCase(String str) {
 
 dependencies {
     // Androidx support libraries
-    implementation "androidx.appcompat:appcompat:$androidXAppCompatVersion"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$androidXConstraintLayoutVersion"
-    implementation "androidx.multidex:multidex:$androidXMultiDexVersion"
-    implementation "com.android.support:design:27.0.2"
+    implementation libraries.androidXAppCompat
+    implementation libraries.androidXConstraintLayout
+    implementation libraries.material
+    implementation libraries.androidXMultiDex
+    implementation libraries.design
 
     // Kotlin support
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation "androidx.core:core-ktx:$androidXCoreKotlinLibraryVersion"
+    implementation libraries.kotlinStdlibJdk7
+    implementation libraries.androidXCoreKtx
 
     // Menu
-    implementation "com.github.skydoves:flourish:1.0.1"
-    implementation "com.github.skydoves:powermenu:2.1.9"
+    implementation libraries.flourish
+    implementation libraries.powerMenu
 
     // Calligraphy
-    implementation 'dev.b3nedikt.calligraphy:calligraphy:4.0.2'
-    implementation 'dev.b3nedikt.viewpump:viewpump:4.0.5'
+    implementation libraries.calligraphy
+    implementation libraries.viewpump
 
     // Sectioned recyclerview
-    implementation 'com.afollestad:sectioned-recyclerview:0.5.0'
+    implementation libraries.sectionedRecyclerView
 
     // Image loader
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation libraries.glide
 
     // Increment product view
-    implementation 'com.steelkiwi:increment-product-view:1.2.0'
+    implementation libraries.incrementProductView
 
-    implementation 'com.github.zhangjianliang110:color-shadow_drawable:v1.0.1'
+    implementation libraries.colorShadowDrawable
 
-    implementation 'com.github.lzyzsd.randomcolor:library:1.0.0'
+    implementation libraries.androidRandomColor
 
     implementation('com.meembusoft.recyclerview:mrecyclerview:1.0.01-SNAPSHOT') {
         changing = true
     }
 
-    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation libraries.gson
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation "com.google.android.flexbox:flexbox:$flexBoxVersion"
+    implementation libraries.picasso
+    implementation libraries.flexBox
 
 //    implementation 'eu.davidea:flexible-adapter:5.1.0'
 //    implementation 'eu.davidea:flexible-adapter-ui:1.0.0'
 
     // Parceler
-    implementation "org.parceler:parceler-api:$parcelerVersion"
-    annotationProcessor "org.parceler:parceler:$parcelerVersion"
+    implementation libraries.parcelerApi
+    annotationProcessor libraries.parceler
 
     // Barcode
-    implementation "com.journeyapps:zxing-android-embedded:$zxingVersion"
+    implementation libraries.zxingAndroidEmbedded
 
     // Image picker
-    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    implementation libraries.imagePicker
 
     // Date time picker
-    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+    implementation libraries.materialdDateTimePicker
 
     // Rating bar
-    implementation "me.zhanghai.android.materialratingbar:library:$materialRatingBarVersion"
+    implementation libraries.materialRatingBar
 
     // Library projects
     implementation project(":library:localemanager")
