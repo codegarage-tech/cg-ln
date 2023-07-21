@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
-    buildToolsVersion "$libraryVersions.appBuildTools"
+    compileSdk "$libraryVersions.compileSdk".toInteger()
+
+    namespace 'com.allattentionhere.fabulousfilter'
 
     defaultConfig {
-        minSdkVersion "$libraryVersions.minSdk"
-        targetSdkVersion "$libraryVersions.targetSdk"
-        versionCode "$libraryVersions.fabulousfilterVersionCode".toInteger()
-        versionName "$libraryVersions.fabulousfilterVersionName"
+        minSdk "$libraryVersions.minSdk".toInteger()
+        targetSdk "$libraryVersions.targetSdk".toInteger()
 
         vectorDrawables.useSupportLibrary = true
     }

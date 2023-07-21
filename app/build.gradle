@@ -7,8 +7,7 @@ plugins {
 apply from: "../dependencies.gradle"
 
 android {
-    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
-    buildToolsVersion "$libraryVersions.appBuildTools"
+    compileSdk "$libraryVersions.compileSdk".toInteger()
 
     signingConfigs {
         releaseConfig {
@@ -18,17 +17,17 @@ android {
                 storeFile file('../misc/keydata.keystore.jks')
                 storePassword STORE_PASSWORD
             } catch (Exception ex) {
-                throw new InvalidUserDataException(ex.getMessage())
+                throw new Exception(ex.getMessage())
             }
         }
     }
 
+    namespace 'com.meembusoft.ln'
+
     defaultConfig {
         applicationId "com.meembusoft.ln"
-        minSdkVersion "$libraryVersions.minSdk"
-        targetSdkVersion "$libraryVersions.targetSdk"
-        versionCode 1
-        versionName "1.0"
+        minSdk "$libraryVersions.minSdk".toInteger()
+        targetSdk "$libraryVersions.targetSdk".toInteger()
 
         vectorDrawables.useSupportLibrary = true
 
@@ -133,35 +132,35 @@ android {
 
         // Furnish output and rename the output apk file name
         variant.outputs.all { output ->
-            def appName = variant.mergedFlavor.resValues.get('app_name').getValue()
+            def appName = variant.mergedFlavor.resValues.get("string/app_name")
             def underScore = "_"
             def hyphen = "-"
             def appType = variant.productFlavors[0].name
             def clientType = variant.productFlavors[1].name
             def version = variant.versionName
             def buildType = variant.buildType.name
-            System.out.println("appName: " + appName)
+            System.out.println("appName: " + appName.getValue())
             System.out.println("appType: " + appType)
             System.out.println("clientType: " + clientType)
             System.out.println("version: " + version)
             System.out.println("buildType: " + buildType)
-            def releaseApkName = appName + underScore + appType.capitalize() + underScore + version + underScore + buildType.capitalize() + ".apk"
-            outputFileName = releaseApkName
+            def releaseApkName = "${appName.getValue()}${underScore}${appType.toUpperCase()}${underScore}${version}${underScore}${buildType.toUpperCase()}.apk"
+            output.outputFileName = releaseApkName
             System.out.println("outputFileName: " + outputFileName)
 
-            // set new resVale for final app name
+            // set new resValue for final app name
             def finalAppName = ""
             if (appType.equals('user')) {
-                finalAppName = appName
+                finalAppName = appName.getValue()
             } else if (appType.equals('admin')) {
-                finalAppName = appName + hyphen + convertToCamelCase(appType)
+                finalAppName = "${appName.getValue()}${hyphen}${convertToCamelCase(appType)}"
             } else if (appType.equals('driver')) {
-                finalAppName = appName + hyphen + convertToCamelCase(appType)
+                finalAppName = "${appName.getValue()}${hyphen}${convertToCamelCase(appType)}"
             } else {
-                finalAppName = appName
+                finalAppName = appName.getValue()
             }
             System.out.println("finalAppName: " + finalAppName)
-            variant.resValue 'string', 'app_name', finalAppName
+            variant.resValue('string', 'app_name', "${finalAppName}")
         }
     }
 }

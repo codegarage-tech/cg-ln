@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
-    buildToolsVersion "$libraryVersions.appBuildTools"
+    compileSdk "$libraryVersions.compileSdk".toInteger()
+
+    namespace 'com.nex3z.flowlayout'
 
     defaultConfig {
-        minSdkVersion "$libraryVersions.minSdk"
-        targetSdkVersion "$libraryVersions.targetSdk"
-        versionCode "$libraryVersions.flowlayoutVersionCode".toInteger()
-        versionName "$libraryVersions.flowlayoutVersionName"
+        minSdk "$libraryVersions.minSdk".toInteger()
+        targetSdk "$libraryVersions.targetSdk".toInteger()
     }
     buildTypes {
         release {

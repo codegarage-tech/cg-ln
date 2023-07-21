@@ -3,14 +3,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
-    buildToolsVersion "$libraryVersions.appBuildTools"
+    compileSdk "$libraryVersions.compileSdk".toInteger()
+
+    namespace 'com.claudiodegio.msv'
 
     defaultConfig {
-        minSdkVersion "$libraryVersions.minSdk"
-        targetSdkVersion "$libraryVersions.targetSdk"
-        versionCode "$libraryVersions.msvsearchVersionCode".toInteger()
-        versionName "$libraryVersions.msvsearchVersionName"
+        minSdk "$libraryVersions.minSdk".toInteger()
+        targetSdk "$libraryVersions.targetSdk".toInteger()
 
         vectorDrawables.useSupportLibrary = true
     }

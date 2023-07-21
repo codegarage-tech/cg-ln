@@ -1,18 +1,18 @@
 ext.libraryVersions = [
-        appBuildTools                   : '30.0.2',
+        appBuildTools                   : '34.0.0',
         minSdk                          : 21,
-        targetSdk                       : 30,
-        compileSdk                      : 30,
+        targetSdk                       : 34,
+        compileSdk                      : 34,
         userBDVersionCode               : 1001,
         userBDVersionName               : '1.0.01',
         rashedShopVersionCode           : 1000,
         rashedShopVersionName           : '1.0.00',
 
         // Plugin versions
-        gradle                          : '4.2.2',
-        kotlinGradlePlugin              : '1.4.32',
+        gradle                          : '8.0.2',
+        kotlinGradlePlugin              : '1.6.21',
         kotlinAndroidExtensions         : '1.4.32',
-        realmGradlePlugin               : '6.0.0',
+        realmGradlePlugin               : '10.15.1',
 
         // Library projects versions
         aboutboxVersionCode             : 7,
@@ -85,8 +85,8 @@ ext.libraryVersions = [
         incrementProductView            : '1.2.0',
         colorShadowDrawable             : 'v1.0.1',
         androidRandomColor              : '1.0.0',
-        imagePicker                     : "2.1",
-        materialdDateTimePicker         : "4.2.3",
+        imagePicker                     : '2.1',
+        materialdDateTimePicker         : '4.2.3',
         circleImageView                 : '2.2.0',
 ]
 

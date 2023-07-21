@@ -1,9 +1,9 @@
-apply plugin: 'com.android.library'
-apply plugin: 'realm-android'
-
 buildscript {
+    apply from: "${rootDir}/dependencies.gradle"
+
     repositories {
         google()
+        mavenCentral()
         jcenter()
     }
     dependencies {
@@ -11,15 +11,20 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.android.library'
+}
+
+apply plugin: "realm-android"
+
 android {
-    compileSdkVersion "$libraryVersions.compileSdk".toInteger()
-    buildToolsVersion "$libraryVersions.appBuildTools"
+    compileSdk "$libraryVersions.compileSdk".toInteger()
+
+    namespace 'com.meembusoft.addtocart'
 
     defaultConfig {
-        minSdkVersion "$libraryVersions.minSdk"
-        targetSdkVersion "$libraryVersions.targetSdk"
-        versionCode "$libraryVersions.addtocartVersionCode".toInteger()
-        versionName "$libraryVersions.addtocartVersionName"
+        minSdk "$libraryVersions.minSdk".toInteger()
+        targetSdk "$libraryVersions.targetSdk".toInteger()
     }
 
     buildTypes {

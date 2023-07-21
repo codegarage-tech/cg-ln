@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
@@ -24,6 +25,7 @@
 
         <activity
             android:name="com.meembusoft.ln.activity.HomeActivity"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,50 +36,62 @@
 
         <activity
             android:name="com.meembusoft.ln.activity.SearchActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.CategoryActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.CartActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.DownloadAppActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.SignInActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.SignUpActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.SupportActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.AboutProfileActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.OrdersActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.FavoriteProductActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.AppNotificationsActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.meembusoft.ln.activity.ForgotPasswordActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
     </application>
 
