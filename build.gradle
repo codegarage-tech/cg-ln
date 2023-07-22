@@ -21,7 +21,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$libraryVersions.gradle"
+        classpath gradlePlugins.gradle
         classpath gradlePlugins.kotlinGradlePlugin
         classpath gradlePlugins.kotlinAndroidExtensions
 
@@ -29,11 +29,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
-//plugins {
-//    id 'com.android.application'
-//    id 'com.android.library'
-//}
 
 allprojects {
     repositories {
